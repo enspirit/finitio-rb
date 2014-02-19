@@ -1,0 +1,22 @@
+template-info:
+  name: "rubygem.noe"
+  version: 2.0.1
+variables:
+  lower:
+    qrb
+  upper:
+    Qrb
+  version:
+    0.1.0
+  summary: |-
+    Q - in Ruby
+  description: |-
+    Implements the Q information language in Ruby.
+  authors:
+    - {name: Bernard Lambeau, email: blambeau@gmail.com}
+  links:
+    - https://github.com/blambeau/qrb
+  dependencies:
+    - {name: rake,      version: "~> 10.0",  groups: [development]}
+    - {name: rspec,     version: "~> 2.14",   groups: [development]}
+
