@@ -43,3 +43,7 @@ end
 Then(/^the result should be the null representation in the host language$/) do
   @result.should be_nil
 end
+
+Then(/^the result should equal (\d+)$/) do |expected|
+  @result.should eq(Integer(expected))
+end

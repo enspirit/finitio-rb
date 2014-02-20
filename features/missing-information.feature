@@ -9,6 +9,16 @@ Feature: Missing information Using Q
        MaybeInt = union_type(Nil, Int)
        """
 
+   Scenario: Validating non nil against Int
+
+     Given I validate the following JSON data against Int
+       """
+       12
+       """
+
+     Then it should be a success
+     And the result should equal 12
+
   Scenario: Validating nil against Int
 
     Given I validate the following JSON data against Int
