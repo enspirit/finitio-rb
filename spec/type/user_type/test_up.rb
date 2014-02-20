@@ -3,8 +3,8 @@ module Qrb
   describe UserType, 'up' do
 
     let(:type){
-      UserType.new("userType", intType   => ->(i){ Foo.new(i) },
-                               floatType => ->(f){ Bar.new(f) })
+      UserType.new({intType   => ->(i){ Foo.new(i) },
+                    floatType => ->(f){ Bar.new(f) }}, "userType")
     }
 
     subject{

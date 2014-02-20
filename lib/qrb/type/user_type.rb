@@ -2,7 +2,7 @@ require 'set'
 module Qrb
   class UserType < Type
 
-    def initialize(name, contracts)
+    def initialize(contracts, name = nil)
       unless contracts.is_a?(Hash)
         raise ArgumentError, "Hash expected, got `#{contracts}`"
       end
@@ -11,6 +11,10 @@ module Qrb
       @contracts = contracts.freeze
     end
     attr_reader :contracts
+
+    def default_name
+      "Unnamed"
+    end
 
     def up(value, handler = UpHandler.new)
       # Try each contract in turn. Do nothing on UpError as
@@ -26,7 +30,7 @@ module Qrb
 
         # Seems nice, just try to get one stage higher now
         success, uped = handler.just_try do
-          upper.call(value)
+          upper.call(uped)
         end
         return uped if success
 
