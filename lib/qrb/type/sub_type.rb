@@ -28,7 +28,7 @@ module Qrb
       constraints.each_pair do |name, constraint|
         next if constraint===uped
         msg = handler.default_error_message(self, value)
-        msg << " (not #{name})" unless DEFAULT_CONSTRAINT_NAMES.include?(name)
+        msg << " (not #{name})" unless default_constraint?(name)
         handler.fail!(msg)
       end
 
@@ -49,6 +49,13 @@ module Qrb
 
     def hash
       self.class.hash ^ super_type.hash ^ set_hash(constraints.values)
+    end
+
+  private
+
+    def default_constraint?(name)
+      DEFAULT_CONSTRAINT_NAMES.include?(name) or \
+        name.to_s.capitalize == self.name
     end
 
   end # class BuiltinType
