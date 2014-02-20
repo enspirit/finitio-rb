@@ -13,7 +13,7 @@ module Qrb
     end
 
     def ==(other)
-      return nil unless other.is_a?(BuiltinType)
+      return false unless other.is_a?(BuiltinType)
       other.ruby_type==ruby_type
     end
     alias :eql? :==

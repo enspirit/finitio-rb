@@ -21,7 +21,7 @@ module Qrb
     end
 
     it 'should be a total function, with nil for non types' do
-      (type1 == 12).should be_nil
+      (type1 == 12).should be_false
     end
 
     it 'should implement hash accordingly' do

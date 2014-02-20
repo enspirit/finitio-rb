@@ -38,7 +38,7 @@ module Qrb
     end
 
     def ==(other)
-      return nil unless other.is_a?(TupleType)
+      return false unless other.is_a?(TupleType)
       heading == other.heading
     end
     alias :eql? :==

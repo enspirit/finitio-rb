@@ -37,7 +37,7 @@ module Qrb
     end
 
     def ==(other)
-      return nil unless other.is_a?(SubType)
+      return false unless other.is_a?(SubType)
       other.super_type == super_type and \
       set_equal?(constraints.values, other.constraints.values)
     end

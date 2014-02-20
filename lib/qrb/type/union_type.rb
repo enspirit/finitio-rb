@@ -28,7 +28,7 @@ module Qrb
     end
 
     def ==(other)
-      return nil unless other.is_a?(UnionType) 
+      return false unless other.is_a?(UnionType)
       set_equal?(candidates, other.candidates)
     end
     alias :eql? :==

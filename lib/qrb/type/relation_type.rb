@@ -30,7 +30,7 @@ module Qrb
     end
 
     def ==(other)
-      return nil unless other.is_a?(RelationType)
+      return false unless other.is_a?(RelationType)
       heading == other.heading
     end
     alias :eql? :==

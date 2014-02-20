@@ -19,7 +19,7 @@ module Qrb
     end
 
     it 'should be a total function, with nil for non types' do
-      (uType == 12).should be_nil
+      (uType == 12).should be_false
     end
 
     it 'should implement hash accordingly' do
