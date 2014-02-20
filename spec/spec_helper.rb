@@ -13,6 +13,20 @@ module SpecHelpers
 
 end
 
+class Foo
+  def initialize(*args)
+    @args = args
+  end
+  attr_reader :args
+end
+
+class Bar
+  def initialize(*args)
+    @args = args
+  end
+  attr_reader :args
+end
+
 RSpec.configure do |c|
   c.include SpecHelpers
 end
