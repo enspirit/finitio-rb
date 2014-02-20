@@ -42,7 +42,7 @@ module Qrb
   private
 
     def tuple_type
-      @tuple_type ||= TupleType.new(name, heading)
+      @tuple_type ||= TupleType.new(heading)
     end
 
   end # class RelationType

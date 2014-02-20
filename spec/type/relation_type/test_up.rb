@@ -85,7 +85,7 @@ module Qrb
 
         it 'should raise an UpError' do
           subject.should be_a(UpError)
-          subject.message.should eq("Invalid value `foo` for colors")
+          subject.message.should eq("Invalid value `foo` for {r: Byte, g: Byte, b: Byte}")
         end
 
         it 'should have no cause' do

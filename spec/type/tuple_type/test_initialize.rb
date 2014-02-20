@@ -7,7 +7,7 @@ module Qrb
     }
 
     context 'with a valid heading' do
-      subject{ TupleType.new("tupleType", heading) }
+      subject{ TupleType.new(heading) }
 
       it{ should be_a(TupleType) }
 
@@ -17,12 +17,12 @@ module Qrb
     end
 
     context 'with an invalid heading' do
-      subject{ TupleType.new("foo", "bar") }
+      subject{ TupleType.new("foo") }
 
       it 'should raise an error' do
         ->{
           subject
-        }.should raise_error(ArgumentError, "Heading expected, got `bar`")
+        }.should raise_error(ArgumentError, "Heading expected, got `foo`")
       end
     end
 

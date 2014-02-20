@@ -9,7 +9,7 @@ module Qrb
     }
 
     let(:type){
-      TupleType.new("color", heading)
+      TupleType.new(heading, "color")
     }
 
     subject{ type.up(arg)  }

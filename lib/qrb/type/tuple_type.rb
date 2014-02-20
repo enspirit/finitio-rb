@@ -1,7 +1,7 @@
 module Qrb
   class TupleType < Type
 
-    def initialize(name, heading)
+    def initialize(heading, name = nil)
       unless heading.is_a?(Heading)
         raise ArgumentError, "Heading expected, got `#{heading}`"
       end
@@ -35,6 +35,10 @@ module Qrb
       end
 
       uped
+    end
+
+    def default_name
+      "{#{heading.to_name}}"
     end
 
     def ==(other)
