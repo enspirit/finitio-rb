@@ -1,4 +1,7 @@
 module Qrb
+  #
+  # Abstract class for Q type (generators).
+  #
   class Type
 
     def initialize(name)
@@ -28,14 +31,6 @@ module Qrb
 
     def set_hash(arg)
       arg.map(&:hash).reduce(:^)
-    end
-
-    def up_error_message(value)
-      "Invalid value `#{value}` for #{to_s}"
-    end
-
-    def up_error!(value, cause = nil)
-      raise UpError.new(up_error_message(value), cause)
     end
 
   end # class Type
