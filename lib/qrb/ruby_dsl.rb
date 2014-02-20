@@ -18,6 +18,10 @@ module Qrb
       RelationType.new(heading(defn), name)
     end
 
+    def union_type(*candidates)
+      UnionType.new(candidates)
+    end
+
   private
 
     def heading(h)

@@ -60,4 +60,4 @@ Feature: Using Q to validate input data
 
     Then it should be an UpError as:
       | message                       | location |
-      | Invalid value `-121` for Byte | 1/g      | 
+      | Invalid value `-121` for Byte | 1/g      |

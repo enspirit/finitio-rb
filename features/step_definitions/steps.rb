@@ -7,7 +7,7 @@ end
 
 Given(/^I validate the following JSON data against (.*?)$/) do |type, json|
   type = @realm.const_get(type)
-  json = ::JSON.parse(json)
+  json = ::MultiJson.load(json)
   @result = type.up(json) rescue $!
 end
 
@@ -40,3 +40,6 @@ Then(/^it should be an UpError as:$/) do |table|
   end
 end
 
+Then(/^the result should be the null representation in the host language$/) do
+  @result.should be_nil
+end
