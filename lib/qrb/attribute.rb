@@ -24,7 +24,7 @@ module Qrb
     #
     # This method allows working with ruby hashes having either Symbols or
     # Strings as keys. It ensures that no Symbol is created by the rest of the
-    # code, since this would provide a DoS attack verctor under MRI.
+    # code, since this would provide a DoS attack vector under MRI.
     #
     def fetch_on(arg, &bl)
       unless arg.respond_to?(:fetch)
