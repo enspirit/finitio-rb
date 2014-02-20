@@ -1,4 +1,34 @@
 module Qrb
+  #
+  # The Tuple type generator allows capturing information *facts*. For
+  # instance, a Point type could be defined as follows:
+  #
+  #     Point = {r: Length, theta: Angle}
+  #
+  # This class allows capturing those information types, as in:
+  #
+  #     Length = BuiltinType.new(Fixnum)
+  #     Angle  = BuiltinType.new(Float)
+  #     Point  = TupleType.new(Heading.new([
+  #                Attribute.new(:r, Length),
+  #                Attribute.new(:theta, Angle)
+  #              ]))
+  #
+  # A Hash with Symbol as keys is used as concrete ruby representation for
+  # tuples. The values map to the concrete representations of each attribute
+  # type:
+  #
+  #     R(Point) = Hash[r: R(Length), theta: R(Angle)]
+  #              = Hash[r: Fixnum, theta: Float]
+  #
+  # Accordingly, the `up` transformation function has the signature below.
+  # It expects it's Alpha/Object argument to be a Hash with all and only the
+  # expected keys (either as Symbols or Strings). The `up` function
+  # applies on every attribute value according to their respective type.
+  #
+  #     up :: Alpha  -> Point                         throws TypeError
+  #     up :: Object -> Hash[r: Fixnum, theta: Float] throws UpError
+  #
   class TupleType < Type
 
     def initialize(heading, name = nil)
@@ -11,6 +41,9 @@ module Qrb
     end
     attr_reader :heading
 
+    # Convert `value` (supposed to be Hash) to a Tuple, by checking attributes
+    # and applying `up` on them in turn. Raise an error if any attribute is
+    # missing or unrecognized, as well as if any sub transformation fails.
     def up(value, handler = UpHandler.new)
       handler.failed!(self, value) unless value.is_a?(Hash)
 
