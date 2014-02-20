@@ -24,7 +24,7 @@ module Qrb
     end
 
     def set_hash(arg)
-      arg.map(&:hash).reduce(:+)
+      arg.map(&:hash).reduce(:^)
     end
 
     def up_error_message(value)

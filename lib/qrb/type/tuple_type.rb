@@ -44,7 +44,7 @@ module Qrb
     alias :eql? :==
 
     def hash
-      heading.hash
+      self.class.hash ^ heading.hash
     end
 
   end # class TupleType

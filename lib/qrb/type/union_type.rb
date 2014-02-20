@@ -34,7 +34,7 @@ module Qrb
     alias :eql? :==
 
     def hash
-      set_hash(self.candidates)
+      self.class.hash ^ set_hash(self.candidates)
     end
 
   end # class UnionType

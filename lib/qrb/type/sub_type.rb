@@ -44,7 +44,7 @@ module Qrb
     alias :eql? :==
 
     def hash
-      super_type.hash + 37*set_hash(constraints.values)
+      self.class.hash ^ super_type.hash ^ set_hash(constraints.values)
     end
 
   end # class BuiltinType

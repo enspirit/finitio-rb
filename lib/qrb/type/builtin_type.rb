@@ -19,7 +19,7 @@ module Qrb
     alias :eql? :==
 
     def hash
-      ruby_type.hash
+      self.class.hash ^ ruby_type.hash
     end
 
   end # class BuiltinType
