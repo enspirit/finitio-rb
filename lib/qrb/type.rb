@@ -2,12 +2,15 @@ module Qrb
   class Type
 
     def initialize(name)
-      unless name.is_a?(String)
+      unless name.nil? or name.is_a?(String)
         raise ArgumentError, "String expected for type name, got `#{name}`"
       end
       @name = name
     end
-    attr_reader :name
+
+    def name
+      @name || default_name
+    end
 
     def to_s
       name.to_s

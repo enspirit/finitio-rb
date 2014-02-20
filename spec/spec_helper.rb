@@ -4,11 +4,11 @@ require 'qrb'
 module SpecHelpers
 
   def intType
-    Qrb::BuiltinType.new("intType", Integer)
+    Qrb::BuiltinType.new(Integer, "intType")
   end
 
   def floatType
-    Qrb::BuiltinType.new("floatType", Float)
+    Qrb::BuiltinType.new(Float, "floatType")
   end
 
 end

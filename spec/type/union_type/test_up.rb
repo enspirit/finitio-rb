@@ -2,9 +2,7 @@ require 'spec_helper'
 module Qrb
   describe UnionType, "up" do
 
-    let(:int_type)  { BuiltinType.new("int", Integer)  }
-    let(:float_type){ BuiltinType.new("float", Float)  }
-    let(:type)      { UnionType.new("union", [int_type, float_type]) }
+    let(:type)      { UnionType.new("union", [intType, floatType]) }
 
     subject{ type.up(arg) }
 

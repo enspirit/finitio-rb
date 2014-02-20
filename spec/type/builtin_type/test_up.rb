@@ -2,7 +2,7 @@ require 'spec_helper'
 module Qrb
   describe BuiltinType, "up" do
 
-    let(:type){ BuiltinType.new("int", Integer) }
+    let(:type){ BuiltinType.new(Integer, 'int') }
 
     subject{ type.up(arg) }
 

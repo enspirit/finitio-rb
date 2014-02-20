@@ -2,9 +2,9 @@ require 'spec_helper'
 module Qrb
   describe BuiltinType, "equality" do
 
-    let(:intType) { BuiltinType.new("int1", Integer) }
-    let(:intType2){ BuiltinType.new("int2", Integer) }
-    let(:fltType) { BuiltinType.new("flt1", Float)   }
+    let(:intType) { BuiltinType.new(Integer) }
+    let(:intType2){ BuiltinType.new(Integer) }
+    let(:fltType) { BuiltinType.new(Float)   }
 
     it 'should apply structural equality' do
       (intType == intType2).should be_true

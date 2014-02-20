@@ -1,7 +1,7 @@
 module Qrb
   class BuiltinType < Type
 
-    def initialize(name, ruby_type)
+    def initialize(ruby_type, name = nil)
       super(name)
       @ruby_type = ruby_type
     end
@@ -10,6 +10,10 @@ module Qrb
     def up(value, handler = UpHandler.new)
       handler.failed!(self, value) unless ruby_type===value
       value
+    end
+
+    def default_name
+      @ruby_type.name.to_s
     end
 
     def ==(other)
