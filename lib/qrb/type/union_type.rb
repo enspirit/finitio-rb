@@ -2,7 +2,7 @@ require 'set'
 module Qrb
   class UnionType < Type
 
-    def initialize(name, candidates)
+    def initialize(candidates, name = nil)
       unless candidates.all?{|c| c.is_a?(Type) }
         raise ArgumentError, "[Qrb::Type] expected, got #{candidates}"
       end
@@ -25,6 +25,10 @@ module Qrb
 
       # No one succeed, just fail
       handler.failed!(self, value)
+    end
+
+    def default_name
+      candidates.map(&:name).join('|')
     end
 
     def ==(other)

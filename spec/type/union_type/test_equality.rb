@@ -2,10 +2,10 @@ require 'spec_helper'
 module Qrb
   describe UnionType, "equality" do
 
-    let(:uType)  { UnionType.new("uType",  [intType, floatType]) }
-    let(:uType2) { UnionType.new("uType2", [floatType, intType]) }
-    let(:uType3) { UnionType.new("uType3", [floatType, intType]) }
-    let(:uType4) { UnionType.new("uType4", [intType])            }
+    let(:uType)  { UnionType.new([intType, floatType]) }
+    let(:uType2) { UnionType.new([floatType, intType]) }
+    let(:uType3) { UnionType.new([floatType, intType]) }
+    let(:uType4) { UnionType.new([intType])            }
 
     it 'should apply structural equality' do
       (uType  == uType2).should be_true
