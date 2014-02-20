@@ -23,10 +23,26 @@ module Qrb
     context 'with a String' do
       let(:arg){ "foo" }
 
+      subject{
+        begin
+          type.up(arg)
+          fail
+        rescue => ex
+          ex
+        end
+      }
+
       it 'should raise an Error' do
-        ->{
-          subject
-        }.should raise_error(UpError, "Invalid value `foo` for union")
+        subject.should be_a(UpError)
+        subject.message.should eq("Invalid value `foo` for union")
+      end
+
+      it 'should have no cause' do
+        subject.cause.should be_nil
+      end
+
+      it 'should have an empty location' do
+        subject.location.should eq('')
       end
     end
 

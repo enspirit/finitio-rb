@@ -12,43 +12,67 @@ module Qrb
       it{ should be(arg) }
     end
 
-    context 'with a Float' do
-      let(:arg){ 12.0 }
+    context 'when raising an Error' do
 
-      it 'should raise an Error' do
-        ->{
-          subject
-        }.should raise_error(UpError, "Invalid value `12.0` for byte")
-      end
-
-      it "should have the proper cause from super type's up" do
+      subject do
         begin
-          subject
+          type.up(arg)
           raise
-        rescue UpError => ex
-          ex.cause.should be_a(UpError)
-          ex.cause.message.should eq("Invalid value `12.0` for intType")
+        rescue => ex
+          ex
         end
       end
-    end
 
-    context 'with a negative integer' do
-      let(:arg){ -12 }
+      context 'with a Float' do
+        let(:arg){ 12.0 }
 
-      it 'should raise an Error' do
-        ->{
-          subject
-        }.should raise_error(UpError, "Invalid value `-12` for byte")
+        it 'should raise an Error' do
+          subject.should be_a(UpError)
+          subject.message.should eq("Invalid value `12.0` for byte")
+        end
+
+        it "should have the proper cause from super type's up" do
+          subject.cause.should be_a(UpError)
+          subject.cause.message.should eq("Invalid value `12.0` for intType")
+        end
+
+        it "should have an empty location" do
+          subject.location.should eq('')
+        end
       end
-    end
 
-    context 'with a non small integer' do
-      let(:arg){ 1000 }
+      context 'with a negative integer' do
+        let(:arg){ -12 }
 
-      it 'should raise an Error' do
-        ->{
-          subject
-        }.should raise_error(UpError, "Invalid value `1000` for byte (not small)")
+        it 'should raise an Error' do
+          subject.should be_a(UpError)
+          subject.message.should eq("Invalid value `-12` for byte")
+        end
+
+        it "should have no cause" do
+          subject.cause.should be_nil
+        end
+
+        it "should have an empty location" do
+          subject.location.should eq('')
+        end
+      end
+
+      context 'with a non small integer' do
+        let(:arg){ 1000 }
+
+        it 'should raise an Error' do
+          subject.should be_a(UpError)
+          subject.message.should eq("Invalid value `1000` for byte (not small)")
+        end
+
+        it "should have no cause" do
+          subject.cause.should be_nil
+        end
+
+        it "should have an empty location" do
+          subject.location.should eq('')
+        end
       end
     end
 

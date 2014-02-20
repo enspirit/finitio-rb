@@ -5,11 +5,11 @@ module Qrb
       @stack = []
     end
 
-    def branch(type, value)
-      push([type, value])
+    def deeper(location)
+      @stack.push(location.to_s)
       res = yield
     ensure
-      pop
+      @stack.pop
       res
     end
 
@@ -19,54 +19,28 @@ module Qrb
       [ false, nil ]
     end
 
-    def try
+    def try(type, value)
       yield
     rescue UpError => cause
-      fail!(cause)
+      failed!(type, value, cause)
     end
 
-    def fail!(*args)
-      options = {}
-      cause   = nil
-
-      # Parse arguments
-      args.each do |arg|
-        case arg
-        when Hash  then options = arg
-        when Error then cause = arg
-        end
-      end
-
-      # Build the error message
-      msg = options[:message] ? options[:message] : default_error_message
-
-      # Raise the error now
-      raise UpError.new(msg, cause)
+    def failed!(type, value, cause = nil)
+      msg = default_error_message(type, value)
+      raise UpError.new(msg, cause, location)
     end
 
-    def default_error_message
-      value_s, type_s = value_to_s(top_value), type_to_s(top_type)
+    def fail!(msg, cause = nil)
+      raise UpError.new(msg, cause, location)
+    end
+
+    def default_error_message(type, value)
+      value_s, type_s = value_to_s(value), type_to_s(type)
       "Invalid value `#{value_s}` for #{type_s}"
     end
 
-  private
-
-    attr_reader :stack
-
-    def push(pair)
-      @stack << pair
-    end
-
-    def pop
-      @stack.pop
-    end
-
-    def top_type
-      stack.last.first
-    end
-
-    def top_value
-      stack.last.last
+    def location
+      @stack.join('/')
     end
 
   private

@@ -12,21 +12,21 @@ module Qrb
     end
     attr_reader :heading
 
-    def up(arg, handler = UpHandler.new)
-      handler.branch(self, arg) do
-        handler.fail! unless arg.respond_to?(:each)
+    def up(value, handler = UpHandler.new)
+      handler.failed!(self, value) unless value.respond_to?(:each)
 
-        # Up every tuple and keep results in a Set
-        set = Set.new
-        arg.each.each_with_index do |tuple, index|
+      # Up every tuple and keep results in a Set
+      set = Set.new
+      value.each.each_with_index do |tuple, index|
+        handler.deeper(index) do
           tuple = tuple_type.up(tuple, handler)
-          handler.fail!(message: "Duplicate tuple") if set.include?(tuple)
+          handler.fail!("Duplicate tuple") if set.include?(tuple)
           set << tuple
         end
-
-        # Return built tuples
-        set
       end
+
+      # Return built tuples
+      set
     end
 
     def ==(other)

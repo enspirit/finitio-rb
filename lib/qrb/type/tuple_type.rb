@@ -11,30 +11,30 @@ module Qrb
     end
     attr_reader :heading
 
-    def up(arg, handler = UpHandler.new)
-      handler.branch(self, arg) do
-        handler.fail! unless arg.is_a?(Hash)
+    def up(value, handler = UpHandler.new)
+      handler.failed!(self, value) unless value.is_a?(Hash)
 
-        # Uped values, i.e. tuple under construction
-        uped = {}
+      # Uped values, i.e. tuple under construction
+      uped = {}
 
-        # Check the tuple arity and fail fast if extra attributes
-        # (missing attributes are handled just after)
-        if arg.size > heading.size
-          extra = arg.keys.map(&:to_s) - heading.map{|attr| attr.name.to_s }
-          handler.fail!(message: "Unrecognized attribute `#{extra.first}`")
+      # Check the tuple arity and fail fast if extra attributes
+      # (missing attributes are handled just after)
+      if value.size > heading.size
+        extra = value.keys.map(&:to_s) - heading.map{|attr| attr.name.to_s }
+        handler.fail!("Unrecognized attribute `#{extra.first}`")
+      end
+
+      # Up each attribute in turn now. Fail on missing ones.
+      heading.each do |attribute|
+        val = attribute.fetch_on(value) do
+          handler.fail!("Missing attribute `#{attribute.name}`")
         end
-
-        # Up each attribute in turn now. Fail on missing ones.
-        heading.each do |attribute|
-          val = attribute.fetch_on(arg) do
-            handler.fail!(message: "Missing attribute `#{attribute.name}`")
-          end
+        handler.deeper(attribute.name) do
           uped[attribute.name] = attribute.type.up(val, handler)
         end
-
-        uped
       end
+
+      uped
     end
 
     def ==(other)

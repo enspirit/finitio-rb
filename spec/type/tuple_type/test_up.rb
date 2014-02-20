@@ -28,60 +28,91 @@ module Qrb
       end
     end
 
-    context 'with something else than a Hash' do
-      let(:arg){
-        "foo"
-      }
+    context 'when raising an error' do
 
-      it 'should raise an UpError' do
-        ->{
-          subject
-        }.should raise_error(UpError, "Invalid value `foo` for color")
-      end
-    end
-
-    context 'with a missing attribute' do
-      let(:arg){
-        { "r" => 12, "g" => 13 }
-      }
-
-      it 'should raise an UpError' do
-        ->{
-          subject
-        }.should raise_error(UpError, "Missing attribute `b`")
-      end
-    end
-
-    context 'with an extra attribute' do
-      let(:arg){
-        { "r" => 12, "g" => 13, "b" => 255, "extr" => 165 }
-      }
-
-      it 'should raise an UpError' do
-        ->{
-          subject
-        }.should raise_error(UpError, "Unrecognized attribute `extr`")
-      end
-    end
-
-    context 'with an invalid attribute' do
-      let(:arg){
-        { "r" => 12.0, "g" => 13, "b" => 255 }
-      }
-
-      it 'should raise an UpError' do
-        ->{
-          subject
-        }.should raise_error(UpError, "Invalid value `12.0` for byte")
-      end
-
-      it 'should have the correct cause' do
+      subject do
         begin
-          subject
-          raise
-        rescue UpError => ex
-          ex.cause.should be_a(UpError)
-          ex.cause.message.should eq("Invalid value `12.0` for intType")
+          type.up(arg)
+          fail
+        rescue => ex
+          ex
+        end
+      end
+
+      context 'with something else than a Hash' do
+        let(:arg){
+          "foo"
+        }
+
+        it 'should raise an UpError' do
+          subject.should be_a(UpError)
+          subject.message.should eq("Invalid value `foo` for color")
+        end
+
+        it 'should have no cause' do
+          subject.cause.should be_nil
+        end
+
+        it 'should have an empty location' do
+          subject.location.should eq('')
+        end
+      end
+
+      context 'with a missing attribute' do
+        let(:arg){
+          { "r" => 12, "g" => 13 }
+        }
+
+        it 'should raise an UpError' do
+          subject.should be_a(UpError)
+          subject.message.should eq("Missing attribute `b`")
+        end
+
+        it 'should have no cause' do
+          subject.cause.should be_nil
+        end
+
+        it 'should have an empty location' do
+          subject.location.should eq('')
+        end
+      end
+
+      context 'with an extra attribute' do
+        let(:arg){
+          { "r" => 12, "g" => 13, "b" => 255, "extr" => 165 }
+        }
+
+        it 'should raise an UpError' do
+          subject.should be_a(UpError)
+          subject.message.should eq("Unrecognized attribute `extr`")
+        end
+
+        it 'should have no cause' do
+          subject.cause.should be_nil
+        end
+
+        it 'should have an empty location' do
+          subject.location.should eq('')
+        end
+      end
+
+      context 'with an invalid attribute' do
+        let(:arg){
+          { "r" => 12.0, "g" => 13, "b" => 255 }
+        }
+
+        it 'should raise an UpError' do
+          subject.should be_a(UpError)
+          subject.message.should eq("Invalid value `12.0` for byte")
+        end
+
+        it 'should have the correct cause' do
+          subject.cause.should be_a(UpError)
+          subject.cause.message.should eq("Invalid value `12.0` for intType")
+        end
+
+        it 'should have the correct location' do
+          subject.location.should eq("r")
         end
       end
     end

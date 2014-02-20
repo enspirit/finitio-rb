@@ -52,58 +52,120 @@ module Qrb
       end
     end
 
-    context 'with something else than an Array' do
-      let(:arg){
-        "foo"
-      }
+    context 'when raising an error' do
 
-      it 'should raise an UpError' do
-        ->{
-          subject
-        }.should raise_error(UpError, "Invalid value `foo` for colors")
+      subject do
+        begin
+          type.up(arg)
+          fail
+        rescue => ex
+          ex
+        end
       end
-    end
 
-    context 'with Array of non-tuples' do
-      let(:arg){
-        ["foo"]
-      }
+      context 'with something else than an Array' do
+        let(:arg){
+          "foo"
+        }
 
-      it 'should raise an UpError' do
-        ->{
-          subject
-        }.should raise_error(UpError, "Invalid value `foo` for colors")
+        it 'should raise an UpError' do
+          subject.should be_a(UpError)
+          subject.message.should eq("Invalid value `foo` for colors")
+        end
+
+        it 'should have no cause' do
+          subject.cause.should be_nil
+        end
+
+        it 'should have an empty location' do
+          subject.location.should eq('')
+        end
       end
-    end
 
-    context 'with a wrong tuple' do
-      let(:arg){
-        [
-          { "r" => 12, "g" => 13, "b" => 255 },
-          { "r" => 12, "g" => 13 }
-        ]
-      }
+      context 'with Array of non-tuples' do
+        let(:arg){
+          ["foo"]
+        }
 
-      it 'should raise an UpError' do
-        ->{
-          subject
-        }.should raise_error(UpError, %Q{Missing attribute `b`})
+        it 'should raise an UpError' do
+          subject.should be_a(UpError)
+          subject.message.should eq("Invalid value `foo` for colors")
+        end
+
+        it 'should have no cause' do
+          subject.cause.should be_nil
+        end
+
+        it 'should have the correct location' do
+          subject.location.should eq('0')
+        end
       end
-    end
 
-    context 'with a duplicate tuple' do
-      let(:arg){
-        [
-          { "r" => 12, "g" => 13, "b" => 255 },
-          { "r" => 12, "g" => 192, "b" => 13 },
-          { "r" => 12, "g" => 13, "b" => 255 }
-        ]
-      }
+      context 'with a wrong tuple' do
+        let(:arg){
+          [
+            { "r" => 12, "g" => 13, "b" => 255 },
+            { "r" => 12, "g" => 13 }
+          ]
+        }
 
-      it 'should raise an UpError' do
-        ->{
-          subject
-        }.should raise_error(UpError, "Duplicate tuple")
+        it 'should raise an UpError' do
+          subject.should be_a(UpError)
+          subject.message.should eq("Missing attribute `b`")
+        end
+
+        it 'should have no cause' do
+          subject.cause.should be_nil
+        end
+
+        it 'should have the correct location' do
+          subject.location.should eq('1')
+        end
+      end
+
+      context 'with a wrong tuple attribute' do
+        let(:arg){
+          [
+            { "r" => 12, "g" => 13, "b" => 255  },
+            { "r" => 12, "g" => 13, "b" => 12.0 }
+          ]
+        }
+
+        it 'should raise an UpError' do
+          subject.should be_a(UpError)
+          subject.message.should eq("Invalid value `12.0` for byte")
+        end
+
+        it 'should have a cause' do
+          subject.cause.should_not be_nil
+        end
+
+        it 'should have the correct location' do
+          subject.location.should eq('1/b')
+        end
+      end
+
+      context 'with a duplicate tuple' do
+        let(:arg){
+          [
+            { "r" => 12, "g" => 13, "b" => 255 },
+            { "r" => 12, "g" => 192, "b" => 13 },
+            { "r" => 12, "g" => 13, "b" => 255 }
+          ]
+        }
+
+        it 'should raise an UpError' do
+          subject.should be_a(UpError)
+          subject.message.should eq("Duplicate tuple")
+        end
+
+        it 'should have no cause' do
+          subject.cause.should be_nil
+        end
+
+        it 'should have the correct location' do
+          subject.location.should eq('2')
+        end
       end
     end
 
