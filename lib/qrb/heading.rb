@@ -8,7 +8,14 @@ module Qrb
         raise ArgumentError, "Enumerable[Attribute] expected"
       end
 
-      @attributes = Hash[attributes.map{|a| [a.name, a] }].freeze
+      @attributes = {}
+      attributes.each do |attr|
+        if @attributes[attr.name]
+          raise ArgumentError, "Attribute names must be unique"
+        end
+        @attributes[attr.name] = attr
+      end
+      @attributes.freeze
     end
 
     def size
