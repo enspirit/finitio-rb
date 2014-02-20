@@ -27,6 +27,10 @@ module Qrb
       @attributes.values.each(&bl)
     end
 
+    def to_name
+      map(&:to_name).join(', ')
+    end
+
     def ==(other)
       return nil unless other.is_a?(Heading)
       attributes == other.attributes

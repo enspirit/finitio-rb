@@ -23,6 +23,10 @@ module Qrb
       end
     end
 
+    def to_name
+      "#{name}: #{type}"
+    end
+
     def ==(other)
       return nil unless other.is_a?(Attribute)
       name==other.name and type==other.type
