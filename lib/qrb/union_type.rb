@@ -4,7 +4,7 @@ module Qrb
 
     def initialize(name, candidates)
       unless candidates.all?{|c| c.is_a?(Type) }
-        raise "Qrb::Type expected, got #{candidates}"
+        raise ArgumentError, "[Qrb::Type] expected, got #{candidates}"
       end
 
       super(name)

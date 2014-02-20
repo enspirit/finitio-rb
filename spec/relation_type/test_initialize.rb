@@ -6,9 +6,21 @@ module Qrb
       Heading.new([Attribute.new(:a, intType)])
     }
 
-    subject{ RelationType.new("relType", heading) }
+    context 'with a valid heading' do
+      subject{ RelationType.new("relType", heading) }
 
-    it{ should be_a(RelationType) }
+      it{ should be_a(RelationType) }
+    end
+
+    context 'with an invalid heading' do
+      subject{ RelationType.new("foo", "bar") }
+
+      it 'should raise an error' do
+        ->{
+          subject
+        }.should raise_error(ArgumentError, "Heading expected, got `bar`")
+      end
+    end
 
   end
 end

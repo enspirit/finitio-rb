@@ -4,7 +4,7 @@ module Qrb
 
     def initialize(name, heading)
       unless heading.is_a?(Heading)
-        raise "Heading expected, got `#{heading}`"
+        raise ArgumentError, "Heading expected, got `#{heading}`"
       end
 
       super(name)

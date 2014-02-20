@@ -5,11 +5,11 @@ module Qrb
 
     def initialize(name, super_type, constraints)
       unless super_type.is_a?(Type)
-        raise "Qrb::Type expected, got #{super_type}"
+        raise ArgumentError, "Qrb::Type expected, got #{super_type}"
       end
 
       unless constraints.is_a?(Hash)
-        raise "Hash expected for constraints, got #{constraints}"
+        raise ArgumentError, "Hash expected for constraints, got #{constraints}"
       end
 
       super(name)
