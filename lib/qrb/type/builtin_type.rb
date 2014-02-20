@@ -1,7 +1,7 @@
 module Qrb
   #
-  # A BuiltinType generator allows mapping an information type from Q to a
-  # type of the host language, here Ruby. For instance,
+  # A BuiltinType generator allows capuring an information type to a type of
+  # the host language, here a Ruby class. For instance,
   #
   #     Int := BuiltinType(ruby.Fixnum)
   #
@@ -9,10 +9,15 @@ module Qrb
   # values that can be represented by the host type. In the example, `Int`
   # captures the same set of numbers as ruby's Fixnum.
   #
-  # Once uped, the representation of the information type is done through
-  # the ruby class of the host type. In the example:
+  # The ruby class is used as concrete representation of the information type.
+  # In the example:
   #
-  #    M(Int) = Fixnum
+  #     R(Int) = Fixnum
+  #
+  # Accordingly, the `up` transformation function has the following signature:
+  #
+  #     up :: Alpha  -> Int    throws TypeError
+  #     up :: Object -> Fixnum throws UpError
   #
   class BuiltinType < Type
 
