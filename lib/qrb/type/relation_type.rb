@@ -1,5 +1,27 @@
 require 'set'
 module Qrb
+  #
+  # The Relation type generator allows capturing sets of information facts,
+  # i.e. sets of tuples (of same heading). E.g.
+  #
+  #     ColoredPoints = {{ point: Point, color: Color }}
+  #
+  # This class allows capturing relation types, in a way similar to TupleType:
+  #
+  #     ColoredPoints = RelationType.new( Heading[...] )
+  #
+  # A ruby Set is used as concrete representation, and will contain hashes
+  # that are valid representations of the associated tuple type:
+  #
+  #     R(ColoredPoints) = Set[ R({...}) ] = Set[Hash[...]]
+  #
+  # Accordingly, the up transformation function has the signature below. It
+  # expects an Enumerable as input and fails if any duplicate is found (after
+  # tuple transformation), or if any tuple fails at being transformed.
+  #
+  #     up :: Alpha  -> ColoredPoints   throws TypeError
+  #     up :: Object -> Set[Hash[...]]  throws UpError
+  #
   class RelationType < Type
 
     def initialize(heading, name = nil)
@@ -12,6 +34,9 @@ module Qrb
     end
     attr_reader :heading
 
+    # Apply the corresponding TupleType's `up` to every element of `value`
+    # (any enumerable). Return a Set of transformed tuples. Fail if anything
+    # goes wrong transforming tuples or if duplicates are found.
     def up(value, handler = UpHandler.new)
       handler.failed!(self, value) unless value.respond_to?(:each)
 
