@@ -12,18 +12,21 @@ module Qrb
     end
     attr_reader :heading
 
-    def up(arg)
-      up_error!(arg) unless arg.respond_to?(:each)
+    def up(arg, handler = UpHandler.new)
+      handler.branch(self, arg) do
+        handler.fail! unless arg.respond_to?(:each)
 
-      set = Set.new
-      arg.each.each_with_index do |tuple, index|
-        tuple = up_tuple(tuple, index)
-        if set.include?(tuple)
-          raise UpError.new("Duplicate tuple @ [#{index}]")
+        # Up every tuple and keep results in a Set
+        set = Set.new
+        arg.each.each_with_index do |tuple, index|
+          tuple = tuple_type.up(tuple, handler)
+          handler.fail!(message: "Duplicate tuple") if set.include?(tuple)
+          set << tuple
         end
-        set << tuple
+
+        # Return built tuples
+        set
       end
-      set
     end
 
     def ==(other)
@@ -40,13 +43,6 @@ module Qrb
 
     def tuple_type
       @tuple_type ||= TupleType.new(name, heading)
-    end
-
-    def up_tuple(tuple, index)
-      tuple_type.up(tuple)
-    rescue UpError => cause
-      msg = "Invalid tuple `#{tuple}` for #{to_s} @ [#{index}]"
-      raise UpError.new(msg, cause)
     end
 
   end # class RelationType

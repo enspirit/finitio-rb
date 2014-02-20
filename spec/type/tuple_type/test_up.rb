@@ -48,7 +48,7 @@ module Qrb
       it 'should raise an UpError' do
         ->{
           subject
-        }.should raise_error(UpError, "Missing attribute `b` for color")
+        }.should raise_error(UpError, "Missing attribute `b`")
       end
     end
 
@@ -60,7 +60,7 @@ module Qrb
       it 'should raise an UpError' do
         ->{
           subject
-        }.should raise_error(UpError, "Unrecognized attribute `extr` for color")
+        }.should raise_error(UpError, "Unrecognized attribute `extr`")
       end
     end
 
@@ -72,7 +72,7 @@ module Qrb
       it 'should raise an UpError' do
         ->{
           subject
-        }.should raise_error(UpError, "Invalid attribute `r` for color")
+        }.should raise_error(UpError, "Invalid value `12.0` for byte")
       end
 
       it 'should have the correct cause' do
@@ -81,7 +81,7 @@ module Qrb
           raise
         rescue UpError => ex
           ex.cause.should be_a(UpError)
-          ex.cause.message.should eq("Invalid value `12.0` for byte")
+          ex.cause.message.should eq("Invalid value `12.0` for intType")
         end
       end
     end

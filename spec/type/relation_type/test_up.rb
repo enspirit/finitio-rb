@@ -72,7 +72,7 @@ module Qrb
       it 'should raise an UpError' do
         ->{
           subject
-        }.should raise_error(UpError, "Invalid tuple `foo` for colors @ [0]")
+        }.should raise_error(UpError, "Invalid value `foo` for colors")
       end
     end
 
@@ -87,7 +87,7 @@ module Qrb
       it 'should raise an UpError' do
         ->{
           subject
-        }.should raise_error(UpError, %Q{Invalid tuple `{"r"=>12, "g"=>13}` for colors @ [1]})
+        }.should raise_error(UpError, %Q{Missing attribute `b`})
       end
     end
 
@@ -103,7 +103,7 @@ module Qrb
       it 'should raise an UpError' do
         ->{
           subject
-        }.should raise_error(UpError, "Duplicate tuple @ [2]")
+        }.should raise_error(UpError, "Duplicate tuple")
       end
     end
 

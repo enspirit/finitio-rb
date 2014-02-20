@@ -7,9 +7,11 @@ module Qrb
     end
     attr_reader :ruby_type
 
-    def up(value)
-      raise up_error!(value) unless ruby_type===value
-      value
+    def up(value, handler = UpHandler.new)
+      handler.branch(self, value) do
+        handler.fail! unless ruby_type===value
+        value
+      end
     end
 
     def ==(other)

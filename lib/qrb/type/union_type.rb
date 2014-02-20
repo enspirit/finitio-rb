@@ -12,17 +12,23 @@ module Qrb
     end
     attr_reader :candidates
 
-    def up(value)
-      # return the first possible success
-      candidates.each do |c|
-        begin
-          return c.up(value)
-        rescue UpError
-        end
-      end
+    def up(value, handler = UpHandler.new)
+      handler.branch(self, value) do
 
-      # no one, fail
-      up_error!(value)
+        # Try each candidate in turn. Do nothing on UpError as
+        # the next candidate could be the good one! Return the
+        # first successfully uped.
+        candidates.each do |c|
+          success, uped = handler.just_try do
+            c.up(value, handler)
+          end
+          return uped if success
+        end
+
+        # No one succeed, just fail
+        handler.fail!
+
+      end
     end
 
     def ==(other)

@@ -17,24 +17,26 @@ module Qrb
     end
     attr_reader :super_type, :constraints
 
-    def up(value)
-      # try to up through the super type, re-causing any up error
-      begin
-        uped = super_type.up(value)
-      rescue UpError => cause
-        up_error!(value, cause)
-      end
+    def up(value, handler = UpHandler.new)
+      handler.branch(self, value) do
 
-      # check each constraint in turn
-      constraints.each_pair do |name, constraint|
-        next if constraint===uped
-        msg = up_error_message(value)
-        msg += " (not #{name})" unless DEFAULT_CONSTRAINT_NAMES.include?(name)
-        raise UpError, msg
-      end
+        # Check that the supertype is able to up the value.
+        # Rewrite and set cause to any encountered UpError.
+        uped = handler.try do
+          super_type.up(value, handler)
+        end
 
-      # seems good, return the uped value
-      uped
+        # Check each constraint in turn
+        constraints.each_pair do |name, constraint|
+          next if constraint===uped
+          msg = handler.default_error_message
+          msg << " (not #{name})" unless DEFAULT_CONSTRAINT_NAMES.include?(name)
+          handler.fail!(message: msg)
+        end
+
+        # seems good, return the uped value
+        uped
+      end
     end
 
     def ==(other)
