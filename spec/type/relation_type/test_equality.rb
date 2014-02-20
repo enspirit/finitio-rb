@@ -6,9 +6,9 @@ module Qrb
     let(:h2){ Heading.new([Attribute.new(:b, intType), Attribute.new(:r, intType)]) }
     let(:h3){ Heading.new([Attribute.new(:b, intType)])                             }
 
-    let(:type1)  { RelationType.new("type1", h1) }
-    let(:type2)  { RelationType.new("type2", h2) }
-    let(:type3)  { RelationType.new("type2", h3) }
+    let(:type1)  { RelationType.new(h1) }
+    let(:type2)  { RelationType.new(h2) }
+    let(:type3)  { RelationType.new(h3) }
 
     it 'should apply structural equality' do
       (type1 == type2).should be_true

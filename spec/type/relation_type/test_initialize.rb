@@ -7,7 +7,7 @@ module Qrb
     }
 
     context 'with a valid heading' do
-      subject{ RelationType.new("relType", heading) }
+      subject{ RelationType.new(heading) }
 
       it{ should be_a(RelationType) }
     end
@@ -18,7 +18,7 @@ module Qrb
       it 'should raise an error' do
         ->{
           subject
-        }.should raise_error(ArgumentError, "Heading expected, got `bar`")
+        }.should raise_error(ArgumentError, "Heading expected, got `foo`")
       end
     end
 

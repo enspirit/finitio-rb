@@ -9,7 +9,7 @@ module Qrb
     }
 
     let(:type){
-      RelationType.new("colors", heading)
+      RelationType.new(heading, "colors")
     }
 
     subject{ type.up(arg)  }
