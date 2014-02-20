@@ -37,3 +37,8 @@ module Qrb
 
   end # class Type
 end # module Qrb
+require_relative 'type/builtin_type'
+require_relative 'type/union_type'
+require_relative 'type/sub_type'
+require_relative 'type/tuple_type'
+require_relative 'type/relation_type'
