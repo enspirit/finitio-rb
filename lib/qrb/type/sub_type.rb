@@ -3,7 +3,7 @@ module Qrb
 
     DEFAULT_CONSTRAINT_NAMES = [:default, :predicate].freeze
 
-    def initialize(name, super_type, constraints)
+    def initialize(super_type, constraints, name = nil)
       unless super_type.is_a?(Type)
         raise ArgumentError, "Qrb::Type expected, got #{super_type}"
       end
@@ -34,6 +34,10 @@ module Qrb
 
       # seems good, return the uped value
       uped
+    end
+
+    def default_name
+      constraints.keys.first.to_s.capitalize
     end
 
     def ==(other)

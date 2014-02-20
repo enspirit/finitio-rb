@@ -11,6 +11,10 @@ module SpecHelpers
     Qrb::BuiltinType.new(Float, "floatType")
   end
 
+  def byte
+    Qrb::SubType.new(intType, byte: ->(i){ i>=0 && i<=255 })
+  end
+
 end
 
 class Foo

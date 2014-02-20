@@ -2,7 +2,7 @@ require 'spec_helper'
 module Qrb
   describe SubType, "up" do
 
-    let(:type){ SubType.new("byte", intType, default: ->(i){ i>0 }, small: ->(i){ i<255 }) }
+    let(:type){ SubType.new(intType, {default: ->(i){ i>0 }, small: ->(i){ i<255 }}, "byte") }
 
     subject{ type.up(arg) }
 

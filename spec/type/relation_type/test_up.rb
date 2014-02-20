@@ -2,10 +2,6 @@ require 'spec_helper'
 module Qrb
   describe RelationType, "up" do
 
-    let(:byte){
-      SubType.new("byte", intType, predicate: ->(i){ i>=0 && i<=255 })
-    }
-
     let(:heading){
       Heading.new([Attribute.new(:r, byte),
                    Attribute.new(:g, byte),
@@ -133,7 +129,7 @@ module Qrb
 
         it 'should raise an UpError' do
           subject.should be_a(UpError)
-          subject.message.should eq("Invalid value `12.0` for byte")
+          subject.message.should eq("Invalid value `12.0` for Byte")
         end
 
         it 'should have a cause' do
