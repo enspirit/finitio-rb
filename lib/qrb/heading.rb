@@ -1,4 +1,10 @@
 module Qrb
+  #
+  # Helper class for tuple and relation types.
+  #
+  # A heading is a set of attributes, with the constraint that no two
+  # attributes have the same name.
+  #
   class Heading
     include Enumerable
 
@@ -37,7 +43,7 @@ module Qrb
     end
 
     def hash
-      attributes.hash
+      self.class.hash ^ attributes.hash
     end
 
     attr_reader :attributes
