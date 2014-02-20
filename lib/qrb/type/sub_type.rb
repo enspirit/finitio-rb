@@ -1,4 +1,23 @@
 module Qrb
+  #
+  # A sub type generator, through specialization by constraints.
+  #
+  # Sub types are subsets of values from a super type, through constraints.
+  # For instance, a Byte type can be defined as follows:
+  #
+  #     Byte := Integer( i | i >= 0 and i <= 255 )
+  #
+  # This class allows defining such types with multiple, named constraints.
+  # For instance,
+  #
+  #     Int  = BuiltinType.new(Integer)
+  #     Byte = SubType.new(Int, positive: ->(i){ i >= 0 },
+  #                             small:    ->(i){ i <= 255 })
+  #
+  # The representation is kept the same as the super type. In other words:
+  #
+  #     M(Byte) = M(Int) = Fixnum
+  #
   class SubType < Type
 
     DEFAULT_CONSTRAINT_NAMES = [:default, :predicate].freeze
@@ -17,6 +36,8 @@ module Qrb
     end
     attr_reader :super_type, :constraints
 
+    # Check that `value` can be uped through the supertype, then verify all
+    # constraints. Raise an error if anything goes wrong.
     def up(value, handler = UpHandler.new)
       # Check that the supertype is able to up the value.
       # Rewrite and set cause to any encountered UpError.
