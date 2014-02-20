@@ -8,4 +8,4 @@ Q - in Ruby
 
 ## Links
 
-https://github.com/blambeau/qrb
+https://github.com/alf-tool/qrb
