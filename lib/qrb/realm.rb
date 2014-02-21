@@ -8,6 +8,22 @@ module Qrb
       @types = {}
     end
 
+    [
+      :builtin,
+      :adt,
+      :subtype,
+      :union,
+      :seq,
+      :set,
+      :tuple,
+      :relation
+    ].each do |dsl_method|
+      define_method(dsl_method){|*args, &bl|
+        builder.public_send(dsl_method, *args, &bl)
+        builder.add_type
+      }
+    end
+
     def add_type(type)
       unless type.is_a?(Type)
         raise ArgumentError, "Qrb::Type expected, got `#{type}`"
@@ -27,6 +43,12 @@ module Qrb
 
     def fetch(name, &bl)
       @types.fetch(name, &bl)
+    end
+
+  private
+
+    def builder
+      @builder ||= RealmBuilder.new(self)
     end
 
   end # class Realm

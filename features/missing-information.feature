@@ -4,9 +4,9 @@ Feature: Missing information Using Q
 
     Given the Realm is built using the DSL as follows
        """
-       Nil      = builtin(NilClass)
-       Int      = builtin(Integer)
-       MaybeInt = union_type(Nil, Int)
+       Nil      = builtin(NilClass, "Nil")
+       Int      = builtin(Integer,  "Int")
+       MaybeInt = union([Nil, Int], "MaybeInt")
        """
 
    Scenario: Validating non nil against Int
@@ -27,8 +27,8 @@ Feature: Missing information Using Q
       """
 
     Then it should be an UpError as:
-      | message                          |
-      | Invalid value `nil` for Integer  |
+      | message                      |
+      | Invalid value `nil` for Int  |
 
   Scenario: Validating nil against MaybeInt
 
