@@ -5,6 +5,14 @@ module Qrb
       @stack = []
     end
 
+    def iterate(value)
+      value.each.each_with_index do |elm, index|
+        deeper(index) do
+          yield(elm, index)
+        end
+      end
+    end
+
     def deeper(location)
       @stack.push(location.to_s)
       res = yield

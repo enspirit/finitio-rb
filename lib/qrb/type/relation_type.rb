@@ -41,12 +41,10 @@ module Qrb
 
       # Up every tuple and keep results in a Set
       set = Set.new
-      value.each.each_with_index do |tuple, index|
-        handler.deeper(index) do
-          tuple = tuple_type.up(tuple, handler)
-          handler.fail!("Duplicate tuple") if set.include?(tuple)
-          set << tuple
-        end
+      handler.iterate(value) do |tuple, index|
+        tuple = tuple_type.up(tuple, handler)
+        handler.fail!("Duplicate tuple") if set.include?(tuple)
+        set << tuple
       end
 
       # Return built tuples

@@ -32,12 +32,10 @@ module Qrb
       handler.failed!(self, value) unless value.respond_to?(:each)
 
       set = Set.new
-      value.each.each_with_index do |elm, index|
-        handler.deeper(index) do
-          elm = elm_type.up(elm, handler)
-          handler.fail!("Duplicate value `#{elm}`") if set.include?(elm)
-          set << elm
-        end
+      handler.iterate(value) do |elm, index|
+        elm = elm_type.up(elm, handler)
+        handler.fail!("Duplicate value `#{elm}`") if set.include?(elm)
+        set << elm
       end
       set
     end

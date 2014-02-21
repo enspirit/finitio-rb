@@ -32,11 +32,11 @@ module Qrb
     def up(value, handler = UpHandler.new)
       handler.failed!(self, value) unless value.respond_to?(:each)
 
-      value.each.each_with_index.map do |elm, index|
-        handler.deeper(index) do
-          elm_type.up(elm, handler)
-        end
+      array = []
+      handler.iterate(value) do |elm, index|
+        array << elm_type.up(elm, handler)
       end
+      array
     end
 
     def default_name
