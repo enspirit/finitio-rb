@@ -1,5 +1,6 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'qrb'
+require 'qrb/syntax'
 
 module SpecHelpers
 
@@ -11,8 +12,16 @@ module SpecHelpers
     Qrb::BuiltinType.new(Float, "floatType")
   end
 
+  def nilType
+    Qrb::BuiltinType.new(NilClass, "nilType")
+  end
+
   def byte
     Qrb::SubType.new(intType, byte: ->(i){ i>=0 && i<=255 })
+  end
+
+  def realm_builder
+    Qrb::RealmBuilder.new
   end
 
 end
