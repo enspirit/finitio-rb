@@ -59,6 +59,8 @@ module Qrb
       heading = case heading
       when Heading
         heading
+      when TupleType, RelationType
+        heading.heading
       when Hash
         attributes(heading)
         Heading.new(pop_one(:attributes))

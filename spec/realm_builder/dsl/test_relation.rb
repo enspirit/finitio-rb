@@ -37,6 +37,18 @@ module Qrb
         end
       end
 
+      context 'when used with a tuple type' do
+        subject{
+          builder.relation(TupleType.new(heading), "MyRelation")
+        }
+
+        it_should_behave_like "The Relation[a: Int] type"
+
+        it 'should have the correct name' do
+          subject.name.should eq("MyRelation")
+        end
+      end
+
       context 'when used with a hash and ruby classes' do
         subject{
           builder.relation(a: Integer)
