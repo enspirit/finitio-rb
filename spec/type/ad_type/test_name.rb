@@ -1,19 +1,19 @@
 require 'spec_helper'
 module Qrb
-  describe UserType, "name" do
+  describe AdType, "name" do
 
     subject{ type.name }
 
     context 'when provided' do
-      let(:type){ UserType.new({}, "Foo") }
+      let(:type){ AdType.new(Color, {}, "Foo") }
 
       it{ should eq('Foo') }
     end
 
     context 'when not provided' do
-      let(:type){ UserType.new({}) }
+      let(:type){ AdType.new(Color, {}) }
 
-      it{ should eq('Unnamed') }
+      it{ should eq('Color') }
     end
 
   end

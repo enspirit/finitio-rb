@@ -17,18 +17,24 @@ module SpecHelpers
 
 end
 
-class Foo
-  def initialize(*args)
-    @args = args
+class Color
+  def initialize(contract, rep)
+    @contract = contract
+    @rep = rep
   end
-  attr_reader :args
+  attr_reader :contract, :rep
 end
 
-class Bar
-  def initialize(*args)
-    @args = args
+class RgbContract
+  def self.rgb(rep)
+    Color.new(:rgb, rep)
   end
-  attr_reader :args
+end
+
+class HexContract
+  def self.hex(rep)
+    Color.new(:hex, rep)
+  end
 end
 
 RSpec.configure do |c|
