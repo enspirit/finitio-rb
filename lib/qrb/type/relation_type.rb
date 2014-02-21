@@ -1,4 +1,3 @@
-require 'set'
 module Qrb
   #
   # The Relation type generator allows capturing sets of information facts,

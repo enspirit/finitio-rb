@@ -1,3 +1,5 @@
+require 'set'
+
 #
 # Q - in Ruby
 #
