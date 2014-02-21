@@ -13,7 +13,7 @@ module Qrb
   #     Number = UnionType.new([ Int, Real ])
   #
   # When transforming a value through `up`, the different candidate types are
-  # tried in specified order. The first one that succeeds at builting the
+  # tried in specified order. The first one that succeeds at building the
   # value ends the process and the value is simply returned. Accordingly,
   # the concrete representation will be
   #
