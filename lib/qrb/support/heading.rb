@@ -28,6 +28,10 @@ module Qrb
       @attributes.size
     end
 
+    def empty?
+      size == 0
+    end
+
     def each(&bl)
       return to_enum unless bl
       @attributes.values.each(&bl)
