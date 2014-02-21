@@ -24,16 +24,7 @@ module Qrb
   #     up :: Object -> Array[Float]  throws UpError
   #
   class SeqType < Type
-
-    def initialize(elm_type, name = nil)
-      unless elm_type.is_a?(Type)
-        raise ArgumentError, "Qrb::Type expected, got `#{elm_type}`"
-      end
-
-      super(name)
-      @elm_type = elm_type
-    end
-    attr_reader :elm_type
+    include CollectionType
 
     # Apply the element type's up transformation to each element of `value`
     # (expected to respond to `each`). Return converted values in a ruby
@@ -50,16 +41,6 @@ module Qrb
 
     def default_name
       "[#{elm_type.name}]"
-    end
-
-    def ==(other)
-      return false unless other.is_a?(SeqType)
-      elm_type == other.elm_type
-    end
-    alias :eql? :==
-
-    def hash
-      self.class.hash ^ self.elm_type.hash
     end
 
   end # class SeqType
