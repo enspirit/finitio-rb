@@ -19,8 +19,7 @@ module Qrb
       :relation
     ].each do |dsl_method|
       define_method(dsl_method){|*args, &bl|
-        builder.public_send(dsl_method, *args, &bl)
-        builder.add_type
+        builder.add_type builder.public_send(dsl_method, *args, &bl)
       }
     end
 

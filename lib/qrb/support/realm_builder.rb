@@ -17,15 +17,15 @@ module Qrb
         fail!("Ruby module expected, got `#{type}`")
       end
 
-      push(:ruby_type, type)
+      type
     end
 
     def name(name)
-      unless name.is_a?(String) and name.strip.size > 1
+      unless name.nil? or (name.is_a?(String) and name.strip.size > 1)
         fail!("Wrong type name `#{name}`")
       end
 
-      push(:name, name.strip)
+      name.nil? ? nil : name.strip
     end
 
     def constraints(constraints)
@@ -33,26 +33,24 @@ module Qrb
         constraints = { predicate: constraints }
       end
 
-      push(:constraints, constraints)
+      constraints
     end
 
     def attribute(name, type)
-      type(type)
-
-      push(:attribute, Attribute.new(name, pop_one(:type)))
+      Attribute.new(name, type(type))
     end
 
     def attributes(attributes)
       attributes = case attributes
       when Hash
-        attributes.each_pair do |name, type|
+        attributes.each_pair.map do |name, type|
           attribute(name, type)
         end
       else
         fail!("Hash expected, got `#{attributes}`")
       end
 
-      push(:attributes, pop_all(:attribute))
+      attributes
     end
 
     def heading(heading)
@@ -62,13 +60,12 @@ module Qrb
       when TupleType, RelationType
         heading.heading
       when Hash
-        attributes(heading)
-        Heading.new(pop_one(:attributes))
+        Heading.new(attributes(heading))
       else
         fail!("Heading expected, got `#{heading}`")
       end
 
-      push(:heading, heading)
+      heading
     end
 
     def contracts(contracts)
@@ -79,7 +76,7 @@ module Qrb
         fail!("Invalid contract names `#{invalid}`")
       end
 
-      push(:contracts, contracts)
+      contracts
     end
 
     def type(type)
@@ -94,149 +91,124 @@ module Qrb
         fail!("Qrb::Type|Module expected, got `#{type}`")
       end
 
-      push(:type, type)
+      type
     end
 
     ########################################################## Type generators
 
-    def builtin(ruby_type = nil, name = nil)
-      ruby_type(ruby_type) if ruby_type
-      name(name)           if name
+    def builtin(ruby_type, name = nil)
+      ruby_type = ruby_type(ruby_type)
+      name      = name(name)
 
-      type BuiltinType.new(*pop(:ruby_type, :name))
+      BuiltinType.new(ruby_type, name)
     end
 
     def builtin!(*args)
-      builtin(*args)
-      add_type
+      add_type builtin(*args)
     end
 
-    def adt(ruby_type = nil, contracts = nil, name = nil)
-      ruby_type(ruby_type) if ruby_type
-      contracts(contracts) if contracts
-      name(name)           if name
+    def adt(ruby_type, contracts, name = nil)
+      ruby_type = ruby_type(ruby_type)
+      contracts = contracts(contracts)
+      name      = name(name)
 
-      type AdType.new(*pop(:ruby_type, :contracts, :name))
+      AdType.new(ruby_type, contracts, name)
     end
 
     def adt!(*args)
-      adt(*args)
-      add_type
+      add_type adt(*args)
     end
 
     ### Sub and union
 
-    def subtype(super_type = nil, constraints = nil, name = nil)
-      type(super_type)         if super_type
-      constraints(constraints) if constraints
-      name(name)               if name
+    def subtype(super_type, constraints, name = nil)
+      super_type  = type(super_type)
+      constraints = constraints(constraints)
+      name        = name(name)
 
-      type SubType.new(*pop(:type, :constraints, :name))
+      SubType.new(super_type, constraints, name)
     end
 
     def subtype!(*args)
-      subtype(*args)
-      add_type
+      add_type subtype(*args)
     end
 
     def union(*args)
+      candidates, name = [], nil
       args.each do |arg|
         case arg
-        when Array  then arg.map{|t| type(t) }
-        when String then name(arg)
+        when Array  then candidates = arg.map{|t| type(t) }
+        when String then name = name(arg)
         else
-          type(arg)
+          candidates << type(arg)
         end
       end
 
-      type UnionType.new(pop_all(:type), pop_one(:name))
+      UnionType.new(candidates, name)
     end
 
     def union!(*args)
-      union(*args)
-      add_type
+      add_type union(*args)
     end
 
     ### Collections
 
-    def seq(elm_type = nil, name = nil)
-      type(elm_type) if elm_type
-      name(name)     if name
+    def seq(elm_type, name = nil)
+      elm_type = type(elm_type)
+      name     = name(name)
 
-      type SeqType.new(*pop(:type, :name))
+      SeqType.new(elm_type, name)
     end
 
     def seq!(*args)
-      seq(*args)
-      add_type
+      add_type seq(*args)
     end
 
-    def set(elm_type = nil, name = nil)
-      type(elm_type) if elm_type
-      name(name)     if name
+    def set(elm_type, name = nil)
+      elm_type = type(elm_type)
+      name     = name(name)
 
-      type SetType.new(*pop(:type, :name))
+      SetType.new(elm_type, name)
     end
 
     def set!(*args)
-      set(*args)
-      add_type
+      add_type set(*args)
     end
 
     ### Tuples and relations
 
-    def tuple(heading = nil, name = nil)
-      heading(heading) if heading
-      name(name)       if name
+    def tuple(heading, name = nil)
+      heading = heading(heading)
+      name    = name(name)
 
-      type TupleType.new(*pop(:heading, :name))
+      TupleType.new(heading, name)
     end
 
     def tuple!(*args)
-      tuple(*args)
-      add_type
+      add_type tuple(*args)
     end
 
-    def relation(heading = nil, name = nil)
-      heading(heading) if heading
-      name(name)       if name
+    def relation(heading, name = nil)
+      heading = heading(heading)
+      name    = name(name)
 
-      type RelationType.new(*pop(:heading, :name))
+      RelationType.new(heading, name)
     end
 
     def relation!(*args)
-      relation(*args)
-      add_type
+      add_type relation(*args)
     end
 
     ######################################################### Realm management
 
-    def add_type
-      realm.add_type(*pop(:type))
+    def add_type(type)
+      realm.add_type(type)
     end
 
   private
 
     def fail!(message)
       raise Error, message, caller
-    end
-
-    def push(who, what)
-      @stacks[who] << what
-      what
-    end
-
-    def pop(*whoes)
-      whoes.map{|who| @stacks[who].pop }.compact
-    end
-
-    def pop_one(who)
-      @stacks[who].pop
-    end
-
-    def pop_all(who)
-      res, @stacks[who] = @stacks[who], []
-      res
     end
 
   end # class TypeBuilder
