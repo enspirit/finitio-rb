@@ -42,7 +42,7 @@ module Qrb
     # Invoke `from_q` on each candidate type in turn. Return the value
     # returned by the first one that does not fail. Fail with an TypeError if no
     # candidate succeeds at tranforming `value`.
-    def from_q(value, handler = UpHandler.new)
+    def from_q(value, handler = FromQHelper.new)
 
       # Do nothing on TypeError as the next candidate could be the good one!
       candidates.each do |c|

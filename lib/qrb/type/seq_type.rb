@@ -29,7 +29,7 @@ module Qrb
     # Apply the element type's `from_q` transformation to each element of
     # `value` (expected to respond to `each`). Return converted values in a
     # ruby Array.
-    def from_q(value, handler = UpHandler.new)
+    def from_q(value, handler = FromQHelper.new)
       handler.failed!(self, value) unless value.respond_to?(:each)
 
       array = []

@@ -1,7 +1,7 @@
 module Qrb
   module DataType
 
-    def from_q(value, handler = UpHandler.new)
+    def from_q(value, handler = FromQHelper.new)
       ad_type.from_q(value, handler)
     end
 

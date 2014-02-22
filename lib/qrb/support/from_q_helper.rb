@@ -1,5 +1,5 @@
 module Qrb
-  class UpHandler
+  class FromQHelper
 
     def initialize
       @stack = []
@@ -64,5 +64,5 @@ module Qrb
       type.name.to_s
     end
 
-  end # class UpHandler
+  end # class FromQHelper
 end # module Qrb

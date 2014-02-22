@@ -29,7 +29,7 @@ module Qrb
 
     # Check that `value` is a valid instance of `ruby_type` through `===` or
     # raise an error.
-    def from_q(value, handler = UpHandler.new)
+    def from_q(value, handler = FromQHelper.new)
       handler.failed!(self, value) unless ruby_type===value
       value
     end

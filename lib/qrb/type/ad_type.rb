@@ -67,7 +67,7 @@ module Qrb
       ruby_type.name.to_s
     end
 
-    def from_q(value, handler = UpHandler.new)
+    def from_q(value, handler = FromQHelper.new)
       # Up should be idempotent with respect to the ADT
       return value if value.is_a?(ruby_type)
 

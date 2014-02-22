@@ -44,7 +44,7 @@ module Qrb
     # Convert `value` (supposed to be Hash) to a Tuple, by checking attributes
     # and applying `from_q` on them in turn. Raise an error if any attribute
     # is missing or unrecognized, as well as if any sub transformation fails.
-    def from_q(value, handler = UpHandler.new)
+    def from_q(value, handler = FromQHelper.new)
       handler.failed!(self, value) unless value.is_a?(Hash)
 
       # Uped values, i.e. tuple under construction

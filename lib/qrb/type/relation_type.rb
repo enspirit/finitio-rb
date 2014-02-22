@@ -36,7 +36,7 @@ module Qrb
     # Apply the corresponding TupleType's `from_q` to every element of `value`
     # (any enumerable). Return a Set of transformed tuples. Fail if anything
     # goes wrong transforming tuples or if duplicates are found.
-    def from_q(value, handler = UpHandler.new)
+    def from_q(value, handler = FromQHelper.new)
       handler.failed!(self, value) unless value.respond_to?(:each)
 
       # Up every tuple and keep results in a Set

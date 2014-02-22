@@ -45,7 +45,7 @@ module Qrb
 
     # Check that `value` can be uped through the supertype, then verify all
     # constraints. Raise an error if anything goes wrong.
-    def from_q(value, handler = UpHandler.new)
+    def from_q(value, handler = FromQHelper.new)
       # Check that the supertype is able to from_q the value.
       # Rewrite and set cause to any encountered TypeError.
       uped = handler.try(self, value) do
