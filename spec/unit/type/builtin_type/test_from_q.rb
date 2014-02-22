@@ -1,10 +1,10 @@
 require 'spec_helper'
 module Qrb
-  describe BuiltinType, "up" do
+  describe BuiltinType, "from_q" do
 
     let(:type){ BuiltinType.new(Integer, 'int') }
 
-    subject{ type.up(arg) }
+    subject{ type.from_q(arg) }
 
     context 'with an Integer' do
       let(:arg){ 12 }
@@ -16,12 +16,7 @@ module Qrb
       let(:arg){ 12.0 }
 
       subject{
-        begin
-          type.up(arg)
-          raise
-        rescue UpError => ex
-          ex
-        end
+        type.from_q(arg) rescue $!
       }
 
       it 'should raise an Error' do

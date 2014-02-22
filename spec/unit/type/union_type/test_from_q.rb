@@ -1,10 +1,10 @@
 require 'spec_helper'
 module Qrb
-  describe UnionType, "up" do
+  describe UnionType, "from_q" do
 
     let(:type)      { UnionType.new([intType, floatType], "union") }
 
-    subject{ type.up(arg) }
+    subject{ type.from_q(arg) }
 
     context 'with an Integer' do
       let(:arg){ 12 }
@@ -22,12 +22,7 @@ module Qrb
       let(:arg){ "foo" }
 
       subject{
-        begin
-          type.up(arg)
-          fail
-        rescue => ex
-          ex
-        end
+        type.from_q(arg) rescue $!
       }
 
       it 'should raise an Error' do

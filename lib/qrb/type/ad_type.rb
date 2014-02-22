@@ -41,10 +41,11 @@ module Qrb
   #
   #     R(Color) = ColorImpl
   #
-  # Accordingly, the `up` transformation function has the following signature:
+  # Accordingly, the `from_q` transformation function has the following
+  # signature:
   #
-  #     up :: Alpha  -> Color     throws TypeError
-  #     up :: Object -> ColorImpl throws UpError
+  #     from_q :: Alpha  -> Color     throws TypeError
+  #     from_q :: Object -> ColorImpl throws UpError
   #
   class AdType < Type
 
@@ -66,7 +67,7 @@ module Qrb
       ruby_type.name.to_s
     end
 
-    def up(value, handler = UpHandler.new)
+    def from_q(value, handler = UpHandler.new)
       # Up should be idempotent with respect to the ADT
       return value if value.is_a?(ruby_type)
 
@@ -75,9 +76,9 @@ module Qrb
       # first successfully uped.
       contracts.each_pair do |name, (infotype,upper)|
 
-        # First make the up on the information type
+        # First make the from_q transformation on the information type
         success, uped = handler.just_try do
-          infotype.up(value, handler)
+          infotype.from_q(value, handler)
         end
         next unless success
 

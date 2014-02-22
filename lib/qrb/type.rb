@@ -19,7 +19,7 @@ module Qrb
       name.to_s
     end
 
-    def up(*args)
+    def from_q(*args)
       raise NotImplementedError, "Missing #{self.class.name}#up"
     end
 

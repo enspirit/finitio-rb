@@ -1,8 +1,8 @@
 module Qrb
   module DataType
 
-    def up(value, handler = UpHandler.new)
-      ad_type.up(value, handler)
+    def from_q(value, handler = UpHandler.new)
+      ad_type.from_q(value, handler)
     end
 
     def contract(name, infotype)

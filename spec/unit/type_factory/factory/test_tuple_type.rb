@@ -28,9 +28,9 @@ module Qrb
       it{ should be_a(TupleType) }
 
       it 'should have the correct constraint on r' do
-        subject.up(r: 36)
+        subject.from_q(r: 36)
         ->{
-          subject.up(r: 543)
+          subject.from_q(r: 543)
         }.should raise_error(UpError)
       end
 

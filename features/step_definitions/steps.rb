@@ -6,7 +6,7 @@ end
 Given(/^I validate the following JSON data against (.*?)$/) do |type, json|
   type = @realm.fetch(type)
   json = ::MultiJson.load(json)
-  @result = type.up(json) rescue $!
+  @result = type.from_q(json) rescue $!
 end
 
 Then(/^it should be a success$/) do

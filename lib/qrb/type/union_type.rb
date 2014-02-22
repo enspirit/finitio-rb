@@ -12,8 +12,8 @@ module Qrb
   #     Real   = BuiltinType.new(Float)
   #     Number = UnionType.new([ Int, Real ])
   #
-  # When transforming a value through `up`, the different candidate types are
-  # tried in specified order. The first one that succeeds at building the
+  # When transforming a value through `from_q`, the different candidate types
+  # are tried in specified order. The first one that succeeds at building the
   # value ends the process and the value is simply returned. Accordingly,
   # the concrete representation will be
   #
@@ -21,10 +21,11 @@ module Qrb
   #
   # where `^` denotes the `least common super type` operator on ruby classes.
   #
-  # Accordingly, the `up` transformation function has the following signature:
+  # Accordingly, the `from_q` transformation function has the following
+  # signature:
   #
-  #     up :: Alpha  -> Number  throws TypeError
-  #     up :: Object -> Numeric throws UpError
+  #     from_q :: Alpha  -> Number  throws TypeError
+  #     from_q :: Object -> Numeric throws UpError
   #
   class UnionType < Type
 
@@ -38,15 +39,15 @@ module Qrb
     end
     attr_reader :candidates
 
-    # Invoke `up` on each candidate type in turn. Return the value returned by
-    # the first one that does not fail. Fail with an UpError if no candidate
-    # succeeds at tranforming `value`.
-    def up(value, handler = UpHandler.new)
+    # Invoke `from_q` on each candidate type in turn. Return the value
+    # returned by the first one that does not fail. Fail with an UpError if no
+    # candidate succeeds at tranforming `value`.
+    def from_q(value, handler = UpHandler.new)
 
       # Do nothing on UpError as the next candidate could be the good one!
       candidates.each do |c|
         success, uped = handler.just_try do
-          c.up(value, handler)
+          c.from_q(value, handler)
         end
         return uped if success
       end

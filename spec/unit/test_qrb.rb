@@ -8,8 +8,8 @@ describe Qrb do
   it 'should have DSL methods' do
     t = Qrb.type(Fixnum){|i| i>=0 }
     t.should be_a(Qrb::SubType)
-    t.up(12).should eq(12)
-    ->{ t.up(-12) }.should raise_error(Qrb::UpError)
+    t.from_q(12).should eq(12)
+    ->{ t.from_q(-12) }.should raise_error(Qrb::UpError)
   end
 
 end

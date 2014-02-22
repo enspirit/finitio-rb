@@ -1,10 +1,10 @@
 require 'spec_helper'
 module Qrb
-  describe SeqType, 'up' do
+  describe SeqType, 'from_q' do
 
     let(:type){ SeqType.new(byte) }
 
-    subject{ type.up(arg) }
+    subject{ type.from_q(arg) }
 
     context 'with an empty array' do
       let(:arg){ [] }
@@ -32,7 +32,7 @@ module Qrb
       let(:arg){ [2, 4, -12] }
 
       subject{
-        type.up(arg) rescue $!
+        type.from_q(arg) rescue $!
       }
 
       it 'should raise an error' do

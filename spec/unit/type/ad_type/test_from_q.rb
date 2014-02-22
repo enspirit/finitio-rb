@@ -1,13 +1,13 @@
 require 'spec_helper'
 module Qrb
-  describe AdType, 'up' do
+  describe AdType, 'from_q' do
 
     let(:type){
       AdType.new(Color, rgb: [intType, RgbContract], hex: [floatType, HexContract])
     }
 
     subject{
-      type.up(arg)
+      type.from_q(arg)
     }
 
     context 'with a color' do

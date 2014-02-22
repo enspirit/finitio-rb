@@ -20,10 +20,10 @@ module Qrb
   #
   #     R(Byte) = R(Int) = Fixnum
   #
-  # Accordingly, the `up` transformation function has the following signature:
+  # Accordingly, the `from_q` transformation function has the following signature:
   #
-  #     up :: Alpha  -> Byte   throws TypeError
-  #     up :: Object -> Fixnum throws UpError
+  #     from_q :: Alpha  -> Byte   throws TypeError
+  #     from_q :: Object -> Fixnum throws UpError
   #
   class SubType < Type
 
@@ -45,11 +45,11 @@ module Qrb
 
     # Check that `value` can be uped through the supertype, then verify all
     # constraints. Raise an error if anything goes wrong.
-    def up(value, handler = UpHandler.new)
-      # Check that the supertype is able to up the value.
+    def from_q(value, handler = UpHandler.new)
+      # Check that the supertype is able to from_q the value.
       # Rewrite and set cause to any encountered UpError.
       uped = handler.try(self, value) do
-        super_type.up(value, handler)
+        super_type.from_q(value, handler)
       end
 
       # Check each constraint in turn

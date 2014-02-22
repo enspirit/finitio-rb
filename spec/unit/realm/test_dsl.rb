@@ -21,7 +21,7 @@ module Qrb
 
       it 'should apply the constraint' do
         ->{
-          subject.up(-9)
+          subject.from_q(-9)
         }.should raise_error(UpError)
       end
     end

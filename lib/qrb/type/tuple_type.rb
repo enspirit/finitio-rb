@@ -21,13 +21,13 @@ module Qrb
   #     R(Point) = Hash[r: R(Length), theta: R(Angle)]
   #              = Hash[r: Fixnum, theta: Float]
   #
-  # Accordingly, the `up` transformation function has the signature below.
+  # Accordingly, the `from_q` transformation function has the signature below.
   # It expects it's Alpha/Object argument to be a Hash with all and only the
-  # expected keys (either as Symbols or Strings). The `up` function
+  # expected keys (either as Symbols or Strings). The `from_q` function
   # applies on every attribute value according to their respective type.
   #
-  #     up :: Alpha  -> Point                         throws TypeError
-  #     up :: Object -> Hash[r: Fixnum, theta: Float] throws UpError
+  #     from_q :: Alpha  -> Point                         throws TypeError
+  #     from_q :: Object -> Hash[r: Fixnum, theta: Float] throws UpError
   #
   class TupleType < Type
 
@@ -42,9 +42,9 @@ module Qrb
     attr_reader :heading
 
     # Convert `value` (supposed to be Hash) to a Tuple, by checking attributes
-    # and applying `up` on them in turn. Raise an error if any attribute is
-    # missing or unrecognized, as well as if any sub transformation fails.
-    def up(value, handler = UpHandler.new)
+    # and applying `from_q` on them in turn. Raise an error if any attribute
+    # is missing or unrecognized, as well as if any sub transformation fails.
+    def from_q(value, handler = UpHandler.new)
       handler.failed!(self, value) unless value.is_a?(Hash)
 
       # Uped values, i.e. tuple under construction
@@ -63,7 +63,7 @@ module Qrb
           handler.fail!("Missing attribute `#{attribute.name}`")
         end
         handler.deeper(attribute.name) do
-          uped[attribute.name] = attribute.type.up(val, handler)
+          uped[attribute.name] = attribute.type.from_q(val, handler)
         end
       end
 

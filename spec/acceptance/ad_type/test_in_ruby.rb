@@ -29,10 +29,10 @@ module Qrb
       it{ should be_a(Class) }
     end
 
-    describe 'the up method, when valid' do
+    describe 'the from_q method, when valid' do
 
       subject{
-        color.up(r: 12, g: 13, b: 28)
+        color.from_q(r: 12, g: 13, b: 28)
       }
 
       it{ should be_a(color) }
@@ -50,7 +50,7 @@ module Qrb
       }
 
       subject{
-        color.up(value)
+        color.from_q(value)
       }
 
       it{ should be(value) }
