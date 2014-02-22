@@ -19,7 +19,7 @@ module Qrb
       :relation
     ].each do |dsl_method|
       define_method(dsl_method){|*args, &bl|
-        builder.add_type builder.public_send(dsl_method, *args, &bl)
+        add_type factory.public_send(dsl_method, *args, &bl)
       }
     end
 
@@ -46,8 +46,8 @@ module Qrb
 
   private
 
-    def builder
-      @builder ||= RealmBuilder.new(self)
+    def factory
+      @factory ||= TypeFactory.new
     end
 
   end # class Realm

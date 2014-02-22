@@ -5,7 +5,7 @@ module Qrb
   module Syntax
 
     def self.compile(str)
-      parse(str.strip).compile(RealmBuilder.new)
+      parse(str.strip).compile(TypeFactory.new)
     end
 
   end

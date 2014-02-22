@@ -2,8 +2,8 @@ module Qrb
   module Syntax
     module RelationType
 
-      def compile(builder)
-        builder.relation(heading.compile(builder))
+      def compile(factory)
+        factory.relation(heading.compile(factory))
       end
 
     end # module RelationType

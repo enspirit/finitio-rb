@@ -1,20 +1,20 @@
 require 'spec_helper'
 module Qrb
-  describe RealmBuilder, "Factory#set" do
+  describe TypeFactory, "Factory#set" do
 
-    let(:builder){ RealmBuilder.new }
+    let(:factory){ TypeFactory.new }
 
     context 'for set of scalars' do
       let(:expected){ SetType.new(intType) }
 
       context 'when used with {Class}' do
-        subject{ builder.type([Integer].to_set) }
+        subject{ factory.type([Integer].to_set) }
 
         it{ should eq(expected) }
       end
 
       context 'when used with [Class] and a name' do
-        subject{ builder.type([Integer].to_set, "MySet") }
+        subject{ factory.type([Integer].to_set, "MySet") }
 
         it{ should eq(expected) }
 
@@ -26,11 +26,11 @@ module Qrb
 
     context 'for pseudo-relations' do
       subject{
-        builder.type([{r: Integer}].to_set, "MySet")
+        factory.type([{r: Integer}].to_set, "MySet")
       }
 
       let(:expected){
-        builder.relation(r: Integer)
+        factory.relation(r: Integer)
       }
 
       it{ should eq(expected) }

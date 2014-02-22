@@ -20,8 +20,8 @@ module SpecHelpers
     Qrb::SubType.new(intType, byte: ->(i){ i>=0 && i<=255 })
   end
 
-  def realm_builder
-    Qrb::RealmBuilder.new
+  def type_factory
+    Qrb::TypeFactory.new
   end
 
 end

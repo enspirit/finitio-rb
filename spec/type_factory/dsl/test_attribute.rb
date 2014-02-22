@@ -1,8 +1,8 @@
 require 'spec_helper'
 module Qrb
-  describe RealmBuilder, "DSL#attribute" do
+  describe TypeFactory, "DSL#attribute" do
 
-    let(:builder){ RealmBuilder.new }
+    let(:factory){ TypeFactory.new }
 
     shared_examples_for "The a:Integer attribute" do
 
@@ -19,7 +19,7 @@ module Qrb
 
     context 'when used with a ruby class' do
       subject{
-        builder.attribute(:a, Integer)
+        factory.attribute(:a, Integer)
       }
 
       it_should_behave_like "The a:Integer attribute"
@@ -27,7 +27,7 @@ module Qrb
 
     context 'when used with a type' do
       subject{
-        builder.attribute(:a, intType)
+        factory.attribute(:a, intType)
       }
 
       it_should_behave_like "The a:Integer attribute"

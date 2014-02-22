@@ -2,7 +2,7 @@ module Qrb
   module Syntax
     module ConstraintDef
 
-      def compile(builder)
+      def compile(factory)
         expr = "->(#{var_name}){ #{expression} }"
         ::Kernel.eval(expr)
       end

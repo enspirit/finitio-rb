@@ -1,8 +1,8 @@
 require 'spec_helper'
 module Qrb
-  describe RealmBuilder, "DSL#attributes" do
+  describe TypeFactory, "DSL#attributes" do
 
-    let(:builder){ RealmBuilder.new }
+    let(:factory){ TypeFactory.new }
 
     shared_examples_for "The a:Integer, b:Float attributes" do
 
@@ -15,7 +15,7 @@ module Qrb
 
     context 'when used with ruby classes' do
       subject{
-        builder.attributes(a: Integer, b: Float)
+        factory.attributes(a: Integer, b: Float)
       }
 
       it_should_behave_like "The a:Integer, b:Float attributes"
@@ -23,7 +23,7 @@ module Qrb
 
     context 'when used with types' do
       subject{
-        builder.attributes(a: intType, b: floatType)
+        factory.attributes(a: intType, b: floatType)
       }
 
       it_should_behave_like "The a:Integer, b:Float attributes"
@@ -31,7 +31,7 @@ module Qrb
 
     context 'when used with a mix of both types' do
       subject{
-        builder.attributes(a: Integer, b: floatType)
+        factory.attributes(a: Integer, b: floatType)
       }
 
       it_should_behave_like "The a:Integer, b:Float attributes"

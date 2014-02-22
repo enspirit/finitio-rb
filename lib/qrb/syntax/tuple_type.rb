@@ -2,8 +2,8 @@ module Qrb
   module Syntax
     module TupleType
 
-      def compile(builder)
-        builder.tuple(heading.compile(builder))
+      def compile(factory)
+        factory.tuple(heading.compile(factory))
       end
 
     end # module TupleType

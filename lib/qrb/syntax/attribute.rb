@@ -2,8 +2,8 @@ module Qrb
   module Syntax
     module Attribute
 
-      def compile(builder)
-        builder.attribute(attribute_name.to_sym, type.compile(builder))
+      def compile(factory)
+        factory.attribute(attribute_name.to_sym, type.compile(factory))
       end
 
     end # module BuiltinType

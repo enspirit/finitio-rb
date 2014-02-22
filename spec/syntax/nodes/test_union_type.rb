@@ -7,7 +7,7 @@ module Qrb
     }
 
     let(:compiled){
-      subject.compile(realm_builder)
+      subject.compile(type_factory)
     }
 
     context '.Integer|.Float' do

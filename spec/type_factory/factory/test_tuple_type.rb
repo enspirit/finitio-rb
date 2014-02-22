@@ -1,19 +1,19 @@
 require 'spec_helper'
 module Qrb
-  describe RealmBuilder, "Factory#tuple" do
+  describe TypeFactory, "Factory#tuple" do
 
-    let(:builder){ RealmBuilder.new }
+    let(:factory){ TypeFactory.new }
 
-    let(:expected){ builder.tuple(r: Integer) }
+    let(:expected){ factory.tuple(r: Integer) }
 
     context 'when use with {r: Integer}' do
-      subject{ builder.type(r: Integer) }
+      subject{ factory.type(r: Integer) }
 
       it{ should eq(expected) }
     end
 
     context 'when use with {r: Integer} and a name' do
-      subject{ builder.type({r: Integer}, "MyTuple") }
+      subject{ factory.type({r: Integer}, "MyTuple") }
 
       it{ should eq(expected) }
 

@@ -1,20 +1,20 @@
 require 'spec_helper'
 module Qrb
-  describe RealmBuilder, "Factory#seq" do
+  describe TypeFactory, "Factory#seq" do
 
-    let(:builder){ RealmBuilder.new }
+    let(:factory){ TypeFactory.new }
 
     context 'for sequences of scalars' do
       let(:expected){ SeqType.new(intType) }
 
       context 'when used with [Class]' do
-        subject{ builder.type([Integer]) }
+        subject{ factory.type([Integer]) }
 
         it{ should eq(expected) }
       end
 
       context 'when used with [Class] and a name' do
-        subject{ builder.type([Integer], "MySeq") }
+        subject{ factory.type([Integer], "MySeq") }
 
         it{ should eq(expected) }
 
@@ -26,11 +26,11 @@ module Qrb
 
     context 'for pseudo-relations' do
       subject{
-        builder.type([{r: Integer}], "MySeq")
+        factory.type([{r: Integer}], "MySeq")
       }
 
       let(:expected){
-        builder.seq(builder.tuple(r: Integer))
+        factory.seq(factory.tuple(r: Integer))
       }
 
       it{ should eq(expected) }

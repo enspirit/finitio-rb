@@ -11,7 +11,7 @@ module Qrb
     end
 
     it 'compiles to a BuiltinType' do
-      subject.compile(realm_builder).should be_a(BuiltinType)
+      subject.compile(type_factory).should be_a(BuiltinType)
     end
 
   end

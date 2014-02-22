@@ -2,10 +2,10 @@ module Qrb
   module Syntax
     module SubType
 
-      def compile(builder)
-        s = rel_type.compile(builder)
-        c = constraint_def.compile(builder)
-        builder.subtype(s, c)
+      def compile(factory)
+        s = rel_type.compile(factory)
+        c = constraint_def.compile(factory)
+        factory.subtype(s, c)
       end
 
     end # module SubType

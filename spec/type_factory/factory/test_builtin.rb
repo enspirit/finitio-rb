@@ -1,17 +1,17 @@
 require 'spec_helper'
 module Qrb
-  describe RealmBuilder, "Factory#builtin" do
+  describe TypeFactory, "Factory#builtin" do
 
-    let(:builder){ RealmBuilder.new }
+    let(:factory){ TypeFactory.new }
 
     context 'when use with a ruby class' do
-      subject{ builder.type(Integer) }
+      subject{ factory.type(Integer) }
 
       it{ should eq(intType) }
     end
 
     context 'when use with a ruby class and a name' do
-      subject{ builder.type(Integer, "Int") }
+      subject{ factory.type(Integer, "Int") }
 
       it{ should eq(intType) }
 

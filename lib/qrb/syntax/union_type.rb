@@ -2,9 +2,9 @@ module Qrb
   module Syntax
     module UnionType
 
-      def compile(builder)
-        cds = captures[:sub_type].map{|x| x.compile(builder) }
-        builder.union(cds)
+      def compile(factory)
+        cds = captures[:sub_type].map{|x| x.compile(factory) }
+        factory.union(cds)
       end
 
     end # module UnionType

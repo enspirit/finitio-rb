@@ -2,9 +2,9 @@ module Qrb
   module Syntax
     module BuiltinType
 
-      def compile(builder)
+      def compile(factory)
         clazz = ::Kernel.const_get(builtin_type_name)
-        builder.builtin(clazz)
+        factory.builtin(clazz)
       end
 
     end # module BuiltinType

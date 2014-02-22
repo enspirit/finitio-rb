@@ -1,13 +1,5 @@
 module Qrb
-  class RealmBuilder
-
-    def initialize(realm = Realm.new)
-      unless realm.is_a?(Realm)
-        raise ArgumentError, "Qrb::Realm expected, got `#{realm}`"
-      end
-      @realm  = realm
-    end
-    attr_reader :realm
+  class TypeFactory
 
     ################################################################## Factory
 
@@ -16,8 +8,7 @@ module Qrb
       when Type
         type
       when Module
-        name ||= type.name.to_s
-        realm.fetch(name){|n| realm.add_type(BuiltinType.new(type, n)) }
+        BuiltinType.new(type, name || type.name.to_s)
       when Hash
         tuple(type, name)
       when Array
@@ -106,20 +97,12 @@ module Qrb
       BuiltinType.new(ruby_type, name)
     end
 
-    def builtin!(*args)
-      add_type builtin(*args)
-    end
-
     def adt(ruby_type, contracts, name = nil)
       ruby_type = ruby_type(ruby_type)
       contracts = contracts(contracts)
       name      = name(name)
 
       AdType.new(ruby_type, contracts, name)
-    end
-
-    def adt!(*args)
-      add_type adt(*args)
     end
 
     ### Sub and union
@@ -130,10 +113,6 @@ module Qrb
       name        = name(name)
 
       SubType.new(super_type, constraints, name)
-    end
-
-    def subtype!(*args)
-      add_type subtype(*args)
     end
 
     def union(*args)
@@ -150,10 +129,6 @@ module Qrb
       UnionType.new(candidates, name)
     end
 
-    def union!(*args)
-      add_type union(*args)
-    end
-
     ### Collections
 
     def seq(elm_type, name = nil)
@@ -163,19 +138,11 @@ module Qrb
       SeqType.new(elm_type, name)
     end
 
-    def seq!(*args)
-      add_type seq(*args)
-    end
-
     def set(elm_type, name = nil)
       elm_type = type(elm_type)
       name     = name(name)
 
       SetType.new(elm_type, name)
-    end
-
-    def set!(*args)
-      add_type set(*args)
     end
 
     ### Tuples and relations
@@ -187,25 +154,11 @@ module Qrb
       TupleType.new(heading, name)
     end
 
-    def tuple!(*args)
-      add_type tuple(*args)
-    end
-
     def relation(heading, name = nil)
       heading = heading(heading)
       name    = name(name)
 
       RelationType.new(heading, name)
-    end
-
-    def relation!(*args)
-      add_type relation(*args)
-    end
-
-    ######################################################### Realm management
-
-    def add_type(type)
-      realm.add_type(type)
     end
 
   private
