@@ -1,19 +1,4 @@
 require 'citrus'
-require 'sexpr'
-module Qrb
-  Syntax = Sexpr.load File.expand_path('../syntax/q.sexp.yml', __FILE__)
-  module Syntax
-
-    def self.compile_realm(source)
-      parse(source, root: "realm_def").compile(Realm.new)
-    end
-
-    def self.compile_type(str)
-      parse(str.strip, root: "type").compile(TypeFactory.new)
-    end
-
-  end
-end
 require_relative 'syntax/support'
 require_relative 'syntax/expression'
 require_relative 'syntax/attribute'
@@ -34,3 +19,22 @@ require_relative 'syntax/realm_def'
 require_relative 'syntax/type_ref'
 require_relative 'syntax/ad_type'
 require_relative 'syntax/contract'
+module Qrb
+  module Syntax
+
+    Citrus.load File.expand_path('../syntax/q.citrus', __FILE__)
+
+    def self.parse(*args, &bl)
+      Parser.parse(*args, &bl)
+    end
+
+    def self.compile_realm(source)
+      Parser.parse(source, root: "realm_def").compile(Realm.new)
+    end
+
+    def self.compile_type(str)
+      Parser.parse(str.strip, root: "type").compile(TypeFactory.new)
+    end
+
+  end
+end

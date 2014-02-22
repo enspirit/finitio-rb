@@ -1,6 +1,5 @@
 source 'http://rubygems.org'
 
-gem "sexpr",  "~> 0.6.0"
 gem "citrus", "~> 2.4"
 
 group :development do
