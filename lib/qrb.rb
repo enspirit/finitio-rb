@@ -30,11 +30,18 @@ module Qrb
   DEFAULT_FACTORY = TypeFactory.new
 
   module Dsl
+
     DSL_METHODS.each do |meth|
       define_method(meth) do |*args, &bl|
         DEFAULT_FACTORY.public_send(meth, *args, &bl)
       end
     end
+
+    def parse_realm(source)
+      require "qrb/syntax"
+      Syntax.compile_realm(source)
+    end
+
   end
   extend Dsl
 

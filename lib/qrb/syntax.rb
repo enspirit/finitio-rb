@@ -4,8 +4,12 @@ module Qrb
   Syntax = Sexpr.load File.expand_path('../syntax/q.sexp.yml', __FILE__)
   module Syntax
 
-    def self.compile(str)
-      parse(str.strip).compile(TypeFactory.new)
+    def self.compile_realm(source)
+      parse(source, root: "realm_def").compile(Realm.new)
+    end
+
+    def self.compile_type(str)
+      parse(str.strip, root: "type").compile(TypeFactory.new)
     end
 
   end
@@ -24,3 +28,6 @@ require_relative 'syntax/set_type'
 require_relative 'syntax/tuple_type'
 require_relative 'syntax/relation_type'
 require_relative 'syntax/union_type'
+require_relative 'syntax/type_def'
+require_relative 'syntax/realm_def'
+require_relative 'syntax/type_ref'

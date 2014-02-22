@@ -1,5 +1,22 @@
 grammar Qrb::Syntax::Parser
 
+  rule realm_def
+    (spacing (statement (spacing statement)*) spacing eof)
+    <Qrb::Syntax::RealmDef>
+  end
+
+  rule statement
+      type_def
+    | type
+  end
+
+  rule type_def
+    (type_name spacing '=' spacing type)
+    <Qrb::Syntax::TypeDef>
+  end
+
+  ###################################################################### Types
+
   rule type
     union_type
   end
@@ -105,7 +122,8 @@ grammar Qrb::Syntax::Parser
   end
 
   rule type_ref
-    type_name
+    (type_name spacing)
+    <Qrb::Syntax::TypeRef>
   end
 
   # lexer
@@ -132,6 +150,10 @@ grammar Qrb::Syntax::Parser
 
   rule spacing
     /[ \t\n]*/
+  end
+
+  rule eof
+    !.
   end
 
 end

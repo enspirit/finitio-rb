@@ -3,7 +3,7 @@ module Qrb
     module ConstraintDef
 
       def compile(factory)
-        constraints.compile(var_name)
+        constraints.compile(var_name.to_s)
       end
 
     end # module ConstraintDef

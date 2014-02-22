@@ -15,6 +15,11 @@ module Qrb
       @name || default_name
     end
 
+    def name=(n)
+      raise Error, "Name already set to `#{@name}`" unless @name.nil?
+      @name = n
+    end
+
     def to_s
       name.to_s
     end
