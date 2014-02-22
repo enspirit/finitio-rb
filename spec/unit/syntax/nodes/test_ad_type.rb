@@ -48,12 +48,15 @@ module Qrb
 
       it 'compiles to an AdType' do
         compiled.should be_a(AdType)
-        compiled.ruby_type.should be(Object)
+        compiled.ruby_type.should be_nil
         compiled.contract_names.should eq([:as])
       end
 
       it 'should behave as expected' do
         compiled.from_q(r: 12).should eq(r: 12)
+        ->{
+          compiled.from_q("foo")
+        }.should raise_error(TypeError)
       end
     end
 

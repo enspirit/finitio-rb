@@ -50,7 +50,7 @@ module Qrb
   class AdType < Type
 
     def initialize(ruby_type, contracts, name = nil)
-      unless ruby_type.is_a?(Module)
+      unless ruby_type.nil? or ruby_type.is_a?(Module)
         raise ArgumentError, "Module expected, got `#{ruby_type}`"
       end
       unless contracts.is_a?(Hash)
@@ -74,12 +74,12 @@ module Qrb
     end
 
     def default_name
-      ruby_type.name.to_s
+      (ruby_type && ruby_type.name.to_s) || "Anonymous"
     end
 
     def from_q(value, handler = FromQHelper.new)
       # Up should be idempotent with respect to the ADT
-      return value if value.is_a?(ruby_type)
+      return value if ruby_type and value.is_a?(ruby_type)
 
       # Try each contract in turn. Do nothing on TypeError as
       # the next candidate could be the good one! Return the
@@ -100,7 +100,7 @@ module Qrb
 
       end
 
-      # No one succeededr, just fail
+      # No one succeeded, just fail
       handler.failed!(self, value)
     end
 

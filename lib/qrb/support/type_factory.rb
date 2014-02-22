@@ -105,7 +105,7 @@ module Qrb
     end
 
     def adt(ruby_type, contracts, name = nil)
-      ruby_type = ruby_type(ruby_type)
+      ruby_type = ruby_type(ruby_type) if ruby_type
       contracts = contracts(contracts)
       name      = name(name)
 

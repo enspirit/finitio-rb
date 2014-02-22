@@ -6,7 +6,7 @@ module Qrb
       def compile(factory)
         name  = builtin_type_name
         clazz = name ? resolve_ruby_const(name.to_s) : nil
-        factory.adt(clazz || Object, compile_contracts(factory, clazz))
+        factory.adt(clazz, compile_contracts(factory, clazz))
       end
 
       def compile_contracts(factory, clazz)

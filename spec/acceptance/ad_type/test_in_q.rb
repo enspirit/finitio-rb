@@ -21,8 +21,9 @@ module Qrb
 
     let(:realm) do
       Qrb.parse_realm <<-EOF
-        Byte  = .Fixnum( i | i>=0 and i<= 255 )
-        Color = .Qrb::MyColorClass <rgb> {r: Byte, g: Byte, b: Byte}
+        Byte   = .Fixnum( i | i>=0 and i<= 255 )
+        Color  = .Qrb::MyColorClass <rgb> {r: Byte, g: Byte, b: Byte}
+        Gender = <mf> .String( s | s=='M' or s=='F' )
       EOF
     end
 
@@ -45,6 +46,36 @@ module Qrb
         end
       end
 
+      context 'when invalid' do
+        let(:arg){ {"r" => -12, "g" => 17, "b" => 71} }
+
+        it 'should raise an error' do
+          ->{
+            subject
+          }.should raise_error(TypeError)
+        end
+      end
+
+    end
+
+    describe 'the Gender.from_q method' do
+      subject{ realm['Gender'].from_q(arg) }
+
+      context 'when valid' do
+        let(:arg){ 'M' }
+
+        it{ should eq('M') }
+      end
+
+      context 'when valid' do
+        let(:arg){ 'Monsieur' }
+
+        it 'should raise an error' do
+          ->{
+            subject
+          }.should raise_error(TypeError, "Invalid value `Monsieur` for Gender")
+        end
+      end
     end
 
   end
