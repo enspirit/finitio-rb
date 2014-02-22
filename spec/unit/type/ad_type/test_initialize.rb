@@ -3,7 +3,8 @@ module Qrb
   describe AdType, 'initialize' do
 
     subject{
-      AdType.new(Color, rgb: [intType, RgbContract], hex: [floatType, HexContract])
+      AdType.new(Color, rgb: [intType,   Color.method(:rgb) ],
+                        hex: [floatType, Color.method(:hex) ])
     }
 
     context 'with valid arguments' do

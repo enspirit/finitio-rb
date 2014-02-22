@@ -3,7 +3,8 @@ module Qrb
   describe AdType, 'from_q' do
 
     let(:type){
-      AdType.new(Color, rgb: [intType, RgbContract], hex: [floatType, HexContract])
+      AdType.new(Color, rgb: [intType,   ->(i){ i*2 } ],
+                        hex: [floatType, ->(f){ f*3 } ])
     }
 
     subject{
@@ -11,7 +12,7 @@ module Qrb
     }
 
     context 'with a color' do
-      let(:arg){ Color.new(:rgb, 12) }
+      let(:arg){ Color.new(12, 13, 15) }
 
       it{ should be(arg) }
     end
@@ -19,23 +20,13 @@ module Qrb
     context 'with an integer' do
       let(:arg){ 12 }
 
-      it{ should be_a(Color) }
-
-      it 'should have used the RGB contract' do
-        subject.contract.should eq(:rgb)
-        subject.rep.should eq(12)
-      end
+      it{ should eq(24) }
     end
 
     context 'with a float' do
       let(:arg){ 12.0 }
 
-      it{ should be_a(Color) }
-
-      it 'should have used the HEX contract' do
-        subject.contract.should eq(:hex)
-        subject.rep.should eq(12.0)
-      end
+      it{ should eq(36.0) }
     end
 
     context 'with an unrecognized' do

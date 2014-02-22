@@ -56,12 +56,22 @@ module Qrb
       unless contracts.is_a?(Hash)
         raise ArgumentError, "Hash expected, got `#{contracts}`"
       end
+      invalid = contracts.values.reject{|v|
+        v.is_a?(Array) and v.size == 2 and v.first.is_a?(Type) and v.last.respond_to?(:call)
+      }
+      unless invalid.empty?
+        raise ArgumentError, "Invalid contracts `#{invalid}`"
+      end
 
       super(name)
       @ruby_type = ruby_type
       @contracts = contracts.freeze
     end
     attr_reader :ruby_type, :contracts
+
+    def contract_names
+      contracts.keys
+    end
 
     def default_name
       ruby_type.name.to_s
@@ -84,7 +94,7 @@ module Qrb
 
         # Seems nice, just try to get one stage higher now
         success, uped = handler.just_try do
-          upper.send(name, uped)
+          upper.call(uped)
         end
         return uped if success
 

@@ -27,23 +27,28 @@ module SpecHelpers
 end
 
 class Color
-  def initialize(contract, rep)
-    @contract = contract
-    @rep = rep
-  end
-  attr_reader :contract, :rep
-end
 
-class RgbContract
-  def self.rgb(rep)
-    Color.new(:rgb, rep)
+  def initialize(r, g, b)
+    @r, @g, @b = r, g, b
   end
-end
+  attr_reader :r, :g, :b
 
-class HexContract
-  def self.hex(rep)
-    Color.new(:hex, rep)
+  def self.rgb(tuple)
+    new(tuple[:r], tuple[:g], tuple[:b])
   end
+
+  def to_rgb
+    { r: @r, g: @g, b: @b }
+  end
+
+  def self.hex(s)
+    Color.new *[1, 3, 5].map{|i| s[i, 2].to_i(16) }
+  end
+
+  def to_hex
+    "#" << [r, g, b].map{|i| i.to_s(16) }.join
+  end
+
 end
 
 RSpec.configure do |c|

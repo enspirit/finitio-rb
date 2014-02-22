@@ -6,7 +6,7 @@ module Qrb
     end
 
     def contract(name, infotype)
-      ad_contracts[name] = [ Qrb.type(infotype) , self ]
+      ad_contracts[name] = [ Qrb.type(infotype) , method(name) ]
     end
 
   private
