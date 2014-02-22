@@ -44,7 +44,7 @@ module Qrb
       it 'should raise an error' do
         ->{
           subject
-        }.should raise_error(UpError, "Invalid value `foo` for Color")
+        }.should raise_error(TypeError, "Invalid value `foo` for Color")
       end
     end
 

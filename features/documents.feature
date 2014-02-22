@@ -41,6 +41,6 @@ Feature: Using Q to build formal document schemas
       }
       """
 
-    Then it should be an UpError as:
+    Then it should be an TypeError as:
       | message                          | location    |
       | Invalid value `bar` for Integer  | color/green |

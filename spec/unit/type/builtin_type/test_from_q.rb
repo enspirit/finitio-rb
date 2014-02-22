@@ -20,7 +20,7 @@ module Qrb
       }
 
       it 'should raise an Error' do
-        subject.should be_a(UpError)
+        subject.should be_a(TypeError)
         subject.message.should eq("Invalid value `12.0` for int")
       end
 

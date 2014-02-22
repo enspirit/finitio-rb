@@ -23,7 +23,7 @@ module Qrb
   # Accordingly, the `from_q` transformation function has the following signature:
   #
   #     from_q :: Alpha  -> Byte   throws TypeError
-  #     from_q :: Object -> Fixnum throws UpError
+  #     from_q :: Object -> Fixnum throws TypeError
   #
   class SubType < Type
 
@@ -47,7 +47,7 @@ module Qrb
     # constraints. Raise an error if anything goes wrong.
     def from_q(value, handler = UpHandler.new)
       # Check that the supertype is able to from_q the value.
-      # Rewrite and set cause to any encountered UpError.
+      # Rewrite and set cause to any encountered TypeError.
       uped = handler.try(self, value) do
         super_type.from_q(value, handler)
       end

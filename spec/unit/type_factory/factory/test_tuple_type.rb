@@ -31,7 +31,7 @@ module Qrb
         subject.from_q(r: 36)
         ->{
           subject.from_q(r: 543)
-        }.should raise_error(UpError)
+        }.should raise_error(TypeError)
       end
 
       it 'should have the correct name' do

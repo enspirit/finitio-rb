@@ -22,12 +22,12 @@ module Qrb
         let(:arg){ 12.0 }
 
         it 'should raise an Error' do
-          subject.should be_a(UpError)
+          subject.should be_a(TypeError)
           subject.message.should eq("Invalid value `12.0` for byte")
         end
 
         it "should have the proper cause from super type's up" do
-          subject.cause.should be_a(UpError)
+          subject.cause.should be_a(TypeError)
           subject.cause.message.should eq("Invalid value `12.0` for intType")
         end
 
@@ -40,7 +40,7 @@ module Qrb
         let(:arg){ -12 }
 
         it 'should raise an Error' do
-          subject.should be_a(UpError)
+          subject.should be_a(TypeError)
           subject.message.should eq("Invalid value `-12` for byte")
         end
 
@@ -57,7 +57,7 @@ module Qrb
         let(:arg){ 1000 }
 
         it 'should raise an Error' do
-          subject.should be_a(UpError)
+          subject.should be_a(TypeError)
           subject.message.should eq("Invalid value `1000` for byte (not small)")
         end
 

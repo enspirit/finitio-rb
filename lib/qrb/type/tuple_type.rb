@@ -27,7 +27,7 @@ module Qrb
   # applies on every attribute value according to their respective type.
   #
   #     from_q :: Alpha  -> Point                         throws TypeError
-  #     from_q :: Object -> Hash[r: Fixnum, theta: Float] throws UpError
+  #     from_q :: Object -> Hash[r: Fixnum, theta: Float] throws TypeError
   #
   class TupleType < Type
 

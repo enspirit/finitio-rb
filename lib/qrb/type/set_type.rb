@@ -20,7 +20,7 @@ module Qrb
   # an Enumerator when invoked without block).
   #
   #     from_q :: Alpha  -> Adresses     throws TypeError
-  #     from_q :: Object -> Set[String]  throws UpError
+  #     from_q :: Object -> Set[String]  throws TypeError
   #
   class SetType < Type
     include CollectionType

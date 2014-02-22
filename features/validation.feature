@@ -28,7 +28,7 @@ Feature: Using Q to validate input data
       """
       <json>
       """
-    Then it should be an UpError as:
+    Then it should be an TypeError as:
       | message   | location   |
       | <msg>     | <loc>      |
 
@@ -58,6 +58,6 @@ Feature: Using Q to validate input data
        { "r": 132, "g": -121,  "b": 12 }]
       """
 
-    Then it should be an UpError as:
+    Then it should be an TypeError as:
       | message                       | location |
       | Invalid value `-121` for Byte | 1/g      |

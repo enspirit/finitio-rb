@@ -36,7 +36,7 @@ module Qrb
       }
 
       it 'should raise an error' do
-        subject.should be_a(UpError)
+        subject.should be_a(TypeError)
         subject.message.should eq("Invalid value `-12` for Byte")
       end
 
@@ -53,7 +53,7 @@ module Qrb
       }
 
       it 'should raise an error' do
-        subject.should be_a(UpError)
+        subject.should be_a(TypeError)
         subject.message.should eq("Duplicate value `2`")
       end
 

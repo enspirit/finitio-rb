@@ -10,7 +10,7 @@ module Qrb
 
   end # class Error
 
-  class UpError < Error
+  class TypeError < Error
 
     def initialize(msg, cause = nil, location = nil)
       super(msg, cause)
@@ -18,6 +18,6 @@ module Qrb
     end
     attr_reader :location
 
-  end # class UpError
+  end # class TypeError
 
 end # module Qrb

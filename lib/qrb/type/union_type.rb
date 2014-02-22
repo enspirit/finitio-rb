@@ -25,7 +25,7 @@ module Qrb
   # signature:
   #
   #     from_q :: Alpha  -> Number  throws TypeError
-  #     from_q :: Object -> Numeric throws UpError
+  #     from_q :: Object -> Numeric throws TypeError
   #
   class UnionType < Type
 
@@ -40,11 +40,11 @@ module Qrb
     attr_reader :candidates
 
     # Invoke `from_q` on each candidate type in turn. Return the value
-    # returned by the first one that does not fail. Fail with an UpError if no
+    # returned by the first one that does not fail. Fail with an TypeError if no
     # candidate succeeds at tranforming `value`.
     def from_q(value, handler = UpHandler.new)
 
-      # Do nothing on UpError as the next candidate could be the good one!
+      # Do nothing on TypeError as the next candidate could be the good one!
       candidates.each do |c|
         success, uped = handler.just_try do
           c.from_q(value, handler)

@@ -45,7 +45,7 @@ module Qrb
   # signature:
   #
   #     from_q :: Alpha  -> Color     throws TypeError
-  #     from_q :: Object -> ColorImpl throws UpError
+  #     from_q :: Object -> ColorImpl throws TypeError
   #
   class AdType < Type
 
@@ -71,7 +71,7 @@ module Qrb
       # Up should be idempotent with respect to the ADT
       return value if value.is_a?(ruby_type)
 
-      # Try each contract in turn. Do nothing on UpError as
+      # Try each contract in turn. Do nothing on TypeError as
       # the next candidate could be the good one! Return the
       # first successfully uped.
       contracts.each_pair do |name, (infotype,upper)|

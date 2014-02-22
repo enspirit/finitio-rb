@@ -26,7 +26,7 @@ Feature: Missing information Using Q
       null
       """
 
-    Then it should be an UpError as:
+    Then it should be an TypeError as:
       | message                      |
       | Invalid value `nil` for Int  |
 

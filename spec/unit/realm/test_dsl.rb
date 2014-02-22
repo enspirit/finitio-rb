@@ -22,7 +22,7 @@ module Qrb
       it 'should apply the constraint' do
         ->{
           subject.from_q(-9)
-        }.should raise_error(UpError)
+        }.should raise_error(TypeError)
       end
     end
 

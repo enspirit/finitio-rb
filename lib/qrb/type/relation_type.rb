@@ -19,7 +19,7 @@ module Qrb
   # (after tuple transformation), or if any tuple fails at being transformed.
   #
   #     from_q :: Alpha  -> ColoredPoints   throws TypeError
-  #     from_q :: Object -> Set[Hash[...]]  throws UpError
+  #     from_q :: Object -> Set[Hash[...]]  throws TypeError
   #
   class RelationType < Type
 

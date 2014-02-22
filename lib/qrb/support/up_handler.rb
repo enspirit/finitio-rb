@@ -23,23 +23,23 @@ module Qrb
 
     def just_try
       [ true, yield ]
-    rescue UpError => cause
+    rescue TypeError => cause
       [ false, nil ]
     end
 
     def try(type, value)
       yield
-    rescue UpError => cause
+    rescue TypeError => cause
       failed!(type, value, cause)
     end
 
     def failed!(type, value, cause = nil)
       msg = default_error_message(type, value)
-      raise UpError.new(msg, cause, location)
+      raise TypeError.new(msg, cause, location)
     end
 
     def fail!(msg, cause = nil)
-      raise UpError.new(msg, cause, location)
+      raise TypeError.new(msg, cause, location)
     end
 
     def default_error_message(type, value)

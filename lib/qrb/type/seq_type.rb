@@ -21,7 +21,7 @@ module Qrb
   # an Enumerator when invoked without block).
   #
   #     from_q :: Alpha  -> Measures      throws TypeError
-  #     from_q :: Object -> Array[Float]  throws UpError
+  #     from_q :: Object -> Array[Float]  throws TypeError
   #
   class SeqType < Type
     include CollectionType

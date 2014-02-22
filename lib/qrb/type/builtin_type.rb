@@ -17,7 +17,7 @@ module Qrb
   # Accordingly, the `from_q` transformation function has the following signature:
   #
   #     from_q :: Alpha  -> Int    throws TypeError
-  #     from_q :: Object -> Fixnum throws UpError
+  #     from_q :: Object -> Fixnum throws TypeError
   #
   class BuiltinType < Type
 

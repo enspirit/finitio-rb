@@ -30,8 +30,8 @@ Then(/^the result should be a (.*?) ruby representation$/) do |type|
   end
 end
 
-Then(/^it should be an UpError as:$/) do |table|
-  @result.should be_a(Qrb::UpError)
+Then(/^it should be an TypeError as:$/) do |table|
+  @result.should be_a(Qrb::TypeError)
   expected = table.hashes.first
   expected.each_pair do |k,v|
     @result.send(k.to_sym).should eq(v)
