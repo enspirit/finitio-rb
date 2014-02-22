@@ -1,11 +1,10 @@
 module Qrb
   module Syntax
     module BuiltinType
+      include Support
 
       def compile(factory)
-        name  = builtin_type_name.to_s
-        clazz = name.split('::')
-                    .inject(::Kernel){|mod,const| mod.const_get(const) }
+        clazz = resolve_ruby_const(builtin_type_name.to_s)
         factory.builtin(clazz)
       end
 

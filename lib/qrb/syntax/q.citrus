@@ -112,9 +112,24 @@ grammar Qrb::Syntax::Parser
   # terminal forms
 
   rule term_type
-      builtin_type
+      ad_type
+    | builtin_type
     | type_ref
   end
+
+  # ad type
+
+  rule ad_type
+    (('.' builtin_type_name)? spacing contract (spacing ',' spacing contract)*)
+    <Qrb::Syntax::AdType>
+  end
+
+  rule contract
+    ('<' contract_name '>' spacing type)
+    <Qrb::Syntax::Contract>
+  end
+
+  # builtin and refs
 
   rule builtin_type
     ('.' builtin_type_name)
@@ -129,6 +144,10 @@ grammar Qrb::Syntax::Parser
   # lexer
 
   rule var_name
+    /[a-z]+/
+  end
+
+  rule contract_name
     /[a-z]+/
   end
 

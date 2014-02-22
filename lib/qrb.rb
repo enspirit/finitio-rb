@@ -29,6 +29,8 @@ module Qrb
 
   DEFAULT_FACTORY = TypeFactory.new
 
+  IDENTITY = ->(object){ object }
+
   module Dsl
 
     DSL_METHODS.each do |meth|
