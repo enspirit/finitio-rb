@@ -127,7 +127,7 @@ grammar Qrb::Syntax::Parser
   end
 
   rule builtin_type_name
-    /[a-zA-Z]+/
+    /[a-zA-Z0-9:]/+
   end
 
   rule spacing

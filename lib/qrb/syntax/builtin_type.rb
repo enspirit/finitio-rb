@@ -3,7 +3,9 @@ module Qrb
     module BuiltinType
 
       def compile(factory)
-        clazz = ::Kernel.const_get(builtin_type_name)
+        name  = builtin_type_name.to_s
+        clazz = name.split('::')
+                    .inject(::Kernel){|mod,const| mod.const_get(const) }
         factory.builtin(clazz)
       end
 

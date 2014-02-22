@@ -3,15 +3,29 @@ module Qrb
   describe Syntax, "builtin_type" do
 
     subject{
-      Syntax.parse(".Integer", root: "builtin_type")
+      Syntax.parse(source, root: "builtin_type")
     }
 
-    it 'parses typical ruby builtins' do
-      subject.should eq('.Integer')
+    let(:compiled){
+      subject.compile(type_factory)
+    }
+
+    context 'when an unqualified class name' do
+      let(:source){ ".Integer" }
+
+      it 'compiles to a BuiltinType' do
+        compiled.should be_a(BuiltinType)
+        compiled.ruby_type.should be(Integer)
+      end
     end
 
-    it 'compiles to a BuiltinType' do
-      subject.compile(type_factory).should be_a(BuiltinType)
+    context 'when a qualified class name' do
+      let(:source){ ".Qrb::Type" }
+
+      it 'compiles to a BuiltinType' do
+        compiled.should be_a(BuiltinType)
+        compiled.ruby_type.should be(::Qrb::Type)
+      end
     end
 
   end
