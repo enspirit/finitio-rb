@@ -13,13 +13,13 @@ module Qrb
     context '(i | i >= 0)' do
       let(:input){ '(i | i >= 0)' }
 
-      it 'compiles to an Proc' do
-        compiled.should be_a(Proc)
+      it 'compiles to an Hash' do
+        compiled.should be_a(Hash)
       end
 
       it 'compiled to the correct proc' do
-        compiled.call(12).should be_true
-        compiled.call(-12).should be_false
+        compiled[:predicate].call(12).should be_true
+        compiled[:predicate].call(-12).should be_false
       end
     end
 

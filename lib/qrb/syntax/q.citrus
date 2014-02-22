@@ -19,12 +19,29 @@ grammar Qrb::Syntax::Parser
   end
 
   rule constraint_def
-    ('(' spacing var_name spacing '|' spacing expression spacing ')')
+    ('(' spacing var_name spacing '|' spacing constraints spacing ')')
     <Qrb::Syntax::ConstraintDef>
   end
 
+  rule constraints
+      (named_constraint (spacing ',' spacing named_constraint)*)
+      <Qrb::Syntax::Constraints>
+    | unnamed_constraint
+  end
+
+  rule named_constraint
+    (constraint_name ':' spacing expression)
+    <Qrb::Syntax::NamedConstraint>
+  end
+
+  rule unnamed_constraint
+    (spacing expression)
+    <Qrb::Syntax::UnnamedConstraint>
+  end
+
   rule expression
-    (!')' .)+
+    ((!(')' | ',') .)+)
+    <Qrb::Syntax::Expression>
   end
 
   # relational types
@@ -95,6 +112,10 @@ grammar Qrb::Syntax::Parser
 
   rule var_name
     /[a-z]+/
+  end
+
+  rule constraint_name
+    /[a-z][a-z_]*/
   end
 
   rule attribute_name

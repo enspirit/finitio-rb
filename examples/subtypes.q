@@ -5,6 +5,7 @@ Real   = .Float
 
 # Positive integers only
 Posint = Int( i | i >= 0 )
+Posint = Int( i | positive: i >= 0, small: i <= 255 )
 
 # The traditional Byte
 Byte = Int( i | i >= 0 and i <= 255 )

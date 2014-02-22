@@ -3,8 +3,7 @@ module Qrb
     module ConstraintDef
 
       def compile(factory)
-        expr = "->(#{var_name}){ #{expression} }"
-        ::Kernel.eval(expr)
+        constraints.compile(var_name)
       end
 
     end # module ConstraintDef
