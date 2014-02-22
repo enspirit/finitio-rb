@@ -2,14 +2,14 @@ Feature: Using Q to validate input data
 
   Background:
 
-    Given the Realm is built using the DSL as follows
+    Given the Realm is
        """
-       Nil    = builtin(NilClass, "Nil")
-       Int    = builtin(Integer,  "Int")
-       String = builtin(String)
-       Byte   = subtype(Int, {byte: ->(i){ i>=0 and i<=255 }}, "Byte")
-       Color  = tuple({r: Byte, g: Byte, b: Byte}, "Color")
-       Colors = relation(Color, "Colors")
+       Nil    = .NilClass
+       Int    = .Integer
+       String = .String
+       Byte   = Int( i | i>=0 and i<=255 )
+       Color  = { r: Byte, g: Byte, b: Byte }
+       Colors = {{ r: Byte, g: Byte, b: Byte }}
        """
 
   Scenario: Validating against a valid Color representation

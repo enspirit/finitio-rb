@@ -42,6 +42,11 @@ module Qrb
       Syntax.compile_realm(source)
     end
 
+    def parse_type(source)
+      require "qrb/syntax"
+      Syntax.compile_type(source)
+    end
+
   end
   extend Dsl
 

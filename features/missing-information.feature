@@ -2,11 +2,11 @@ Feature: Missing information Using Q
 
   Background:
 
-    Given the Realm is built using the DSL as follows
+    Given the Realm is
        """
-       Nil      = builtin(NilClass, "Nil")
-       Int      = builtin(Integer,  "Int")
-       MaybeInt = union([Nil, Int], "MaybeInt")
+       Nil      = .NilClass
+       Int      = .Integer
+       MaybeInt = Nil|Int
        """
 
    Scenario: Validating non nil against Int

@@ -1,6 +1,5 @@
-Given(/^the Realm is built using the DSL as follows$/) do |string|
-  @realm ||= Qrb::Realm.new
-  @realm.instance_eval(string)
+Given(/^the Realm is$/) do |source|
+  @realm ||= Qrb.parse_realm(source)
 end
 
 Given(/^I validate the following JSON data against (.*?)$/) do |type, json|
