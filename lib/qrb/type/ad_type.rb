@@ -67,6 +67,9 @@ module Qrb
     end
 
     def up(value, handler = UpHandler.new)
+      # Up should be idempotent with respect to the ADT
+      return value if value.is_a?(ruby_type)
+
       # Try each contract in turn. Do nothing on UpError as
       # the next candidate could be the good one! Return the
       # first successfully uped.

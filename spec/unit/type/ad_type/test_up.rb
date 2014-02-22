@@ -10,6 +10,12 @@ module Qrb
       type.up(arg)
     }
 
+    context 'with a color' do
+      let(:arg){ Color.new(:rgb, 12) }
+
+      it{ should be(arg) }
+    end
+
     context 'with an integer' do
       let(:arg){ 12 }
 
