@@ -1,5 +1,9 @@
 require 'citrus'
 require_relative 'syntax/support'
+require_relative 'syntax/realm'
+require_relative 'syntax/schema'
+require_relative 'syntax/definitions'
+require_relative 'syntax/type_def'
 require_relative 'syntax/expression'
 require_relative 'syntax/attribute'
 require_relative 'syntax/heading'
@@ -14,8 +18,6 @@ require_relative 'syntax/set_type'
 require_relative 'syntax/tuple_type'
 require_relative 'syntax/relation_type'
 require_relative 'syntax/union_type'
-require_relative 'syntax/type_def'
-require_relative 'syntax/realm_def'
 require_relative 'syntax/type_ref'
 require_relative 'syntax/ad_type'
 require_relative 'syntax/contract'
@@ -29,7 +31,11 @@ module Qrb
     end
 
     def self.compile_realm(source)
-      Parser.parse(source, root: "realm_def").compile(Realm.new)
+      Parser.parse(source, root: "realm").compile(Qrb::Realm.new)
+    end
+
+    def self.compile_schema(str)
+      Parser.parse(str.strip, root: "schema").compile(Qrb::Realm.new)
     end
 
     def self.compile_type(str)
