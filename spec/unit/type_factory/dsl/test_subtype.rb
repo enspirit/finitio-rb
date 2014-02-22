@@ -8,6 +8,22 @@ module Qrb
       { predicate: 1..10 }
     }
 
+    shared_examples_for "The PosInt type" do
+
+      it{ should be_a(SubType) }
+
+      it 'should have the BuiltinType(Integer) super type' do
+        subject.super_type.should be_a(BuiltinType)
+        subject.super_type.ruby_type.should be(Integer)
+      end
+
+      it 'should have the correct constraint' do
+        ->{
+          subject.up(-12)
+        }.should raise_error(UpError)
+      end
+    end
+
     shared_examples_for "The SmallInt structural type" do
 
       it{ should be_a(SubType) }
@@ -49,6 +65,14 @@ module Qrb
       }
 
       it_should_behave_like "The SmallInt structural type"
+    end
+
+    context 'when used with a constraint block' do
+      subject{
+        factory.subtype(Integer){|i| i >=0 }
+      }
+
+      it_should_behave_like "The PosInt type"
     end
 
     context 'when used with a name' do

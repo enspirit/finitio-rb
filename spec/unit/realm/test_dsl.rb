@@ -12,5 +12,19 @@ module Qrb
       it{ should be_a(TupleType) }
     end
 
+    context 'for building a sub type' do
+      subject{
+        realm.subtype(Integer){|i| i>=0 }
+      }
+
+      it{ should be_a(SubType) }
+
+      it 'should apply the constraint' do
+        ->{
+          subject.up(-9)
+        }.should raise_error(UpError)
+      end
+    end
+
   end
 end

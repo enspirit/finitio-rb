@@ -3,7 +3,8 @@ module Qrb
 
     ################################################################## Factory
 
-    def type(type, name = nil)
+    def type(type, name = nil, &bl)
+      return subtype(type(type, name), bl) if bl
       case type
       when Type
         type
@@ -18,6 +19,12 @@ module Qrb
         fail!("Set of arity 1 expected, got `#{type}`") unless type.size==1
         sub = type(type.first)
         sub.is_a?(TupleType) ? relation(sub.heading, name) : set(sub, name)
+      when Range
+        clazz = [type.begin, type.end].map(&:class).uniq
+        fail!("Unsupported range `#{type}`") unless clazz.size==1
+        subtype(clazz.first, type)
+      when Regexp
+        subtype(String, type)
       else
         fail!("Unable to factor a Qrb::Type from `#{type}`")
       end
@@ -41,12 +48,12 @@ module Qrb
       name.nil? ? nil : name.strip
     end
 
-    def constraints(constraints)
-      unless constraints.is_a?(Hash)
-        constraints = { predicate: constraints }
-      end
-
-      constraints
+    def constraints(constraints = nil, &bl)
+      constrs = {}
+      constrs[:predicate] = bl if bl
+      constrs[:predicate] = constraints unless constraints.is_a?(Hash)
+      constrs.merge!(constraints)       if constraints.is_a?(Hash)
+      constrs
     end
 
     def attribute(name, type)
@@ -107,9 +114,9 @@ module Qrb
 
     ### Sub and union
 
-    def subtype(super_type, constraints, name = nil)
+    def subtype(super_type, constraints = nil, name = nil, &bl)
       super_type  = type(super_type)
-      constraints = constraints(constraints)
+      constraints = constraints(constraints, &bl)
       name        = name(name)
 
       SubType.new(super_type, constraints, name)
