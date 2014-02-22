@@ -22,5 +22,22 @@ module Qrb
       end
     end
 
+    context 'when use with {r: 0..255} and a name' do
+      subject{ factory.type({r: 0..255}, "MyTuple") }
+
+      it{ should be_a(TupleType) }
+
+      it 'should have the correct constraint on r' do
+        subject.up(r: 36)
+        ->{
+          subject.up(r: 543)
+        }.should raise_error(UpError)
+      end
+
+      it 'should have the correct name' do
+        subject.name.should eq("MyTuple")
+      end
+    end
+
   end
 end
