@@ -6,11 +6,33 @@ module Qrb
         raise ArgumentError, "Qrb::Realm expected, got `#{realm}`"
       end
       @realm  = realm
-      @stacks = Hash.new{|h,k| h[k] = [] }
     end
     attr_reader :realm
 
-    #################################################### Stack-based Arguments
+    ################################################################## Factory
+
+    def type(type, name = nil)
+      case type
+      when Type
+        type
+      when Module
+        name ||= type.name.to_s
+        realm.fetch(name){|n| realm.add_type(BuiltinType.new(type, n)) }
+      when Hash
+        tuple(type, name)
+      when Array
+        fail!("Array of arity 1 expected, got `#{type}`") unless type.size==1
+        seq(type.first, name)
+      when Set
+        fail!("Set of arity 1 expected, got `#{type}`") unless type.size==1
+        sub = type(type.first)
+        sub.is_a?(TupleType) ? relation(sub.heading, name) : set(sub, name)
+      else
+        fail!("Unable to factor a Qrb::Type from `#{type}`")
+      end
+    end
+
+    ########################################################### Type Arguments
 
     def ruby_type(type)
       unless type.is_a?(Module)
@@ -41,7 +63,7 @@ module Qrb
     end
 
     def attributes(attributes)
-      attributes = case attributes
+      case attributes
       when Hash
         attributes.each_pair.map do |name, type|
           attribute(name, type)
@@ -49,12 +71,10 @@ module Qrb
       else
         fail!("Hash expected, got `#{attributes}`")
       end
-
-      attributes
     end
 
     def heading(heading)
-      heading = case heading
+      case heading
       when Heading
         heading
       when TupleType, RelationType
@@ -64,8 +84,6 @@ module Qrb
       else
         fail!("Heading expected, got `#{heading}`")
       end
-
-      heading
     end
 
     def contracts(contracts)
@@ -77,21 +95,6 @@ module Qrb
       end
 
       contracts
-    end
-
-    def type(type)
-      type = case type
-      when Type
-        type
-      when Module
-        realm.fetch(type.name.to_s){|name|
-          realm.add_type(BuiltinType.new(type, name))
-        }
-      else
-        fail!("Qrb::Type|Module expected, got `#{type}`")
-      end
-
-      type
     end
 
     ########################################################## Type generators
@@ -208,7 +211,7 @@ module Qrb
   private
 
     def fail!(message)
-      raise Error, message, caller
+      raise ArgumentError, message, caller
     end
 
   end # class TypeBuilder
