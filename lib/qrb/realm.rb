@@ -8,16 +8,7 @@ module Qrb
       @types = {}
     end
 
-    [
-      :builtin,
-      :adt,
-      :subtype,
-      :union,
-      :seq,
-      :set,
-      :tuple,
-      :relation
-    ].each do |dsl_method|
+    DSL_METHODS.each do |dsl_method|
       define_method(dsl_method){|*args, &bl|
         add_type factory.public_send(dsl_method, *args, &bl)
       }

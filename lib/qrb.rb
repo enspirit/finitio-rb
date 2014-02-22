@@ -5,10 +5,34 @@ require 'set'
 #
 module Qrb
 
-end # module Qrb
+  DSL_METHODS = [
+    :builtin,
+    :adt,
+    :subtype,
+    :union,
+    :seq,
+    :set,
+    :tuple,
+    :relation,
+    :type
+  ]
 
-require_relative "qrb/version"
-require_relative "qrb/errors"
-require_relative "qrb/support"
-require_relative 'qrb/type'
-require_relative 'qrb/realm'
+  require_relative "qrb/version"
+  require_relative "qrb/errors"
+  require_relative "qrb/support"
+  require_relative 'qrb/type'
+  require_relative 'qrb/data_type'
+  require_relative 'qrb/realm'
+
+  DEFAULT_FACTORY = TypeFactory.new
+
+  module Dsl
+    DSL_METHODS.each do |meth|
+      define_method(meth) do |*args, &bl|
+        DEFAULT_FACTORY.public_send(meth, *args, &bl)
+      end
+    end
+  end
+  extend Dsl
+
+end # module Qrb
