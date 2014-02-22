@@ -6,6 +6,9 @@ require 'set'
 module Qrb
 
   DSL_METHODS = [
+    :attribute,
+    :heading,
+    :constraints,
     :builtin,
     :adt,
     :subtype,

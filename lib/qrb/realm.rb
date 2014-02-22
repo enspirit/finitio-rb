@@ -10,7 +10,7 @@ module Qrb
 
     DSL_METHODS.each do |dsl_method|
       define_method(dsl_method){|*args, &bl|
-        add_type factory.public_send(dsl_method, *args, &bl)
+        factory.public_send(dsl_method, *args, &bl)
       }
     end
 
@@ -35,10 +35,12 @@ module Qrb
       @types.fetch(name, &bl)
     end
 
-  private
-
     def factory
       @factory ||= TypeFactory.new
+    end
+
+    def inspect
+      @types.each_pair.map{|k,v| "#{k} = #{v}" }.join("\n")
     end
 
   end # class Realm
