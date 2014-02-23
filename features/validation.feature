@@ -20,7 +20,7 @@ Feature: Using Q to validate input data
       """
 
     Then it should be a success
-    And the result should be a Color ruby representation
+    And the result should be a Color native representation
 
   Scenario: Validating an incomplete Color representation
 
@@ -76,7 +76,7 @@ Feature: Using Q to validate input data
       """
 
     Then it should be a success
-    And the result should be a Colors ruby representation
+    And the result should be a Colors native representation
 
   Scenario: Validating against an invalid Colors representation
 

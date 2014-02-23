@@ -12,7 +12,7 @@ Then(/^it should be a success$/) do
   @result.should_not be_a(Exception)
 end
 
-Then(/^the result should be a (.*?) ruby representation$/) do |type|
+Then(/^the result should be a (.*?) native representation$/) do |type|
   type = @realm.fetch(type)
   case type
   when Qrb::TupleType
