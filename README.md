@@ -188,3 +188,86 @@ a sequence of tuples instead:
 ```ruby
 Preferences = [{ lang: String, reason: String }]
 ```
+
+### Abstract Data types
+
+Abstract data types, also called user-defined types, provide the way to define
+higher level abstractions easily and to optionally connect them to types of
+the host language (e.g. a ruby class). For instance, a `Color` abstraction can
+be defined as follows:
+
+```ruby
+Color = <rgb> {r: Byte, g: Byte, b: Byte},
+        <hex> String( s | s =~ /^#[0-9a-f]{6}$/i )
+```
+
+The Color definition above shows that a color can be represented either by a
+RGB triple (through a tuple type), or by a hexadecimal string (e.g. '#8a2be2').
+`rgb` and `hex` are called the information contracts of the Color abstraction.
+
+Defined as above, the type will behave as a union type, i.e. it will let pass
+valid RGB triples and hexadecimal strings. Now, information contracts can also
+be complemented to connect the Color abstraction to a host language type, e.g.
+a Color ruby class.
+
+Suppose for example that the following `Color` class has been defined:
+
+```ruby
+class Color
+
+  def initialize(r, g, b)
+    @r, @g, @b = r, g, b
+  end
+  attr_reader :r, :g, :b
+
+end
+```
+
+Connecting our information type to this Color class is through a builtin type
+and two explicit converters:
+
+```ruby
+Color = .Color <rgb> {r: Byte, g: Byte, b: Byte}
+          \( tuple | Color.new(tuple.r, tuple.g, tuple.b) )
+          \( color | {r: color.r, g: color.g, b: color.b} )
+```
+
+The converters provide load/dump code to convert from information types to the
+code abstraction and vice versa. Q(rb) guarantees that they will be executed
+on valid representations of the corresponding information types. Nevertheless,
+this code tends to be exposed to the unsafe world and should always be kept
+*pure and safe* (no side effect, no metaprogramming, no code evaluation,
+etc.).
+
+Qrb provides a more idiomatic way of connecting ruby classes to information
+types, through convention over configuration. The converters can indeed be
+moved to the class itself, as one would probably do it for testing purpose or
+because the converters are idiomatic methods for the class:
+
+```ruby
+class Color
+
+  def initialize(r, g, b)
+    @r, @g, @b = r, g, b
+  end
+  attr_reader :r, :g, :b
+
+  def self.rgb(tuple)
+    Color.new(tuple.r, tuple.g, tuple.b)
+  end
+
+  def to_rgb
+    {r: @r, g: @g, b: @b}
+  end
+
+end
+```
+
+The following Q definition, that refers to the builtin type but has no
+converter, makes the assumption that the convention is met and will use the
+methods for convertions:
+
+
+```ruby
+Color = .Color <rgb> {r: Byte, g: Byte, b: Byte}
+```
