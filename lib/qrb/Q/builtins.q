@@ -14,3 +14,7 @@ Bignum  = .Bignum
 Integer = .Integer
 Float   = .Float
 Real    = .Float
+
+# Date
+Date    = .Date <iso8601> .String \( s | Date.iso8601(s) )
+                                  \( d | d.iso8601       )

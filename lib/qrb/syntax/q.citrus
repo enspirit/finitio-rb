@@ -162,7 +162,7 @@ grammar Qrb::Syntax::Parser
   end
 
   rule contract_name
-    /[a-z]+/
+    /[a-z][a-z0-9]*/
   end
 
   rule constraint_name
