@@ -182,7 +182,15 @@ grammar Qrb::Syntax::Parser
   end
 
   rule spacing
-    /[ \t\n]*/
+    (spaces | comment)*
+  end
+
+  rule comment
+    '#' (![\n] .)* [\n]?
+  end
+
+  rule spaces
+    /[ \t\n]+/
   end
 
   rule eof
