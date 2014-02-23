@@ -22,22 +22,50 @@ Feature: Using Q to validate input data
     Then it should be a success
     And the result should be a Color ruby representation
 
-  Scenario Outline: Validating against an invalid Color representation
+  Scenario: Validating an incomplete Color representation
 
     Given I validate the following JSON data against Color
       """
-      <json>
+      { "r": 121, "g": 12 }
       """
-    Then it should be an TypeError as:
-      | message   | location   |
-      | <msg>     | <loc>      |
 
-    Examples:
-      | json                                      | msg                          | loc |
-      | { "r": 121, "g": 12 }                     | Missing attribute `b`        |     |
-      | { "r": 121, "g": 12, "b": 255, "i": 143 } | Unrecognized attribute `i`   |     |
-      | { "r": "foo", "g": 1, "b": 1 }            | Invalid value `foo` for Byte | r   |
-      | { "r": -12, "g": 1, "b": 1 }              | Invalid value `-12` for Byte | r   |
+    Then it should be a TypeError as:
+      | message               | location |
+      | Missing attribute `b` |          |
+
+  Scenario: Validating a Color representation with extra attributes
+
+    Given I validate the following JSON data against Color
+      """
+      { "r": 121, "g": 12, "b": 255, "i": 143 }
+      """
+
+    Then it should be a TypeError as:
+      | message                    | location |
+      | Unrecognized attribute `i` |          |
+
+  Scenario: Validating a Color representation with an invalid attribute type
+
+    Given I validate the following JSON data against Color
+      """
+      { "r": "foo", "g": 12, "b": 255 }
+      """
+
+    Then it should be a TypeError as:
+      | message                      | location |
+      | Invalid value `foo` for Byte | r        |
+
+
+  Scenario: Validating a Color representation with an invalid value
+
+    Given I validate the following JSON data against Color
+      """
+      { "r": -12, "g": 12, "b": 255 }
+      """
+
+    Then it should be a TypeError as:
+      | message                      | location |
+      | Invalid value `-12` for Byte | r        |
 
   Scenario: Validating against a valid Colors representation
 
@@ -58,6 +86,6 @@ Feature: Using Q to validate input data
        { "r": 132, "g": -121,  "b": 12 }]
       """
 
-    Then it should be an TypeError as:
+    Then it should be a TypeError as:
       | message                       | location |
       | Invalid value `-121` for Byte | 1/g      |

@@ -46,7 +46,7 @@ Feature: Using Q to build formal document schemas
       }
       """
 
-    Then it should be an TypeError as:
+    Then it should be a TypeError as:
       | message                       | location    |
       | Invalid value `bar` for Byte  | color/green |
 
@@ -65,6 +65,6 @@ Feature: Using Q to build formal document schemas
       }
       """
 
-    Then it should be an TypeError as:
+    Then it should be a TypeError as:
       | message                        | location    |
       | Invalid value `bar` for Gender | gender      |

@@ -29,7 +29,7 @@ Then(/^the result should be a (.*?) ruby representation$/) do |type|
   end
 end
 
-Then(/^it should be an TypeError as:$/) do |table|
+Then(/^it should be a TypeError as:$/) do |table|
   @result.should be_a(Qrb::TypeError)
   expected = table.hashes.first
   expected.each_pair do |k,v|
