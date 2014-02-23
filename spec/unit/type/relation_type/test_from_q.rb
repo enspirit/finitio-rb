@@ -59,7 +59,7 @@ module Qrb
           "foo"
         }
 
-        it 'should raise an TypeError' do
+        it 'should raise a TypeError' do
           subject.should be_a(TypeError)
           subject.message.should eq("Invalid value `foo` for colors")
         end
@@ -78,7 +78,7 @@ module Qrb
           ["foo"]
         }
 
-        it 'should raise an TypeError' do
+        it 'should raise a TypeError' do
           subject.should be_a(TypeError)
           subject.message.should eq("Invalid value `foo` for {r: Byte, g: Byte, b: Byte}")
         end
@@ -100,7 +100,7 @@ module Qrb
           ]
         }
 
-        it 'should raise an TypeError' do
+        it 'should raise a TypeError' do
           subject.should be_a(TypeError)
           subject.message.should eq("Missing attribute `b`")
         end
@@ -122,7 +122,7 @@ module Qrb
           ]
         }
 
-        it 'should raise an TypeError' do
+        it 'should raise a TypeError' do
           subject.should be_a(TypeError)
           subject.message.should eq("Invalid value `12.0` for Byte")
         end
@@ -145,7 +145,7 @@ module Qrb
           ]
         }
 
-        it 'should raise an TypeError' do
+        it 'should raise a TypeError' do
           subject.should be_a(TypeError)
           subject.message.should eq("Duplicate tuple")
         end

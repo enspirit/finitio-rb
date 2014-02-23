@@ -35,7 +35,7 @@ module Qrb
           "foo"
         }
 
-        it 'should raise an TypeError' do
+        it 'should raise a TypeError' do
           subject.should be_a(TypeError)
           subject.message.should eq("Invalid value `foo` for color")
         end
@@ -54,7 +54,7 @@ module Qrb
           { "r" => 12, "g" => 13 }
         }
 
-        it 'should raise an TypeError' do
+        it 'should raise a TypeError' do
           subject.should be_a(TypeError)
           subject.message.should eq("Missing attribute `b`")
         end
@@ -73,7 +73,7 @@ module Qrb
           { "r" => 12, "g" => 13, "b" => 255, "extr" => 165 }
         }
 
-        it 'should raise an TypeError' do
+        it 'should raise a TypeError' do
           subject.should be_a(TypeError)
           subject.message.should eq("Unrecognized attribute `extr`")
         end
@@ -92,7 +92,7 @@ module Qrb
           { "r" => 12.0, "g" => 13, "b" => 255 }
         }
 
-        it 'should raise an TypeError' do
+        it 'should raise a TypeError' do
           subject.should be_a(TypeError)
           subject.message.should eq("Invalid value `12.0` for Byte")
         end
