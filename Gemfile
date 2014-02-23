@@ -7,4 +7,5 @@ group :development do
   gem "rspec", "~> 2.14"
   gem "cucumber", "~> 1.3"
   gem "path", "~> 1.3"
+  gem 'coveralls', require: false
 end

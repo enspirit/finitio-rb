@@ -3,6 +3,9 @@ require 'path'
 require 'qrb'
 require 'qrb/syntax'
 
+require 'coveralls'
+Coveralls.wear!
+
 class Color
 
   def initialize(r, g, b)
