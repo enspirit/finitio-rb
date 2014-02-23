@@ -12,22 +12,12 @@ module Qrb
       def compile_contracts(factory, clazz)
         contracts = {}
         captures[:contract].each do |node|
-          compile_contract(factory, clazz, contracts, node)
+          contract = node.compile(factory, clazz)
+          contracts.merge!(contract) do |k,_,_|
+            raise Error, "Duplicate contract name `#{k}`"
+          end
         end
         contracts
-      end
-
-      def compile_contract(factory, clazz, contracts, node)
-        name, infotype = node.compile(factory)
-        if contracts[name]
-          raise Error, "Duplicate contract name `#{name}`"
-        end
-        contract = if clazz
-          [ infotype, clazz.method(name) ]
-        else
-          [ infotype, IDENTITY ]
-        end
-        contracts[name] = contract
       end
 
     end # module AdType

@@ -23,5 +23,21 @@ module Qrb
       end
     end
 
+    context '(a >= 10)' do
+      let(:input){ '(a >= 10)' }
+
+      it 'compiles to an Proc' do
+        compiled.should be_a(Proc)
+      end
+    end
+
+    context 'acall(a)' do
+      let(:input){ 'acall(a)' }
+
+      it 'compiles to an Proc' do
+        compiled.should be_a(Proc)
+      end
+    end
+
   end
 end

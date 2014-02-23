@@ -70,5 +70,25 @@ module Qrb
       end
     end
 
+    context 'A contract with explicit converters' do
+      let(:input){ '.DateTime <iso> .String \( s | DateTime.parse(s) ) \( d | d.to_s )' }
+
+      it 'compiles to an AdType' do
+        compiled.should be_a(AdType)
+        compiled.ruby_type.should be(DateTime)
+        compiled.contract_names.should eq([:iso])
+      end
+
+      it 'should behave as expected' do
+        compiled.from_q("2014-01-19T12:00").should be_a(DateTime)
+      end
+
+      it 'should hide errors' do
+        err = compiled.from_q("foo") rescue $!
+        err.should be_a(TypeError)
+        err.message.should eq("Invalid value `foo` for DateTime")
+      end
+    end
+
   end
 end

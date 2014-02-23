@@ -60,11 +60,6 @@ grammar Qrb::Syntax::Parser
     <Qrb::Syntax::UnnamedConstraint>
   end
 
-  rule expression
-    ((!(')' | ',') .)+)
-    <Qrb::Syntax::Expression>
-  end
-
   # relational types
 
   rule rel_type
@@ -129,7 +124,7 @@ grammar Qrb::Syntax::Parser
   end
 
   rule contract
-    ('<' contract_name '>' spacing type)
+    ('<' contract_name '>' spacing type (spacing ('\\' up:lambda_expr) spacing ('\\' down:lambda_expr))?)
     <Qrb::Syntax::Contract>
   end
 
@@ -143,6 +138,21 @@ grammar Qrb::Syntax::Parser
   rule type_ref
     (type_name spacing)
     <Qrb::Syntax::TypeRef>
+  end
+
+  # lambda and expressions
+
+  rule lambda_expr
+    ('(' spacing var_name spacing '|' spacing expression spacing ')')
+    <Qrb::Syntax::LambdaExpr>
+  end
+
+  rule expression
+    (
+        ('(' spacing expression spacing ')')
+      | (![\(,\)] .)+ expression?
+    )
+    <Qrb::Syntax::Expression>
   end
 
   # lexer
