@@ -137,7 +137,7 @@ Union types are also very useful for capturing possibly missing information
 (aka NULL/nil). For instance, the following type will capture either an
 integer, or nil (note that `Nil = .NilClass`).
 
-```
+```ruby
 MaybeInt = Integer|Nil
 ```
 
