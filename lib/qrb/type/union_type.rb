@@ -4,27 +4,27 @@ module Qrb
   # A union type (aka algebraic type) allows capturing information types
   # through generalization/disjunction. For instance,
   #
-  #     Number = Int|Real
+  #     Numeric = Int|Real
   #
   # This class allows capturing such union types, as follows:
   #
-  #     Int    = BuiltinType.new(Fixnum)
-  #     Real   = BuiltinType.new(Float)
-  #     Number = UnionType.new([ Int, Real ])
+  #     Int     = BuiltinType.new(Fixnum)
+  #     Real    = BuiltinType.new(Float)
+  #     Numeric = UnionType.new([ Int, Real ])
   #
   # When transforming a value through `from_q`, the different candidate types
   # are tried in specified order. The first one that succeeds at building the
   # value ends the process and the value is simply returned. Accordingly,
   # the concrete representation will be
   #
-  #     R(Number) = R(Int) ^ R(Real) = Fixnum ^ Float = Numeric
+  #     R(Numeric) = R(Int) ^ R(Real) = Fixnum ^ Float = Numeric
   #
   # where `^` denotes the `least common super type` operator on ruby classes.
   #
   # Accordingly, the `from_q` transformation function has the following
   # signature:
   #
-  #     from_q :: Alpha  -> Number  throws TypeError
+  #     from_q :: Alpha  -> Numeric throws TypeError
   #     from_q :: Object -> Numeric throws TypeError
   #
   class UnionType < Type
