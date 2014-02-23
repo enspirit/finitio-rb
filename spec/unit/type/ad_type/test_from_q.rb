@@ -39,5 +39,17 @@ module Qrb
       end
     end
 
+    context 'when the upper raises an error' do
+      let(:type){
+        AdType.new(Color, rgb: [ intType, ->(t){ raise ArgumentError } ])
+      }
+
+      it 'should hide the error' do
+        err = type.from_q(12) rescue $!
+        err.should be_a(TypeError)
+        err.message.should eq("Invalid value `12` for Color")
+      end
+    end
+
   end
 end

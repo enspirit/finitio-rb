@@ -93,7 +93,7 @@ module Qrb
         next unless success
 
         # Seems nice, just try to get one stage higher now
-        success, uped = handler.just_try do
+        success, uped = handler.just_try(StandardError) do
           upper.call(uped)
         end
         return uped if success

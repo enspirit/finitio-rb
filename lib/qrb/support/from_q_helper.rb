@@ -21,9 +21,9 @@ module Qrb
       res
     end
 
-    def just_try
+    def just_try(rescue_on = TypeError)
       [ true, yield ]
-    rescue TypeError => cause
+    rescue rescue_on => cause
       [ false, nil ]
     end
 
