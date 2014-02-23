@@ -202,8 +202,9 @@ Color = <rgb> {r: Byte, g: Byte, b: Byte},
 ```
 
 The Color definition above shows that a color can be represented either by a
-RGB triple (through a tuple type), or by a hexadecimal string (e.g. '#8a2be2').
-`rgb` and `hex` are called the information contracts of the Color abstraction.
+RGB triple (through a tuple type), or by a hexadecimal string (e.g.
+'#8a2be2'). `rgb` and `hex` are called the **information contracts** of the
+Color abstraction.
 
 Defined as above, the type will behave as a union type, i.e. it will let pass
 valid RGB triples and hexadecimal strings. Now, information contracts can also
@@ -224,7 +225,8 @@ end
 ```
 
 Connecting our information type to this Color class is through a builtin type
-and two explicit converters:
+and two explicit converters (we only show the `rgb` contract here, the `hex`
+one is defined in a similar way):
 
 ```ruby
 Color = .Color <rgb> {r: Byte, g: Byte, b: Byte}

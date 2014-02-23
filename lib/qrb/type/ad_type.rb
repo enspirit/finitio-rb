@@ -29,9 +29,8 @@ module Qrb
   #     # The RGB info type: {r: Byte, g: Byte, b: Byte}
   #     rgb_infotype  = TupleType.new(...)
   #
-  #     # The RGB contract, an object that responds to `rgb` to convert from
-  #     # a valid Hash[r: Fixnum, ...] to a ColorImpl instance. The latter is
-  #     # is expected to respond to :to_rgb
+  #     # The RGB contract converter, an object that responds to `call` to
+  #     # convert from a valid Hash[r: Fixnum, ...] to a ColorImpl instance.
   #     rgb_contract = ...
   #
   #     AdType.new(ColorImpl, rgb: [rgb_infotype, rgb_contract], hex: ...)
