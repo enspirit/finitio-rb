@@ -28,6 +28,10 @@ module Qrb
       raise NotImplementedError, "Missing #{self.class.name}#up"
     end
 
+    def undress(*args)
+      from_q(*args)
+    end
+
   protected
 
     def set_equal?(s1, s2)

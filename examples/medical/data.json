@@ -1,0 +1,22 @@
+[
+  {
+    "id": "d9026fa0-66ff-0131-38cb-3c07545ed162",
+    "diagnosis_date": "2013-12-31",
+    "patient": {
+      "id": "a12b1870-66fa-0131-38cb-3c07545ed162",
+      "name": "Lambeau Bernard",
+      "gender": "M"
+    },
+    "appointments": [
+      {
+        "at": "2014-01-15T10:30:00.000000+00:00",
+        "fixed": true,
+        "duration": 240
+      },
+      {
+        "at": "2014-02-05T10:30:00.000000+00:00",
+        "fixed": false
+      }
+    ]
+  }
+]
