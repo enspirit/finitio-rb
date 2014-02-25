@@ -28,7 +28,7 @@ module Qrb
       raise NotImplementedError, "Missing #{self.class.name}#up"
     end
 
-    def undress(*args)
+    def dress(*args)
       from_q(*args)
     end
 

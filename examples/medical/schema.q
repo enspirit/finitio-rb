@@ -3,17 +3,22 @@ Boolean = .TrueClass|.FalseClass
 String  = .String
 Real    = .Float
 Integer = .Fixnum
-Date    = .Date <iso8601> .String \( s | Date.iso8601(s) )
-                                  \( t | t.iso8601 )
+Date    = .Date <iso8601> .String \( s | Date.iso8601(s)   )
+                                  \( t | t.iso8601         )
 Time    = .Time <iso8601> .String \( s | DateTime.parse(s) )
-                                  \( t | t.iso8601 )
+                                  \( t | t.iso8601         )
 
 # Some reusable data types (could be reused across schemas)
-Uuid     = String( s | s.size == 36 )
-Dose     = <as> Real( f |  f >= 0.0 and f <= 1.0 )
-Gender   = <as> String( s | s == 'M' or s == 'F' )
-Duration = .Duration <minutes> Integer( i | i > 0 )
-Name     = String( s | s.strip.size > 0 )
+Uuid        = String( s | s.size == 36 )
+Dose        = <as> Real( f |  f >= 0.0 and f <= 1.0 )
+Gender      = <as> String( s | s == 'M' or s == 'F' )
+Duration    = <minutes> Integer( i | i > 0 )
+Name        = String( s | s.strip.size > 0 )
+Appointment = {
+  at: Time,
+  duration: Duration,
+  fixed: Boolean
+}
 
 # The main schema, for instance for a RESTful resource or a NoSQL
 # database
@@ -25,9 +30,5 @@ Name     = String( s | s.strip.size > 0 )
     name: Name,
     gender: Gender
   },
-  appointments: {{
-    at: Time,
-    duration: Duration,
-    fixed: Boolean
-  }}
+  appointments: {Appointment}
 }}
