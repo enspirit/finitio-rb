@@ -21,13 +21,13 @@ module Qrb
   #     R(Point) = Hash[r: R(Length), theta: R(Angle)]
   #              = Hash[r: Fixnum, theta: Float]
   #
-  # Accordingly, the `from_q` transformation function has the signature below.
+  # Accordingly, the `dress` transformation function has the signature below.
   # It expects it's Alpha/Object argument to be a Hash with all and only the
-  # expected keys (either as Symbols or Strings). The `from_q` function
+  # expected keys (either as Symbols or Strings). The `dress` function
   # applies on every attribute value according to their respective type.
   #
-  #     from_q :: Alpha  -> Point                         throws TypeError
-  #     from_q :: Object -> Hash[r: Fixnum, theta: Float] throws TypeError
+  #     dress :: Alpha  -> Point                         throws TypeError
+  #     dress :: Object -> Hash[r: Fixnum, theta: Float] throws TypeError
   #
   class TupleType < Type
 
@@ -42,9 +42,9 @@ module Qrb
     attr_reader :heading
 
     # Convert `value` (supposed to be Hash) to a Tuple, by checking attributes
-    # and applying `from_q` on them in turn. Raise an error if any attribute
+    # and applying `dress` on them in turn. Raise an error if any attribute
     # is missing or unrecognized, as well as if any sub transformation fails.
-    def from_q(value, handler = FromQHelper.new)
+    def dress(value, handler = DressHelper.new)
       handler.failed!(self, value) unless value.is_a?(Hash)
 
       # Uped values, i.e. tuple under construction
@@ -63,7 +63,7 @@ module Qrb
           handler.fail!("Missing attribute `#{attribute.name}`")
         end
         handler.deeper(attribute.name) do
-          uped[attribute.name] = attribute.type.from_q(val, handler)
+          uped[attribute.name] = attribute.type.dress(val, handler)
         end
       end
 

@@ -20,7 +20,7 @@ module Qrb
       end
 
       it 'should behave as expected' do
-        compiled.from_q(r: 138, g: 43, b: 226).should eq(blueviolet)
+        compiled.dress(r: 138, g: 43, b: 226).should eq(blueviolet)
       end
     end
 
@@ -39,7 +39,7 @@ module Qrb
       end
 
       it 'should behave as expected' do
-        compiled.from_q("#8A2BE2").should eq(blueviolet)
+        compiled.dress("#8A2BE2").should eq(blueviolet)
       end
     end
 
@@ -53,9 +53,9 @@ module Qrb
       end
 
       it 'should behave as expected' do
-        compiled.from_q(r: 12).should eq(r: 12)
+        compiled.dress(r: 12).should eq(r: 12)
         ->{
-          compiled.from_q("foo")
+          compiled.dress("foo")
         }.should raise_error(TypeError)
       end
     end
@@ -80,11 +80,11 @@ module Qrb
       end
 
       it 'should behave as expected' do
-        compiled.from_q("2014-01-19T12:00").should be_a(DateTime)
+        compiled.dress("2014-01-19T12:00").should be_a(DateTime)
       end
 
       it 'should hide errors' do
-        err = compiled.from_q("foo") rescue $!
+        err = compiled.dress("foo") rescue $!
         err.should be_a(TypeError)
         err.message.should eq("Invalid value `foo` for DateTime")
       end

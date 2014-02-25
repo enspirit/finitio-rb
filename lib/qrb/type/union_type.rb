@@ -12,7 +12,7 @@ module Qrb
   #     Real    = BuiltinType.new(Float)
   #     Numeric = UnionType.new([ Int, Real ])
   #
-  # When transforming a value through `from_q`, the different candidate types
+  # When transforming a value through `dress`, the different candidate types
   # are tried in specified order. The first one that succeeds at building the
   # value ends the process and the value is simply returned. Accordingly,
   # the concrete representation will be
@@ -21,11 +21,11 @@ module Qrb
   #
   # where `^` denotes the `least common super type` operator on ruby classes.
   #
-  # Accordingly, the `from_q` transformation function has the following
+  # Accordingly, the `dress` transformation function has the following
   # signature:
   #
-  #     from_q :: Alpha  -> Numeric throws TypeError
-  #     from_q :: Object -> Numeric throws TypeError
+  #     dress :: Alpha  -> Numeric throws TypeError
+  #     dress :: Object -> Numeric throws TypeError
   #
   class UnionType < Type
 
@@ -39,15 +39,15 @@ module Qrb
     end
     attr_reader :candidates
 
-    # Invoke `from_q` on each candidate type in turn. Return the value
+    # Invoke `dress` on each candidate type in turn. Return the value
     # returned by the first one that does not fail. Fail with an TypeError if no
     # candidate succeeds at tranforming `value`.
-    def from_q(value, handler = FromQHelper.new)
+    def dress(value, handler = DressHelper.new)
 
       # Do nothing on TypeError as the next candidate could be the good one!
       candidates.each do |c|
         success, uped = handler.just_try do
-          c.from_q(value, handler)
+          c.dress(value, handler)
         end
         return uped if success
       end

@@ -1,6 +1,6 @@
 require 'spec_helper'
 module Qrb
-  describe TupleType, "from_q" do
+  describe TupleType, "dress" do
 
     let(:heading){
       Heading.new([Attribute.new(:r, byte),
@@ -12,7 +12,7 @@ module Qrb
       TupleType.new(heading, "color")
     }
 
-    subject{ type.from_q(arg)  }
+    subject{ type.dress(arg)  }
 
     context 'with a valid Hash' do
       let(:arg){
@@ -27,7 +27,7 @@ module Qrb
     context 'when raising an error' do
 
       subject do
-        type.from_q(arg) rescue $!
+        type.dress(arg) rescue $!
       end
 
       context 'with something else than a Hash' do

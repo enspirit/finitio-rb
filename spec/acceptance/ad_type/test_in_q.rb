@@ -31,8 +31,8 @@ module Qrb
       realm["Color"]
     }
 
-    describe 'the Color.from_q method' do
-      subject{ color.from_q(arg) }
+    describe 'the Color.dress method' do
+      subject{ color.dress(arg) }
 
       context 'when valid' do
         let(:arg){ {"r" => 12, "g" => 17, "b" => 71} }
@@ -58,8 +58,8 @@ module Qrb
 
     end
 
-    describe 'the Gender.from_q method' do
-      subject{ realm['Gender'].from_q(arg) }
+    describe 'the Gender.dress method' do
+      subject{ realm['Gender'].dress(arg) }
 
       context 'when valid' do
         let(:arg){ 'M' }

@@ -1,6 +1,6 @@
 require 'spec_helper'
 module Qrb
-  describe RelationType, "from_q" do
+  describe RelationType, "dress" do
 
     let(:heading){
       Heading.new([Attribute.new(:r, byte),
@@ -12,7 +12,7 @@ module Qrb
       RelationType.new(heading, "colors")
     }
 
-    subject{ type.from_q(arg)  }
+    subject{ type.dress(arg)  }
 
     context 'with a valid array of Hashes' do
       let(:arg){
@@ -51,7 +51,7 @@ module Qrb
     context 'when raising an error' do
 
       subject do
-        type.from_q(arg) rescue $!
+        type.dress(arg) rescue $!
       end
 
       context 'with something else than an Array' do

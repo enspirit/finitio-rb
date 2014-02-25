@@ -40,11 +40,11 @@ module Qrb
   #
   #     R(Color) = ColorImpl
   #
-  # Accordingly, the `from_q` transformation function has the following
+  # Accordingly, the `dress` transformation function has the following
   # signature:
   #
-  #     from_q :: Alpha  -> Color     throws TypeError
-  #     from_q :: Object -> ColorImpl throws TypeError
+  #     dress :: Alpha  -> Color     throws TypeError
+  #     dress :: Object -> ColorImpl throws TypeError
   #
   class AdType < Type
 
@@ -76,7 +76,7 @@ module Qrb
       (ruby_type && ruby_type.name.to_s) || "Anonymous"
     end
 
-    def from_q(value, handler = FromQHelper.new)
+    def dress(value, handler = DressHelper.new)
       # Up should be idempotent with respect to the ADT
       return value if ruby_type and value.is_a?(ruby_type)
 
@@ -85,9 +85,9 @@ module Qrb
       # first successfully uped.
       contracts.each_pair do |name, (infotype,upper)|
 
-        # First make the from_q transformation on the information type
+        # First make the dress transformation on the information type
         success, uped = handler.just_try do
-          infotype.from_q(value, handler)
+          infotype.dress(value, handler)
         end
         next unless success
 

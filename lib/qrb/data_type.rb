@@ -1,8 +1,8 @@
 module Qrb
   module DataType
 
-    def from_q(value, handler = FromQHelper.new)
-      ad_type.from_q(value, handler)
+    def dress(value, handler = DressHelper.new)
+      ad_type.dress(value, handler)
     end
 
     def contract(name, infotype)

@@ -1,10 +1,10 @@
 require 'spec_helper'
 module Qrb
-  describe SetType, 'from_q' do
+  describe SetType, 'dress' do
 
     let(:type){ SetType.new(byte) }
 
-    subject{ type.from_q(arg) }
+    subject{ type.dress(arg) }
 
     context 'with an empty array' do
       let(:arg){ [] }
@@ -32,7 +32,7 @@ module Qrb
       let(:arg){ [2, 4, -12] }
 
       subject{
-        type.from_q(arg) rescue $!
+        type.dress(arg) rescue $!
       }
 
       it 'should raise an error' do
@@ -49,7 +49,7 @@ module Qrb
       let(:arg){ [2, 4, 2] }
 
       subject{
-        type.from_q(arg) rescue $!
+        type.dress(arg) rescue $!
       }
 
       it 'should raise an error' do

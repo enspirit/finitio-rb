@@ -14,9 +14,9 @@ module Qrb
       end
 
       it 'should have the correct constraint' do
-        subject.from_q(10).should eq(10)
-        ->{ subject.from_q(-12) }.should raise_error(TypeError)
-        ->{ subject.from_q(12) }.should raise_error(TypeError)
+        subject.dress(10).should eq(10)
+        ->{ subject.dress(-12) }.should raise_error(TypeError)
+        ->{ subject.dress(12) }.should raise_error(TypeError)
       end
     end
 
@@ -44,8 +44,8 @@ module Qrb
       it { should be_a(SubType) }
 
       it 'should have the correct constraint' do
-        subject.from_q('abc').should eq('abc')
-        ->{ subject.from_q('123') }.should raise_error(TypeError)
+        subject.dress('abc').should eq('abc')
+        ->{ subject.dress('123') }.should raise_error(TypeError)
       end
     end
 

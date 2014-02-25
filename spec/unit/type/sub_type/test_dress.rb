@@ -1,10 +1,10 @@
 require 'spec_helper'
 module Qrb
-  describe SubType, "from_q" do
+  describe SubType, "dress" do
 
     let(:type){ SubType.new(intType, {default: ->(i){ i>0 }, small: ->(i){ i<255 }}, "byte") }
 
-    subject{ type.from_q(arg) }
+    subject{ type.dress(arg) }
 
     context 'with an valid Integer' do
       let(:arg){ 12 }
@@ -15,7 +15,7 @@ module Qrb
     context 'when raising an Error' do
 
       subject do
-        type.from_q(arg) rescue $!
+        type.dress(arg) rescue $!
       end
 
       context 'with a Float' do

@@ -1,10 +1,10 @@
 require 'spec_helper'
 module Qrb
-  describe BuiltinType, "from_q" do
+  describe BuiltinType, "dress" do
 
     let(:type){ BuiltinType.new(Integer, 'int') }
 
-    subject{ type.from_q(arg) }
+    subject{ type.dress(arg) }
 
     context 'with an Integer' do
       let(:arg){ 12 }
@@ -16,7 +16,7 @@ module Qrb
       let(:arg){ 12.0 }
 
       subject{
-        type.from_q(arg) rescue $!
+        type.dress(arg) rescue $!
       }
 
       it 'should raise an Error' do

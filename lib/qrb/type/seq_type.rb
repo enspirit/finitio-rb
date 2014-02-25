@@ -15,26 +15,26 @@ module Qrb
   #
   #     R(Measures) = Array[R(Temperature)] = Array[Float]
   #
-  # Accordingly, the `from_q` transformation function has the signature below.
+  # Accordingly, the `dress` transformation function has the signature below.
   # It expects it's Alpha/Object argument to be a object responding to
   # `each` (with the ruby idiomatic semantics that such a `each` returns
   # an Enumerator when invoked without block).
   #
-  #     from_q :: Alpha  -> Measures      throws TypeError
-  #     from_q :: Object -> Array[Float]  throws TypeError
+  #     dress :: Alpha  -> Measures      throws TypeError
+  #     dress :: Object -> Array[Float]  throws TypeError
   #
   class SeqType < Type
     include CollectionType
 
-    # Apply the element type's `from_q` transformation to each element of
+    # Apply the element type's `dress` transformation to each element of
     # `value` (expected to respond to `each`). Return converted values in a
     # ruby Array.
-    def from_q(value, handler = FromQHelper.new)
+    def dress(value, handler = DressHelper.new)
       handler.failed!(self, value) unless value.respond_to?(:each)
 
       array = []
       handler.iterate(value) do |elm, index|
-        array << elm_type.from_q(elm, handler)
+        array << elm_type.dress(elm, handler)
       end
       array
     end

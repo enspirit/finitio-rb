@@ -14,10 +14,10 @@ module Qrb
   #
   #     R(Int) = Fixnum
   #
-  # Accordingly, the `from_q` transformation function has the following signature:
+  # Accordingly, the `dress` transformation function has the following signature:
   #
-  #     from_q :: Alpha  -> Int    throws TypeError
-  #     from_q :: Object -> Fixnum throws TypeError
+  #     dress :: Alpha  -> Int    throws TypeError
+  #     dress :: Object -> Fixnum throws TypeError
   #
   class BuiltinType < Type
 
@@ -29,7 +29,7 @@ module Qrb
 
     # Check that `value` is a valid instance of `ruby_type` through `===` or
     # raise an error.
-    def from_q(value, handler = FromQHelper.new)
+    def dress(value, handler = DressHelper.new)
       handler.failed!(self, value) unless ruby_type===value
       value
     end

@@ -19,7 +19,7 @@ module Qrb
 
       it 'should have the correct constraint' do
         ->{
-          subject.from_q(-12)
+          subject.dress(-12)
         }.should raise_error(TypeError)
       end
     end

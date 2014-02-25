@@ -1,5 +1,5 @@
 module Qrb
-  class FromQHelper
+  class DressHelper
 
     def initialize
       @stack = []
@@ -64,5 +64,5 @@ module Qrb
       type.name.to_s
     end
 
-  end # class FromQHelper
+  end # class DressHelper
 end # module Qrb

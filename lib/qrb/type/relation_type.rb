@@ -14,12 +14,12 @@ module Qrb
   #
   #     R(ColoredPoints) = Set[ R({...}) ] = Set[Hash[...]]
   #
-  # Accordingly, the from_q transformation function has the signature below.
+  # Accordingly, the dress transformation function has the signature below.
   # It expects an Enumerable as input and fails if any duplicate is found
   # (after tuple transformation), or if any tuple fails at being transformed.
   #
-  #     from_q :: Alpha  -> ColoredPoints   throws TypeError
-  #     from_q :: Object -> Set[Hash[...]]  throws TypeError
+  #     dress :: Alpha  -> ColoredPoints   throws TypeError
+  #     dress :: Object -> Set[Hash[...]]  throws TypeError
   #
   class RelationType < Type
 
@@ -33,16 +33,16 @@ module Qrb
     end
     attr_reader :heading
 
-    # Apply the corresponding TupleType's `from_q` to every element of `value`
+    # Apply the corresponding TupleType's `dress` to every element of `value`
     # (any enumerable). Return a Set of transformed tuples. Fail if anything
     # goes wrong transforming tuples or if duplicates are found.
-    def from_q(value, handler = FromQHelper.new)
+    def dress(value, handler = DressHelper.new)
       handler.failed!(self, value) unless value.respond_to?(:each)
 
       # Up every tuple and keep results in a Set
       set = Set.new
       handler.iterate(value) do |tuple, index|
-        tuple = tuple_type.from_q(tuple, handler)
+        tuple = tuple_type.dress(tuple, handler)
         handler.fail!("Duplicate tuple") if set.include?(tuple)
         set << tuple
       end

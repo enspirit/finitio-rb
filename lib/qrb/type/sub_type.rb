@@ -20,10 +20,10 @@ module Qrb
   #
   #     R(Byte) = R(Int) = Fixnum
   #
-  # Accordingly, the `from_q` transformation function has the following signature:
+  # Accordingly, the `dress` transformation function has the following signature:
   #
-  #     from_q :: Alpha  -> Byte   throws TypeError
-  #     from_q :: Object -> Fixnum throws TypeError
+  #     dress :: Alpha  -> Byte   throws TypeError
+  #     dress :: Object -> Fixnum throws TypeError
   #
   class SubType < Type
 
@@ -45,11 +45,11 @@ module Qrb
 
     # Check that `value` can be uped through the supertype, then verify all
     # constraints. Raise an error if anything goes wrong.
-    def from_q(value, handler = FromQHelper.new)
-      # Check that the supertype is able to from_q the value.
+    def dress(value, handler = DressHelper.new)
+      # Check that the supertype is able to dress the value.
       # Rewrite and set cause to any encountered TypeError.
       uped = handler.try(self, value) do
-        super_type.from_q(value, handler)
+        super_type.dress(value, handler)
       end
 
       # Check each constraint in turn

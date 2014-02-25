@@ -1,6 +1,6 @@
 require 'spec_helper'
 module Qrb
-  describe AdType, 'from_q' do
+  describe AdType, 'dress' do
 
     let(:type){
       AdType.new(Color, rgb: [intType,   ->(i){ i*2 } ],
@@ -8,7 +8,7 @@ module Qrb
     }
 
     subject{
-      type.from_q(arg)
+      type.dress(arg)
     }
 
     context 'with a color' do
@@ -45,7 +45,7 @@ module Qrb
       }
 
       it 'should hide the error' do
-        err = type.from_q(12) rescue $!
+        err = type.dress(12) rescue $!
         err.should be_a(TypeError)
         err.message.should eq("Invalid value `12` for Color")
       end
