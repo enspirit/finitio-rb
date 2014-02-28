@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/blambeau/qrb.png)](https://travis-ci.org/blambeau/qrb)
 [![Dependency Status](https://gemnasium.com/blambeau/qrb.png)](https://gemnasium.com/blambeau/qrb)
 [![Code Climate](https://codeclimate.com/github/blambeau/qrb.png)](https://codeclimate.com/github/blambeau/qrb)
-[![Coverage Status](https://coveralls.io/repos/blambeau/qrb/badge.png?branch=master)](https://coveralls.io/r/blambeau/qrb?branch=master)
+[![Coverage Status](https://coveralls.io/repos/blambeau/qrb/badge.png?branch=master)](https://coveralls.io/r/blambeau/qrb)
 
 # Qrb
 
