@@ -67,4 +67,6 @@ module Qrb
   end
 
   extend self
+
+  DEFAULT_REALM = realm('Q/builtins')
 end # module Qrb

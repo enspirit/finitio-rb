@@ -1,5 +1,5 @@
 Given(/^the document has been defined as follows:$/) do |str|
-  @schema = Qrb.parse_schema(str)
+  @schema = Qrb::DEFAULT_REALM.parse_schema(str)
 end
 
 Given(/^I dress the following JSON document:$/) do |str|

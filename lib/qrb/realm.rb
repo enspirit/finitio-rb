@@ -39,6 +39,11 @@ module Qrb
       @factory ||= TypeFactory.new
     end
 
+    def parse_schema(source)
+      require "qrb/syntax"
+      Syntax.compile_schema(source, self.dup)
+    end
+
     def inspect
       @types.each_pair.map{|k,v| "#{k} = #{v}" }.join("\n")
     end

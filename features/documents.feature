@@ -4,11 +4,10 @@ Feature: Using Q to build formal document schemas
 
     Given the document has been defined as follows:
       """
-      Str    = .String
-      Byte   = .Integer( i | i >= 0 and i <= 255 )
-      Gender = <mf> Str( s | s == 'M' or s == 'F' )
+      Byte   = Integer( i | i >= 0 and i <= 255 )
+      Gender = <mf> String( s | s == 'M' or s == 'F' )
       {
-        name: Str,
+        name: String,
         color: { red: Byte, green: Byte, blue: Byte },
         gender: Gender
       }
