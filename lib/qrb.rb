@@ -58,5 +58,5 @@ module Qrb
 
   extend self
 
-  DEFAULT_SYSTEM = system('Q/builtins')
+  DEFAULT_SYSTEM = system('Q/default')
 end # module Qrb
