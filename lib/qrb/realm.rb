@@ -4,8 +4,8 @@ module Qrb
   #
   class Realm
 
-    def initialize
-      @types = {}
+    def initialize(types = {})
+      @types = types
     end
 
     DSL_METHODS.each do |dsl_method|
@@ -41,6 +41,10 @@ module Qrb
 
     def inspect
       @types.each_pair.map{|k,v| "#{k} = #{v}" }.join("\n")
+    end
+
+    def dup
+      Realm.new(@types.dup)
     end
 
   end # class Realm
