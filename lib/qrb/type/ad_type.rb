@@ -76,6 +76,10 @@ module Qrb
       (ruby_type && ruby_type.name.to_s) || "Anonymous"
     end
 
+    def include?(value)
+      ruby_type === value
+    end
+
     def dress(value, handler = DressHelper.new)
       # Up should be idempotent with respect to the ADT
       return value if ruby_type and value.is_a?(ruby_type)
