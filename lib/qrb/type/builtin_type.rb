@@ -27,15 +27,19 @@ module Qrb
     end
     attr_reader :ruby_type
 
+    def default_name
+      @ruby_type.name.to_s
+    end
+
+    def include?(value)
+      ruby_type === value
+    end
+
     # Check that `value` is a valid instance of `ruby_type` through `===` or
     # raise an error.
     def dress(value, handler = DressHelper.new)
       handler.failed!(self, value) unless ruby_type===value
       value
-    end
-
-    def default_name
-      @ruby_type.name.to_s
     end
 
     def ==(other)
