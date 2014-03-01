@@ -1,12 +1,12 @@
 require 'spec_helper'
 module Qrb
-  describe Realm, "initialize" do
+  describe System, "initialize" do
 
-    let(:realm){ Realm.new }
+    let(:system){ System.new }
 
     context 'for building a tuple type' do
       subject{
-        realm.tuple(r: Integer)
+        system.tuple(r: Integer)
       }
       
       it{ should be_a(TupleType) }
@@ -14,7 +14,7 @@ module Qrb
 
     context 'for building a sub type' do
       subject{
-        realm.subtype(Integer){|i| i>=0 }
+        system.subtype(Integer){|i| i>=0 }
       }
 
       it{ should be_a(SubType) }

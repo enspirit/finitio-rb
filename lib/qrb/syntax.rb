@@ -1,7 +1,6 @@
 require 'citrus'
 require_relative 'syntax/support'
-require_relative 'syntax/realm'
-require_relative 'syntax/schema'
+require_relative 'syntax/system'
 require_relative 'syntax/definitions'
 require_relative 'syntax/type_def'
 require_relative 'syntax/expression'
@@ -31,12 +30,8 @@ module Qrb
       Parser.parse(*args, &bl)
     end
 
-    def self.compile_realm(source, realm = Qrb::Realm.new)
-      Parser.parse(source, root: "realm").compile(realm)
-    end
-
-    def self.compile_schema(str, realm = Qrb::Realm.new)
-      Parser.parse(str.strip, root: "schema").compile(realm)
+    def self.compile(source, system = Qrb::System.new)
+      Parser.parse(source, root: "system").compile(system)
     end
 
     def self.compile_type(str)

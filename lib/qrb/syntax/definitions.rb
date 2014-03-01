@@ -2,11 +2,11 @@ module Qrb
   module Syntax
     module Definitions
 
-      def compile(realm)
+      def compile(system)
         captures[:type_def].each do |node|
-          node.compile(realm)
+          node.compile(system)
         end
-        realm
+        system
       end
 
     end # module Definitions

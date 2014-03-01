@@ -1,13 +1,8 @@
 grammar Qrb::Syntax::Parser
 
-  rule realm
-    (spacing definitions spacing eof)
-    <Qrb::Syntax::Realm>
-  end
-
-  rule schema
-    (spacing definitions spacing type eof)
-    <Qrb::Syntax::Schema>
+  rule system
+    (spacing definitions spacing type? eof)
+    <Qrb::Syntax::System>
   end
 
   rule definitions

@@ -11,7 +11,7 @@ Then(/^its '(.*?)' attribute should be a Date representation$/) do |attr|
 end
 
 Then(/^the result should be a representation for (.*?)$/) do |type|
-  type = @realm.fetch(type)
+  type = @system.fetch(type)
   case type
   when Qrb::TupleType
     @result.should be_a(Hash)

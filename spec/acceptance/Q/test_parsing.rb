@@ -7,7 +7,7 @@ describe "Q definition files" do
     describe "Q/#{file.basename.rm_ext}" do
 
       it 'should parse' do
-        Qrb.parse_realm(file.read).should be_a(Qrb::Realm)
+        Qrb.parse(file.read).should be_a(Qrb::System)
       end
     end
   end

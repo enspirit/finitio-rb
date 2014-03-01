@@ -1,14 +1,14 @@
 require 'rspec'
 module Qrb
-  describe Realm, "[]" do
+  describe System, "[]" do
 
-    let(:realm){ Realm.new }
+    let(:system){ System.new }
 
     before do
-      realm.add_type(intType)
+      system.add_type(intType)
     end
 
-    subject{ realm[name] }
+    subject{ system[name] }
 
     context 'with an existing type name' do
       let(:name){ "intType" }

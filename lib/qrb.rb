@@ -25,7 +25,7 @@ module Qrb
   require_relative "qrb/support"
   require_relative 'qrb/type'
   require_relative 'qrb/data_type'
-  require_relative 'qrb/realm'
+  require_relative 'qrb/system'
 
   DEFAULT_FACTORY = TypeFactory.new
 
@@ -37,27 +37,17 @@ module Qrb
     end
   end
 
-  def parse_realm(source)
+  def parse(source)
     require "qrb/syntax"
-    Syntax.compile_realm(source)
+    Syntax.compile(source)
   end
 
-  def parse_type(source)
-    require "qrb/syntax"
-    Syntax.compile_type(source)
-  end
-
-  def parse_schema(source)
-    require "qrb/syntax"
-    Syntax.compile_schema(source)
-  end
-
-  def realm(identifier)
+  def system(identifier)
     f = File.expand_path("../qrb/#{identifier}.q", __FILE__)
     if File.exists?(f)
-      parse_realm(File.read(f))
+      parse(File.read(f))
     else
-      raise Error, "Unknown realm #{identifier}"
+      raise Error, "Unknown system #{identifier}"
     end
   end
 
@@ -68,5 +58,5 @@ module Qrb
 
   extend self
 
-  DEFAULT_REALM = realm('Q/builtins')
+  DEFAULT_SYSTEM = system('Q/builtins')
 end # module Qrb

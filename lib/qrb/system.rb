@@ -1,12 +1,14 @@
 module Qrb
   #
-  # A Realm is a collection of named Q types.
+  # A System is a collection of named Q types.
   #
-  class Realm
+  class System
 
-    def initialize(types = {})
+    def initialize(types = {}, main = nil)
       @types = types
+      @main  = main
     end
+    attr_accessor :main
 
     DSL_METHODS.each do |dsl_method|
       define_method(dsl_method){|*args, &bl|
@@ -39,9 +41,14 @@ module Qrb
       @factory ||= TypeFactory.new
     end
 
-    def parse_schema(source)
+    def dress(*args, &bl)
+      raise Error, "No main type." unless main
+      main.dress(*args, &bl)
+    end
+
+    def parse(source)
       require "qrb/syntax"
-      Syntax.compile_schema(source, self.dup)
+      Syntax.compile(source, self.dup)
     end
 
     def inspect
@@ -49,8 +56,8 @@ module Qrb
     end
 
     def dup
-      Realm.new(@types.dup)
+      System.new(@types.dup, @main)
     end
 
-  end # class Realm
+  end # class System
 end # module Qrb

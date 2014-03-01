@@ -2,7 +2,7 @@ Feature: Using Q to validate input data
 
   Background:
 
-    Given the Realm is
+    Given the System is
        """
        Nil    = .NilClass
        Int    = .Integer

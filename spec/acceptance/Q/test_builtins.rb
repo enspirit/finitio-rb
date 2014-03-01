@@ -2,10 +2,10 @@ require 'spec_helper'
 module Qrb
   describe "Q/builtins" do
 
-    let(:realm){ Qrb.realm('Q/builtins') }
+    let(:system){ Qrb.system('Q/builtins') }
 
     describe 'Boolean' do
-      let(:type){ realm['Boolean'] }
+      let(:type){ system['Boolean'] }
 
       it 'recognizes true' do
         type.dress(true).should eq(true)
@@ -21,7 +21,7 @@ module Qrb
     end
 
     describe 'Date' do
-      let(:type){ realm['Date'] }
+      let(:type){ system['Date'] }
 
       let(:expected){ Date.new(2014, 11, 9) }
 

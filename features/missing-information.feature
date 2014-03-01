@@ -2,7 +2,7 @@ Feature: Missing information Using Q
 
   Background:
 
-    Given the Realm is
+    Given the System is
        """
        Nil      = .NilClass
        Int      = .Integer

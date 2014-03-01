@@ -1,9 +1,9 @@
-Given(/^the Realm is$/) do |source|
-  @realm ||= Qrb.parse_realm(source)
+Given(/^the System is$/) do |source|
+  @system ||= Qrb.parse(source)
 end
 
 Given(/^I validate the following JSON data against (.*?)$/) do |type, json|
-  type = @realm.fetch(type)
+  type = @system.fetch(type)
   json = ::MultiJson.load(json)
   @result = type.dress(json) rescue $!
 end

@@ -2,10 +2,10 @@ module Qrb
   module Syntax
     module TypeDef
 
-      def compile(realm)
-        t = type.compile(realm)
+      def compile(system)
+        t = type.compile(system)
         t.name = type_name.to_s
-        realm.add_type(t)
+        system.add_type(t)
         t
       end
 

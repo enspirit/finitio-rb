@@ -1,19 +1,19 @@
 require 'rspec'
 module Qrb
-  describe Realm, "dup" do
+  describe System, "dup" do
 
-    let(:realm){ Realm.new }
+    let(:system){ System.new }
 
     before do
-      realm.add_type(intType)
+      system.add_type(intType)
     end
 
-    subject{ realm.dup }
+    subject{ system.dup }
 
-    it{ should be_a(Realm) }
+    it{ should be_a(System) }
 
     it 'should not be the same object' do
-      subject.should_not be(realm)
+      subject.should_not be(system)
     end
 
     it 'should have intType' do
@@ -23,7 +23,7 @@ module Qrb
     it 'should not share internals with the original' do
       subject.add_type(floatType)
       subject['floatType'].should_not be_nil
-      realm['floatType'].should be_nil
+      system['floatType'].should be_nil
     end
 
   end

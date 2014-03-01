@@ -1,14 +1,14 @@
 require 'rspec'
 module Qrb
-  describe Realm, "fetch" do
+  describe System, "fetch" do
 
-    let(:realm){ Realm.new }
+    let(:system){ System.new }
 
     before do
-      realm.add_type(intType)
+      system.add_type(intType)
     end
 
-    subject{ realm.fetch(name) }
+    subject{ system.fetch(name) }
 
     context 'with an existing type name' do
       let(:name){ "intType" }
@@ -30,7 +30,7 @@ module Qrb
 
     context 'with a non existing type name and a block' do
       subject{
-        realm.fetch("noSuchOne"){ "bar" }
+        system.fetch("noSuchOne"){ "bar" }
       }
 
       it 'should yield the block' do

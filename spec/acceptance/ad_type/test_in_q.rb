@@ -19,8 +19,8 @@ module Qrb
       end
     end
 
-    let(:realm) do
-      Qrb.parse_realm <<-EOF
+    let(:system) do
+      Qrb.parse <<-EOF
         Byte   = .Fixnum( i | i>=0 and i<= 255 )
         Color  = .Qrb::MyColorClass <rgb> {r: Byte, g: Byte, b: Byte}
         Gender = <mf> .String( s | s=='M' or s=='F' )
@@ -28,7 +28,7 @@ module Qrb
     end
 
     let(:color){
-      realm["Color"]
+      system["Color"]
     }
 
     describe 'the Color.dress method' do
@@ -59,7 +59,7 @@ module Qrb
     end
 
     describe 'the Gender.dress method' do
-      subject{ realm['Gender'].dress(arg) }
+      subject{ system['Gender'].dress(arg) }
 
       context 'when valid' do
         let(:arg){ 'M' }
