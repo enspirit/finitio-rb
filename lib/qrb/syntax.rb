@@ -31,12 +31,12 @@ module Qrb
       Parser.parse(*args, &bl)
     end
 
-    def self.compile_realm(source)
-      Parser.parse(source, root: "realm").compile(Qrb::Realm.new)
+    def self.compile_realm(source, realm = Qrb::Realm.new)
+      Parser.parse(source, root: "realm").compile(realm)
     end
 
-    def self.compile_schema(str)
-      Parser.parse(str.strip, root: "schema").compile(Qrb::Realm.new)
+    def self.compile_schema(str, realm = Qrb::Realm.new)
+      Parser.parse(str.strip, root: "schema").compile(realm)
     end
 
     def self.compile_type(str)
