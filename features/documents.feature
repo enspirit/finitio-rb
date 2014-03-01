@@ -16,7 +16,7 @@ Feature: Using Q to build formal document schemas
 
   Scenario: Validating data against valid document
 
-    Given I use the document schema to validate the following JSON doc:
+    Given I dress the following JSON document:
       """
       {
         "name": "Bernard Lambeau",
@@ -33,7 +33,7 @@ Feature: Using Q to build formal document schemas
 
   Scenario: Validating data against an invalid document (I)
 
-    Given I use the document schema to validate the following JSON doc:
+    Given I dress the following JSON document:
       """
       {
         "name": "Bernard Lambeau",
@@ -52,7 +52,7 @@ Feature: Using Q to build formal document schemas
 
   Scenario: Validating data against an invalid document (II)
 
-    Given I use the document schema to validate the following JSON doc:
+    Given I dress the following JSON document:
       """
       {
         "name": "Bernard Lambeau",
