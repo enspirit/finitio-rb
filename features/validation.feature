@@ -20,7 +20,7 @@ Feature: Using Q to validate input data
       """
 
     Then it should be a success
-    And the result should be a Color native representation
+    And the result should be a representation for Color
 
   Scenario: Validating an incomplete Color representation
 
@@ -76,7 +76,7 @@ Feature: Using Q to validate input data
       """
 
     Then it should be a success
-    And the result should be a Colors native representation
+    And the result should be a representation for Colors
 
   Scenario: Validating against an invalid Colors representation
 

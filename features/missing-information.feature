@@ -38,4 +38,4 @@ Feature: Missing information Using Q
       """
 
     Then it should be a success
-    And the result should be the null representation in the host language
+    And the result should be a Nil representation
