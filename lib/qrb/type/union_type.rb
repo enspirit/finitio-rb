@@ -39,6 +39,10 @@ module Qrb
     end
     attr_reader :candidates
 
+    def include?(value)
+      candidates.any?{|c| c.include?(value) }
+    end
+
     # Invoke `dress` on each candidate type in turn. Return the value
     # returned by the first one that does not fail. Fail with an TypeError if no
     # candidate succeeds at tranforming `value`.
