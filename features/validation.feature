@@ -4,17 +4,14 @@ Feature: Using Q to validate input data
 
     Given the System is
        """
-       Nil    = .NilClass
-       Int    = .Integer
-       String = .String
-       Byte   = Int( i | i>=0 and i<=255 )
+       Byte   = Integer( i | i>=0 and i<=255 )
        Color  = { r: Byte, g: Byte, b: Byte }
        Colors = {{ r: Byte, g: Byte, b: Byte }}
        """
 
   Scenario: Validating against a valid Color representation
 
-    Given I validate the following JSON data against Color
+    Given I dress the following JSON document with Color:
       """
       { "r": 121, "g": 12, "b": 87 }
       """
@@ -24,7 +21,7 @@ Feature: Using Q to validate input data
 
   Scenario: Validating an incomplete Color representation
 
-    Given I validate the following JSON data against Color
+    Given I dress the following JSON document with Color:
       """
       { "r": 121, "g": 12 }
       """
@@ -35,7 +32,7 @@ Feature: Using Q to validate input data
 
   Scenario: Validating a Color representation with extra attributes
 
-    Given I validate the following JSON data against Color
+    Given I dress the following JSON document with Color:
       """
       { "r": 121, "g": 12, "b": 255, "i": 143 }
       """
@@ -46,7 +43,7 @@ Feature: Using Q to validate input data
 
   Scenario: Validating a Color representation with an invalid attribute type
 
-    Given I validate the following JSON data against Color
+    Given I dress the following JSON document with Color:
       """
       { "r": "foo", "g": 12, "b": 255 }
       """
@@ -58,7 +55,7 @@ Feature: Using Q to validate input data
 
   Scenario: Validating a Color representation with an invalid value
 
-    Given I validate the following JSON data against Color
+    Given I dress the following JSON document with Color:
       """
       { "r": -12, "g": 12, "b": 255 }
       """
@@ -69,7 +66,7 @@ Feature: Using Q to validate input data
 
   Scenario: Validating against a valid Colors representation
 
-    Given I validate the following JSON data against Colors
+    Given I dress the following JSON document with Colors:
       """
       [{ "r": 121, "g": 12, "b": 87 },
        { "r": 132, "g": 1,  "b": 12 }]
@@ -80,7 +77,7 @@ Feature: Using Q to validate input data
 
   Scenario: Validating against an invalid Colors representation
 
-    Given I validate the following JSON data against Colors
+    Given I dress the following JSON document with Colors:
       """
       [{ "r": 121, "g": 12, "b": 87 },
        { "r": 132, "g": -121,  "b": 12 }]

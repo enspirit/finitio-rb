@@ -2,7 +2,7 @@ Feature: Using Q to build formal document schemas
 
   Background:
 
-    Given the document has been defined as follows:
+    Given the System is
       """
       Byte   = Integer( i | i >= 0 and i <= 255 )
       Gender = <mf> String( s | s == 'M' or s == 'F' )

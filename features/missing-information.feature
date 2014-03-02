@@ -4,35 +4,33 @@ Feature: Missing information Using Q
 
     Given the System is
        """
-       Nil      = .NilClass
-       Int      = .Integer
-       MaybeInt = Nil|Int
+       MaybeInt = Nil|Integer
        """
 
-   Scenario: Validating non nil against Int
+   Scenario: Validating non nil against Integer
 
-     Given I validate the following JSON data against Int
-       """
+    Given I dress the following JSON document with Integer:
+      """
        12
        """
 
      Then it should be a success
      And the result should equal 12
 
-  Scenario: Validating nil against Int
+  Scenario: Validating nil against Integer
 
-    Given I validate the following JSON data against Int
+    Given I dress the following JSON document with Integer:
       """
       null
       """
 
     Then it should be a TypeError as:
-      | message                      |
-      | Invalid value `nil` for Int  |
+      | message                         |
+      | Invalid value `nil` for Integer |
 
   Scenario: Validating nil against MaybeInt
 
-    Given I validate the following JSON data against MaybeInt
+    Given I dress the following JSON document with MaybeInt:
       """
       null
       """

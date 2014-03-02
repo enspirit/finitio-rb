@@ -2,7 +2,7 @@ Feature: Using Q to coerce input data to higher-level abstractions
 
   Background:
 
-    Given the document has been defined as follows:
+    Given the System is
       """
       {
         name: String,
