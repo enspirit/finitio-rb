@@ -41,6 +41,21 @@ module Qrb
     end
     attr_reader :heading
 
+    def default_name
+      "{#{heading.to_name}}"
+    end
+
+    def include?(value)
+      return false unless value.is_a?(Hash)
+      return false if value.size > heading.size
+      heading.all? do |attribute|
+        attr_val = value.fetch(attribute.name){
+          return false
+        }
+        attribute.type.include?(attr_val)
+      end
+    end
+
     # Convert `value` (supposed to be Hash) to a Tuple, by checking attributes
     # and applying `dress` on them in turn. Raise an error if any attribute
     # is missing or unrecognized, as well as if any sub transformation fails.
@@ -68,10 +83,6 @@ module Qrb
       end
 
       uped
-    end
-
-    def default_name
-      "{#{heading.to_name}}"
     end
 
     def ==(other)
