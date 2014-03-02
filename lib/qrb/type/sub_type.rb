@@ -43,6 +43,14 @@ module Qrb
     end
     attr_reader :super_type, :constraints
 
+    def default_name
+      constraints.keys.first.to_s.capitalize
+    end
+
+    def include?(value)
+      super_type.include?(value) && constraints.all?{|_,c| c===value }
+    end
+
     # Check that `value` can be uped through the supertype, then verify all
     # constraints. Raise an error if anything goes wrong.
     def dress(value, handler = DressHelper.new)
@@ -62,10 +70,6 @@ module Qrb
 
       # seems good, return the uped value
       uped
-    end
-
-    def default_name
-      constraints.keys.first.to_s.capitalize
     end
 
     def ==(other)
