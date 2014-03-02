@@ -36,4 +36,4 @@ Feature: Missing information Using Q
       """
 
     Then it should be a success
-    And the result should be a Nil representation
+    And the result should be a representation for Nil
