@@ -33,6 +33,16 @@ module Qrb
     end
     attr_reader :heading
 
+    def default_name
+      "{{#{heading.to_name}}}"
+    end
+
+    def include?(value)
+      value.is_a?(Set) && value.all?{|tuple|
+        tuple_type.include?(tuple)
+      }
+    end
+
     # Apply the corresponding TupleType's `dress` to every element of `value`
     # (any enumerable). Return a Set of transformed tuples. Fail if anything
     # goes wrong transforming tuples or if duplicates are found.
@@ -49,10 +59,6 @@ module Qrb
 
       # Return built tuples
       set
-    end
-
-    def default_name
-      "{{#{heading.to_name}}}"
     end
 
     def ==(other)
