@@ -26,6 +26,10 @@ module Qrb
   class SeqType < Type
     include CollectionType
 
+    def include?(value)
+      value.is_a?(::Array) and value.all?{|v| elm_type.include?(v) }
+    end
+
     # Apply the element type's `dress` transformation to each element of
     # `value` (expected to respond to `each`). Return converted values in a
     # ruby Array.
