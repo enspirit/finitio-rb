@@ -25,6 +25,14 @@ module Qrb
   class SetType < Type
     include CollectionType
 
+    def default_name
+      "{#{elm_type.name}}"
+    end
+
+    def include?(value)
+      value.is_a?(::Set) and value.all?{|v| elm_type.include?(v) }
+    end
+
     # Apply the element type's `dress` transformation to each element of
     # `value` (expected to respond to `each`). Return converted values in a
     # ruby Set.
@@ -38,10 +46,6 @@ module Qrb
         set << elm
       end
       set
-    end
-
-    def default_name
-      "{#{elm_type.name}}"
     end
 
   end # class SetType
