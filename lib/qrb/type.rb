@@ -24,8 +24,21 @@ module Qrb
       name.to_s
     end
 
+    # Check if `value` belongs to this type. Returns true if it's the case,
+    # false otherwise.
+    #
+    # For belonging to the type, `value` MUST be a valid representation, not
+    # an 'approximation' or some 'similar' representation. In particular,
+    # returning true means that no dressing is required for using `value` as a
+    # proper one. Similarly, the method MUST always return true on a value
+    # directly obtained through `dress`.
+    #
+    def include?(value)
+      raise NotImplementedError, "Missing #{self.class.name}#include?"
+    end
+
     def dress(*args)
-      raise NotImplementedError, "Missing #{self.class.name}#up"
+      raise NotImplementedError, "Missing #{self.class.name}#dress"
     end
 
   protected
