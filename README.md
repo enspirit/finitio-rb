@@ -99,7 +99,7 @@ Rep({ElmType}) = Set<Rep(ElmType)>
 Rep({Ai => Ti}) = Hash<Symbol => Rep(Ti)>
 
 # Relations are represented through ruby ::Set of ::Hash.
-Rep({{Ai => Ti}}) = Array<Hash<Symbol => Rep(Ti)>>
+Rep({{Ai => Ti}}) = Set<Hash<Symbol => Rep(Ti)>>
 
 # Abstract data types are represented through the corresponding class when
 # specified. ADTs behave as Union types if no class is bound.
