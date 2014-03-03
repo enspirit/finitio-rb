@@ -27,11 +27,11 @@ Q
 
 # Let load some JSON document
 data = JSON.parse <<-JSON
-  { "name": "Q", at: "20142-03-01" }
+  { "name": "Q", "at": "20142-03-01" }
 JSON
 
 # And try dressing that data
-schema.dress(data)
+puts schema.dress(data)
 ```
 
 ## About this Q binding

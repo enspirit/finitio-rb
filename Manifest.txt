@@ -1,15 +1,11 @@
-qrb.gemspec
-qrb.noespec
-.gemtest
 CHANGELOG.md
 Gemfile
 Gemfile.lock
-bin/**/*
 lib/**/*
 LICENCE.md
 Manifest.txt
+qrb.gemspec
 Rakefile
 README.md
 spec/**/*
 tasks/**/*
-test/**/*
