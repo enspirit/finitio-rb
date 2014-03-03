@@ -1,7 +1,7 @@
 grammar Qrb::Syntax::Parser
 
   rule system
-    (spacing definitions spacing type? eof)
+    (spacing definitions spacing type? spacing eof)
     <Qrb::Syntax::System>
   end
 
