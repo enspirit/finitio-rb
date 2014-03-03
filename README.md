@@ -71,6 +71,41 @@ class Color
 end
 ```
 
+## About representations
+
+The `Rep` representation function mapping Q types to ruby classes is as
+follows:
+
+```ruby
+# Builtins are represented by the corresponding ruby class
+Rep(.Builtin) = Builtin
+
+# Sub types are represented by the same representation as the super type
+Rep(SuperType( s | ... )) = Rep(SuperType)
+
+# Unions are represented by the corresponding classes. The guaranteed result
+# class is thus the least common super class (^) of the corresponding
+# representations of candidate types
+Rep(T1 | ... | Tn) = Rep(T1) ^ ... ^ Rep(Tn)
+
+# Sequences are represented through ::Array.
+Rep([ElmType]) = Array<Rep(ElmType)>
+
+# Sets are represented through ::Set.
+Rep({ElmType}) = Set<Rep(ElmType)>
+
+# Tuples are represented through ruby ::Hash. Attribute names are always
+# symbolized
+Rep({Ai => Ti}) = Hash<Symbol => Rep(Ti)>
+
+# Relations are represented through ruby ::Set of ::Hash.
+Rep({{Ai => Ti}}) = Array<Hash<Symbol => Rep(Ti)>>
+
+# Abstract data types are represented through the corresponding class when
+# specified. ADTs behave as Union types if no class is bound.
+Rep(.Builtin <rep> ...) = Builtin
+```
+
 ## About the default system
 
 See `lib/qrb/Q/default.q` for the precise definition of the default system.
