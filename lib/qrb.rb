@@ -1,4 +1,5 @@
 require 'set'
+require 'time'
 
 #
 # Q - in Ruby
