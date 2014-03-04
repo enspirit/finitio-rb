@@ -116,6 +116,7 @@ Gem::Specification.new do |s|
   #   "~> 2.2"                (shortcut for ">= 2.2.0", "< 3.0")
   #   "~> 2.2.0"              (shortcut for ">= 2.2.0", "< 2.3.0")
   #
+  s.add_dependency("citrus", "~> 2.4")
 
   #
   # One call to add_dependency('gem_name', 'gem version requirement') for each
@@ -123,8 +124,7 @@ Gem::Specification.new do |s|
   # One call to add_development_dependency('gem_name', 'gem version requirement')
   # for each development dependency. These gems are required for developers
   #
-  s.add_development_dependency("rake", "~> 10.0")
-  s.add_development_dependency("rspec", "~> 2.14")
+  # We use Gemfile for development dependencies.
   
 
   # The version of ruby required by this gem

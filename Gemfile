@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem "citrus", "~> 2.4"
+gemspec
 
 group :development do
   gem "rake", "~> 10.0"
