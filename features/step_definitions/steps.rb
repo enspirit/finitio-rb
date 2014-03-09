@@ -1,8 +1,26 @@
+Before do
+  @system = Qrb::TEST_SYSTEM
+end
+
 Given(/^the System is$/) do |source|
-  @system ||= Qrb::DEFAULT_SYSTEM.parse(source)
+  @system = Qrb::DEFAULT_SYSTEM.parse(source)
+end
+
+Given(/^the type under test is (.*?)$/) do |typename|
+  @type_under_test = @system[typename]
 end
 
 ### dressing
+
+Given(/^I dress JSON's '(.*?)'$/) do |str|
+  doc = MultiJson.load(str)
+  @result = @type_under_test.dress(doc) rescue $!
+end
+
+Given(/^I dress JSON's '(.*?)' with (.*?)$/) do |str, typename|
+  doc = MultiJson.load(str)
+  @result = @system[typename].dress(doc) rescue $!
+end
 
 Given(/^I dress the following JSON document:$/) do |str|
   doc = MultiJson.load(str)
@@ -47,4 +65,33 @@ end
 Then(/^the result should be a representation for (.*?)$/) do |type|
   type = @system.fetch(type)
   type.should include(@result)
+end
+
+
+Then(/^the result should be the integer (\d+)$/) do |expected|
+  @result.should eq(Integer(expected))
+end
+
+Then(/^the result should be the Boolean true$/) do
+  @result.should eq(true)
+end
+
+Then(/^the result should be the Boolean false$/) do
+  @result.should eq(false)
+end
+
+Then(/^the result should be the 13st of March 2014$/) do
+  @result.should eq(Date.parse("2014-03-13"))
+end
+
+Then(/^the result should be the real (\d+.\d+)$/) do |expected|
+  @result.should eq(Float(expected))
+end
+
+Then(/^the result should be the string '(.*?)'$/) do |expected|
+  @result.should eq(expected)
+end
+
+Then(/^the result should be the 13st of March 2014 at 08:30$/) do
+  @result.should eq(Time.parse("2014-03-13T08:30"))
 end

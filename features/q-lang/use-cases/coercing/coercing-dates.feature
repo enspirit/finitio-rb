@@ -1,4 +1,4 @@
-Feature: Using Q to coerce input data to higher-level abstractions
+Feature: Using Q to coerce input data have date attributes
 
   Background:
 

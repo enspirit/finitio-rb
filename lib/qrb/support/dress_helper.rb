@@ -54,7 +54,7 @@ module Qrb
   private
 
     def value_to_s(value)
-      return 'nil' if value.nil?
+      return 'null' if value.nil?
       s = value.to_s
       s = "#{s[0..25]}..." if s.size>25
       s

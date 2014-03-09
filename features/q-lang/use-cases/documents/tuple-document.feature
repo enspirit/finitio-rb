@@ -1,11 +1,11 @@
-Feature: Using Q to build formal document schemas
+Feature: Using Q to define a single-tuple document
 
   Background:
 
     Given the System is
       """
-      Byte   = Integer( i | i >= 0 and i <= 255 )
-      Gender = <mf> String( s | s == 'M' or s == 'F' )
+      Byte   = Integer( i | i >= 0 && i <= 255 )
+      Gender = <mf> String( s | s == 'M' || s == 'F' )
       {
         name: String,
         color: { red: Byte, green: Byte, blue: Byte },
