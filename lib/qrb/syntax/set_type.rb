@@ -7,6 +7,10 @@ module Qrb
         factory.set(elm_type)
       end
 
+      def to_ast
+        [:set_type, type.to_ast]
+      end
+
     end # module SetType
   end # module Syntax
 end # module Qrb

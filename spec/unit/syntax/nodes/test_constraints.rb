@@ -10,12 +10,24 @@ module Qrb
       subject.compile("a")
     }
 
+    let(:ast){
+      subject.to_ast('a')
+    }
+
     context 'a >= 10' do
       let(:input){ 'a >= 10' }
 
       it 'compiles to an Hash' do
         compiled.should be_a(Hash)
         compiled.keys.should eq([:predicate])
+      end
+
+      it 'has the expected AST' do
+        ast.should eq([
+          :constraint,
+          "default",
+          [:fn, [:parameters, "a"], [:source, "a >= 10"]]
+        ])
       end
     end
 
@@ -26,6 +38,14 @@ module Qrb
         compiled.should be_a(Hash)
         compiled.keys.should eq([:foo])
       end
+
+      it 'has the expected AST' do
+        ast.should eq([[
+          :constraint,
+          "foo",
+          [:fn, [:parameters, "a"], [:source, "a >= 10"]]
+        ]])
+      end
     end
 
     context 'foo: a >= 10, bar: a <= 255' do
@@ -34,6 +54,21 @@ module Qrb
       it 'compiles to an Hash' do
         compiled.should be_a(Hash)
         compiled.keys.should eq([:foo, :bar])
+      end
+
+      it 'has the expected AST' do
+        ast.should eq([
+          [
+            :constraint,
+            "foo",
+            [:fn, [:parameters, "a"], [:source, "a >= 10"]]
+          ],
+          [
+            :constraint,
+            "bar",
+            [:fn, [:parameters, "a"], [:source, "a <= 255"]]
+          ]
+        ])
       end
     end
 

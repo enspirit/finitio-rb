@@ -196,7 +196,7 @@ grammar Qrb::Syntax::Parser
   end
 
   rule builtin_type_name
-    /[a-zA-Z0-9:]/+
+    /[a-zA-Z0-9:]+/
   end
 
   # LEXER (spacing & comments)

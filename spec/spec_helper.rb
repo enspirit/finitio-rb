@@ -64,6 +64,10 @@ module SpecHelpers
     Qrb::TypeFactory.new
   end
 
+  def system
+    Qrb::System.new
+  end
+
   def blueviolet
     Color.new(138, 43, 226)
   end

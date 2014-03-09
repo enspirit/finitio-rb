@@ -10,6 +10,10 @@ module Qrb
       subject.compile("a")
     }
 
+    let(:ast){
+      subject.to_ast('a')
+    }
+
     context 'a >= 10' do
       let(:input){ 'foo: a >= 10' }
 
@@ -24,6 +28,14 @@ module Qrb
       it 'should be the correct Proc' do
         compiled[:foo].call(12).should be_true
         compiled[:foo].call(9).should be_false
+      end
+
+      it 'has the expected AST' do
+        ast.should eq([
+          :constraint,
+          "foo",
+          [:fn, [:parameters, "a"], [:source, "a >= 10"]]
+        ])
       end
     end
 

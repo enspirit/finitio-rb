@@ -10,6 +10,10 @@ module Qrb
         Qrb::Heading.new(attributes(factory))
       end
 
+      def to_ast
+        captures[:attribute].map(&:to_ast).unshift(:heading)
+      end
+
     end # module Heading
   end # module Syntax
 end # module Qrb

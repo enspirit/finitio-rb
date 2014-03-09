@@ -8,6 +8,10 @@ module Qrb
         factory.subtype(s, c)
       end
 
+      def to_ast
+        [:sub_type, rel_type.to_ast] + constraint_def.to_ast
+      end
+
     end # module SubType
   end # module Syntax
 end # module Qrb

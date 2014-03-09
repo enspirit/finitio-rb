@@ -13,6 +13,10 @@ module Qrb
         constraints
       end
 
+      def to_ast(var_name)
+        captures[:named_constraint].map{|c| c.to_ast(var_name) }
+      end
+
     end # module Constraints
   end # module Syntax
 end # module Qrb

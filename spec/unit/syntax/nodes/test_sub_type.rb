@@ -10,6 +10,10 @@ module Qrb
       subject.compile(type_factory)
     }
 
+    let(:ast){
+      subject.to_ast
+    }
+
     context '.Integer( i | i >= 0 )' do
       let(:input){ '.Integer( i | i >= 0 )' }
 
@@ -17,6 +21,14 @@ module Qrb
         compiled.should be_a(SubType)
         compiled.super_type.should be_a(BuiltinType)
         compiled.super_type.ruby_type.should be(Integer)
+      end
+
+      it 'has the expected AST' do
+        ast.should eq([
+          :sub_type,
+          [:builtin_type, "Integer"],
+          [:constraint, "default", [:fn, [:parameters, "i"], [:source, "i >= 0"]]]
+        ])
       end
     end
 
@@ -32,6 +44,14 @@ module Qrb
       it 'has the correct constraints' do
         compiled.constraints.keys.should eq([:positive])
       end
+
+      it 'has the expected AST' do
+        ast.should eq([
+          :sub_type,
+          [:builtin_type, "Integer"],
+          [:constraint, "positive", [:fn, [:parameters, "i"], [:source, "i >= 0"]]]
+        ])
+      end
     end
 
     context '.Integer( i | positive: i >= 0, ... )' do
@@ -45,6 +65,15 @@ module Qrb
 
       it 'has the correct constraints' do
         compiled.constraints.keys.should eq([:positive, :small])
+      end
+
+      it 'has the expected AST' do
+        ast.should eq([
+          :sub_type,
+          [:builtin_type, "Integer"],
+          [:constraint, "positive", [:fn, [:parameters, "i"], [:source, "i >= 0"]]],
+          [:constraint, "small",    [:fn, [:parameters, "i"], [:source, "i <= 255"]]]
+        ])
       end
     end
 

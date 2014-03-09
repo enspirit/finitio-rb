@@ -8,6 +8,10 @@ module Qrb
         [ clazz.method(:dress), clazz.method(:undress) ]
       end
 
+      def to_ast
+        [ :external_pair, builtin_type_name.to_s ]
+      end
+
     end # module ExternalPair
   end # module Syntax
 end # module Qrb

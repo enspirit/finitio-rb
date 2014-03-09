@@ -10,6 +10,10 @@ module Qrb
       compiled.values.first
     }
 
+    let(:ast){
+      subject.to_ast
+    }
+
     context 'No converter and a class' do
       let(:input){ '<rgb> {r: .Integer, g: .Integer, b: .Integer}' }
 
@@ -24,6 +28,20 @@ module Qrb
         contract[0].should be_a(TupleType)
         contract[1].should be_a(Method)
         contract[2].should be_a(Proc)
+      end
+
+      it 'has expected AST' do
+        ast.should eq([
+          :contract,
+          "rgb",
+          [:tuple_type,
+            [:heading,
+              [:attribute, "r", [:builtin_type, "Integer"]],
+              [:attribute, "g", [:builtin_type, "Integer"]],
+              [:attribute, "b", [:builtin_type, "Integer"]]
+            ]
+          ]
+        ])
       end
     end
 
@@ -42,6 +60,20 @@ module Qrb
         contract[1].should be(Qrb::IDENTITY)
         contract[2].should be(Qrb::IDENTITY)
       end
+
+      it 'has expected AST' do
+        ast.should eq([
+          :contract,
+          "rgb",
+          [:tuple_type,
+            [:heading,
+              [:attribute, "r", [:builtin_type, "Integer"]],
+              [:attribute, "g", [:builtin_type, "Integer"]],
+              [:attribute, "b", [:builtin_type, "Integer"]]
+            ]
+          ]
+        ])
+      end
     end
 
     context 'A contract with explicit converters' do
@@ -57,6 +89,18 @@ module Qrb
         contract.should be_a(Array)
         contract.first.should be_a(BuiltinType)
         contract.last.should be_a(Proc)
+      end
+
+      it 'has expected AST' do
+        ast.should eq([
+          :contract,
+          "iso",
+          [:builtin_type, "String"],
+          [:inline_pair,
+            [:fn, [:parameters, "s"], [:source, "DateTime.parse(s)"]],
+            [:fn, [:parameters, "d"], [:source, "d.to_s"]]
+          ]
+        ])
       end
     end
 
@@ -74,6 +118,15 @@ module Qrb
         contract[0].should be_a(BuiltinType)
         contract[1].should be_a(Method)
         contract[2].should be_a(Method)
+      end
+
+      it 'has expected AST' do
+        ast.should eq([
+          :contract,
+          "iso",
+          [:builtin_type, "String"],
+          [:external_pair, "ExternalContract"]
+        ])
       end
     end
 

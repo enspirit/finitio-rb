@@ -7,6 +7,10 @@ module Qrb
         factory.union(cds)
       end
 
+      def to_ast
+        captures[:sub_type].map(&:to_ast).unshift(:union_type)
+      end
+
     end # module UnionType
   end # module Syntax
 end # module Qrb

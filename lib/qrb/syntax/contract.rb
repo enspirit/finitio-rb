@@ -22,6 +22,16 @@ module Qrb
         end
       end
 
+      def to_ast
+        ast = [
+          :contract,
+          contract_name.to_s,
+          (type && type.to_ast) 
+        ]
+        ast << pair.to_ast if pair
+        ast
+      end
+
     end # module Contract
   end # module Syntax
 end # module Qrb

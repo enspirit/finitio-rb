@@ -44,6 +44,11 @@ module Qrb
     Syntax.compile(source)
   end
 
+  def ast(source)
+    require "qrb/syntax"
+    Syntax.ast(source)
+  end
+
   def system(identifier)
     f = File.expand_path("../qrb/#{identifier}.q", __FILE__)
     if File.exists?(f)

@@ -6,26 +6,38 @@ module Qrb
       Syntax.parse(source, root: "builtin_type")
     }
 
-    let(:compiled){
-      subject.compile(type_factory)
-    }
+    describe "compilation result" do
+      let(:compiled){
+        subject.compile(type_factory)
+      }
 
-    context 'when an unqualified class name' do
-      let(:source){ ".Integer" }
+      context 'when an unqualified class name' do
+        let(:source){ ".Integer" }
 
-      it 'compiles to a BuiltinType' do
-        compiled.should be_a(BuiltinType)
-        compiled.ruby_type.should be(Integer)
+        it 'compiles to a BuiltinType' do
+          compiled.should be_a(BuiltinType)
+          compiled.ruby_type.should be(Integer)
+        end
+      end
+
+      context 'when a qualified class name' do
+        let(:source){ ".Qrb::Type" }
+
+        it 'compiles to a BuiltinType' do
+          compiled.should be_a(BuiltinType)
+          compiled.ruby_type.should be(::Qrb::Type)
+        end
       end
     end
 
-    context 'when a qualified class name' do
+    describe "AST" do
       let(:source){ ".Qrb::Type" }
 
-      it 'compiles to a BuiltinType' do
-        compiled.should be_a(BuiltinType)
-        compiled.ruby_type.should be(::Qrb::Type)
-      end
+      let(:ast){
+        subject.to_ast
+      }
+
+      it{ ast.should eq([:builtin_type, "Qrb::Type"]) }
     end
 
   end

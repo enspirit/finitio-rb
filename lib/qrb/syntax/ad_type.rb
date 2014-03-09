@@ -20,6 +20,13 @@ module Qrb
         contracts
       end
 
+      def to_ast
+        [ 
+          :ad_type,
+          builtin_type_name ? builtin_type_name.to_s : nil
+        ] + captures[:contract].map(&:to_ast)
+      end
+
     end # module AdType
   end # module Syntax
 end # module Qrb

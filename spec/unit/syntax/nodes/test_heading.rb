@@ -6,36 +6,53 @@ module Qrb
       Syntax.parse(input, root: "heading")
     }
 
-    let(:compiled){
-      subject.compile(type_factory)
-    }
+    describe "compilation result" do
+      let(:compiled){
+        subject.compile(type_factory)
+      }
 
-    context 'empty heading' do
-      let(:input){ '  ' }
+      context 'empty heading' do
+        let(:input){ '  ' }
 
-      it 'compiles to a Heading' do
-        compiled.should be_a(Heading)
-        compiled.to_name.should eq('')
+        it 'compiles to a Heading' do
+          compiled.should be_a(Heading)
+          compiled.to_name.should eq('')
+        end
+      end
+
+      context 'a: .Integer' do
+        let(:input){ 'a: .Integer' }
+
+        it 'compiles to a Heading' do
+          compiled.should be_a(Heading)
+          compiled.to_name.should eq('a: Integer')
+        end
+      end
+
+      context 'a: .Integer, b: .Float' do
+        let(:input){ 'a: .Integer, b: .Float' }
+
+        it 'compiles to a Heading' do
+          compiled.should be_a(Heading)
+          compiled.to_name.should eq('a: Integer, b: Float')
+        end
       end
     end
 
-    context 'a: .Integer' do
-      let(:input){ 'a: .Integer' }
-
-      it 'compiles to a Heading' do
-        compiled.should be_a(Heading)
-        compiled.to_name.should eq('a: Integer')
-      end
-    end
-
-    context 'a: .Integer, b: .Float' do
+    describe "AST" do
       let(:input){ 'a: .Integer, b: .Float' }
 
-      it 'compiles to a Heading' do
-        compiled.should be_a(Heading)
-        compiled.to_name.should eq('a: Integer, b: Float')
-      end
-    end
+      let(:ast){
+        subject.to_ast
+      }
 
+      it{
+        ast.should eq([
+          :heading,
+          [ :attribute, "a", [:builtin_type, "Integer" ]],
+          [ :attribute, "b", [:builtin_type, "Float" ]]
+        ])
+      }
+    end
   end
 end

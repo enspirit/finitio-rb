@@ -6,35 +6,53 @@ module Qrb
       Syntax.parse(input, root: "tuple_type")
     }
 
-    let(:compiled){
-      subject.compile(type_factory)
-    }
+    describe "compilation result" do
+      let(:compiled){
+        subject.compile(type_factory)
+      }
 
-    context 'empty heading' do
-      let(:input){ '{ }' }
+      context 'empty heading' do
+        let(:input){ '{ }' }
 
-      it 'compiles to a TupleType' do
-        compiled.should be_a(TupleType)
-        compiled.heading.should be_empty
+        it 'compiles to a TupleType' do
+          compiled.should be_a(TupleType)
+          compiled.heading.should be_empty
+        end
+      end
+
+      context '{a: .Integer}' do
+        let(:input){ '{a: .Integer}' }
+
+        it 'compiles to a TupleType' do
+          compiled.should be_a(TupleType)
+          compiled.heading.size.should eq(1)
+        end
+      end
+
+      context '{a: .Integer, b: .Float}' do
+        let(:input){ '{a: .Integer, b: .Float}' }
+
+        it 'compiles to a TupleType' do
+          compiled.should be_a(TupleType)
+          compiled.heading.size.should eq(2)
+        end
       end
     end
 
-    context '{a: .Integer}' do
+    describe "AST" do
       let(:input){ '{a: .Integer}' }
 
-      it 'compiles to a TupleType' do
-        compiled.should be_a(TupleType)
-        compiled.heading.size.should eq(1)
-      end
-    end
+      let(:ast){ subject.to_ast }
 
-    context '{a: .Integer, b: .Float}' do
-      let(:input){ '{a: .Integer, b: .Float}' }
-
-      it 'compiles to a TupleType' do
-        compiled.should be_a(TupleType)
-        compiled.heading.size.should eq(2)
-      end
+      it{
+        ast.should eq([
+          :tuple_type,
+          [
+            :heading,
+            [ :attribute, "a", [:builtin_type, "Integer" ]]
+          ]
+        ])
+      }
     end
 
   end

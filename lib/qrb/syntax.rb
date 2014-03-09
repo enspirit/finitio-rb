@@ -33,6 +33,10 @@ module Qrb
       Parser.parse(*args, &bl)
     end
 
+    def self.ast(source)
+      Parser.parse(source, root: "system").to_ast
+    end
+
     def self.compile(source, system = Qrb::System.new)
       Parser.parse(source, root: "system").compile(system)
     end
