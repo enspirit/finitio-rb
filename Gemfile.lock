@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    qrb (0.2.0)
+    qrb (0.3.0)
       citrus (~> 2.4)
 
 GEM
