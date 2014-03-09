@@ -34,7 +34,7 @@ JSON
 puts schema.dress(data)
 ```
 
-## About this Q binding
+## ADTs with internal contracts
 
 Qrb tries to provide an idiomatic binding for ruby developers. In particular,
 it uses a simple convention-over-configuration protocol for information
@@ -67,6 +67,32 @@ class Color
   end
 
   # ...
+
+end
+```
+
+## ADTs with external contracts
+
+When the scenario above is not possible or not wanted (would require core
+extensions for instance), Qrb allows defining ADTs with external contracts.
+The following ADT definition:
+
+```ruby
+Color = .Color <rgb> {r: Byte, g: Byte, b: Byte} ColorContract
+```
+
+expected the following ruby module:
+
+```ruby
+module ColorContract
+
+  def self.dress(tuple)
+    Color.new(tuple[:r], tuple[:g], tuple[:b])
+  end
+
+  def self.undress(color)
+    { r: color.r, g: color.g, b: color.b }
+  end
 
 end
 ```
