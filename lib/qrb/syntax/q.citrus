@@ -150,7 +150,7 @@ grammar Qrb::Syntax::Parser
     <Qrb::Syntax::Expression>
   end
 
-  # lexer
+  # LEXER (names)
 
   rule var_name
     /[a-z]+/
@@ -161,7 +161,7 @@ grammar Qrb::Syntax::Parser
   end
 
   rule constraint_name
-    /[a-z][a-z_]*/
+    /[a-z][a-zA-Z_]*/
   end
 
   rule attribute_name
@@ -175,6 +175,8 @@ grammar Qrb::Syntax::Parser
   rule builtin_type_name
     /[a-zA-Z0-9:]/+
   end
+
+  # LEXER (spacing & comments)
 
   rule spacing
     (spaces | comment)*
