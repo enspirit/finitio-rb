@@ -21,6 +21,8 @@ require_relative 'syntax/union_type'
 require_relative 'syntax/type_ref'
 require_relative 'syntax/ad_type'
 require_relative 'syntax/contract'
+require_relative 'syntax/inline_pair'
+require_relative 'syntax/external_pair'
 require_relative 'syntax/lambda_expr'
 module Qrb
   module Syntax

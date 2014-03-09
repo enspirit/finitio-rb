@@ -3,8 +3,8 @@ module Qrb
   describe AdType, 'dress' do
 
     let(:type){
-      AdType.new(Color, rgb: [intType,   ->(i){ i*2 } ],
-                        hex: [floatType, ->(f){ f*3 } ])
+      AdType.new(Color, rgb: [intType,   ->(i){ i*2 }, Qrb::IDENTITY ],
+                        hex: [floatType, ->(f){ f*3 }, Qrb::IDENTITY ])
     }
 
     subject{
@@ -41,7 +41,7 @@ module Qrb
 
     context 'when the upper raises an error' do
       let(:type){
-        AdType.new(Color, rgb: [ intType, ->(t){ raise ArgumentError } ])
+        AdType.new(Color, rgb: [ intType, ->(t){ raise ArgumentError }, Qrb::IDENTITY ])
       }
 
       it 'should hide the error' do

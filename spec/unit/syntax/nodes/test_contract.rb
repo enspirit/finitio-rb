@@ -21,8 +21,9 @@ module Qrb
         compiled.should be_a(Hash)
         compiled.keys.should eq([:rgb])
         contract.should be_a(Array)
-        contract.first.should be_a(TupleType)
-        contract.last.should be_a(Method)
+        contract[0].should be_a(TupleType)
+        contract[1].should be_a(Method)
+        contract[2].should be_a(Proc)
       end
     end
 
@@ -37,8 +38,9 @@ module Qrb
         compiled.should be_a(Hash)
         compiled.keys.should eq([:rgb])
         contract.should be_a(Array)
-        contract.first.should be_a(TupleType)
-        contract.last.should be(Qrb::IDENTITY)
+        contract[0].should be_a(TupleType)
+        contract[1].should be(Qrb::IDENTITY)
+        contract[2].should be(Qrb::IDENTITY)
       end
     end
 
@@ -55,6 +57,23 @@ module Qrb
         contract.should be_a(Array)
         contract.first.should be_a(BuiltinType)
         contract.last.should be_a(Proc)
+      end
+    end
+
+    context 'A contract with external dressers' do
+      let(:input){ '<iso> .String .ExternalContract' }
+
+      let(:compiled){
+        subject.compile(type_factory, nil)
+      }
+
+      it 'compiles to the expected Hash' do
+        compiled.should be_a(Hash)
+        compiled.keys.should eq([:iso])
+        contract.should be_a(Array)
+        contract[0].should be_a(BuiltinType)
+        contract[1].should be_a(Method)
+        contract[2].should be_a(Method)
       end
     end
 

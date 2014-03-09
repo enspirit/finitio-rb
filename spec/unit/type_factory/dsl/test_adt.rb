@@ -5,8 +5,8 @@ module Qrb
     let(:factory){ TypeFactory.new }
 
     let(:contracts){
-      { rgb: [intType,   Color.method(:rgb) ],
-        hex: [floatType, Color.method(:hex) ]}
+      { rgb: [intType,   Color.method(:rgb), Qrb::IDENTITY ],
+        hex: [floatType, Color.method(:hex), Qrb::IDENTITY ]}
     }
 
     shared_examples_for "The <Color> type" do

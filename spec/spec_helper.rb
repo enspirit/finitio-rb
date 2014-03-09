@@ -35,6 +35,13 @@ class Color
 
 end
 
+module ExternalContract
+  def self.dress(x)
+  end
+  def self.undress(y)
+  end
+end
+
 module SpecHelpers
 
   def intType

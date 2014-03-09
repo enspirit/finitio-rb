@@ -6,7 +6,13 @@ module Qrb
     end
 
     def contract(name, infotype)
-      ad_contracts[name] = [ Qrb.type(infotype) , method(name) ]
+      dresser   = method(name)
+      undresser = instance_method(:"to_#{name}")
+      ad_contracts[name] = [
+        Qrb.type(infotype),
+        dresser,
+        ->(d){ undresser.bind(d).call }
+      ]
     end
 
   private

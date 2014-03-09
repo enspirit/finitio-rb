@@ -120,8 +120,23 @@ grammar Qrb::Syntax::Parser
   end
 
   rule contract
-    ('<' contract_name '>' spacing type (spacing ('\\' up:lambda_expr) spacing ('\\' down:lambda_expr))?)
+    ('<' contract_name '>' spacing type spacing pair?)
     <Qrb::Syntax::Contract>
+  end
+
+  rule pair
+      inline_pair
+    | external_pair
+  end
+
+  rule inline_pair
+    ('\\' dress:lambda_expr spacing '\\' undress:lambda_expr)
+    <Qrb::Syntax::InlinePair>
+  end
+
+  rule external_pair
+    ('.' builtin_type_name)
+    <Qrb::Syntax::ExternalPair>
   end
 
   # any

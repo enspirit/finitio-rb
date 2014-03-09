@@ -5,8 +5,8 @@ module Qrb
     subject{ type.default_name }
 
     let(:type){
-      AdType.new(Color, rgb: [intType,   Color.method(:rgb) ],
-                        hex: [floatType, Color.method(:hex) ])
+      AdType.new(Color, rgb: [intType,   Color.method(:rgb), Qrb::IDENTITY ],
+                        hex: [floatType, Color.method(:hex), Qrb::IDENTITY ])
     }
 
     it{ should eq('Color') }

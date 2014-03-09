@@ -56,7 +56,8 @@ module Qrb
         raise ArgumentError, "Hash expected, got `#{contracts}`"
       end
       invalid = contracts.values.reject{|v|
-        v.is_a?(Array) and v.size == 2 and v.first.is_a?(Type) and v.last.respond_to?(:call)
+        v.is_a?(Array) and v.size == 3 and v[0].is_a?(Type) and \
+        v[1].respond_to?(:call) and v[2].respond_to?(:call)
       }
       unless invalid.empty?
         raise ArgumentError, "Invalid contracts `#{invalid}`"
@@ -86,20 +87,20 @@ module Qrb
 
       # Try each contract in turn. Do nothing on TypeError as
       # the next candidate could be the good one! Return the
-      # first successfully uped.
-      contracts.each_pair do |name, (infotype,upper)|
+      # first successfully dressed.
+      contracts.each_pair do |name, (infotype, dresser, _)|
 
         # First make the dress transformation on the information type
-        success, uped = handler.just_try do
+        success, dressed = handler.just_try do
           infotype.dress(value, handler)
         end
         next unless success
 
         # Seems nice, just try to get one stage higher now
-        success, uped = handler.just_try(StandardError) do
-          upper.call(uped)
+        success, dressed = handler.just_try(StandardError) do
+          dresser.call(dressed)
         end
-        return uped if success
+        return dressed if success
 
       end
 
