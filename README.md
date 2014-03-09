@@ -77,6 +77,9 @@ The `Rep` representation function mapping Q types to ruby classes is as
 follows:
 
 ```ruby
+# Any type is represented by Ruby's Object class
+Rep(.) = Object
+
 # Builtins are represented by the corresponding ruby class
 Rep(.Builtin) = Builtin
 

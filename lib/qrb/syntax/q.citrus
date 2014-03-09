@@ -108,6 +108,7 @@ grammar Qrb::Syntax::Parser
   rule term_type
       ad_type
     | builtin_type
+    | any_type
     | type_ref
   end
 
@@ -121,6 +122,13 @@ grammar Qrb::Syntax::Parser
   rule contract
     ('<' contract_name '>' spacing type (spacing ('\\' up:lambda_expr) spacing ('\\' down:lambda_expr))?)
     <Qrb::Syntax::Contract>
+  end
+
+  # any
+
+  rule any_type
+    '.'
+    <Qrb::Syntax::AnyType>
   end
 
   # builtin and refs

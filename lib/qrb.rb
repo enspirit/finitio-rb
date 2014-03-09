@@ -10,6 +10,7 @@ module Qrb
     :attribute,
     :heading,
     :constraints,
+    :any,
     :builtin,
     :adt,
     :subtype,

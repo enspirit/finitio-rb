@@ -97,6 +97,12 @@ module Qrb
 
     ########################################################## Type generators
 
+    def any(name = nil)
+      name = name(name)
+
+      AnyType.new(name)
+    end
+
     def builtin(ruby_type, name = nil)
       ruby_type = ruby_type(ruby_type)
       name      = name(name)
