@@ -78,7 +78,7 @@ extensions for instance), Qrb allows defining ADTs with external contracts.
 The following ADT definition:
 
 ```ruby
-Color = .Color <rgb> {r: Byte, g: Byte, b: Byte} RgbContract
+Color = .Color <rgb> {r: Byte, g: Byte, b: Byte} .RgbContract
 ```
 
 expected the following ruby module:
