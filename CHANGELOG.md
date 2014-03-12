@@ -1,3 +1,5 @@
+# 0.4.0 / FIX ME
+
 # 0.3.0 / 2014-03-09
 
 * Added AnyType abstraction, aka '.'
