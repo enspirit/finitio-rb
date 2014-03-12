@@ -29,20 +29,21 @@ module Qrb
 
     Citrus.load File.expand_path('../syntax/q.citrus', __FILE__)
 
-    def self.parse(*args, &bl)
-      Parser.parse(*args, &bl)
+    def self.parse(source, *args, &bl)
+      source = File.read(source) if source.respond_to?(:to_path)
+      Parser.parse(source, *args, &bl)
     end
 
     def self.ast(source)
-      Parser.parse(source, root: "system").to_ast
+      parse(source, root: "system").to_ast
     end
 
     def self.compile(source, system = Qrb::System.new)
-      Parser.parse(source, root: "system").compile(system)
+      parse(source, root: "system").compile(system)
     end
 
-    def self.compile_type(str)
-      Parser.parse(str.strip, root: "type").compile(TypeFactory.new)
+    def self.compile_type(source)
+      parse(source, root: "type").compile(TypeFactory.new)
     end
 
   end

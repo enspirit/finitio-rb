@@ -1,5 +1,8 @@
 # 0.4.0 / FIX ME
 
+* Qrb.parse now recognizes Path-like objects (responding to :to_path),
+  allowing to parse files directly (through Pathname, Path, etc.).
+
 # 0.3.0 / 2014-03-09
 
 * Added AnyType abstraction, aka '.'

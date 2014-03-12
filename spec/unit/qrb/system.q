@@ -1,0 +1,1 @@
+Posint = .Integer( i | i >= 0 )

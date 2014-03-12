@@ -3,7 +3,7 @@ module Qrb
   describe Syntax, '.compile' do
 
     let(:source){
-      <<-EOF
+      <<-EOF.strip
         {
           name: .String,
           color: { red: .Integer, green: .Integer, blue: .Integer },
