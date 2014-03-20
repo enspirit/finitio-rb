@@ -47,7 +47,7 @@ module Finitio
   end
 
   def system(identifier)
-    f = File.expand_path("../Finitio/#{identifier}.fio", __FILE__)
+    f = File.expand_path("../finitio/#{identifier}.fio", __FILE__)
     if File.exists?(f)
       parse(File.read(f))
     else
@@ -56,7 +56,7 @@ module Finitio
   end
 
   def definition_files(of)
-    dir = File.expand_path("../Finitio/#{of}", __FILE__)
+    dir = File.expand_path("../finitio/#{of}", __FILE__)
     Dir.glob("#{dir}/*.fio")
   end
 
