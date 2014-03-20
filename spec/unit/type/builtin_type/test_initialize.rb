@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe BuiltinType, "initialize" do
 
     let(:type){ BuiltinType.new(Integer) }

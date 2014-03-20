@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe TypeFactory, "Factory#set" do
 
     let(:factory){ TypeFactory.new }

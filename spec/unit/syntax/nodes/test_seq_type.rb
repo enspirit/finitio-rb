@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe Syntax, "seq_type" do
 
     subject{

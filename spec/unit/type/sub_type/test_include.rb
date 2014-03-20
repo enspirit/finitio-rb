@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe SubType, "include?" do
 
     let(:type){ SubType.new(intType, {default: ->(i){ i>0 }, small: ->(i){ i<255 }}, "byte") }

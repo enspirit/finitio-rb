@@ -1,9 +1,9 @@
 Before do
-  @system = Qrb::TEST_SYSTEM
+  @system = Finitio::TEST_SYSTEM
 end
 
 Given(/^the System is$/) do |source|
-  @system = Qrb::DEFAULT_SYSTEM.parse(source)
+  @system = Finitio::DEFAULT_SYSTEM.parse(source)
 end
 
 Given(/^the type under test is (.*?)$/) do |typename|
@@ -40,7 +40,7 @@ Then(/^it should be a success$/) do
 end
 
 Then(/^it should be a TypeError as:$/) do |table|
-  @result.should be_a(Qrb::TypeError)
+  @result.should be_a(Finitio::TypeError)
   expected = table.hashes.first
   expected.each_pair do |k,v|
     @result.send(k.to_sym).should eq(v)

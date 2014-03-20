@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe TupleType, "equality" do
 
     let(:h1){ Heading.new([Attribute.new(:r, intType), Attribute.new(:b, intType)]) }

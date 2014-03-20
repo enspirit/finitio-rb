@@ -1,5 +1,5 @@
 require 'rspec'
-module Qrb
+module Finitio
   describe System, "add_type" do
 
     let(:system){ System.new }
@@ -25,7 +25,7 @@ module Qrb
       it 'should raise an error' do
         ->{
           subject
-        }.should raise_error(ArgumentError, "Qrb::Type expected, got `foo`")
+        }.should raise_error(ArgumentError, "Finitio::Type expected, got `foo`")
       end
     end
 
@@ -39,7 +39,7 @@ module Qrb
       it 'should raise an error' do
         ->{
           subject
-        }.should raise_error(Qrb::Error, "Duplicate type name `intType`")
+        }.should raise_error(Finitio::Error, "Duplicate type name `intType`")
       end
     end
 

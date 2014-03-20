@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe Attribute, "equality" do
 
     let(:attr1){ Attribute.new(:red, intType) }

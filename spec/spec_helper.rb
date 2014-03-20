@@ -1,7 +1,7 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'path'
-require 'qrb'
-require 'qrb/syntax'
+require 'finitio'
+require 'finitio/syntax'
 
 require 'coveralls'
 Coveralls.wear!
@@ -45,27 +45,27 @@ end
 module SpecHelpers
 
   def intType
-    Qrb::BuiltinType.new(Integer, "intType")
+    Finitio::BuiltinType.new(Integer, "intType")
   end
 
   def floatType
-    Qrb::BuiltinType.new(Float, "floatType")
+    Finitio::BuiltinType.new(Float, "floatType")
   end
 
   def nilType
-    Qrb::BuiltinType.new(NilClass, "nilType")
+    Finitio::BuiltinType.new(NilClass, "nilType")
   end
 
   def byte
-    Qrb::SubType.new(intType, byte: ->(i){ i>=0 && i<=255 })
+    Finitio::SubType.new(intType, byte: ->(i){ i>=0 && i<=255 })
   end
 
   def type_factory
-    Qrb::TypeFactory.new
+    Finitio::TypeFactory.new
   end
 
   def system
-    Qrb::System.new
+    Finitio::System.new
   end
 
   def blueviolet

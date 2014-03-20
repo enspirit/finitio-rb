@@ -1,10 +1,10 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe AdType, 'initialize' do
 
     subject{
-      AdType.new(Color, rgb: [intType,   Color.method(:rgb), Qrb::IDENTITY ],
-                        hex: [floatType, Color.method(:hex), Qrb::IDENTITY ])
+      AdType.new(Color, rgb: [intType,   Color.method(:rgb), Finitio::IDENTITY ],
+                        hex: [floatType, Color.method(:hex), Finitio::IDENTITY ])
     }
 
     context 'with valid arguments' do

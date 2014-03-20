@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe SeqType, 'dress' do
 
     let(:type){ SeqType.new(byte) }

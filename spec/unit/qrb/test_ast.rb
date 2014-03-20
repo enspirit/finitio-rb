@@ -1,8 +1,8 @@
 require 'spec_helper'
-describe Qrb, "ast" do
+describe Finitio, "ast" do
 
   subject{
-    Qrb.ast <<-EOF
+    Finitio.ast <<-EOF
       Posint = .Fixnum( i | i>=0 )
       Point  = { x: Posint, y: Posint }
       {{ p: Point }}

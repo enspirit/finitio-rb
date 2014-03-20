@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe Syntax, "builtin_type" do
 
     subject{
@@ -21,23 +21,23 @@ module Qrb
       end
 
       context 'when a qualified class name' do
-        let(:source){ ".Qrb::Type" }
+        let(:source){ ".Finitio::Type" }
 
         it 'compiles to a BuiltinType' do
           compiled.should be_a(BuiltinType)
-          compiled.ruby_type.should be(::Qrb::Type)
+          compiled.ruby_type.should be(::Finitio::Type)
         end
       end
     end
 
     describe "AST" do
-      let(:source){ ".Qrb::Type" }
+      let(:source){ ".Finitio::Type" }
 
       let(:ast){
         subject.to_ast
       }
 
-      it{ ast.should eq([:builtin_type, "Qrb::Type"]) }
+      it{ ast.should eq([:builtin_type, "Finitio::Type"]) }
     end
 
   end

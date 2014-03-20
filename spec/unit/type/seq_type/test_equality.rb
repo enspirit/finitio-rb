@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe SeqType, "equality" do
 
     let(:type) { SeqType.new(intType)   }

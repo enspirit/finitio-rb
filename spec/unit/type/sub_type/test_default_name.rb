@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe SubType, "default_name" do
 
     let(:type){ SubType.new(intType, posint: ->(i){}) }

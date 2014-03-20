@@ -1,33 +1,34 @@
-[![Build Status](https://travis-ci.org/blambeau/qrb.png)](https://travis-ci.org/blambeau/qrb)
-[![Dependency Status](https://gemnasium.com/blambeau/qrb.png)](https://gemnasium.com/blambeau/qrb)
-[![Code Climate](https://codeclimate.com/github/blambeau/qrb.png)](https://codeclimate.com/github/blambeau/qrb)
-[![Coverage Status](https://coveralls.io/repos/blambeau/qrb/badge.png?branch=master)](https://coveralls.io/r/blambeau/qrb)
+[![Build Status](https://travis-ci.org/blambeau/finitio-rb.png)](https://travis-ci.org/blambeau/finitio-rb)
+[![Dependency Status](https://gemnasium.com/blambeau/finitio-rb.png)](https://gemnasium.com/blambeau/finitio-rb)
+[![Code Climate](https://codeclimate.com/github/blambeau/finitio-rb.png)](https://codeclimate.com/github/blambeau/finitio-rb)
+[![Coverage Status](https://coveralls.io/repos/blambeau/finitio-rb/badge.png?branch=master)](https://coveralls.io/r/blambeau/finitio-rb)
 
-# Qrb
+# Finitio(-rb)
 
-*Q* is a language for capturing information structure. Think "JSON/XML schema"
-but the correct way. For more information about *Q* itself, see [www.q-lang.io](http://www.q-lang.io)
+*Finitio* is a language for capturing information structure. Think "JSON/XML
+schema" but the right way. For more information about *Finitio* itself, see
+[www.finitio.io](http://www.finitio.io)
 
-Qrb is the ruby binding of *Q*. It allows defining Q schemas and validating
-and coercing data against them in an idiomatic ruby way.
+`finitio-rb` is the ruby binding of *Finitio*. It allows defining data schemas
+and validating and coercing data against them in an idiomatic ruby way.
 
 ## Example
 
 ```ruby
-require 'qrb'
+require 'finitio'
 require 'json'
 
-# Let load a Q schema
-schema = Qrb::DEFAULT_SYSTEM.parse <<-Q
+# Let load a schema
+schema = Finitio::DEFAULT_SYSTEM.parse <<-FIO
   {
     name: String( s | s.strip.size > 0 ),
     at: DateTime
   }
-Q
+FIO
 
 # Let load some JSON document
 data = JSON.parse <<-JSON
-  { "name": "Q", "at": "20142-03-01" }
+  { "name": "Finitio", "at": "20142-03-01" }
 JSON
 
 # And try dressing that data
@@ -36,10 +37,10 @@ puts schema.dress(data)
 
 ## ADTs with internal contracts
 
-Qrb tries to provide an idiomatic binding for ruby developers. In particular,
-it uses a simple convention-over-configuration protocol for information
-contracts. This protocol is easily described through an example. The following
-ADT definition:
+`finitio-rb` tries to provide an idiomatic binding for ruby developers. In
+particular, it uses a simple convention-over-configuration protocol for
+information contracts. This protocol is easily described through an example.
+The following ADT definition:
 
 ```ruby
 Color = .Color <rgb> {r: Byte, g: Byte, b: Byte}
@@ -74,8 +75,8 @@ end
 ## ADTs with external contracts
 
 When the scenario above is not possible or not wanted (would require core
-extensions for instance), Qrb allows defining ADTs with external contracts.
-The following ADT definition:
+extensions for instance), `finitio-rb` allows defining ADTs with external
+contracts. The following ADT definition:
 
 ```ruby
 Color = .Color <rgb> {r: Byte, g: Byte, b: Byte} .RgbContract
@@ -99,8 +100,8 @@ end
 
 ## About representations
 
-The `Rep` representation function mapping Q types to ruby classes is as
-follows:
+The `Rep` representation function mapping *Finitio* types to ruby classes is
+as follows:
 
 ```ruby
 # Any type is represented by Ruby's Object class
@@ -137,8 +138,8 @@ Rep(.Builtin <rep> ...) = Builtin
 
 ## About the default system
 
-See `lib/qrb/Q/default.q` for the precise definition of the default system.
-In summary,
+See `lib/finitio/Finitio/default.fio` for the precise definition of the default
+system. In summary,
 
 * Most ruby native (data) classes are already aliased to avoid explicit use of
   builtins. In particular, `Integer`, `String`, etc.

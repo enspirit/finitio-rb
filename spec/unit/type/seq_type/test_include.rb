@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe SeqType, "include?" do
 
     let(:type){ SeqType.new(intType) }

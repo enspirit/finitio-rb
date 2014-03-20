@@ -1,5 +1,5 @@
 require 'rspec'
-module Qrb
+module Finitio
   describe System, "fetch" do
 
     let(:system){ System.new }

@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe UnionType, "include?" do
 
     let(:type){ UnionType.new([intType, floatType]) }

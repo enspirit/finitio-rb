@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe Syntax, "contract" do
 
     subject{
@@ -57,8 +57,8 @@ module Qrb
         compiled.keys.should eq([:rgb])
         contract.should be_a(Array)
         contract[0].should be_a(TupleType)
-        contract[1].should be(Qrb::IDENTITY)
-        contract[2].should be(Qrb::IDENTITY)
+        contract[1].should be(Finitio::IDENTITY)
+        contract[2].should be(Finitio::IDENTITY)
       end
 
       it 'has expected AST' do

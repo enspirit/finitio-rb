@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe UnionType, "default_name" do
 
     subject{ type.default_name }

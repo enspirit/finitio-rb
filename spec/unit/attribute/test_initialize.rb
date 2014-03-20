@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe Attribute, "initialize" do
 
     subject{ Attribute.new(:red, intType) }

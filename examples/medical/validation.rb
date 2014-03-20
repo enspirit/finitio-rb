@@ -6,8 +6,8 @@ jsondata = JSON.parse(source)
 #ap jsondata
 
 begin
-  schema = Qrb.parse_schema(File.read('schema.q'))
+  schema = Finitio.parse_schema(File.read('schema.fio'))
   ap schema.dress(jsondata)
-rescue Qrb::TypeError => ex
+rescue Finitio::TypeError => ex
   puts "[%s] :: %s" % [ex.location, ex.message]
 end

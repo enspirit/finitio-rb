@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe SetType, 'default_name' do
 
     let(:type){

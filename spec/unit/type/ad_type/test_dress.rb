@@ -1,10 +1,10 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe AdType, 'dress' do
 
     let(:type){
-      AdType.new(Color, rgb: [intType,   ->(i){ i*2 }, Qrb::IDENTITY ],
-                        hex: [floatType, ->(f){ f*3 }, Qrb::IDENTITY ])
+      AdType.new(Color, rgb: [intType,   ->(i){ i*2 }, Finitio::IDENTITY ],
+                        hex: [floatType, ->(f){ f*3 }, Finitio::IDENTITY ])
     }
 
     subject{
@@ -41,7 +41,7 @@ module Qrb
 
     context 'when the upper raises an error' do
       let(:type){
-        AdType.new(Color, rgb: [ intType, ->(t){ raise ArgumentError }, Qrb::IDENTITY ])
+        AdType.new(Color, rgb: [ intType, ->(t){ raise ArgumentError }, Finitio::IDENTITY ])
       }
 
       it 'should hide the error' do

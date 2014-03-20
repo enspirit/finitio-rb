@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe AdType, "name" do
 
     subject{ type.name }

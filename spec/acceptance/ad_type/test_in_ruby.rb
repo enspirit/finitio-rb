@@ -1,10 +1,10 @@
 require 'spec_helper'
-module Qrb
-  describe "Using Q's abstract data types in Ruby" do
+module Finitio
+  describe "Using Finitio's abstract data types in Ruby" do
 
     let(:color) do
       Class.new{
-        extend Qrb::DataType
+        extend Finitio::DataType
 
         def initialize(r, g, b)
           @r, @g, @b = r, g, b

@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe SubType, "equality" do
 
     let(:c1){ ->(i){ i>0   } }

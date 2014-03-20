@@ -27,7 +27,7 @@ begin
   require 'rubygems/package_task'
 
   # Dynamically load the gem spec
-  gemspec_file = File.expand_path('../../qrb.gemspec', __FILE__)
+  gemspec_file = File.expand_path('../../finitio.gemspec', __FILE__)
   gemspec      = Kernel.eval(File.read(gemspec_file))
 
   Gem::PackageTask.new(gemspec) do |t|

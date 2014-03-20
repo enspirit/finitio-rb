@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe UnionType, "initialize" do
 
     context 'with valid candidates' do
@@ -16,7 +16,7 @@ module Qrb
       it 'should raise an error' do
         ->{
           union
-        }.should raise_error(ArgumentError, %Q{[Qrb::Type] expected, got ["bar"]})
+        }.should raise_error(ArgumentError, %Q{[Finitio::Type] expected, got ["bar"]})
       end
     end
 

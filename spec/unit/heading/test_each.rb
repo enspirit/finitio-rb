@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe Heading, "each" do
 
     let(:a){ Attribute.new(:a, intType) }

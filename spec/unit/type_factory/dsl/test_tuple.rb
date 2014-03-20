@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe TypeFactory, "DSL#tuple" do
 
     let(:factory){ TypeFactory.new }

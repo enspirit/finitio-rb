@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe SubType, "initialize" do
 
     let(:c1){ ->(i){ i>0 } }

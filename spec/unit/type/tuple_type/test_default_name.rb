@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe TupleType, "default_name" do
 
     let(:heading){

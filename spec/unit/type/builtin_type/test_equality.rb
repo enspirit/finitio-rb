@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe BuiltinType, "equality" do
 
     let(:intType) { BuiltinType.new(Integer) }

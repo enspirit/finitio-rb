@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe SetType, 'initialize' do
 
     subject{
@@ -20,7 +20,7 @@ module Qrb
       it 'should raise an error' do
         ->{
           subject
-        }.should raise_error(ArgumentError, 'Qrb::Type expected, got `foo`')
+        }.should raise_error(ArgumentError, 'Finitio::Type expected, got `foo`')
       end
     end
 

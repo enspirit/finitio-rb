@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe UnionType, "equality" do
 
     let(:uType)  { UnionType.new([intType, floatType]) }

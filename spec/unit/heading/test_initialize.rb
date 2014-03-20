@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe Heading, "initialize" do
 
     subject{ Heading.new(attributes) }

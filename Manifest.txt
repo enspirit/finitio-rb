@@ -4,7 +4,7 @@ Gemfile.lock
 lib/**/*
 LICENCE.md
 Manifest.txt
-qrb.gemspec
+finitio.gemspec
 Rakefile
 README.md
 spec/**/*

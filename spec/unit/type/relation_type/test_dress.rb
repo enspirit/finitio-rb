@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe RelationType, "dress" do
 
     let(:heading){

@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe Heading, "size" do
 
     let(:r){ Attribute.new(:red, intType) }

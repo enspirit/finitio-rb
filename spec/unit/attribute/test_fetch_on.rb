@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe Attribute, "fetch_on" do
 
     let(:attr){ Attribute.new(:red, intType) }

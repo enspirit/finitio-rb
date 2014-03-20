@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe TypeFactory, "DSL#attribute" do
 
     let(:factory){ TypeFactory.new }

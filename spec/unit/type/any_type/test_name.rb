@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe AnyType, "name" do
 
     subject{ type.name }

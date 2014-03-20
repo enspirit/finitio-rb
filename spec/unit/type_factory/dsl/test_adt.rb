@@ -1,12 +1,12 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe TypeFactory, "DSL#adt" do
 
     let(:factory){ TypeFactory.new }
 
     let(:contracts){
-      { rgb: [intType,   Color.method(:rgb), Qrb::IDENTITY ],
-        hex: [floatType, Color.method(:hex), Qrb::IDENTITY ]}
+      { rgb: [intType,   Color.method(:rgb), Finitio::IDENTITY ],
+        hex: [floatType, Color.method(:hex), Finitio::IDENTITY ]}
     }
 
     shared_examples_for "The <Color> type" do

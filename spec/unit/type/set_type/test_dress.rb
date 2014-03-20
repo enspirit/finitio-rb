@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe SetType, 'dress' do
 
     let(:type){ SetType.new(byte) }

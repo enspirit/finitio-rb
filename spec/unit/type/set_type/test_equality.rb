@@ -1,5 +1,5 @@
 require 'spec_helper'
-module Qrb
+module Finitio
   describe SetType, "equality" do
 
     let(:type) { SetType.new(intType)   }
