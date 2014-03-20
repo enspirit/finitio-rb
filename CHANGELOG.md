@@ -1,6 +1,7 @@
-# 0.4.0 / FIX ME
+# 0.4.0 / 2014-03-20
 
-* Qrb.parse now recognizes Path-like objects (responding to :to_path),
+* Finitio(-rb) is born from the sources of Q(rb) 0.3.0
+* Finitio.parse now recognizes Path-like objects (responding to :to_path),
   allowing to parse files directly (through Pathname, Path, etc.).
 
 # 0.3.0 / 2014-03-09
