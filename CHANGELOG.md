@@ -1,3 +1,8 @@
+# 0.4.1 / 2014-03-20
+
+* Fixed access to the default system that lead to 'Unknown system
+  Finitio/default (Finitio::Error)'
+
 # 0.4.0 / 2014-03-20
 
 * Finitio(-rb) is born from the sources of Q(rb) 0.3.0
