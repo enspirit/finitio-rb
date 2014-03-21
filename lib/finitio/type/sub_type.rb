@@ -90,5 +90,5 @@ module Finitio
         name.to_s.capitalize == self.name
     end
 
-  end # class BuiltinType
+  end # class SubType
 end # module Finitio
