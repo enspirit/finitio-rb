@@ -10,12 +10,6 @@ module Finitio
     end
     attr_accessor :main
 
-    DSL_METHODS.each do |dsl_method|
-      define_method(dsl_method){|*args, &bl|
-        factory.public_send(dsl_method, *args, &bl)
-      }
-    end
-
     def add_type(type)
       unless type.is_a?(Type)
         raise ArgumentError, "Finitio::Type expected, got `#{type}`"
@@ -39,6 +33,12 @@ module Finitio
 
     def factory
       @factory ||= TypeFactory.new
+    end
+
+    TypeFactory::DSL_METHODS.each do |dsl_method|
+      define_method(dsl_method){|*args, &bl|
+        factory.public_send(dsl_method, *args, &bl)
+      }
     end
 
     def dress(*args, &bl)

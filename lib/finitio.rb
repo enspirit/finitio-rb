@@ -3,37 +3,13 @@ require 'time'
 
 module Finitio
 
-  DSL_METHODS = [
-    :attribute,
-    :heading,
-    :constraints,
-    :any,
-    :builtin,
-    :adt,
-    :subtype,
-    :union,
-    :seq,
-    :set,
-    :tuple,
-    :relation,
-    :type
-  ]
-
   require_relative "finitio/version"
   require_relative "finitio/errors"
   require_relative "finitio/support"
   require_relative 'finitio/type'
   require_relative 'finitio/system'
 
-  DEFAULT_FACTORY = TypeFactory.new
-
   IDENTITY = ->(object){ object }
-
-  DSL_METHODS.each do |meth|
-    define_method(meth) do |*args, &bl|
-      DEFAULT_FACTORY.public_send(meth, *args, &bl)
-    end
-  end
 
   def parse(source)
     require "finitio/syntax"

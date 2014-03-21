@@ -1,6 +1,22 @@
 module Finitio
   class TypeFactory
 
+    DSL_METHODS = [
+      :attribute,
+      :heading,
+      :constraints,
+      :any,
+      :builtin,
+      :adt,
+      :subtype,
+      :union,
+      :seq,
+      :set,
+      :tuple,
+      :relation,
+      :type
+    ]
+
     ################################################################## Factory
 
     def type(type, name = nil, &bl)
