@@ -38,12 +38,15 @@ module Finitio
       parse(source, root: "system").to_ast
     end
 
-    def self.compile(source, system = Finitio::System.new)
-      parse(source, root: "system").compile(system)
+    def self.compile(source, cpl = nil)
+      cpl = Compilation.coerce(cpl)
+      parse(source, root: "system").compile(cpl)
+      cpl.system
     end
 
-    def self.compile_type(source)
-      parse(source, root: "type").compile(TypeFactory.new)
+    def self.compile_type(source, cpl = nil)
+      cpl = Compilation.coerce(cpl)
+      parse(source, root: "type").compile(cpl)
     end
 
   end

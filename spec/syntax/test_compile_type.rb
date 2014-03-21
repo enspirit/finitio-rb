@@ -1,6 +1,6 @@
 require 'spec_helper'
 module Finitio
-  describe Syntax, '.compile' do
+  describe Syntax, '.compile_type' do
 
     let(:source){
       <<-EOF.strip
