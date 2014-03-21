@@ -1,3 +1,29 @@
+# 0.5.0 / HEAD
+
+* Major enhancements
+
+  * Types no longer have to declared before being used. In order words, the
+    following will work fine even if Bigint references Posint that is declared
+    afterwards:
+
+        ```
+        Bigint = Posint( i | i >= 255 )
+        Posint = Integer( i | i >= 0 )
+        { length: Bigint }
+        ```
+
+  * Added support for recursive types, e.g.
+
+        ```
+        Tree = { label: String, children: [Tree] }
+        ```
+
+* Breaking chnages on undocumented APIs
+
+  * Removed factory methods from the Finitio module itself. Use a System
+    instance instead.
+  * Removed Finitio::DataType
+
 # 0.4.1 / 2014-03-20
 
 * Fixed access to the default system that lead to 'Unknown system
