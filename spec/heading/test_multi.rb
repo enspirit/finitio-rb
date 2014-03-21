@@ -1,31 +1,23 @@
 require 'spec_helper'
 module Finitio
-  describe Heading, "to_name" do
+  describe Heading, "multi?" do
 
-    subject{ Heading.new(attributes).to_name }
+    subject{ Heading.new(attributes).multi? }
 
     context 'with no attribute' do
       let(:attributes){
         [ ]
       }
 
-      it{ should eq('') }
+      it{ should be_false }
     end
 
-    context 'with one attribute' do
-      let(:attributes){
-        [ Attribute.new(:red, intType) ]
-      }
-
-      it{ should eq('red: intType') }
-    end
-
-    context 'with multiple attributes' do
+    context 'with required attributes' do
       let(:attributes){
         [ Attribute.new(:red, intType), Attribute.new(:blue, floatType) ]
       }
 
-      it{ should eq('red: intType, blue: floatType') }
+      it{ should be_false }
     end
 
     context 'with some optional attributes' do
@@ -33,7 +25,7 @@ module Finitio
         [ Attribute.new(:red, intType), Attribute.new(:blue, floatType, false) ]
       }
 
-      it{ should eq('red: intType, blue :? floatType') }
+      it{ should be_true }
     end
 
   end

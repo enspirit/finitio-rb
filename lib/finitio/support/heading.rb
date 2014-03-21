@@ -32,6 +32,10 @@ module Finitio
       size == 0
     end
 
+    def multi?
+      any?{|attr| not(attr.required?) }
+    end
+
     def each(&bl)
       return to_enum unless bl
       @attributes.values.each(&bl)
