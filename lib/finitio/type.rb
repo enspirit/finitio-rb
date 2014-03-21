@@ -58,6 +58,7 @@ module Finitio
   end # class Type
 end # module Finitio
 require_relative 'type/collection_type'
+require_relative 'type/proxy_type'
 require_relative 'type/any_type'
 require_relative 'type/builtin_type'
 require_relative 'type/union_type'

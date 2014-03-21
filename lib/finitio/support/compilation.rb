@@ -4,8 +4,9 @@ module Finitio
     def initialize(system = System.new, factory = TypeFactory.new)
       @system  = system
       @factory = factory
+      @proxies = []
     end
-    attr_reader :system, :factory
+    attr_reader :system, :factory, :proxies
 
     def self.coerce(arg)
       case arg
@@ -17,12 +18,25 @@ module Finitio
       end
     end
 
+    def resolve_proxies!
+      proxies.each do |p|
+        p.resolve(system)
+      end
+      self
+    end
+
     # Delegation to Factory
 
     TypeFactory::DSL_METHODS.each do |dsl_method|
       define_method(dsl_method){|*args, &bl|
         factory.public_send(dsl_method, *args, &bl)
       }
+    end
+
+    def proxy(*args, &bl)
+      proxy = factory.proxy(*args, &bl)
+      proxies << proxy
+      proxy
     end
 
     # Delegation to System

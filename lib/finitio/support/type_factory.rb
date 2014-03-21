@@ -14,7 +14,8 @@ module Finitio
       :set,
       :tuple,
       :relation,
-      :type
+      :type,
+      :proxy
     ]
 
     ################################################################## Factory
@@ -188,6 +189,10 @@ module Finitio
       name    = name(name)
 
       RelationType.new(heading, name)
+    end
+
+    def proxy(target_name)
+      ProxyType.new(target_name)
     end
 
   private

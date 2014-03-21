@@ -41,7 +41,7 @@ module Finitio
     def self.compile(source, cpl = nil)
       cpl = Compilation.coerce(cpl)
       parse(source, root: "system").compile(cpl)
-      cpl.system
+      cpl.resolve_proxies!.system
     end
 
     def self.compile_type(source, cpl = nil)

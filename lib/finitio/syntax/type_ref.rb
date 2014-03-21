@@ -4,7 +4,7 @@ module Finitio
 
       def compile(factory)
         factory.fetch(type_name.to_s) do |n|
-          raise Error, "Unknown type `#{n}`"
+          factory.proxy(n)
         end
       end
 
