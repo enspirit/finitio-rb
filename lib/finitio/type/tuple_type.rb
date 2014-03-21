@@ -86,8 +86,7 @@ module Finitio
     end
 
     def ==(other)
-      return false unless other.is_a?(TupleType)
-      heading == other.heading
+      super || (other.is_a?(TupleType) && heading == other.heading)
     end
     alias :eql? :==
 

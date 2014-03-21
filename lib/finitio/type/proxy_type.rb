@@ -1,13 +1,13 @@
 module Finitio
   class ProxyType < Type
 
-    def initialize(target_name)
+    def initialize(target_name, target = nil)
       unless target_name.is_a?(String)
         raise ArgumentError, "String expected for type name, got `#{target_name}`"
       end
 
       @target_name = target_name
-      @target = nil
+      @target = target
     end
     attr_reader :target_name, :target
 

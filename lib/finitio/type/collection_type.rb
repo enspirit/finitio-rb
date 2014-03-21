@@ -12,8 +12,7 @@ module Finitio
     attr_reader :elm_type
 
     def ==(other)
-      return false unless other.is_a?(self.class)
-      elm_type == other.elm_type
+      super || (other.is_a?(self.class) && elm_type == other.elm_type)
     end
     alias :eql? :==
 

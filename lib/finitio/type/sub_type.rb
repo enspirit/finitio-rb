@@ -73,9 +73,10 @@ module Finitio
     end
 
     def ==(other)
-      return false unless other.is_a?(SubType)
-      other.super_type == super_type and \
-      set_equal?(constraints.values, other.constraints.values)
+      super || (
+        other.is_a?(SubType) && (other.super_type == super_type) &&
+        set_equal?(constraints.values, other.constraints.values)
+      )
     end
     alias :eql? :==
 

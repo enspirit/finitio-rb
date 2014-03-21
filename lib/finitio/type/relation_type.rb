@@ -62,8 +62,7 @@ module Finitio
     end
 
     def ==(other)
-      return false unless other.is_a?(RelationType)
-      heading == other.heading
+      super || (other.is_a?(RelationType) && heading == other.heading)
     end
     alias :eql? :==
 

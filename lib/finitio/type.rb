@@ -45,6 +45,10 @@ module Finitio
       name.to_s
     end
 
+    def ==(other)
+      super || (other.is_a?(ProxyType) && other == self)
+    end
+
   protected
 
     def set_equal?(s1, s2)

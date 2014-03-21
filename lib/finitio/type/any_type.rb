@@ -35,7 +35,7 @@ module Finitio
     end
 
     def ==(other)
-      other.is_a?(AnyType)
+      super || other.is_a?(AnyType)
     end
     alias :eql? :==
 

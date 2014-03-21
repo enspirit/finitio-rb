@@ -65,8 +65,9 @@ module Finitio
     end
 
     def ==(other)
-      return false unless other.is_a?(UnionType)
-      set_equal?(candidates, other.candidates)
+      super || (
+        other.is_a?(UnionType) && set_equal?(candidates, other.candidates)
+      )
     end
     alias :eql? :==
 

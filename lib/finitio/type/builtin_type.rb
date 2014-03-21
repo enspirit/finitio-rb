@@ -43,8 +43,7 @@ module Finitio
     end
 
     def ==(other)
-      return false unless other.is_a?(BuiltinType)
-      other.ruby_type==ruby_type
+      super || (other.is_a?(BuiltinType) && other.ruby_type==ruby_type)
     end
     alias :eql? :==
 
