@@ -11,6 +11,10 @@ module Finitio
       @name = name
     end
 
+    def default_name
+      raise NotImplementedError, "Missing #{self.class.name}#default_name"
+    end
+
     def name
       @name || default_name
     end
@@ -18,10 +22,6 @@ module Finitio
     def name=(n)
       raise Error, "Name already set to `#{@name}`" unless @name.nil?
       @name = n
-    end
-
-    def to_s
-      name.to_s
     end
 
     # Check if `value` belongs to this type. Returns true if it's the case,
@@ -39,6 +39,10 @@ module Finitio
 
     def dress(*args)
       raise NotImplementedError, "Missing #{self.class.name}#dress"
+    end
+
+    def to_s
+      name.to_s
     end
 
   protected
