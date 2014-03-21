@@ -6,8 +6,18 @@ Given(/^the System is$/) do |source|
   @system = Finitio::DEFAULT_SYSTEM.parse(source)
 end
 
+Given(/^the System source is$/) do |src|
+  @system_source = src
+end
+
 Given(/^the type under test is (.*?)$/) do |typename|
   @type_under_test = @system[typename]
+end
+
+### compiling
+
+Then(/^it should compile fine$/) do
+  @system = Finitio::DEFAULT_SYSTEM.parse(@system_source)
 end
 
 ### dressing
