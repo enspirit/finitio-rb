@@ -23,7 +23,6 @@ module Finitio
   require_relative "finitio/errors"
   require_relative "finitio/support"
   require_relative 'finitio/type'
-  require_relative 'finitio/data_type'
   require_relative 'finitio/system'
 
   DEFAULT_FACTORY = TypeFactory.new
