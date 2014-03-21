@@ -62,6 +62,8 @@ module Finitio
   end # class Type
 end # module Finitio
 require_relative 'type/collection_type'
+require_relative 'type/heading_based_type'
+require_relative 'type/hash_based_type'
 require_relative 'type/proxy_type'
 require_relative 'type/any_type'
 require_relative 'type/builtin_type'
@@ -70,5 +72,6 @@ require_relative 'type/sub_type'
 require_relative 'type/seq_type'
 require_relative 'type/set_type'
 require_relative 'type/tuple_type'
+require_relative 'type/multi_tuple_type'
 require_relative 'type/relation_type'
 require_relative 'type/ad_type'

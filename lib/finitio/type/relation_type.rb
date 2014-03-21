@@ -22,16 +22,14 @@ module Finitio
   #     dress :: Object -> Set[Hash[...]]  throws TypeError
   #
   class RelationType < Type
+    include HeadingBasedType
 
     def initialize(heading, name = nil)
-      unless heading.is_a?(Heading)
-        raise ArgumentError, "Heading expected, got `#{heading}`"
+      super
+      if heading.multi?
+        raise ArgumentError, "Multi heading forbidden"
       end
-
-      super(name)
-      @heading = heading
     end
-    attr_reader :heading
 
     def default_name
       "{{#{heading.to_name}}}"
@@ -59,15 +57,6 @@ module Finitio
 
       # Return built tuples
       set
-    end
-
-    def ==(other)
-      super || (other.is_a?(RelationType) && heading == other.heading)
-    end
-    alias :eql? :==
-
-    def hash
-      self.class.hash ^ heading.hash
     end
 
   private
