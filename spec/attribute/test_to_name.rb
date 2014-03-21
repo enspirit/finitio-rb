@@ -2,9 +2,19 @@ require 'spec_helper'
 module Finitio
   describe Attribute, "to_name" do
 
-    subject{ Attribute.new(:red, intType).to_name }
+    subject{ attr.to_name }
 
-    it{ should eq("red: intType") }
+    context 'when required' do
+      let(:attr){ Attribute.new(:red, intType) }
+
+      it{ should eq("red: intType") }
+    end
+
+    context 'when not required' do
+      let(:attr){ Attribute.new(:red, intType, false) }
+
+      it{ should eq("red :? intType") }
+    end
 
   end
 end

@@ -7,7 +7,7 @@ module Finitio
   #
   class Attribute
 
-    def initialize(name, type)
+    def initialize(name, type, required = true)
       unless name.is_a?(Symbol)
         raise ArgumentError, "Symbol expected for attribute name, got `#{name}`"
       end
@@ -16,9 +16,10 @@ module Finitio
         raise ArgumentError, "Type expected for attribute domain, got `#{type}`"
       end
 
-      @name, @type = name, type
+      @name, @type, @required = name, type, required
     end
-    attr_reader :name, :type
+    attr_reader :name, :type, :required
+    alias :required? :required
 
     # Fetch the attribute on `arg`, which is expected to be a Hash object.
     #
@@ -36,17 +37,17 @@ module Finitio
     end
 
     def to_name
-      "#{name}: #{type}"
+      required ? "#{name}: #{type}" : "#{name} :? #{type}"
     end
 
     def ==(other)
-      return nil unless other.is_a?(Attribute)
-      name==other.name and type==other.type
+      other.is_a?(Attribute) && name==other.name && \
+      type==other.type && required==other.required
     end
     alias :eql? :==
 
     def hash
-      name.hash ^ type.hash
+      name.hash ^ type.hash ^ required.hash
     end
 
   end # class Attribute
