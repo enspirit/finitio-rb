@@ -18,7 +18,7 @@
         Tree = { label: String, children: [Tree] }
         ```
 
-* Breaking chnages on undocumented APIs
+* Breaking changes on undocumented APIs
 
   * Removed factory methods from the Finitio module itself. Use a System
     instance instead.
