@@ -14,11 +14,24 @@ module Finitio
       context 'a: .Integer' do
         let(:input){ 'a: .Integer' }
 
-        it 'compiles to an Attribute' do
+        it 'compiles to an mandatory Attribute' do
           compiled.should be_a(Attribute)
           compiled.name.should eq(:a)
           compiled.type.should be_a(BuiltinType)
           compiled.type.ruby_type.should be(Integer)
+          compiled.should be_required
+        end
+      end
+
+      context 'a :? .Integer' do
+        let(:input){ 'a :? .Integer' }
+
+        it 'compiles to an optional Attribute' do
+          compiled.should be_a(Attribute)
+          compiled.name.should eq(:a)
+          compiled.type.should be_a(BuiltinType)
+          compiled.type.ruby_type.should be(Integer)
+          compiled.should_not be_required
         end
       end
     end
@@ -28,9 +41,17 @@ module Finitio
         subject.to_ast
       }
 
-      let(:input){ 'a: .Integer' }
+      context 'a: .Integer' do
+        let(:input){ 'a: .Integer' }
 
-      it{ ast.should eq([:attribute, "a", [:builtin_type, "Integer"]]) }
+        it{ ast.should eq([:attribute, "a", [:builtin_type, "Integer"]]) }
+      end
+
+      context 'a :? .Integer' do
+        let(:input){ 'a :? .Integer' }
+
+        it{ ast.should eq([:attribute, "a", [:builtin_type, "Integer"], false]) }
+      end
     end
     
 

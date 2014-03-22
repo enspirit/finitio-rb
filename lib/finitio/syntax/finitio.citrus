@@ -81,7 +81,7 @@ grammar Finitio::Syntax::Parser
   end
 
   rule attribute
-    (attribute_name spacing ':' spacing type)
+    (attribute_name spacing multiplicity:(':?' | ':') spacing type)
     <Finitio::Syntax::Attribute>
   end
 

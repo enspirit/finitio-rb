@@ -2,8 +2,12 @@ module Finitio
   module Syntax
     module Heading
 
+      def multi?
+        captures[:attribute].any?{|a| a.optional? }
+      end
+
       def attributes(factory)
-        captures[:attribute].map{|x| x.compile(factory) }
+        captures[:attribute].map{|a| a.compile(factory) }
       end
 
       def compile(factory)

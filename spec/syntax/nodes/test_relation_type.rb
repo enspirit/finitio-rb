@@ -37,22 +37,47 @@ module Finitio
           compiled.heading.size.should eq(2)
         end
       end
+
+      context '{{a: .Integer, b :? .Float}}' do
+        let(:input){ '{{a: .Integer, b :? .Float}}' }
+
+        it 'compiles to a MultiRelationType' do
+          compiled.should be_a(MultiRelationType)
+          compiled.heading.size.should eq(2)
+        end
+      end
     end
 
     describe "AST" do
-      let(:input){ '{{a: .Integer}}' }
-
       let(:ast){ subject.to_ast }
 
-      it{
-        ast.should eq([
-          :relation_type,
-          [
-            :heading,
-            [ :attribute, "a", [:builtin_type, "Integer" ]]
-          ]
-        ])
-      }
+      context '{{a: .Integer}}' do
+        let(:input){ '{{a: .Integer}}' }
+
+        it{
+          ast.should eq([
+            :relation_type,
+            [
+              :heading,
+              [ :attribute, "a", [:builtin_type, "Integer" ]]
+            ]
+          ])
+        }
+      end
+
+      context '{{a :? .Integer}}' do
+        let(:input){ '{{a :? .Integer}}' }
+
+        it{
+          ast.should eq([
+            :multi_relation_type,
+            [
+              :heading,
+              [ :attribute, "a", [:builtin_type, "Integer" ], false]
+            ]
+          ])
+        }
+      end
     end
 
   end

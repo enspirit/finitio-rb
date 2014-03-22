@@ -56,7 +56,7 @@ heading:
   [ attribute+ ]
 
 attribute:
-  [ attribute_name, type ]
+  [ attribute_name, type, Boolean ]
 
 ### constraints
 

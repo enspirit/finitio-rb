@@ -2,12 +2,22 @@ module Finitio
   module Syntax
     module RelationType
 
+      def heading
+        captures[:heading].first
+      end
+
       def compile(factory)
-        factory.relation(heading.compile(factory))
+        factory.send(kind, heading.compile(factory))
       end
 
       def to_ast
-        [:relation_type, heading.to_ast]
+        [ :"#{kind}_type", heading.to_ast ]
+      end
+
+    private
+
+      def kind
+        heading.multi? ? :multi_relation : :relation
       end
 
     end # module RelationType
