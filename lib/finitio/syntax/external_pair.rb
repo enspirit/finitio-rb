@@ -1,7 +1,10 @@
 module Finitio
   module Syntax
     module ExternalPair
+      extend AstNode
       include Support
+
+      capture :builtin_type_name
 
       def compile(factory)
         clazz = resolve_ruby_const(builtin_type_name.to_s)

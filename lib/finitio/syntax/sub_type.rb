@@ -1,6 +1,9 @@
 module Finitio
   module Syntax
     module SubType
+      extend AstNode
+
+      capture :rel_type, :constraint_def
 
       def compile(factory)
         s = rel_type.compile(factory)

@@ -1,6 +1,9 @@
 module Finitio
   module Syntax
     module UnnamedConstraint
+      extend AstNode
+
+      capture :expression
 
       def compile(var_name)
         { predicate: expression.compile(var_name) }

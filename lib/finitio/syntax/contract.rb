@@ -1,6 +1,10 @@
 module Finitio
   module Syntax
     module Contract
+      extend AstNode
+
+      capture :type, :pair
+      capture_str :contract_name
 
       def compile(factory, clazz)
         contract = [ type.compile(factory) ] + compile_pair(factory, clazz)
@@ -25,7 +29,7 @@ module Finitio
       def to_ast
         ast = [
           :contract,
-          contract_name.to_s,
+          contract_name,
           (type && type.to_ast) 
         ]
         ast << pair.to_ast if pair

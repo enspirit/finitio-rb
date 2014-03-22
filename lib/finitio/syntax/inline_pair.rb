@@ -1,7 +1,10 @@
 module Finitio
   module Syntax
     module InlinePair
+      extend AstNode
       include Support
+
+      capture :dress, :undress
 
       def compile(factory)
         [ dress.compile(factory), undress.compile(factory) ]

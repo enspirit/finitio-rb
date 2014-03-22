@@ -1,6 +1,9 @@
 module Finitio
   module Syntax
     module LambdaExpr
+      extend AstNode
+
+      capture :var_name, :expression
 
       def compile(factory)
         expression.compile(var_name)

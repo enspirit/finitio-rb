@@ -1,7 +1,10 @@
 module Finitio
   module Syntax
     module AdType
+      extend AstNode
       include Support
+
+      capture :builtin_type_name
 
       def compile(factory)
         name  = builtin_type_name

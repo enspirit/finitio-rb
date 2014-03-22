@@ -43,6 +43,10 @@
     instance instead.
   * Removed Finitio::DataType
 
+* Other changes
+
+  * Make Finitio compatible with both Citrus 2.4.x and Citrus 3.x
+
 # 0.4.1 / 2014-03-20
 
 * Fixed access to the default system that lead to 'Unknown system

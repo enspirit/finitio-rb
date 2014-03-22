@@ -1,10 +1,9 @@
 module Finitio
   module Syntax
     module RelationType
+      extend AstNode
 
-      def heading
-        captures[:heading].first
-      end
+      capture :heading
 
       def compile(factory)
         factory.send(kind, heading.compile(factory))

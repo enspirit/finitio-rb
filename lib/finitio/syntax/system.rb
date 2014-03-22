@@ -1,6 +1,9 @@
 module Finitio
   module Syntax
     module System
+      extend AstNode
+
+      capture :definitions, :type
 
       def compile(system)
         definitions.compile(system)

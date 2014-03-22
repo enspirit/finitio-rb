@@ -1,10 +1,10 @@
 module Finitio
   module Syntax
     module Attribute
+      extend AstNode
 
-      def multiplicity
-        captures[:multiplicity].first
-      end
+      capture :type, :multiplicity
+      capture_str :attribute_name
 
       def optional?
         multiplicity == ':?'
@@ -19,7 +19,7 @@ module Finitio
       end
 
       def to_ast
-        ast = [:attribute, attribute_name.to_s, type.to_ast]
+        ast = [:attribute, attribute_name, type.to_ast]
         ast << false unless required?
         ast
       end

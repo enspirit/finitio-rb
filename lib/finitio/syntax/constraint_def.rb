@@ -1,6 +1,9 @@
 module Finitio
   module Syntax
     module ConstraintDef
+      extend AstNode
+
+      capture :var_name, :constraints
 
       def compile(factory)
         constraints.compile(var_name.to_s)

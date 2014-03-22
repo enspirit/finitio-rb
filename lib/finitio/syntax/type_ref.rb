@@ -1,6 +1,9 @@
 module Finitio
   module Syntax
     module TypeRef
+      extend AstNode
+
+      capture :type_name
 
       def compile(factory)
         factory.fetch(type_name.to_s) do |n|

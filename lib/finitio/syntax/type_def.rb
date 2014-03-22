@@ -1,6 +1,9 @@
 module Finitio
   module Syntax
     module TypeDef
+      extend AstNode
+
+      capture :type_name, :type
 
       def compile(system)
         t = type.compile(system)

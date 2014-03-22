@@ -1,6 +1,10 @@
 module Finitio
   module Syntax
     module NamedConstraint
+      extend AstNode
+
+      capture :expression
+      capture_str :constraint_name
 
       def compile(var_name)
         { constraint_name.to_sym => expression.compile(var_name) }
@@ -8,8 +12,8 @@ module Finitio
 
       def to_ast(var_name)
         [ :constraint,
-          constraint_name.to_s,
-          [:fn, [:parameters, var_name], [:source, expression.to_s.strip]] ]
+          constraint_name,
+          [:fn, [:parameters, var_name], [:source, expression.to_str.strip]] ]
       end
 
     end # module NamedConstraint

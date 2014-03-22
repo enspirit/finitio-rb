@@ -1,6 +1,9 @@
 module Finitio
   module Syntax
     module SetType
+      extend AstNode
+
+      capture :type
 
       def compile(factory)
         elm_type = type.compile(factory)

@@ -3,7 +3,7 @@ module Finitio
     module Expression
 
       def compile(var_name)
-        expr = "->(#{var_name}){ #{self} }"
+        expr = "->(#{var_name}){ #{to_str} }"
         ::Kernel.eval(expr)
       end
 
