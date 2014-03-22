@@ -13,7 +13,9 @@ module Finitio
       :seq,
       :set,
       :tuple,
+      :multi_tuple,
       :relation,
+      :multi_relation,
       :type,
       :proxy
     ]
@@ -73,8 +75,8 @@ module Finitio
       constrs
     end
 
-    def attribute(name, type)
-      Attribute.new(name, type(type))
+    def attribute(name, type, required = true)
+      Attribute.new(name, type(type), required)
     end
 
     def attributes(attributes)
@@ -184,11 +186,25 @@ module Finitio
       TupleType.new(heading, name)
     end
 
+    def multi_tuple(heading, name = nil)
+      heading = heading(heading)
+      name    = name(name)
+
+      MultiTupleType.new(heading, name)
+    end
+
     def relation(heading, name = nil)
       heading = heading(heading)
       name    = name(name)
 
       RelationType.new(heading, name)
+    end
+
+    def multi_relation(heading, name = nil)
+      heading = heading(heading)
+      name    = name(name)
+
+      MultiRelationType.new(heading, name)
     end
 
     def proxy(target_name)

@@ -23,6 +23,8 @@ module Finitio
       }
 
       it_should_behave_like "The a:Integer attribute"
+
+      it{ should be_required }
     end
 
     context 'when used with a type' do
@@ -31,6 +33,18 @@ module Finitio
       }
 
       it_should_behave_like "The a:Integer attribute"
+
+      it{ should be_required }
+    end
+
+    context 'when used for an optional attribute' do
+      subject{
+        factory.attribute(:a, intType, false)
+      }
+
+      it_should_behave_like "The a:Integer attribute"
+
+      it{ should_not be_required }
     end
 
   end
