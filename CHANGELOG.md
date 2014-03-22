@@ -12,10 +12,29 @@
         { length: Bigint }
         ```
 
-  * Added support for recursive types, e.g.
+  * Added support for recursive types, e.g.,
 
         ```
         Tree = { label: String, children: [Tree] }
+        ```
+
+  * Added support for MultiTuple and MultiRelation types, aka "optional
+    vs. required attributes". In the following system, `Person` is a multi
+    tuple while `Persons` is a multi relation; the date of birth is optional
+    in both cases:
+
+        ```
+        Person  =  { name : String, dob :? Date }
+        Persons = {{ name : String, dob :? Date }}
+        ```
+
+  * Added basic support for namespacing, through dots being now allowed in
+    type names. More namespacing support will be added later.
+
+
+        ```
+        This.Is.A.NameSpaced.Type = .Integer( i | i >= 0 )
+        { length: This.Is.A.NameSpaced.Type }
         ```
 
 * Breaking changes on undocumented APIs
