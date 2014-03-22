@@ -1,16 +1,17 @@
 module Finitio
   #
-  # The Relation type generator allows capturing sets of information facts,
-  # i.e. sets of tuples (of same heading). E.g.
+  # The MultiRelation type generator allows capturing sets of information
+  # facts, but allowing optional attributes. E. g.,
   #
-  #     ColoredPoints = {{ point: Point, color: Color }}
+  #     ColoredPoints = {{ point: Point, color :? Color }}
   #
-  # This class allows capturing relation types, in a way similar to TupleType:
+  # This class allows capturing those types, in a way similar to
+  # MultiTupleType:
   #
-  #     ColoredPoints = RelationType.new( Heading[...] )
+  #     ColoredPoints = MultiRelationType.new( Heading[...] )
   #
   # A ruby Set is used as concrete representation, and will contain hashes
-  # that are valid representations of the associated tuple type:
+  # that are valid representations of the associated multi tuple type:
   #
   #     R(ColoredPoints) = Set[ R({...}) ] = Set[Hash[...]]
   #
@@ -21,20 +22,13 @@ module Finitio
   #     dress :: Alpha  -> ColoredPoints   throws TypeError
   #     dress :: Object -> Set[Hash[...]]  throws TypeError
   #
-  class RelationType < Type
+  class MultiRelationType < Type
     include HeadingBasedType
     include RelBasedType
-
-    def initialize(heading, name = nil)
-      super
-      if heading.multi?
-        raise ArgumentError, "Multi heading forbidden"
-      end
-    end
 
     def default_name
       "{{#{heading.to_name}}}"
     end
 
-  end # class RelationType
+  end # class MultiRelationType
 end # module Finitio
