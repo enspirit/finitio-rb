@@ -192,7 +192,7 @@ grammar Finitio::Syntax::Parser
   end
 
   rule type_name
-    /[A-Z][a-zA-Z]+/
+    /[A-Z][a-zA-Z]+(\.[A-Z][a-zA-Z]+)*/
   end
 
   rule builtin_type_name
