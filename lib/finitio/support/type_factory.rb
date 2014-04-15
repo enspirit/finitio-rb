@@ -12,6 +12,7 @@ module Finitio
       :union,
       :seq,
       :set,
+      :struct,
       :tuple,
       :multi_tuple,
       :relation,
@@ -32,8 +33,14 @@ module Finitio
       when Hash
         tuple(type, name)
       when Array
-        fail!("Array of arity 1 expected, got `#{type}`") unless type.size==1
-        seq(type.first, name)
+        case type.size
+        when 0
+          fail!("Array of arity > 0 expected, got `#{type}`")
+        when 1
+          seq(type.first, name)
+        else
+          struct(type, name)
+        end
       when Set
         fail!("Set of arity 1 expected, got `#{type}`") unless type.size==1
         sub = type(type.first)
@@ -175,6 +182,13 @@ module Finitio
       name     = name(name)
 
       SetType.new(elm_type, name)
+    end
+
+    def struct(component_types, name = nil)
+      component_types = component_types.map{|t| type(t) }
+      name            = name(name)
+
+      StructType.new(component_types, name)
     end
 
     ### Tuples and relations
