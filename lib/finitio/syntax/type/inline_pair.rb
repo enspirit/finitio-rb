@@ -1,8 +1,7 @@
 module Finitio
   module Syntax
     module InlinePair
-      extend AstNode
-      include Support
+      include Node
 
       capture :dress, :undress
 

@@ -1,7 +1,7 @@
 module Finitio
   module Syntax
     module TypeRef
-      extend AstNode
+      include Node
 
       capture :type_name
 

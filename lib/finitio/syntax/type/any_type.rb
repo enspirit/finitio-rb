@@ -1,7 +1,7 @@
 module Finitio
   module Syntax
     module AnyType
-      include Support
+      include Node
 
       def compile(factory)
         factory.any

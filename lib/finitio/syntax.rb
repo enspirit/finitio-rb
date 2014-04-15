@@ -50,5 +50,5 @@ module Finitio
       parse(source, root: "type").compile(cpl)
     end
 
-  end
-end
+  end # module Syntax
+end # module Finitio

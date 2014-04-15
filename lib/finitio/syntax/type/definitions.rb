@@ -1,6 +1,7 @@
 module Finitio
   module Syntax
     module Definitions
+      include Node
 
       def compile(system)
         captures[:type_def].each do |node|

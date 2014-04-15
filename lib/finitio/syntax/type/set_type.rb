@@ -1,7 +1,7 @@
 module Finitio
   module Syntax
     module SetType
-      extend AstNode
+      include Node
 
       capture :type
 

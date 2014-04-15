@@ -1,7 +1,7 @@
 module Finitio
   module Syntax
     module System
-      extend AstNode
+      include Node
 
       capture :definitions, :type
 

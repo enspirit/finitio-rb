@@ -1,20 +1,19 @@
 module Finitio
   module Syntax
-    module ExternalPair
-      extend AstNode
-      include Support
+    module BuiltinType
+      include Node
 
       capture :builtin_type_name
 
       def compile(factory)
         clazz = resolve_ruby_const(builtin_type_name.to_s)
-        [ clazz.method(:dress), clazz.method(:undress) ]
+        factory.builtin(clazz)
       end
 
       def to_ast
-        [ :external_pair, builtin_type_name.to_s ]
+        [:builtin_type, builtin_type_name.to_s]
       end
 
-    end # module ExternalPair
+    end # module BuiltinType
   end # module Syntax
 end # module Finitio

@@ -1,7 +1,7 @@
 module Finitio
   module Syntax
     module Contract
-      extend AstNode
+      include Node
 
       capture :type, :pair
       capture_str :contract_name

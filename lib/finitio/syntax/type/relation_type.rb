@@ -1,7 +1,7 @@
 module Finitio
   module Syntax
     module RelationType
-      extend AstNode
+      include Node
 
       capture :heading
 

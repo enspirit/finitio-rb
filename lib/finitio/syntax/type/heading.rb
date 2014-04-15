@@ -1,6 +1,7 @@
 module Finitio
   module Syntax
     module Heading
+      include Node
 
       def multi?
         captures[:attribute].any?{|a| a.optional? }

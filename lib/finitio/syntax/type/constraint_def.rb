@@ -1,7 +1,7 @@
 module Finitio
   module Syntax
     module ConstraintDef
-      extend AstNode
+      include Node
 
       capture :var_name, :constraints
 

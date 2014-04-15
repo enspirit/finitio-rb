@@ -1,8 +1,7 @@
 module Finitio
   module Syntax
     module AdType
-      extend AstNode
-      include Support
+      include Node
 
       capture :builtin_type_name
 

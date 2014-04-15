@@ -1,7 +1,7 @@
 module Finitio
   module Syntax
     module TupleType
-      extend AstNode
+      include Node
 
       capture :heading
 

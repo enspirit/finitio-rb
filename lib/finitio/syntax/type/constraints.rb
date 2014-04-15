@@ -1,6 +1,7 @@
 module Finitio
   module Syntax
     module Constraints
+      include Node
 
       def compile(var_name)
         constraints = {}

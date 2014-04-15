@@ -1,7 +1,7 @@
 module Finitio
   module Syntax
     module StructType
-      extend AstNode
+      include Node
 
       def compile(factory)
         component_types = captures[:type].map{|x| x.compile(factory) }

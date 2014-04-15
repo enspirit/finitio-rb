@@ -1,7 +1,7 @@
 module Finitio
   module Syntax
     module SeqType
-      extend AstNode
+      include Node
 
       capture :type
 

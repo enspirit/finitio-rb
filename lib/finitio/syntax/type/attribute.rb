@@ -1,7 +1,7 @@
 module Finitio
   module Syntax
     module Attribute
-      extend AstNode
+      include Node
 
       capture :type, :multiplicity
       capture_str :attribute_name

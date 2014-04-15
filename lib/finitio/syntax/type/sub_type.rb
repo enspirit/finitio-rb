@@ -1,7 +1,7 @@
 module Finitio
   module Syntax
     module SubType
-      extend AstNode
+      include Node
 
       capture :rel_type, :constraint_def
 

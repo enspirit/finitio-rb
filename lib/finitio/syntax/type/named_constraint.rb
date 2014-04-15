@@ -1,7 +1,7 @@
 module Finitio
   module Syntax
     module NamedConstraint
-      extend AstNode
+      include Node
 
       capture :expression
       capture_str :constraint_name

@@ -1,6 +1,7 @@
 module Finitio
   module Syntax
     module Expression
+      include Node
 
       def compile(var_name)
         expr = "->(#{var_name}){ #{to_str} }"

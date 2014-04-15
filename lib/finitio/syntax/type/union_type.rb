@@ -1,6 +1,7 @@
 module Finitio
   module Syntax
     module UnionType
+      include Node
 
       def compile(factory)
         cds = captures[:sub_type].map{|x| x.compile(factory) }
