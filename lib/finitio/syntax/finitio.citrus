@@ -90,6 +90,7 @@ grammar Finitio::Syntax::Parser
   rule collection_type
       set_type
     | seq_type
+    | struct_type
     | term_type
   end
 
@@ -101,6 +102,11 @@ grammar Finitio::Syntax::Parser
   rule seq_type
     ('[' type ']')
     <Finitio::Syntax::SeqType>
+  end
+
+  rule struct_type
+    ('<' type (spacing ',' spacing type)* '>')
+    <Finitio::Syntax::StructType>
   end
 
   # terminal forms

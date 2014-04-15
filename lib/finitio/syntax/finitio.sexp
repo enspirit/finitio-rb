@@ -15,6 +15,7 @@ type:
   - union_type
   - set_type
   - seq_type
+  - struct_type
   - tuple_type
   - relation_type
   - ad_type
@@ -37,6 +38,9 @@ set_type:
 
 seq_type:
   - [ type ]
+
+struct_type:
+  - [ type+ ]
 
 tuple_type:
   - [ heading ]
