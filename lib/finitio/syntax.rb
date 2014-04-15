@@ -1,33 +1,14 @@
 require 'citrus'
-require_relative 'syntax/support'
-require_relative 'syntax/system'
-require_relative 'syntax/definitions'
-require_relative 'syntax/type_def'
-require_relative 'syntax/expression'
-require_relative 'syntax/attribute'
-require_relative 'syntax/heading'
-require_relative 'syntax/any_type'
-require_relative 'syntax/builtin_type'
-require_relative 'syntax/sub_type'
-require_relative 'syntax/constraint_def'
-require_relative 'syntax/constraints'
-require_relative 'syntax/named_constraint'
-require_relative 'syntax/unnamed_constraint'
-require_relative 'syntax/seq_type'
-require_relative 'syntax/set_type'
-require_relative 'syntax/struct_type'
-require_relative 'syntax/tuple_type'
-require_relative 'syntax/relation_type'
-require_relative 'syntax/union_type'
-require_relative 'syntax/type_ref'
-require_relative 'syntax/ad_type'
-require_relative 'syntax/contract'
-require_relative 'syntax/inline_pair'
-require_relative 'syntax/external_pair'
-require_relative 'syntax/lambda_expr'
+require_relative 'syntax/node'
+require_relative 'syntax/literal'
+require_relative 'syntax/expr'
+require_relative 'syntax/type'
 module Finitio
   module Syntax
 
+    Citrus.load File.expand_path('../syntax/lexer.citrus', __FILE__)
+    Citrus.load File.expand_path('../syntax/literals.citrus', __FILE__)
+    Citrus.load File.expand_path('../syntax/expressions.citrus', __FILE__)
     Citrus.load File.expand_path('../syntax/finitio.citrus', __FILE__)
 
     def self.parse(source, *args, &bl)

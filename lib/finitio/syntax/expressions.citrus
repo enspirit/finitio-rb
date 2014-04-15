@@ -1,0 +1,129 @@
+require 'finitio/syntax/lexer'
+require 'finitio/syntax/literals'
+
+grammar Finitio::Syntax::Expressions
+  include Finitio::Syntax::Lexer
+  include Finitio::Syntax::Literals
+
+  rule expr
+    logic_or_expr
+  end
+
+  ### Boolean logic
+
+  rule logic_or_expr
+      (left:logic_and_expr op:or_operator right:logic_or_expr)
+      <Finitio::Syntax::Expr::LogicDyadic>
+    | logic_and_expr
+  end
+
+  rule or_operator
+    spaces? ('or' | '||') spaces?
+  end
+
+  rule logic_and_expr
+      (left:logic_not_expr op:and_operator right:logic_and_expr)
+      <Finitio::Syntax::Expr::LogicDyadic>
+    | logic_not_expr
+  end
+
+  rule and_operator
+    spaces? ('and' | '&&') spaces?
+  end
+
+  rule logic_not_expr
+      (not_operator term:logic_term)
+      <Finitio::Syntax::Expr::LogicNot>
+    | logic_term
+  end
+
+  rule not_operator
+    spaces? ('!' | 'not') spaces?
+  end
+
+  rule logic_term
+    comparison_expr
+  end
+
+  ### Comparisons
+
+  rule comparison_expr
+      (left:arith_expr op:comparison_operator right:comparison_expr)
+      <Finitio::Syntax::Expr::Comparison>
+    | arith_expr
+  end
+
+  rule comparison_operator
+    spaces? ('==' | '!=' | '<=' | '>=' | '<' | '>' | '=~') spaces?
+  end
+
+  ### Arithmetic
+
+  rule arith_expr
+    arith_plusminus_expr
+  end
+
+  rule arith_plusminus_expr
+      (left:arith_multdiv_expr op:plusminus_operator right:arith_plusminus_expr)
+      <Finitio::Syntax::Expr::ArithOp>
+    | arith_multdiv_expr
+  end
+
+  rule plusminus_operator
+    spaces? ('+' | '-') spaces?
+  end
+
+  rule arith_multdiv_expr
+      (left:arith_term_expr op:multdiv_operator right:arith_multdiv_expr)
+      <Finitio::Syntax::Expr::ArithOp>
+    | arith_term_expr
+  end
+
+  rule multdiv_operator
+    spaces? ('*' | '/') spaces?
+  end
+
+  rule arith_term_expr
+      ('-' term:arith_term_expr)
+      <Finitio::Syntax::Expr::UnaryMinusOp>
+    | oo_call
+  end
+
+  ### Function calls
+
+  rule oo_call
+      (left:fn_call '.' right:oo_call)
+      <Finitio::Syntax::Expr::OOCall>
+    | fn_call
+  end
+
+  rule fn_call
+      (fn:term_expr '(' spaces? expr? (comma expr)* spaces? ')')
+      <Finitio::Syntax::Expr::FnCall>
+    | term_expr
+  end
+
+  ###
+
+  rule term_expr
+      identifier_expr
+    | literal_expr
+    | parenthesized_expr
+  end
+
+  rule identifier_expr
+    (!keyword /[a-zA-Z_][a-zA-Z0-9_]*/)
+    <Finitio::Syntax::Expr::Identifier>
+  end
+
+  rule literal_expr
+    (!keyword literal)
+    <Finitio::Syntax::Expr::Literal>
+  end
+
+  rule parenthesized_expr
+    ('(' spaces? expr spaces? ')')
+    <Finitio::Syntax::Expr::Parenthesized>
+  end
+
+end

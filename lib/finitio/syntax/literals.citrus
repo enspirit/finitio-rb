@@ -1,0 +1,44 @@
+require 'finitio/syntax/lexer'
+
+grammar Finitio::Syntax::Literals
+  include Finitio::Syntax::Lexer
+
+  rule literal
+      seq_literal
+    | scalar_literal
+  end
+
+  rule seq_literal
+    (open_bracket literal? (comma literal)* close_bracket) {
+      captures[:literal].map(&:value)
+    }
+  end
+
+  rule scalar_literal
+      boolean_literal
+    | real_literal
+    | integer_literal
+    | string_literal
+  end
+
+  rule boolean_literal
+    ("true" | "false")
+    <Finitio::Syntax::Literal::Boolean>
+  end
+
+  rule integer_literal
+    ([0] | [1-9] [0-9]*)
+    <Finitio::Syntax::Literal::Integer>
+  end
+
+  rule real_literal
+    (integer_literal? '.' [0-9]*)
+    <Finitio::Syntax::Literal::Real>
+  end
+
+  rule string_literal
+    (["] str:([\\]["] | !["] .)* ["])
+    <Finitio::Syntax::Literal::String>
+  end
+
+end

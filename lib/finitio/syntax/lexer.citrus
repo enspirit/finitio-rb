@@ -1,5 +1,11 @@
 grammar Finitio::Syntax::Lexer
 
+  # LEXER (keywords)
+
+  rule keyword
+    'and' | 'or' | 'not'
+  end
+
   # LEXER (names)
 
   rule var_name
@@ -26,6 +32,28 @@ grammar Finitio::Syntax::Lexer
     /[a-zA-Z0-9:]+/
   end
 
+  # LEXER symbols
+
+  rule comma
+    opt_spaces ',' opt_spaces
+  end
+
+  rule open_bracket
+    opt_spaces '[' opt_spaces
+  end
+
+  rule close_bracket
+    opt_spaces ']' opt_spaces
+  end
+
+  rule open_brace
+    opt_spaces '{' opt_spaces
+  end
+
+  rule close_brace
+    opt_spaces '{' opt_spaces
+  end
+
   # LEXER (spacing & comments)
 
   rule spacing
@@ -38,6 +66,10 @@ grammar Finitio::Syntax::Lexer
 
   rule spaces
     space+
+  end
+
+  rule opt_spaces
+    space*
   end
 
   rule space

@@ -1,8 +1,12 @@
 require 'finitio/syntax/lexer'
+require 'finitio/syntax/literals'
 require 'finitio/syntax/types'
+require 'finitio/syntax/expressions'
 
 grammar Finitio::Syntax::Parser
   include Finitio::Syntax::Lexer
+  include Finitio::Syntax::Literals
+  include Finitio::Syntax::Expressions
   include Finitio::Syntax::Types
 
   rule system
