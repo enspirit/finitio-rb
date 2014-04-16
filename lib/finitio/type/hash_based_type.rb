@@ -16,7 +16,7 @@ module Finitio
       handler.failed!(self, value) unless value.is_a?(Hash)
 
       # Check for extra attributes
-      unless (extra = extra_attrs(value, true)).empty?
+      unless heading.allow_extra? or (extra = extra_attrs(value, true)).empty?
         handler.fail!("Unrecognized attribute `#{extra.first}`")
       end
 
@@ -72,7 +72,7 @@ module Finitio
     end
 
     def valid_attrs?(value, to_s = false)
-      !extra_attr?(value, to_s) && !missing_attr?(value)
+      (heading.allow_extra? || !extra_attr?(value, to_s)) && !missing_attr?(value)
     end
 
   end # module HashBasedType
