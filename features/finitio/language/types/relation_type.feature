@@ -2,7 +2,7 @@ Feature: Support for rich relation types
 
   Scenario: Pure relation types
 
-    Given the System source is
+    Given the System is
       """
       {{ length: Integer, angle: Real }}
       """
@@ -12,7 +12,7 @@ Feature: Support for rich relation types
 
   Scenario: Support for optional attributes
 
-    Given the System source is
+    Given the System is
       """
       {{ length: Integer, angle :? Real }}
       """
@@ -22,7 +22,7 @@ Feature: Support for rich relation types
 
   Scenario: Support for extra attributes
 
-    Given the System source is
+    Given the System is
       """
       {{ length: Integer, ... }}
       """

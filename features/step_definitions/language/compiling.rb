@@ -1,16 +1,16 @@
 Then(/^it compiles fine$/) do
-  @system = Finitio::DEFAULT_SYSTEM.parse(@system_source)
+  @system.should be_a(Finitio::System)
 end
 
 Then(/^it compiles to a tuple type$/) do
-  @system = Finitio::DEFAULT_SYSTEM.parse(@system_source)
+  @system.should be_a(Finitio::System)
   @main   = @system.main
   [ Finitio::TupleType,
     Finitio::MultiTupleType ].should include(@main.class)
 end
 
 Then(/^it compiles to a relation type$/) do
-  @system = Finitio::DEFAULT_SYSTEM.parse(@system_source)
+  @system.should be_a(Finitio::System)
   @main   = @system.main
   [ Finitio::RelationType,
     Finitio::MultiRelationType ].should include(@main.class)
