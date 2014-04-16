@@ -11,6 +11,14 @@ module Finitio
       @name = name
     end
 
+    def anonymous?
+      @name.nil?
+    end
+
+    def named?
+      !anonymous?
+    end
+
     def default_name
       raise NotImplementedError, "Missing #{self.class.name}#default_name"
     end

@@ -3,17 +3,22 @@ module Finitio
     module TypeDef
       include Node
 
-      capture :type_name, :type
+      capture :type
+      capture_str :type_name
 
       def compile(system)
         t = type.compile(system)
-        t.name = type_name.to_s
-        system.add_type(t)
+        if t.anonymous?
+          t.name = type_name
+          system.add_type(t)
+        else
+          system.add_type(AliasType.new(t, type_name))
+        end
         t
       end
 
       def to_ast
-        [:type_def, type_name.to_s, type.to_ast]
+        [:type_def, type_name, type.to_ast]
       end
 
     end # module TypeDef
