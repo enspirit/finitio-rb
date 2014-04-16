@@ -2,26 +2,36 @@ require 'spec_helper'
 module Finitio
   describe Heading, "equality" do
 
-    let(:h1){ Heading.new([Attribute.new(:r, intType), Attribute.new(:b, intType)]) }
-    let(:h2){ Heading.new([Attribute.new(:b, intType), Attribute.new(:r, intType)]) }
-    let(:h3){ Heading.new([Attribute.new(:b, intType)])                             }
+    let(:r)      { Attribute.new(:r, intType)        }
+    let(:b)      { Attribute.new(:b, intType)        }
+    let(:maybe_r){ Attribute.new(:r, intType, false) }
 
-    it 'should apply structural equality' do
-      (h1 == h2).should be_true
-      (h2 == h1).should be_true
+    def heading(attributes, options = nil)
+      Heading.new(attributes, options)
     end
 
-    it 'should apply distinguish different types' do
-      (h1 == h3).should be_false
-      (h2 == h3).should be_false
+    it 'does not put significance to attributes ordering' do
+      heading([r, b]).should eq(heading([b, r]))
     end
 
-    it 'should be a total function, with nil for non types' do
-      (h1 == 12).should be_nil
+    it 'distinguishes between different attribute sets' do
+      heading([r]).should_not eq(heading([b]))
     end
 
-    it 'should implement hash accordingly' do
-      [h1, h2].map(&:hash).uniq.size.should eq(1)
+    it 'distinguishes between attribute obligations' do
+      heading([r]).should_not eq(heading([maybe_r]))
+    end
+
+    it 'distinguishes between extra allowance' do
+      h1 = heading([r], allow_extra: true)
+      h2 = heading([r], allow_extra: false)
+      h1.should_not eq(h2)
+    end
+
+    it 'distinguishes between attribute types' do
+      a1 = Attribute.new(:r, intType)
+      a2 = Attribute.new(:r, floatType)
+      heading([a1]).should_not eq(heading([a2]))
     end
 
   end

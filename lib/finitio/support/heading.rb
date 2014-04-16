@@ -8,20 +8,11 @@ module Finitio
   class Heading
     include Enumerable
 
-    def initialize(attributes)
-      unless attributes.is_a?(Enumerable) and \
-             attributes.all?{|a| a.is_a?(Attribute) }
-        raise ArgumentError, "Enumerable[Attribute] expected"
-      end
+    DEFAULT_OPTIONS = { allow_extra: false }.freeze
 
-      @attributes = {}
-      attributes.each do |attr|
-        if @attributes[attr.name]
-          raise ArgumentError, "Attribute names must be unique"
-        end
-        @attributes[attr.name] = attr
-      end
-      @attributes.freeze
+    def initialize(attributes, options = nil)
+      @attributes = normalize_attributes(attributes)
+      @options    = normalize_options(options)
     end
 
     def size
@@ -36,6 +27,10 @@ module Finitio
       any?{|attr| not(attr.required?) }
     end
 
+    def allow_extra?
+      options[:allow_extra]
+    end
+
     def each(&bl)
       return to_enum unless bl
       @attributes.values.each(&bl)
@@ -47,15 +42,41 @@ module Finitio
 
     def ==(other)
       return nil unless other.is_a?(Heading)
-      attributes == other.attributes
+      attributes == other.attributes && options == other.options
     end
 
     def hash
-      self.class.hash ^ attributes.hash
+      self.class.hash ^ attributes.hash ^ options.hash
     end
 
-    attr_reader :attributes
-    protected   :attributes
+    attr_reader :attributes, :options
+    protected   :attributes, :options
+
+  private
+
+    def normalize_attributes(attrs)
+      unless attrs.respond_to?(:each)
+        raise ArgumentError, "Enumerable[Attribute] expected"
+      end
+
+      attributes = {}
+      attrs.each do |attr|
+        unless attr.is_a?(Attribute)
+          raise ArgumentError, "Enumerable[Attribute] expected"
+        end
+        if attributes[attr.name]
+          raise ArgumentError, "Attribute names must be unique"
+        end
+        attributes[attr.name] = attr
+      end
+      attributes.freeze
+    end
+
+    def normalize_options(opts)
+      options = DEFAULT_OPTIONS
+      options = options.merge(opts).freeze if opts
+      options
+    end
 
   end # class Heading
 end # class Finitio
