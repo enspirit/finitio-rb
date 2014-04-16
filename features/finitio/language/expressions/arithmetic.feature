@@ -9,7 +9,7 @@ Feature: Support for base arithmetic
       """
       x + 12
       """
-    Then evaluating it with x=<x> should yield <expected>
+    Then evaluating it with x=<x> yields <expected>
 
     Examples:
       | x   | expected |
@@ -23,7 +23,7 @@ Feature: Support for base arithmetic
       """
       x - 12
       """
-    Then evaluating it with x=<x> should yield <expected>
+    Then evaluating it with x=<x> yields <expected>
 
     Examples:
       | x   | expected |
@@ -37,7 +37,7 @@ Feature: Support for base arithmetic
       """
       x * 12
       """
-    Then evaluating it with x=<x> should yield <expected>
+    Then evaluating it with x=<x> yields <expected>
 
     Examples:
       | x   | expected |
@@ -51,7 +51,7 @@ Feature: Support for base arithmetic
       """
       x / 12
       """
-    Then evaluating it with x=<x> should yield <expected>
+    Then evaluating it with x=<x> yields <expected>
 
     Examples:
       | x    | expected |
@@ -65,7 +65,7 @@ Feature: Support for base arithmetic
       """
       x <mult> 12 <add> 1
       """
-    Then evaluating it with x=<x> should yield <expected>
+    Then evaluating it with x=<x> yields <expected>
 
     Examples:
       | mult | add | x    | expected |
@@ -80,7 +80,7 @@ Feature: Support for base arithmetic
       """
       x <mult> (12 <add> 1)
       """
-    Then evaluating it with x=<x> should yield <expected>
+    Then evaluating it with x=<x> yields <expected>
 
     Examples:
       | mult | add | x    | expected |
@@ -95,7 +95,7 @@ Feature: Support for base arithmetic
       """
       4 * 2 * 3
       """
-    Then evaluating it should yield 24
+    Then evaluating it yields 24
 
   Scenario: multiple additions
 
@@ -103,4 +103,4 @@ Feature: Support for base arithmetic
       """
       4 + 2 + 3
       """
-    Then evaluating it should yield 9
+    Then evaluating it yields 9

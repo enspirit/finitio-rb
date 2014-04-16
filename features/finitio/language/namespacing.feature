@@ -7,4 +7,4 @@ Feature: Namespacing type definitions
       Finitio.Posint = Integer( i | i >= 0 )
       { length: Finitio.Posint }
       """
-    Then it should compile fine
+    Then it compiles fine

@@ -9,7 +9,7 @@ Feature: Support for string literals
       """
       <source>
       """
-    Then it should compile to a <type>
+    Then it evaluates to a <type>
 
     Examples:
       |              source | type   |

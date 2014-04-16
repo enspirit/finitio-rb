@@ -9,7 +9,7 @@ Feature: Support for comparisons
       """
       x == 12
       """
-    Then evaluating it with x=<x> should yield <expected>
+    Then evaluating it with x=<x> yields <expected>
 
     Examples:
       | x  | expected |
@@ -23,7 +23,7 @@ Feature: Support for comparisons
       """
       x != 12
       """
-    Then evaluating it with x=<x> should yield <expected>
+    Then evaluating it with x=<x> yields <expected>
 
     Examples:
       | x  | expected |
@@ -37,7 +37,7 @@ Feature: Support for comparisons
       """
       x <= 12
       """
-    Then evaluating it with x=<x> should yield <expected>
+    Then evaluating it with x=<x> yields <expected>
 
     Examples:
       | x  | expected |
@@ -52,7 +52,7 @@ Feature: Support for comparisons
       """
       x < 12
       """
-    Then evaluating it with x=<x> should yield <expected>
+    Then evaluating it with x=<x> yields <expected>
 
     Examples:
       | x  | expected |
@@ -67,7 +67,7 @@ Feature: Support for comparisons
       """
       x >= 12
       """
-    Then evaluating it with x=<x> should yield <expected>
+    Then evaluating it with x=<x> yields <expected>
 
     Examples:
       | x  | expected |
@@ -82,7 +82,7 @@ Feature: Support for comparisons
       """
       x > 12
       """
-    Then evaluating it with x=<x> should yield <expected>
+    Then evaluating it with x=<x> yields <expected>
 
     Examples:
       | x  | expected |
