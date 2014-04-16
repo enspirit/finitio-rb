@@ -9,7 +9,7 @@ grammar Finitio::Syntax::Literals
   end
 
   rule seq_literal
-    (open_bracket literal? (comma literal)* close_bracket) {
+    ('{' spacing literal? (comma literal)* spacing '}') {
       captures[:literal].map(&:value)
     }
   end

@@ -34,24 +34,24 @@ grammar Finitio::Syntax::Lexer
 
   # LEXER symbols
 
+  rule equal
+    spacing '=' spacing
+  end
+
+  rule dots
+    spacing '...' spacing
+  end
+
+  rule opt_comma
+    spacing ',' spacing | spacing
+  end
+
   rule comma
-    opt_spaces ',' opt_spaces
+    spacing ',' spacing
   end
 
-  rule open_bracket
-    opt_spaces '[' opt_spaces
-  end
-
-  rule close_bracket
-    opt_spaces ']' opt_spaces
-  end
-
-  rule open_brace
-    opt_spaces '{' opt_spaces
-  end
-
-  rule close_brace
-    opt_spaces '{' opt_spaces
+  rule pipe
+    spacing '|' spacing
   end
 
   # LEXER (spacing & comments)
@@ -66,10 +66,6 @@ grammar Finitio::Syntax::Lexer
 
   rule spaces
     space+
-  end
-
-  rule opt_spaces
-    space*
   end
 
   rule space

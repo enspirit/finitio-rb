@@ -4,7 +4,7 @@ grammar Finitio::Syntax::Types
   include Finitio::Syntax::Lexer
 
   rule type_def
-    (type_name spacing '=' spacing type)
+    (type_name equal type)
     <Finitio::Syntax::TypeDef>
   end
 
@@ -15,7 +15,7 @@ grammar Finitio::Syntax::Types
   # union and sub types
 
   rule union_type
-      (sub_type ('|' sub_type)+)
+      (sub_type (pipe sub_type)+)
       <Finitio::Syntax::UnionType>
     | sub_type
   end
@@ -27,12 +27,12 @@ grammar Finitio::Syntax::Types
   end
 
   rule constraint_def
-    ('(' spacing var_name spacing '|' spacing constraints spacing ')')
+    ('(' spacing var_name pipe constraints spacing ')')
     <Finitio::Syntax::ConstraintDef>
   end
 
   rule constraints
-      (named_constraint (spacing ',' spacing named_constraint)*)
+      (named_constraint (opt_comma named_constraint)* opt_comma)
       <Finitio::Syntax::Constraints>
     | unnamed_constraint
   end
@@ -66,7 +66,7 @@ grammar Finitio::Syntax::Types
   end
 
   rule heading
-    (attribute? (comma attribute)* (comma allow_extra:'...')? spacing)
+    (attribute? (opt_comma attribute)* (opt_comma allow_extra:dots)? opt_comma?)
     <Finitio::Syntax::Heading>
   end
 
@@ -95,7 +95,7 @@ grammar Finitio::Syntax::Types
   end
 
   rule struct_type
-    ('<' type (spacing ',' spacing type)* '>')
+    ('<' type (comma type)* '>')
     <Finitio::Syntax::StructType>
   end
 
@@ -111,7 +111,7 @@ grammar Finitio::Syntax::Types
   # ad type
 
   rule ad_type
-    (('.' builtin_type_name)? spacing contract (spacing ',' spacing contract)*)
+    (('.' builtin_type_name)? spacing contract (opt_comma contract)* opt_comma)
     <Finitio::Syntax::AdType>
   end
 
@@ -157,14 +157,14 @@ grammar Finitio::Syntax::Types
   # lambda and expressions
 
   rule lambda_expr
-    ('(' spacing var_name spacing '|' spacing expression spacing ')')
+    ('(' spacing var_name pipe expression spacing ')')
     <Finitio::Syntax::LambdaExpr>
   end
 
   rule expression
     (
         ('(' spacing expression spacing ')')
-      | (![\(,\)] .)+ expression?
+      | (![\(,\)\n] .)+ expression?
     )
     <Finitio::Syntax::Expression>
   end
