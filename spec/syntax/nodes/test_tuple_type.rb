@@ -41,9 +41,19 @@ module Finitio
       context '{a: .Integer, b :? .Float}' do
         let(:input){ '{a: .Integer, b :? .Float}' }
 
-        it 'compiles to a TupleType' do
+        it 'compiles to a MultiTupleType' do
           compiled.should be_a(MultiTupleType)
           compiled.heading.size.should eq(2)
+        end
+      end
+
+      context '{a: .Integer, ...}' do
+        let(:input){ '{a: .Integer, ...}' }
+
+        it 'compiles to a MultiTupleType' do
+          compiled.should be_a(MultiTupleType)
+          compiled.heading.size.should eq(1)
+          compiled.heading.should be_allow_extra
         end
       end
     end

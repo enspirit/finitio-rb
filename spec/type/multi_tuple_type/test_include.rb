@@ -56,6 +56,12 @@ module Finitio
         Heading.new([a, maybe_b], allow_extra: true)
       }
 
+      context 'when valid hash, yet with no extra attribute' do
+        let(:arg){ {a: 12} }
+
+        it{ should be_true }
+      end
+
       context 'when valid hash, yet with extra attributes' do
         let(:arg){ {a: 12, c: 15} }
 

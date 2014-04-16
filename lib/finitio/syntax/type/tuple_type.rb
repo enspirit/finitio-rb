@@ -10,7 +10,7 @@ module Finitio
       end
 
       def to_ast
-        [ :"#{kind}_type", heading.to_ast]
+        [ :"#{kind}_type", heading.to_ast ]
       end
 
     private

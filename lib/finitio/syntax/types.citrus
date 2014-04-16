@@ -66,10 +66,8 @@ grammar Finitio::Syntax::Types
   end
 
   rule heading
-      (attribute (',' spacing attribute)*)
-      <Finitio::Syntax::Heading>
-    | spacing
-      <Finitio::Syntax::Heading>
+    (attribute? (comma attribute)* (comma allow_extra:'...')? spacing)
+    <Finitio::Syntax::Heading>
   end
 
   rule attribute

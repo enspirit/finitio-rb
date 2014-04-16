@@ -3,8 +3,14 @@ module Finitio
     module Heading
       include Node
 
+      capture :allow_extra
+
+      def allow_extra?
+        !allow_extra.nil?
+      end
+
       def multi?
-        captures[:attribute].any?{|a| a.optional? }
+        captures[:attribute].any?{|a| a.optional? } or allow_extra?
       end
 
       def attributes(factory)
@@ -12,7 +18,7 @@ module Finitio
       end
 
       def compile(factory)
-        Finitio::Heading.new(attributes(factory))
+        Finitio::Heading.new(attributes(factory), allow_extra: allow_extra?)
       end
 
       def to_ast
