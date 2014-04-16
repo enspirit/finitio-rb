@@ -30,7 +30,9 @@ module Finitio
     end
 
     def resolve(system)
-      @target = system.fetch(target_name)
+      @target = system.fetch(target_name) do
+        raise Error, "No such type `#{target_name}`"
+      end
     end
 
   end # class ProxyType
