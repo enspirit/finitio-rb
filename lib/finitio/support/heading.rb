@@ -24,7 +24,7 @@ module Finitio
     end
 
     def multi?
-      any?{|attr| not(attr.required?) }
+      allow_extra? || any?{|attr| not(attr.required?) }
     end
 
     def allow_extra?
