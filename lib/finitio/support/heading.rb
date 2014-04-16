@@ -15,6 +15,10 @@ module Finitio
       @options    = normalize_options(options)
     end
 
+    def [](attrname)
+      @attributes[attrname]
+    end
+
     def size
       @attributes.size
     end
