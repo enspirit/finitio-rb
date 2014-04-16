@@ -1,6 +1,7 @@
 require_relative 'type/system'
 require_relative 'type/definitions'
 require_relative 'type/type_def'
+require_relative 'type/main_type'
 require_relative 'type/expression'
 require_relative 'type/attribute'
 require_relative 'type/heading'

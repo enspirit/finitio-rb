@@ -10,7 +10,7 @@ grammar Finitio::Syntax::Parser
   include Finitio::Syntax::Types
 
   rule system
-    (spacing definitions spacing type? spacing eof)
+    (spacing definitions spacing main_type? spacing eof)
     <Finitio::Syntax::System>
   end
 

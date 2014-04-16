@@ -3,19 +3,17 @@ module Finitio
     module System
       include Node
 
-      capture :definitions, :type
+      capture :definitions, :main_type
 
       def compile(system)
         definitions.compile(system)
-        if type
-          system.main = type.compile(system)
-        end
+        system.main = main_type.compile(system) if main_type
         system
       end
 
       def to_ast
         ast = [ :system ] + definitions.to_ast
-        ast << type.to_ast if type
+        ast << main_type.to_ast if main_type
         ast
       end
 

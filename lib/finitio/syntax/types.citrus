@@ -8,6 +8,11 @@ grammar Finitio::Syntax::Types
     <Finitio::Syntax::TypeDef>
   end
 
+  rule main_type
+    (spacing type)
+    <Finitio::Syntax::MainType>
+  end
+
   rule type
     union_type
   end
