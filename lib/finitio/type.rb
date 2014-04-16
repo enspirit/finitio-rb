@@ -46,7 +46,9 @@ module Finitio
     end
 
     def ==(other)
-      super || (other.is_a?(ProxyType) && other == self)
+      super || [ProxyType, AliasType].any?{|t|
+        other.is_a?(t) && other == self
+      }
     end
 
   protected
@@ -66,6 +68,7 @@ require_relative 'type/heading_based_type'
 require_relative 'type/hash_based_type'
 require_relative 'type/rel_based_type'
 require_relative 'type/proxy_type'
+require_relative 'type/alias_type'
 require_relative 'type/any_type'
 require_relative 'type/builtin_type'
 require_relative 'type/union_type'
