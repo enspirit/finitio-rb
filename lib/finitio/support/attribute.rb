@@ -21,6 +21,10 @@ module Finitio
     attr_reader :name, :type, :required
     alias :required? :required
 
+    def optional?
+      !required?
+    end
+
     # Fetch the attribute on `arg`, which is expected to be a Hash object.
     #
     # This method allows working with ruby hashes having either Symbols or
