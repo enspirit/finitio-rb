@@ -31,13 +31,13 @@ module Finitio
   #
   class StructType < Type
 
-    def initialize(component_types, name = nil)
+    def initialize(component_types, name = nil, metadata = nil)
       unless component_types.is_a?(Array) &&
              component_types.all?{|c| c.is_a?(Type) }
         raise ArgumentError, "[Finitio::Type] expected, got `#{component_types}`"
       end
 
-      super(name)
+      super(name, metadata)
       @component_types = component_types
     end
     attr_reader :component_types

@@ -54,6 +54,18 @@ grammar Finitio::Syntax::Lexer
     spacing '|' spacing
   end
 
+  rule colon
+    spacing ':' spacing
+  end
+
+  rule open_metadata
+    spacing '/-' spacing
+  end
+
+  rule close_metadata
+    spacing '-/' spacing
+  end
+
   # LEXER (spacing & comments)
 
   rule spacing

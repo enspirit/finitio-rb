@@ -15,7 +15,11 @@ module Finitio
       end
 
       def compile(factory)
-        factory.attribute(attribute_name.to_sym, type.compile(factory), required?)
+        n = attribute_name.to_sym
+        t = type.compile(factory)
+        r = required?
+        m = metadata
+        factory.attribute(n, t, r, m)
       end
 
       def to_ast

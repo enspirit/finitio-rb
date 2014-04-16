@@ -4,16 +4,13 @@ module Finitio
       include Node
 
       capture :type
-      capture_str :type_name
+      capture :type_name
 
       def compile(system)
         t = type.compile(system)
-        if t.anonymous?
-          t.name = type_name
-          system.add_type(t)
-        else
-          system.add_type(AliasType.new(t, type_name))
-        end
+        n = type_name && type_name.to_str
+        m = metadata
+        system.add_type(t, n, m)
         t
       end
 

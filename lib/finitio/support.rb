@@ -1,3 +1,4 @@
+require_relative 'support/metadata'
 require_relative 'support/attribute'
 require_relative 'support/heading'
 require_relative 'support/dress_helper'

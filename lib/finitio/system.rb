@@ -4,16 +4,12 @@ module Finitio
   #
   class System
 
-    def initialize(types = {}, main = nil)
+    def initialize(types = {})
       @types = types
-      @main  = main
     end
-    attr_accessor :main
 
-    def add_type(type)
-      unless type.is_a?(Type)
-        raise ArgumentError, "Finitio::Type expected, got `#{type}`"
-      end
+    def add_type(type, name = nil, metadata = nil)
+      type = factory.type(type, name, metadata)
 
       if @types.has_key?(type.name)
         raise Error, "Duplicate type name `#{type.name}`"
@@ -23,9 +19,13 @@ module Finitio
     end
 
     def get_type(name)
-      @types[name]
+      @types[name] || @types[name.to_s]
     end
     alias :[] :get_type
+
+    def main
+      self['Main']
+    end
 
     def fetch(name, &bl)
       @types.fetch(name, &bl)
@@ -56,7 +56,7 @@ module Finitio
     end
 
     def dup
-      System.new(@types.dup, @main)
+      System.new(@types.dup)
     end
 
   end # class System

@@ -21,8 +21,8 @@ module Finitio
   #
   class BuiltinType < Type
 
-    def initialize(ruby_type, name = nil)
-      super(name)
+    def initialize(ruby_type, name = nil, metadata = nil)
+      super(name, metadata)
       @ruby_type = ruby_type
     end
     attr_reader :ruby_type

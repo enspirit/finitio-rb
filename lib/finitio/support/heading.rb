@@ -19,6 +19,12 @@ module Finitio
       @attributes[attrname]
     end
 
+    def fetch(attrname)
+      @attributes.fetch(attrname) do
+        raise Error, "No such attribute `#{attrname}`"
+      end
+    end
+
     def size
       @attributes.size
     end

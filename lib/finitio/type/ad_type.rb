@@ -48,7 +48,7 @@ module Finitio
   #
   class AdType < Type
 
-    def initialize(ruby_type, contracts, name = nil)
+    def initialize(ruby_type, contracts, name = nil, metadata = nil)
       unless ruby_type.nil? or ruby_type.is_a?(Module)
         raise ArgumentError, "Module expected, got `#{ruby_type}`"
       end
@@ -63,11 +63,15 @@ module Finitio
         raise ArgumentError, "Invalid contracts `#{invalid}`"
       end
 
-      super(name)
+      super(name, metadata)
       @ruby_type = ruby_type
       @contracts = contracts.freeze
     end
     attr_reader :ruby_type, :contracts
+
+    def [](contract_name)
+      contracts[contract_name]
+    end
 
     def contract_names
       contracts.keys

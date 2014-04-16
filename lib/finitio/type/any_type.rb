@@ -18,8 +18,8 @@ module Finitio
   #
   class AnyType < Type
 
-    def initialize(name = nil)
-      super(name)
+    def initialize(name = nil, metadata = nil)
+      super(name, metadata)
     end
 
     def default_name

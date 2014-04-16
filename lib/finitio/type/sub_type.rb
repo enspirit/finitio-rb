@@ -29,7 +29,7 @@ module Finitio
 
     DEFAULT_CONSTRAINT_NAMES = [:default, :predicate].freeze
 
-    def initialize(super_type, constraints, name = nil)
+    def initialize(super_type, constraints, name = nil, metadata = nil)
       unless super_type.is_a?(Type)
         raise ArgumentError, "Finitio::Type expected, got #{super_type}"
       end
@@ -38,10 +38,14 @@ module Finitio
         raise ArgumentError, "Hash expected for constraints, got #{constraints}"
       end
 
-      super(name)
+      super(name, metadata)
       @super_type, @constraints = super_type, constraints.freeze
     end
     attr_reader :super_type, :constraints
+
+    def [](constraint_name)
+      constraints[constraint_name]
+    end
 
     def default_name
       constraints.keys.first.to_s.capitalize

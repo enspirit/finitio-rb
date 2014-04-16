@@ -8,6 +8,11 @@ module Finitio
         }
       end
 
+      def metadata
+        m = captures[:metadata].first
+        m && m.value
+      end
+
       def self.included(by)
         by.extend(ClassHelpers)
       end

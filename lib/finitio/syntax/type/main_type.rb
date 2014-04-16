@@ -6,7 +6,7 @@ module Finitio
       capture :type
 
       def compile(system)
-        type.compile(system)
+        system.add_type(type.compile(system), 'Main', metadata)
       end
 
       def to_ast

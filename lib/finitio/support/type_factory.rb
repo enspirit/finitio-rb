@@ -23,34 +23,38 @@ module Finitio
 
     ################################################################## Factory
 
-    def type(type, name = nil, &bl)
-      return subtype(type(type, name), bl) if bl
+    def type(type, name = nil, metadata = nil, &bl)
+      return subtype(type(type, name, metadata), bl) if bl
       case type
       when Type
-        type
+        alias_type(type, name, metadata)
       when Module
-        BuiltinType.new(type, name || type.name.to_s)
+        BuiltinType.new(type, name || type.name.to_s, metadata)
       when Hash
-        tuple(type, name)
+        tuple(type, name, metadata)
       when Array
         case type.size
         when 0
           fail!("Array of arity > 0 expected, got `#{type}`")
         when 1
-          seq(type.first, name)
+          seq(type.first, name, metadata)
         else
-          struct(type, name)
+          struct(type, name, metadata)
         end
       when Set
         fail!("Set of arity 1 expected, got `#{type}`") unless type.size==1
         sub = type(type.first)
-        sub.is_a?(TupleType) ? relation(sub.heading, name) : set(sub, name)
+        if sub.is_a?(TupleType)
+          relation(sub.heading, name, metadata)
+        else
+          set(sub, name, metadata)
+        end
       when Range
         clazz = [type.begin, type.end].map(&:class).uniq
         fail!("Unsupported range `#{type}`") unless clazz.size==1
-        subtype(clazz.first, type)
+        subtype(clazz.first, type, name, metadata)
       when Regexp
-        subtype(String, type)
+        subtype(String, type, name, metadata)
       else
         fail!("Unable to factor a Finitio::Type from `#{type}`")
       end
@@ -74,6 +78,14 @@ module Finitio
       name.nil? ? nil : name.strip
     end
 
+    def metadata(metadata)
+      unless metadata.nil? or metadata.is_a?(Hash)
+        fail!("Wrong metadata `#{metadata}`")
+      end
+
+      metadata
+    end
+
     def constraints(constraints = nil, &bl)
       constrs = {}
       constrs[:predicate] = bl if bl
@@ -82,8 +94,8 @@ module Finitio
       constrs
     end
 
-    def attribute(name, type, required = true)
-      Attribute.new(name, type(type), required)
+    def attribute(name, type, required = true, metadata = nil)
+      Attribute.new(name, type(type), required, metadata)
     end
 
     def attributes(attributes)
@@ -123,39 +135,43 @@ module Finitio
 
     ########################################################## Type generators
 
-    def any(name = nil)
+    def any(name = nil, metadata = nil)
       name = name(name)
+      meta = metadata(metadata)
 
-      AnyType.new(name)
+      AnyType.new(name, meta)
     end
 
-    def builtin(ruby_type, name = nil)
+    def builtin(ruby_type, name = nil, metadata = nil)
       ruby_type = ruby_type(ruby_type)
       name      = name(name)
+      meta      = metadata(metadata)
 
-      BuiltinType.new(ruby_type, name)
+      BuiltinType.new(ruby_type, name, meta)
     end
 
-    def adt(ruby_type, contracts, name = nil)
+    def adt(ruby_type, contracts, name = nil, metadata = nil)
       ruby_type = ruby_type(ruby_type) if ruby_type
       contracts = contracts(contracts)
       name      = name(name)
+      meta      = metadata(metadata)
 
-      AdType.new(ruby_type, contracts, name)
+      AdType.new(ruby_type, contracts, name, meta)
     end
 
     ### Sub and union
 
-    def subtype(super_type, constraints = nil, name = nil, &bl)
+    def subtype(super_type, constraints = nil, name = nil, metadata = nil, &bl)
       super_type  = type(super_type)
       constraints = constraints(constraints, &bl)
       name        = name(name)
+      meta        = metadata(metadata)
 
-      SubType.new(super_type, constraints, name)
+      SubType.new(super_type, constraints, name, metadata)
     end
 
     def union(*args)
-      candidates, name = [], nil
+      candidates, name, meta = [], nil, nil
       args.each do |arg|
         case arg
         when Array  then candidates = arg.map{|t| type(t) }
@@ -165,60 +181,67 @@ module Finitio
         end
       end
 
-      UnionType.new(candidates, name)
+      UnionType.new(candidates, name, meta)
     end
 
     ### Collections
 
-    def seq(elm_type, name = nil)
+    def seq(elm_type, name = nil, metadata = nil)
       elm_type = type(elm_type)
       name     = name(name)
+      meta     = metadata(metadata)
 
-      SeqType.new(elm_type, name)
+      SeqType.new(elm_type, name, meta)
     end
 
-    def set(elm_type, name = nil)
+    def set(elm_type, name = nil, metadata = nil)
       elm_type = type(elm_type)
       name     = name(name)
+      meta     = metadata(metadata)
 
-      SetType.new(elm_type, name)
+      SetType.new(elm_type, name, meta)
     end
 
-    def struct(component_types, name = nil)
+    def struct(component_types, name = nil, metadata = nil)
       component_types = component_types.map{|t| type(t) }
       name            = name(name)
+      meta            = metadata(metadata)
 
-      StructType.new(component_types, name)
+      StructType.new(component_types, name, meta)
     end
 
     ### Tuples and relations
 
-    def tuple(heading, name = nil)
+    def tuple(heading, name = nil, metadata = nil)
       heading = heading(heading)
       name    = name(name)
+      meta    = metadata(metadata)
 
-      TupleType.new(heading, name)
+      TupleType.new(heading, name, meta)
     end
 
-    def multi_tuple(heading, name = nil)
+    def multi_tuple(heading, name = nil, metadata = nil)
       heading = heading(heading)
       name    = name(name)
+      meta    = metadata(metadata)
 
-      MultiTupleType.new(heading, name)
+      MultiTupleType.new(heading, name, meta)
     end
 
-    def relation(heading, name = nil)
+    def relation(heading, name = nil, metadata = nil)
       heading = heading(heading)
       name    = name(name)
+      meta    = metadata(metadata)
 
-      RelationType.new(heading, name)
+      RelationType.new(heading, name, meta)
     end
 
-    def multi_relation(heading, name = nil)
+    def multi_relation(heading, name = nil, metadata = nil)
       heading = heading(heading)
       name    = name(name)
+      meta    = metadata(metadata)
 
-      MultiRelationType.new(heading, name)
+      MultiRelationType.new(heading, name, meta)
     end
 
     def proxy(target_name)
@@ -226,6 +249,17 @@ module Finitio
     end
 
   private
+
+    def alias_type(type, name, metadata)
+      raise "Type expected `#{type}`" unless type.is_a?(Type)
+      if (name && type.named?) or (metadata && type.metadata?)
+        AliasType.new(type, name, metadata)
+      else
+        type.name = name         if name
+        type.metadata = metadata if metadata
+        type
+      end
+    end
 
     def fail!(message)
       raise ArgumentError, message, caller
