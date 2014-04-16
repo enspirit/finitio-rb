@@ -37,7 +37,12 @@ module Finitio
     end
 
     def to_name
-      map(&:to_name).join(', ')
+      name = map(&:to_name).join(', ')
+      if allow_extra?
+        name << ", " unless empty?
+        name << "..."
+      end
+      name
     end
 
     def ==(other)
