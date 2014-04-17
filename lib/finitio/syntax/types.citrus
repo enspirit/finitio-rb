@@ -39,13 +39,14 @@ grammar Finitio::Syntax::Types
   end
 
   rule constraints
-      (named_constraint (opt_comma named_constraint)* opt_comma)
+      (constraint:named_constraint (opt_comma constraint:named_constraint)* opt_comma)
       <Finitio::Syntax::Constraints>
-    | unnamed_constraint
+    | (spacing constraint:unnamed_constraint)
+      <Finitio::Syntax::Constraints>
   end
 
   rule named_constraint
-    (metadata? constraint_name ':' spacing expression)
+    (metadata? constraint_name colon expression)
     <Finitio::Syntax::NamedConstraint>
   end
 

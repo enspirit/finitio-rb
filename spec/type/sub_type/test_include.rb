@@ -2,7 +2,7 @@ require 'spec_helper'
 module Finitio
   describe SubType, "include?" do
 
-    let(:type){ SubType.new(intType, {default: ->(i){ i>0 }, small: ->(i){ i<255 }}, "byte") }
+    let(:type){ SubType.new(intType, [byte_min, byte_max], "byte") }
 
     subject{ type.include?(arg) }
 
@@ -19,7 +19,7 @@ module Finitio
     end
 
     context 'when not included on int (II)' do
-      let(:arg){ 255 }
+      let(:arg){ 256 }
 
       it{ should be_false }
     end

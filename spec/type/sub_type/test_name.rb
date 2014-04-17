@@ -5,7 +5,7 @@ module Finitio
     subject{ type.name }
 
     context 'when provided' do
-      let(:type){ SubType.new(intType, {posint: ->(i){}}, "Foo") }
+      let(:type){ SubType.new(intType, [positive], "Foo") }
 
       it 'uses the specified one' do
         subject.should eq("Foo")
@@ -13,10 +13,10 @@ module Finitio
     end
 
     context 'when not provided' do
-      let(:type){ SubType.new(intType, posint: ->(i){}) }
+      let(:type){ SubType.new(intType, [positive]) }
 
       it 'uses the first constraint name' do
-        subject.should eq("Posint")
+        subject.should eq("Positive")
       end
     end
 

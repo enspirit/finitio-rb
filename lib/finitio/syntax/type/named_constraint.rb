@@ -7,7 +7,10 @@ module Finitio
       capture_str :constraint_name
 
       def compile(var_name)
-        { constraint_name.to_sym => expression.compile(var_name) }
+        p = expression.compile(var_name)
+        n = constraint_name.to_sym
+        m = metadata
+        Constraint.new(p, n, metadata)
       end
 
       def to_ast(var_name)

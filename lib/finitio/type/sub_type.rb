@@ -27,15 +27,14 @@ module Finitio
   #
   class SubType < Type
 
-    DEFAULT_CONSTRAINT_NAMES = [:default, :predicate].freeze
-
     def initialize(super_type, constraints, name = nil, metadata = nil)
       unless super_type.is_a?(Type)
         raise ArgumentError, "Finitio::Type expected, got #{super_type}"
       end
 
-      unless constraints.is_a?(Hash)
-        raise ArgumentError, "Hash expected for constraints, got #{constraints}"
+      unless constraints.is_a?(Array) &&
+             constraints.all?{|v| v.is_a?(Constraint) }
+        raise ArgumentError, "[Constraint] expected for constraints, got #{constraints}"
       end
 
       super(name, metadata)
@@ -44,15 +43,15 @@ module Finitio
     attr_reader :super_type, :constraints
 
     def [](constraint_name)
-      constraints[constraint_name]
+      constraints.find{|c| c.name == constraint_name }
     end
 
     def default_name
-      constraints.keys.first.to_s.capitalize
+      constraints.first.name.to_s.capitalize
     end
 
     def include?(value)
-      super_type.include?(value) && constraints.all?{|_,c| c===value }
+      super_type.include?(value) && constraints.all?{|c| c===value }
     end
 
     # Check that `value` can be uped through the supertype, then verify all
@@ -65,10 +64,12 @@ module Finitio
       end
 
       # Check each constraint in turn
-      constraints.each_pair do |name, constraint|
+      constraints.each do |constraint|
         next if constraint===uped
         msg = handler.default_error_message(self, value)
-        msg << " (not #{name})" unless default_constraint?(name)
+        if constraint.named? && constraints.size>1
+          msg << " (not #{constraint.name})"
+        end
         handler.fail!(msg)
       end
 
@@ -79,20 +80,13 @@ module Finitio
     def ==(other)
       super || (
         other.is_a?(SubType) && (other.super_type == super_type) &&
-        set_equal?(constraints.values, other.constraints.values)
+        set_equal?(constraints, other.constraints)
       )
     end
     alias :eql? :==
 
     def hash
-      self.class.hash ^ super_type.hash ^ set_hash(constraints.values)
-    end
-
-  private
-
-    def default_constraint?(name)
-      DEFAULT_CONSTRAINT_NAMES.include?(name) or \
-        name.to_s.capitalize == self.name
+      self.class.hash ^ super_type.hash ^ set_hash(constraints)
     end
 
   end # class SubType

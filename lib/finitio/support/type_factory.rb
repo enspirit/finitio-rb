@@ -86,11 +86,28 @@ module Finitio
       metadata
     end
 
+    def constraint(constraint, name = nil)
+      case constraint
+      when Constraint then constraint
+      else Constraint.new(constraint, name)
+      end
+    end
+
     def constraints(constraints = nil, &bl)
-      constrs = {}
-      constrs[:predicate] = bl if bl
-      constrs[:predicate] = constraints unless constraints.is_a?(Hash)
-      constrs.merge!(constraints)       if constraints.is_a?(Hash)
+      constrs = []
+      constrs << Constraint.new(bl) if bl
+      case constraints
+      when Hash
+        constraints.each_pair do |name, cstr|
+          constrs << constraint(cstr, name)
+        end
+      when Array
+        constraints.each do |c|
+          constrs << constraint(c)
+        end
+      else
+        constrs << Constraint.new(constraints)
+      end
       constrs
     end
 

@@ -42,7 +42,7 @@ module Finitio
       end
 
       it 'has the correct constraints' do
-        compiled.constraints.keys.should eq([:positive])
+        compiled.constraints.map(&:name).should eq([:positive])
       end
 
       it 'has the expected AST' do
@@ -64,7 +64,7 @@ module Finitio
       end
 
       it 'has the correct constraints' do
-        compiled.constraints.keys.should eq([:positive, :small])
+        compiled.constraints.map(&:name).should eq([:positive, :small])
       end
 
       it 'has the expected AST' do
