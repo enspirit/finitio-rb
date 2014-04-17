@@ -42,8 +42,8 @@ module Finitio
     end
     attr_reader :super_type, :constraints
 
-    def [](constraint_name)
-      constraints.find{|c| c.name == constraint_name }
+    def [](name)
+      constraints.find{|c| c.name == name }
     end
 
     def default_name

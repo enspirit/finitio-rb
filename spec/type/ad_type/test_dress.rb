@@ -2,9 +2,16 @@ require 'spec_helper'
 module Finitio
   describe AdType, 'dress' do
 
+    let(:rgb){
+      Contract.new(intType, ->(i){ i*2 }, Finitio::IDENTITY, :rgb)
+    }
+
+    let(:hex){
+      Contract.new(floatType, ->(f){ f*3 }, Finitio::IDENTITY, :hex)
+    }
+
     let(:type){
-      AdType.new(Color, rgb: [intType,   ->(i){ i*2 }, Finitio::IDENTITY ],
-                        hex: [floatType, ->(f){ f*3 }, Finitio::IDENTITY ])
+      AdType.new(Color, [rgb, hex])
     }
 
     subject{
@@ -40,8 +47,11 @@ module Finitio
     end
 
     context 'when the upper raises an error' do
+      let(:rgb){
+        Contract.new(intType, ->(t){ raise ArgumentError }, Finitio::IDENTITY, :rgb)
+      }
       let(:type){
-        AdType.new(Color, rgb: [ intType, ->(t){ raise ArgumentError }, Finitio::IDENTITY ])
+        AdType.new(Color, [ rgb ])
       }
 
       it 'should hide the error' do

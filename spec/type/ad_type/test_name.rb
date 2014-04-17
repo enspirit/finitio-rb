@@ -5,13 +5,13 @@ module Finitio
     subject{ type.name }
 
     context 'when provided' do
-      let(:type){ AdType.new(Color, {}, "Foo") }
+      let(:type){ AdType.new(Color, [], "Foo") }
 
       it{ should eq('Foo') }
     end
 
     context 'when not provided' do
-      let(:type){ AdType.new(Color, {}) }
+      let(:type){ AdType.new(Color, []) }
 
       it{ should eq('Color') }
     end

@@ -2,7 +2,7 @@ require 'spec_helper'
 module Finitio
   describe AdType, "include?" do
 
-    let(:type){ AdType.new(Color, {}) }
+    let(:type){ AdType.new(Color, []) }
 
     subject{ type.include?(arg) }
 

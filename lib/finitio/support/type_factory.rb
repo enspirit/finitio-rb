@@ -4,7 +4,10 @@ module Finitio
     DSL_METHODS = [
       :attribute,
       :heading,
+      :constraint,
       :constraints,
+      :contract,
+      :contracts,
       :any,
       :builtin,
       :adt,
@@ -139,15 +142,23 @@ module Finitio
       end
     end
 
-    def contracts(contracts)
-      unless contracts.is_a?(Hash)
-        fail!("Hash expected, got `#{contracts}`")
-      end
-      unless (invalid = contracts.keys.reject{|k| k.is_a?(Symbol) }).empty?
-        fail!("Invalid contract names `#{invalid}`")
-      end
+    def contract(infotype, dresser, undresser, name = nil, metadata = nil)
+      infotype = type(infotype)
+      Contract.new(infotype, dresser, undresser, name, metadata)
+    end
 
-      contracts
+    def contracts(contracts)
+      case contracts
+      when Array
+        unless contracts.all?{|c| c.is_a?(Contract) }
+          fail!("[Contract] expected, got `#{contracts}`")
+        end
+        contracts
+      when Hash
+        contracts.map do |k,v|
+          contract(*v.push(k.to_sym))
+        end
+      end
     end
 
     ########################################################## Type generators

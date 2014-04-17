@@ -6,10 +6,6 @@ module Finitio
       Syntax.parse(input, root: "contract")
     }
 
-    let(:contract){
-      compiled.values.first
-    }
-
     let(:ast){
       subject.to_ast
     }
@@ -21,13 +17,12 @@ module Finitio
         subject.compile(type_factory, Color)
       }
 
-      it 'compiles to the expected Hash' do
-        compiled.should be_a(Hash)
-        compiled.keys.should eq([:rgb])
-        contract.should be_a(Array)
-        contract[0].should be_a(TupleType)
-        contract[1].should be_a(Method)
-        contract[2].should be_a(Proc)
+      it 'compiles to the expected Contract' do
+        compiled.should be_a(Contract)
+        compiled.name.should eq(:rgb)
+        compiled.infotype.should be_a(TupleType)
+        compiled.dresser.should be_a(Method)
+        compiled.undresser.should be_a(Proc)
       end
 
       it 'has expected AST' do
@@ -52,13 +47,12 @@ module Finitio
         subject.compile(type_factory, nil)
       }
 
-      it 'compiles to the expected Hash' do
-        compiled.should be_a(Hash)
-        compiled.keys.should eq([:rgb])
-        contract.should be_a(Array)
-        contract[0].should be_a(TupleType)
-        contract[1].should be(Finitio::IDENTITY)
-        contract[2].should be(Finitio::IDENTITY)
+      it 'compiles to the expected Contract' do
+        compiled.should be_a(Contract)
+        compiled.name.should eq(:rgb)
+        compiled.infotype.should be_a(TupleType)
+        compiled.dresser.should be(Finitio::IDENTITY)
+        compiled.undresser.should be(Finitio::IDENTITY)
       end
 
       it 'has expected AST' do
@@ -83,12 +77,12 @@ module Finitio
         subject.compile(type_factory, nil)
       }
 
-      it 'compiles to the expected Hash' do
-        compiled.should be_a(Hash)
-        compiled.keys.should eq([:iso])
-        contract.should be_a(Array)
-        contract.first.should be_a(BuiltinType)
-        contract.last.should be_a(Proc)
+      it 'compiles to the expected Contract' do
+        compiled.should be_a(Contract)
+        compiled.name.should eq(:iso)
+        compiled.infotype.should be_a(BuiltinType)
+        compiled.dresser.should be_a(Proc)
+        compiled.undresser.should be_a(Proc)
       end
 
       it 'has expected AST' do
@@ -111,13 +105,12 @@ module Finitio
         subject.compile(type_factory, nil)
       }
 
-      it 'compiles to the expected Hash' do
-        compiled.should be_a(Hash)
-        compiled.keys.should eq([:iso])
-        contract.should be_a(Array)
-        contract[0].should be_a(BuiltinType)
-        contract[1].should be_a(Method)
-        contract[2].should be_a(Method)
+      it 'compiles to the expected Contract' do
+        compiled.should be_a(Contract)
+        compiled.name.should eq(:iso)
+        compiled.infotype.should be_a(BuiltinType)
+        compiled.dresser.should be_a(Method)
+        compiled.undresser.should be_a(Method)
       end
 
       it 'has expected AST' do

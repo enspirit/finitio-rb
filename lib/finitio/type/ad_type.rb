@@ -52,15 +52,9 @@ module Finitio
       unless ruby_type.nil? or ruby_type.is_a?(Module)
         raise ArgumentError, "Module expected, got `#{ruby_type}`"
       end
-      unless contracts.is_a?(Hash)
-        raise ArgumentError, "Hash expected, got `#{contracts}`"
-      end
-      invalid = contracts.values.reject{|v|
-        v.is_a?(Array) and v.size == 3 and v[0].is_a?(Type) and \
-        v[1].respond_to?(:call) and v[2].respond_to?(:call)
-      }
-      unless invalid.empty?
-        raise ArgumentError, "Invalid contracts `#{invalid}`"
+      unless contracts.is_a?(Array) &&
+             contracts.all?{|c| c.is_a?(Contract) }
+        raise ArgumentError, "[Contract] expected, got `#{contracts}`"
       end
 
       super(name, metadata)
@@ -69,12 +63,12 @@ module Finitio
     end
     attr_reader :ruby_type, :contracts
 
-    def [](contract_name)
-      contracts[contract_name]
+    def [](name)
+      contracts.find{|c| c.name == name }
     end
 
     def contract_names
-      contracts.keys
+      contracts.map(&:name)
     end
 
     def default_name
@@ -92,17 +86,17 @@ module Finitio
       # Try each contract in turn. Do nothing on TypeError as
       # the next candidate could be the good one! Return the
       # first successfully dressed.
-      contracts.each_pair do |name, (infotype, dresser, _)|
+      contracts.each do |contract|
 
         # First make the dress transformation on the information type
         success, dressed = handler.just_try do
-          infotype.dress(value, handler)
+          contract.infotype.dress(value, handler)
         end
         next unless success
 
         # Seems nice, just try to get one stage higher now
         success, dressed = handler.just_try(StandardError) do
-          dresser.call(dressed)
+          contract.dresser.call(dressed)
         end
         return dressed if success
 
