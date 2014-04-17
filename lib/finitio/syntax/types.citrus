@@ -1,15 +1,17 @@
 require 'finitio/syntax/lexer'
+require 'finitio/syntax/literals'
 
 grammar Finitio::Syntax::Types
   include Finitio::Syntax::Lexer
+  include Finitio::Syntax::Literals
 
   rule type_def
-    (type_name equal type)
+    (metadata? type_name equal type)
     <Finitio::Syntax::TypeDef>
   end
 
   rule main_type
-    (spacing type)
+    (metadata? type)
     <Finitio::Syntax::MainType>
   end
 
@@ -37,18 +39,19 @@ grammar Finitio::Syntax::Types
   end
 
   rule constraints
-      (named_constraint (opt_comma named_constraint)* opt_comma)
+      (constraint:named_constraint (opt_comma constraint:named_constraint)* opt_comma)
       <Finitio::Syntax::Constraints>
-    | unnamed_constraint
+    | (spacing constraint:unnamed_constraint)
+      <Finitio::Syntax::Constraints>
   end
 
   rule named_constraint
-    (constraint_name ':' spacing expression)
+    (metadata? constraint_name colon expression)
     <Finitio::Syntax::NamedConstraint>
   end
 
   rule unnamed_constraint
-    (spacing expression)
+    (metadata? expression)
     <Finitio::Syntax::UnnamedConstraint>
   end
 
@@ -76,7 +79,7 @@ grammar Finitio::Syntax::Types
   end
 
   rule attribute
-    (attribute_name spacing multiplicity:(':?' | ':') spacing type)
+    (metadata? attribute_name spacing multiplicity:(':?' | ':') spacing type)
     <Finitio::Syntax::Attribute>
   end
 
@@ -121,7 +124,7 @@ grammar Finitio::Syntax::Types
   end
 
   rule contract
-    ('<' contract_name '>' spacing type spacing pair?)
+    (metadata? '<' contract_name '>' spacing type spacing pair?)
     <Finitio::Syntax::Contract>
   end
 
@@ -157,6 +160,20 @@ grammar Finitio::Syntax::Types
   rule type_ref
     (type_name spacing)
     <Finitio::Syntax::TypeRef>
+  end
+
+  # metadata
+
+  rule metadata
+    (open_metadata metadata_attr (opt_comma metadata_attr)* opt_comma close_metadata)
+    <Finitio::Syntax::Metadata>
+  | (open_metadata description:(!'-/' .)+ close_metadata)
+    <Finitio::Syntax::Metadata>
+  end
+
+  rule metadata_attr
+    (attribute_name colon literal)
+    <Finitio::Syntax::MetadataAttr>
   end
 
   # lambda and expressions

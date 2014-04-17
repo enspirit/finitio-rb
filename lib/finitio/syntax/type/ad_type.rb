@@ -6,20 +6,15 @@ module Finitio
       capture :builtin_type_name
 
       def compile(factory)
-        name  = builtin_type_name
-        clazz = name ? resolve_ruby_const(name.to_s) : nil
-        factory.adt(clazz, compile_contracts(factory, clazz))
+        name      = builtin_type_name
+        clazz     = name ? resolve_ruby_const(name.to_s) : nil
+        contracts = compile_contracts(factory, clazz)
+        contracts = unique_names!(contracts, "contract")
+        factory.adt(clazz, contracts)
       end
 
       def compile_contracts(factory, clazz)
-        contracts = {}
-        captures[:contract].each do |node|
-          contract = node.compile(factory, clazz)
-          contracts.merge!(contract) do |k,_,_|
-            raise Error, "Duplicate contract name `#{k}`"
-          end
-        end
-        contracts
+        captures[:contract].map{|c| c.compile(factory, clazz) }
       end
 
       def to_ast

@@ -8,6 +8,21 @@ module Finitio
         }
       end
 
+      def metadata
+        m = captures[:metadata].first
+        m && m.value
+      end
+
+      def unique_names!(cs, kind = "constraint")
+        names = {}
+        cs.map(&:name).compact.each do |n|
+          names.merge!(n => true) do |k,_,_|
+            raise Error, "Duplicate #{kind} name `#{k}`"
+          end
+        end
+        cs
+      end
+
       def self.included(by)
         by.extend(ClassHelpers)
       end

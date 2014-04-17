@@ -17,26 +17,29 @@ module Finitio
     context 'a >= 10' do
       let(:input){ 'a >= 10' }
 
-      it 'compiles to an Hash' do
-        compiled.should be_a(Hash)
-        compiled.keys.should eq([:predicate])
+      it 'compiles to an Array' do
+        compiled.should be_a(Array)
+        compiled.size.should eq(1)
+        compiled.first.should be_a(Constraint)
       end
 
       it 'has the expected AST' do
-        ast.should eq([
+        ast.should eq([[
           :constraint,
           "default",
           [:fn, [:parameters, "a"], [:source, "a >= 10"]]
-        ])
+        ]])
       end
     end
 
     context 'foo: a >= 10' do
       let(:input){ 'foo: a >= 10' }
 
-      it 'compiles to an Hash' do
-        compiled.should be_a(Hash)
-        compiled.keys.should eq([:foo])
+      it 'compiles to an Array' do
+        compiled.should be_a(Array)
+        compiled.size.should eq(1)
+        compiled.first.should be_a(Constraint)
+        compiled.map(&:name).should eq([:foo])
       end
 
       it 'has the expected AST' do
@@ -51,9 +54,11 @@ module Finitio
     context 'foo: a >= 10, bar: a <= 255' do
       let(:input){ 'foo: a >= 10, bar: a <= 255' }
 
-      it 'compiles to an Hash' do
-        compiled.should be_a(Hash)
-        compiled.keys.should eq([:foo, :bar])
+      it 'compiles to an Array' do
+        compiled.should be_a(Array)
+        compiled.size.should eq(2)
+        compiled.first.should be_a(Constraint)
+        compiled.map(&:name).should eq([:foo, :bar])
       end
 
       it 'has the expected AST' do
@@ -75,7 +80,7 @@ module Finitio
     context 'foo: a >= 10, foo: a <= 255' do
       let(:input){ 'foo: a >= 10, foo: a <= 255' }
 
-      it 'compiles to an Hash' do
+      it 'raises an error' do
         ->{
           compiled
         }.should raise_error("Duplicate constraint name `foo`")

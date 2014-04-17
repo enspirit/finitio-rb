@@ -3,12 +3,17 @@ module Finitio
   # Abstract class for Finitio type (generators).
   #
   class Type
+    include Metadata
 
-    def initialize(name)
+    def initialize(name, metadata)
       unless name.nil? or name.is_a?(String)
         raise ArgumentError, "String expected for type name, got `#{name}`"
       end
-      @name = name
+      unless metadata.nil? or metadata.is_a?(Hash)
+        raise ArgumentError, "Hash expected for metadata, got `#{metadata}`"
+      end
+      @name     = name
+      @metadata = metadata
     end
 
     def anonymous?

@@ -1,15 +1,19 @@
 module Finitio
   module HeadingBasedType
 
-    def initialize(heading, name = nil)
+    def initialize(heading, name = nil, metadata = nil)
       unless heading.is_a?(Heading)
         raise ArgumentError, "Heading expected, got `#{heading}`"
       end
 
-      super(name)
+      super(name, metadata)
       @heading = heading
     end
     attr_reader :heading
+
+    def [](attrname)
+      heading.fetch(attrname)
+    end
 
     def ==(other)
       super || (other.is_a?(self.class) && heading == other.heading)

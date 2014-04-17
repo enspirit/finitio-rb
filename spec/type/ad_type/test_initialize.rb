@@ -2,9 +2,16 @@ require 'spec_helper'
 module Finitio
   describe AdType, 'initialize' do
 
+    let(:rgb){
+      Contract.new(intType, Color.method(:rgb), Finitio::IDENTITY, :rgb)
+    }
+
+    let(:hex){
+      Contract.new(floatType, Color.method(:hex), Finitio::IDENTITY, :hex)
+    }
+
     subject{
-      AdType.new(Color, rgb: [intType,   Color.method(:rgb), Finitio::IDENTITY ],
-                        hex: [floatType, Color.method(:hex), Finitio::IDENTITY ])
+      AdType.new(Color, [rgb, hex])
     }
 
     context 'with valid arguments' do
@@ -12,7 +19,7 @@ module Finitio
 
       it 'should set the instance variables' do
         subject.ruby_type.should be(Color)
-        subject.contracts.should be_a(Hash)
+        subject.contracts.should be_a(Array)
       end
     end
 
@@ -32,7 +39,7 @@ module Finitio
       it 'should raise an error' do
         ->{
           subject
-        }.should raise_error(ArgumentError, 'Hash expected, got `bar`')
+        }.should raise_error(ArgumentError, '[Contract] expected, got `bar`')
       end
     end
 

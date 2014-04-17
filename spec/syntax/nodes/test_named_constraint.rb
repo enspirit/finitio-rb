@@ -14,20 +14,20 @@ module Finitio
       subject.to_ast('a')
     }
 
-    context 'a >= 10' do
+    context 'foo: a >= 10' do
       let(:input){ 'foo: a >= 10' }
 
-      it 'compiles to an Hash' do
-        compiled.should be_a(Hash)
+      it 'compiles to a Constraint' do
+        compiled.should be_a(Constraint)
       end
 
-      it 'has expected keys' do
-        compiled.keys.should eq([:foo])
+      it 'has expected name' do
+        compiled.name.should eq(:foo)
       end
 
       it 'should be the correct Proc' do
-        compiled[:foo].call(12).should be_true
-        compiled[:foo].call(9).should be_false
+        compiled.===(12).should be_true
+        compiled.===(9).should be_false
       end
 
       it 'has the expected AST' do

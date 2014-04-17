@@ -25,7 +25,7 @@ module Finitio
       it 'should raise an error' do
         ->{
           subject
-        }.should raise_error(ArgumentError, "Finitio::Type expected, got `foo`")
+        }.should raise_error(ArgumentError, "Unable to factor a Finitio::Type from `foo`")
       end
     end
 

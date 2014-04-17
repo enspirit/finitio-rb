@@ -2,7 +2,7 @@ require 'spec_helper'
 module Finitio
   describe SubType, "dress" do
 
-    let(:type){ SubType.new(intType, {default: ->(i){ i>0 }, small: ->(i){ i<255 }}, "byte") }
+    let(:type){ SubType.new(intType, [byte_full], "byte") }
 
     subject{ type.dress(arg) }
 
@@ -58,7 +58,7 @@ module Finitio
 
         it 'should raise an Error' do
           subject.should be_a(TypeError)
-          subject.message.should eq("Invalid value `1000` for byte (not small)")
+          subject.message.should eq("Invalid value `1000` for byte")
         end
 
         it "should have no cause" do

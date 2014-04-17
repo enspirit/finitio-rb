@@ -45,7 +45,6 @@ module Finitio
       :add_type,
       :fetch,
       :main,
-      :main=
     ].each do |meth|
       define_method(meth) do |*args, &bl|
         system.public_send(meth, *args, &bl)

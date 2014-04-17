@@ -5,8 +5,7 @@ module Finitio
     subject{ type.default_name }
 
     let(:type){
-      AdType.new(Color, rgb: [intType,   Color.method(:rgb), Finitio::IDENTITY ],
-                        hex: [floatType, Color.method(:hex), Finitio::IDENTITY ])
+      AdType.new(Color, [])
     }
 
     it{ should eq('Color') }

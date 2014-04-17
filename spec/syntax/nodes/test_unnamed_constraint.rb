@@ -17,17 +17,17 @@ module Finitio
     context 'a >= 10' do
       let(:input){ 'a >= 10' }
 
-      it 'compiles to an Hash' do
-        compiled.should be_a(Hash)
+      it 'compiles to an Constraint' do
+        compiled.should be_a(Constraint)
       end
 
-      it 'has expected keys' do
-        compiled.keys.should eq([:predicate])
+      it 'is anonymous' do
+        compiled.should be_anonymous
       end
 
       it 'should be the correct Proc' do
-        compiled[:predicate].call(12).should be_true
-        compiled[:predicate].call(9).should be_false
+        compiled.===(12).should be_true
+        compiled.===(9).should be_false
       end
 
       it 'has the expected AST' do

@@ -1,7 +1,7 @@
 module Finitio
   class AliasType < Type
 
-    def initialize(target, name)
+    def initialize(target, name, metadata = nil)
       unless target.is_a?(Type)
         raise ArgumentError, "Type expected for target type, got `#{target}`"
       end
@@ -9,7 +9,7 @@ module Finitio
         raise ArgumentError, "Alias name cannot be nil"
       end
 
-      super(name)
+      super(name, metadata)
       @target = target
     end
     attr_reader :target

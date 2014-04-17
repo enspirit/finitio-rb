@@ -56,8 +56,24 @@ module SpecHelpers
     Finitio::BuiltinType.new(NilClass, "nilType")
   end
 
+  def byte_full
+    @byte_full ||= Finitio::Constraint.new(->(i){ i>=0 && i<=255 }, :byte)
+  end
+
+  def byte_min
+    @byte_min ||= Finitio::Constraint.new(->(i){ i>=0 }, :byte_min)
+  end
+
+  def byte_max
+    @byte_max ||= Finitio::Constraint.new(->(i){ i<=255 }, :byte_max)
+  end
+
+  def positive
+    @positive ||= Finitio::Constraint.new(->(i){ i>=0 }, :positive)
+  end
+
   def byte
-    Finitio::SubType.new(intType, byte: ->(i){ i>=0 && i<=255 })
+    Finitio::SubType.new(intType, [byte_full])
   end
 
   def type_factory

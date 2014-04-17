@@ -7,8 +7,10 @@ module Finitio
       capture_str :contract_name
 
       def compile(factory, clazz)
-        contract = [ type.compile(factory) ] + compile_pair(factory, clazz)
-        { contract_name.to_sym => contract }
+        name = contract_name.to_sym
+        infotype = type.compile(factory)
+        dresser, undresser  = compile_pair(factory, clazz)
+        factory.contract(infotype, dresser, undresser, name, metadata)
       end
 
       def compile_pair(factory, clazz)

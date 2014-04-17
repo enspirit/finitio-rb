@@ -18,7 +18,7 @@ module Finitio
       end
 
       it 'should have the two contracts' do
-        subject.contracts.keys.should eq([:rgb, :hex])
+        subject.contracts.map(&:name).should eq([:rgb, :hex])
       end
     end
 

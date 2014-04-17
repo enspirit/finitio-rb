@@ -6,8 +6,9 @@ module Finitio
   # type is a Finitio type.
   #
   class Attribute
+    include Metadata
 
-    def initialize(name, type, required = true)
+    def initialize(name, type, required = true, metadata = nil)
       unless name.is_a?(Symbol)
         raise ArgumentError, "Symbol expected for attribute name, got `#{name}`"
       end
@@ -16,7 +17,7 @@ module Finitio
         raise ArgumentError, "Type expected for attribute domain, got `#{type}`"
       end
 
-      @name, @type, @required = name, type, required
+      @name, @type, @required, @metadata = name, type, required, metadata
     end
     attr_reader :name, :type, :required
     alias :required? :required

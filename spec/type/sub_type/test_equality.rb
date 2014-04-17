@@ -2,32 +2,44 @@ require 'spec_helper'
 module Finitio
   describe SubType, "equality" do
 
-    let(:c1){ ->(i){ i>0   } }
-    let(:c2){ ->(i){ i<255 } }
-
-    let(:type) { SubType.new(intType, default: c1)      }
-    let(:type2){ SubType.new(intType, default: c1)      }
-    let(:type3){ SubType.new(intType, another_name: c1) }
-    let(:type4){ SubType.new(intType, default: c2)      }
-    let(:type5){ SubType.new(floatType, default: c1)    }
-
-    it 'should apply structural equality' do
-      (type == type2).should be_true
-      (type == type3).should be_true
+    def sub(parent, constraints, name = nil)
+      SubType.new(parent, constraints, name)
     end
 
-    it 'should apply distinguish different types' do
-      (type == type4).should be_false
-      (type == type5).should be_false
+    it 'recognizes same sub types' do
+      s1 = sub(intType, [byte_min])
+      s2 = sub(intType, [byte_min])
+      s1.should eq(s2)
     end
 
-    it 'should be a total function, with nil for non types' do
-      (type == 12).should be_false
+    it 'does not take name into account' do
+      s1 = sub(intType, [byte_min], 'foo')
+      s2 = sub(intType, [byte_min], 'bar')
+      s1.should eq(s2)
     end
 
-    it 'should implement hash accordingly' do
-      (type.hash == type2.hash).should be_true
-      (type.hash == type3.hash).should be_true
+    it 'recognizes same sub types with multiple constraints' do
+      s1 = sub(intType, [byte_min, byte_max])
+      s2 = sub(intType, [byte_max, byte_min])
+      s1.should eq(s2)
+    end
+
+    it 'distinguishes different sub types' do
+      s1 = sub(intType, [byte_min])
+      s2 = sub(intType, [byte_max])
+      s1.should_not eq(s2)
+    end
+
+    it 'implements hash code accordingly' do
+      s1 = sub(intType, [byte_min])
+      s2 = sub(intType, [byte_min])
+      s1.hash.should eq(s2.hash)
+    end
+
+    it 'is smart enough to have hashes for different sub types' do
+      s1 = sub(intType, [byte_max])
+      s2 = sub(intType, [byte_min])
+      s1.hash.should_not eq(s2.hash)
     end
 
   end

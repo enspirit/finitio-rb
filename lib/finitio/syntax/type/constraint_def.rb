@@ -10,9 +10,7 @@ module Finitio
       end
 
       def to_ast
-        ast = constraints.to_ast(var_name.to_s)
-        ast = [ast] if ast.first.is_a?(Symbol)
-        ast
+        constraints.to_ast(var_name.to_s)
       end
 
     end # module ConstraintDef

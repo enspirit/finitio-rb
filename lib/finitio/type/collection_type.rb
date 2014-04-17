@@ -1,12 +1,12 @@
 module Finitio
   module CollectionType
 
-    def initialize(elm_type, name = nil)
+    def initialize(elm_type, name = nil, metadata = nil)
       unless elm_type.is_a?(Type)
         raise ArgumentError, "Finitio::Type expected, got `#{elm_type}`"
       end
 
-      super(name)
+      super(name, metadata)
       @elm_type = elm_type
     end
     attr_reader :elm_type

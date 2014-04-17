@@ -33,7 +33,7 @@ module Finitio
     include HeadingBasedType
     include HashBasedType
 
-    def initialize(heading, name = nil)
+    def initialize(heading, name = nil, metadata = nil)
       super
       if heading.multi?
         raise ArgumentError, "Multi heading forbidden"

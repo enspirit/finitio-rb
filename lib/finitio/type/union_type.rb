@@ -29,12 +29,12 @@ module Finitio
   #
   class UnionType < Type
 
-    def initialize(candidates, name = nil)
+    def initialize(candidates, name = nil, metadata = nil)
       unless candidates.all?{|c| c.is_a?(Type) }
         raise ArgumentError, "[Finitio::Type] expected, got #{candidates}"
       end
 
-      super(name)
+      super(name, metadata)
       @candidates = candidates.freeze
     end
     attr_reader :candidates

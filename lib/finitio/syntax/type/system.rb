@@ -7,7 +7,7 @@ module Finitio
 
       def compile(system)
         definitions.compile(system)
-        system.main = main_type.compile(system) if main_type
+        main_type.compile(system) if main_type
         system
       end
 

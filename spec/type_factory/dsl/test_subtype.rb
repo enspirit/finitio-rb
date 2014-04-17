@@ -34,7 +34,9 @@ module Finitio
       end
 
       it 'should have the correct constraints' do
-        subject.constraints.should eq(constraints)
+        subject.constraints.each do |c|
+          c.should be_a(Constraint)
+        end
       end
     end
 
