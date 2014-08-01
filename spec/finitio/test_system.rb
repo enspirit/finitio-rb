@@ -1,9 +1,9 @@
 require 'spec_helper'
-describe Finitio, "parse" do
+describe Finitio, "system" do
 
   context 'with a string' do
     subject{
-      Finitio.parse <<-EOF
+      Finitio.system <<-EOF
         Posint = .Fixnum( i | i>=0 )
         Point  = { x: Posint, y: Posint }
       EOF
@@ -19,7 +19,7 @@ describe Finitio, "parse" do
 
   context 'with a Path' do
     subject{
-      Finitio.parse(Path.dir/"system.q")
+      Finitio.system(Path.dir/"system.fio")
     }
 
     it{ should be_a(Finitio::System) }

@@ -1,5 +1,10 @@
 # 0.5.0 / HEAD
 
+* Breaking changes on public API
+
+  * Finitio.parse now returns the parsing tree, no longer the compiled system,
+    use Finitio.system instead.
+
 * Major enhancements
 
   * Types no longer have to declared before being used. In order words, the
