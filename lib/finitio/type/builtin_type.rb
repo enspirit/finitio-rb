@@ -27,6 +27,8 @@ module Finitio
     end
     attr_reader :ruby_type
 
+    alias :representator :ruby_type
+
     def default_name
       @ruby_type.name.to_s
     end

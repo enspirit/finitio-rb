@@ -25,6 +25,10 @@ module Finitio
   class SetType < Type
     include CollectionType
 
+    def representator
+      [elmType].to_set
+    end
+
     def default_name
       "{#{elm_type.name}}"
     end

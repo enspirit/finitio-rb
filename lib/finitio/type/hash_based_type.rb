@@ -1,8 +1,16 @@
 module Finitio
   module HashBasedType
 
+    def representator
+      rep = {}
+      heading.each do |attr|
+        rep[attr.name] = rep[attr.type.representator]
+      end
+      rep
+    end
+
     def include?(value)
-      value.is_a?(Hash)  &&
+      value.is_a?(Hash) &&
       valid_attrs?(value) &&
       heading.all?{|a|
         value.has_key?(a.name) ? a.type.include?(value[a.name]) : true

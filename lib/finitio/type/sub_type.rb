@@ -42,6 +42,10 @@ module Finitio
     end
     attr_reader :super_type, :constraints
 
+    def representator
+      super_type.representator
+    end
+
     def [](name)
       constraints.find{|c| c.name == name }
     end
