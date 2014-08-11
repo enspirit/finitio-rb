@@ -26,6 +26,10 @@ module Finitio
   class SeqType < Type
     include CollectionType
 
+    def representator
+      [elmType]
+    end
+
     def include?(value)
       value.is_a?(::Array) and value.all?{|v| elm_type.include?(v) }
     end

@@ -13,6 +13,11 @@ module Finitio
 
   def parse(source)
     require "finitio/syntax"
+    Syntax.parse(source)
+  end
+
+  def system(source)
+    require "finitio/syntax"
     Syntax.compile(source)
   end
 
@@ -21,21 +26,9 @@ module Finitio
     Syntax.ast(source)
   end
 
-  def system(identifier)
-    f = File.expand_path("../finitio/#{identifier}.fio", __FILE__)
-    if File.exists?(f)
-      parse(File.read(f))
-    else
-      raise Error, "Unknown system #{identifier}"
-    end
-  end
-
-  def definition_files(of)
-    dir = File.expand_path("../finitio/#{of}", __FILE__)
-    Dir.glob("#{dir}/*.fio")
-  end
-
   extend self
 
-  DEFAULT_SYSTEM = system('Finitio/default')
+  DEFAULT_SYSTEM = system(File.read(
+    File.expand_path('../finitio/Finitio/default.fio', __FILE__)
+  ))
 end # module Finitio

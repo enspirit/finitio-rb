@@ -39,5 +39,13 @@ module Finitio
       end
     end
 
+    context 's =~ /^(test)$/' do
+      let(:input){ 's =~ /^(test)$/' }
+
+      it 'compiles to an Proc' do
+        compiled.should be_a(Proc)
+      end
+    end
+
   end
 end

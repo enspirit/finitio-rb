@@ -42,6 +42,10 @@ module Finitio
     end
     attr_reader :component_types
 
+    def representator
+      component_types.map(&:representator)
+    end
+
     def default_name
       "<" + @component_types.map(&:name).join(', ') + ">"
     end

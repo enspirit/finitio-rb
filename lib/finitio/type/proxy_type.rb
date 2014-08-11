@@ -12,6 +12,7 @@ module Finitio
     attr_reader :target_name, :target
 
     [
+      :representator,
       :name,
       :name=,
       :default_name,

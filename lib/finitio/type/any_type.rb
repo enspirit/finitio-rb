@@ -26,6 +26,10 @@ module Finitio
       "Any"
     end
 
+    def representator
+      Object
+    end
+
     def include?(value)
       true
     end

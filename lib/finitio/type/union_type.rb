@@ -39,6 +39,10 @@ module Finitio
     end
     attr_reader :candidates
 
+    def representator
+      raise NotImplementedError
+    end
+
     def include?(value)
       candidates.any?{|c| c.include?(value) }
     end

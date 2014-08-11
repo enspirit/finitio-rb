@@ -1,6 +1,10 @@
 module Finitio
   module RelBasedType
 
+    def representator
+      [tuple_type.representator]
+    end
+
     def include?(value)
       value.is_a?(Set) && value.all?{|tuple|
         tuple_type.include?(tuple)

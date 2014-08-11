@@ -184,11 +184,13 @@ grammar Finitio::Syntax::Types
   end
 
   rule expression
-    (
-        ('(' spacing expression spacing ')')
-      | (![\(,\)\n] .)+ expression?
-    )
+    expression_part+
     <Finitio::Syntax::Expression>
+  end
+
+  rule expression_part
+      ('(' expression ')')
+    | (![\(,\)\n] .)+
   end
 
 end

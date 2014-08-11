@@ -63,6 +63,15 @@ module Finitio
     end
     attr_reader :ruby_type, :contracts
 
+    alias :representator :ruby_type
+
+    def ruby_type=(ruby_type)
+      @ruby_type = ruby_type
+      @contracts.each do |contract|
+        contract.bind_ruby_type(ruby_type)
+      end
+    end
+
     def [](name)
       contracts.find{|c| c.name == name }
     end
@@ -98,8 +107,14 @@ module Finitio
         success, dressed = handler.just_try(StandardError) do
           contract.dresser.call(dressed)
         end
-        return dressed if success
 
+        if success
+          if ruby_type && !dressed.is_a?(ruby_type)
+            raise "Invalid IC dresser (#{contract.dresser}):"\
+                  " #{ruby_type} expected, got #{dressed.class}"
+          end
+          return dressed
+        end
       end
 
       # No one succeeded, just fail

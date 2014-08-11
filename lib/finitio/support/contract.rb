@@ -24,5 +24,10 @@ module Finitio
     end
     attr_reader :name, :infotype, :dresser, :undresser
 
+    def bind_ruby_type(clazz)
+      @dresser   = clazz.method(name.to_sym)
+      @undresser = clazz.instance_method(:"to_#{name}")
+    end
+
   end # class Contract
 end # module Finitio

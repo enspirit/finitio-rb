@@ -19,6 +19,7 @@ module Finitio
     end
 
     [
+      :representator,
       :dress,
       :undress,
       :include?,
