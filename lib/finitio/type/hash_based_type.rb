@@ -21,7 +21,7 @@ module Finitio
     # and applying `dress` on them in turn. Raise an error if any attribute
     # is missing or unrecognized, as well as if any sub transformation fails.
     def dress(value, handler = DressHelper.new)
-      handler.failed!(self, value) unless value.is_a?(Hash)
+      handler.failed!(self, value) unless looks_a_tuple?(value)
 
       # Check for extra attributes
       unless heading.allow_extra? or (extra = extra_attrs(value, true)).empty?
@@ -50,6 +50,10 @@ module Finitio
     end
 
   protected
+
+    def looks_a_tuple?(value)
+      value.is_a?(Hash) or value.respond_to?(:fetch)
+    end
 
     def attr_names
       @attr_names ||= heading.map(&:name)
