@@ -15,8 +15,8 @@ module Finitio
         let(:input){ '.Integer|.Float' }
 
         it 'compiles to a UnionType' do
-          compiled.should be_a(UnionType)
-          compiled.should eq(UnionType.new([intType, floatType]))
+          expect(compiled).to be_a(UnionType)
+          expect(compiled).to eq(UnionType.new([intType, floatType]))
         end
       end
     end
@@ -26,7 +26,7 @@ module Finitio
 
       let(:ast){ subject.to_ast }
 
-      it{ ast.should eq([
+      it{ expect(ast).to eq([
           :union_type,
           [:builtin_type, "Integer"],
           [:builtin_type, "Float"]

@@ -6,7 +6,7 @@ module Finitio
       let(:union){ UnionType.new([intType, floatType]) }
 
       it 'sets the variable instances' do
-        union.candidates.should eq([intType, floatType])
+        expect(union.candidates).to eq([intType, floatType])
       end
     end
 
@@ -14,9 +14,9 @@ module Finitio
       let(:union){ UnionType.new(["bar"]) }
 
       it 'should raise an error' do
-        ->{
+        expect{
           union
-        }.should raise_error(ArgumentError, %Q{[Finitio::Type] expected, got ["bar"]})
+        }.to raise_error(ArgumentError, %Q{[Finitio::Type] expected, got ["bar"]})
       end
     end
 

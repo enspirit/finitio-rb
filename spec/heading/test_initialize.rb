@@ -26,9 +26,9 @@ module Finitio
       }
 
       it 'should raise an error' do
-        ->{
+        expect{
           subject
-        }.should raise_error(ArgumentError, "Attribute names must be unique")
+        }.to raise_error(ArgumentError, "Attribute names must be unique")
       end
     end
 

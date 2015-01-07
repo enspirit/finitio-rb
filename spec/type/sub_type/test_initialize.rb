@@ -5,8 +5,8 @@ module Finitio
     let(:sub){ SubType.new(intType, [byte_min, byte_max]) }
 
     it 'sets the variable instances' do
-      sub.super_type.should eq(intType)
-      sub.constraints.should eq([byte_min, byte_max])
+      expect(sub.super_type).to eq(intType)
+      expect(sub.constraints).to eq([byte_min, byte_max])
     end
 
   end

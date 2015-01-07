@@ -18,15 +18,15 @@ module Finitio
       }
 
       it 'compiles to the expected Contract' do
-        compiled.should be_a(Contract)
-        compiled.name.should eq(:rgb)
-        compiled.infotype.should be_a(TupleType)
-        compiled.dresser.should be_a(Method)
-        compiled.undresser.should be_a(Proc)
+        expect(compiled).to be_a(Contract)
+        expect(compiled.name).to eq(:rgb)
+        expect(compiled.infotype).to be_a(TupleType)
+        expect(compiled.dresser).to be_a(Method)
+        expect(compiled.undresser).to be_a(Proc)
       end
 
       it 'has expected AST' do
-        ast.should eq([
+        expect(ast).to eq([
           :contract,
           "rgb",
           [:tuple_type,
@@ -48,15 +48,15 @@ module Finitio
       }
 
       it 'compiles to the expected Contract' do
-        compiled.should be_a(Contract)
-        compiled.name.should eq(:rgb)
-        compiled.infotype.should be_a(TupleType)
-        compiled.dresser.should be(Finitio::IDENTITY)
-        compiled.undresser.should be(Finitio::IDENTITY)
+        expect(compiled).to be_a(Contract)
+        expect(compiled.name).to eq(:rgb)
+        expect(compiled.infotype).to be_a(TupleType)
+        expect(compiled.dresser).to be(Finitio::IDENTITY)
+        expect(compiled.undresser).to be(Finitio::IDENTITY)
       end
 
       it 'has expected AST' do
-        ast.should eq([
+        expect(ast).to eq([
           :contract,
           "rgb",
           [:tuple_type,
@@ -78,15 +78,15 @@ module Finitio
       }
 
       it 'compiles to the expected Contract' do
-        compiled.should be_a(Contract)
-        compiled.name.should eq(:iso)
-        compiled.infotype.should be_a(BuiltinType)
-        compiled.dresser.should be_a(Proc)
-        compiled.undresser.should be_a(Proc)
+        expect(compiled).to be_a(Contract)
+        expect(compiled.name).to eq(:iso)
+        expect(compiled.infotype).to be_a(BuiltinType)
+        expect(compiled.dresser).to be_a(Proc)
+        expect(compiled.undresser).to be_a(Proc)
       end
 
       it 'has expected AST' do
-        ast.should eq([
+        expect(ast).to eq([
           :contract,
           "iso",
           [:builtin_type, "String"],
@@ -106,15 +106,15 @@ module Finitio
       }
 
       it 'compiles to the expected Contract' do
-        compiled.should be_a(Contract)
-        compiled.name.should eq(:iso)
-        compiled.infotype.should be_a(BuiltinType)
-        compiled.dresser.should be_a(Method)
-        compiled.undresser.should be_a(Method)
+        expect(compiled).to be_a(Contract)
+        expect(compiled.name).to eq(:iso)
+        expect(compiled.infotype).to be_a(BuiltinType)
+        expect(compiled.dresser).to be_a(Method)
+        expect(compiled.undresser).to be_a(Method)
       end
 
       it 'has expected AST' do
-        ast.should eq([
+        expect(ast).to eq([
           :contract,
           "iso",
           [:builtin_type, "String"],

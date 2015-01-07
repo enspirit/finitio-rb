@@ -16,9 +16,9 @@ module Finitio
       subject{ RelationType.new("foo", "bar") }
 
       it 'should raise an error' do
-        ->{
+        expect{
           subject
-        }.should raise_error(ArgumentError, "Heading expected, got `foo`")
+        }.to raise_error(ArgumentError, "Heading expected, got `foo`")
       end
     end
 

@@ -22,9 +22,9 @@ module Finitio
       let(:arg){ "foo" }
 
       it 'should raise an error' do
-        ->{
+        expect{
           subject
-        }.should raise_error("Invalid value `foo` for {Byte}")
+        }.to raise_error("Invalid value `foo` for {Byte}")
       end
     end
 
@@ -36,12 +36,12 @@ module Finitio
       }
 
       it 'should raise an error' do
-        subject.should be_a(TypeError)
-        subject.message.should eq("Invalid value `-12` for Byte")
+        expect(subject).to be_a(TypeError)
+        expect(subject.message).to eq("Invalid value `-12` for Byte")
       end
 
       it 'should have correct location' do
-        subject.location.should eq("2")
+        expect(subject.location).to eq("2")
       end
     end
 
@@ -53,12 +53,12 @@ module Finitio
       }
 
       it 'should raise an error' do
-        subject.should be_a(TypeError)
-        subject.message.should eq("Duplicate value `2`")
+        expect(subject).to be_a(TypeError)
+        expect(subject.message).to eq("Duplicate value `2`")
       end
 
       it 'should have correct location' do
-        subject.location.should eq("2")
+        expect(subject.location).to eq("2")
       end
     end
 

@@ -11,7 +11,7 @@ module Finitio
 
       it 'resolves fine' do
         subject
-        proxy.target.should eq(intType)
+        expect(proxy.target).to eq(intType)
       end
     end
 
@@ -19,9 +19,9 @@ module Finitio
       let(:system){ {} }
 
       it 'raises an error' do
-        ->{
+        expect{
           subject
-        }.should raise_error(Finitio::Error, "No such type `Int`")
+        }.to raise_error(Finitio::Error, "No such type `Int`")
       end
     end
 

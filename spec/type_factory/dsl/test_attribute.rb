@@ -9,11 +9,11 @@ module Finitio
       it{ should be_a(Attribute) }
 
       it 'should have the correct name' do
-        subject.name.should eq(:a)
+        expect(subject.name).to eq(:a)
       end
 
       it 'should have the correct type' do
-        subject.type.should eq(intType)
+        expect(subject.type).to eq(intType)
       end
     end
 

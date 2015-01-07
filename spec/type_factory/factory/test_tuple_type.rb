@@ -18,7 +18,7 @@ module Finitio
       it{ should eq(expected) }
 
       it 'should have the correct name' do
-        subject.name.should eq("MyTuple")
+        expect(subject.name).to eq("MyTuple")
       end
     end
 
@@ -29,13 +29,13 @@ module Finitio
 
       it 'should have the correct constraint on r' do
         subject.dress(r: 36)
-        ->{
+        expect{
           subject.dress(r: 543)
-        }.should raise_error(TypeError)
+        }.to raise_error(TypeError)
       end
 
       it 'should have the correct name' do
-        subject.name.should eq("MyTuple")
+        expect(subject.name).to eq("MyTuple")
       end
     end
 

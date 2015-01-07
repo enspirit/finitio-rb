@@ -5,32 +5,32 @@ module Finitio
     let(:proxy){ ProxyType.new('Int', intType) }
 
     it 'should delegate name' do
-      proxy.name.should eq(intType.name)
+      expect(proxy.name).to eq(intType.name)
     end
 
     it 'should delegate default_name' do
-      proxy.default_name.should eq(intType.default_name)
+      expect(proxy.default_name).to eq(intType.default_name)
     end
 
     it 'should delegate hash' do
-      proxy.hash.should eq(intType.hash)
+      expect(proxy.hash).to eq(intType.hash)
     end
 
     it 'should delegate ==' do
-      (intType == proxy).should be_true
-      (proxy == intType).should be_true
+      expect(intType == proxy).to be_true
+      expect(proxy == intType).to be_true
     end
 
     it 'should delegate dress' do
-      proxy.dress(12).should eq(12)
+      expect(proxy.dress(12)).to eq(12)
     end
 
     it 'should delegate include?' do
-      proxy.include?(12).should be_true
+      expect(proxy.include?(12)).to be_true
     end
 
     it 'should delegate to_s' do
-      proxy.to_s.should eq(intType.to_s)
+      expect(proxy.to_s).to eq(intType.to_s)
     end
 
   end

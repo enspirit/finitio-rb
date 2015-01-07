@@ -5,7 +5,7 @@ module Finitio
     let(:type){ AnyType.new }
 
     it 'uses Any' do
-      type.default_name.should eq("Any")
+      expect(type.default_name).to eq("Any")
     end
 
   end

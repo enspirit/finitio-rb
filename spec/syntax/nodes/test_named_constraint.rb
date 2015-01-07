@@ -18,20 +18,20 @@ module Finitio
       let(:input){ 'foo: a >= 10' }
 
       it 'compiles to a Constraint' do
-        compiled.should be_a(Constraint)
+        expect(compiled).to be_a(Constraint)
       end
 
       it 'has expected name' do
-        compiled.name.should eq(:foo)
+        expect(compiled.name).to eq(:foo)
       end
 
       it 'should be the correct Proc' do
-        compiled.===(12).should be_true
-        compiled.===(9).should be_false
+        expect(compiled.===(12)).to be_true
+        expect(compiled.===(9)).to be_false
       end
 
       it 'has the expected AST' do
-        ast.should eq([
+        expect(ast).to eq([
           :constraint,
           "foo",
           [:fn, [:parameters, "a"], [:source, "a >= 10"]]

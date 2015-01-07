@@ -20,9 +20,9 @@ module Finitio
       it{ should be_a(SubType) }
 
       it 'should apply the constraint' do
-        ->{
+        expect{
           subject.dress(-9)
-        }.should raise_error(TypeError)
+        }.to raise_error(TypeError)
       end
     end
 

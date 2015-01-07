@@ -14,7 +14,7 @@ module Finitio
       let(:name){ "intType" }
 
       it 'should return the type' do
-        subject.should eq(intType)
+        expect(subject).to eq(intType)
       end
     end
 
@@ -22,7 +22,7 @@ module Finitio
       let(:name){ "noSuchOne" }
 
       it 'should return nil' do
-        subject.should be_nil
+        expect(subject).to be_nil
       end
     end
 

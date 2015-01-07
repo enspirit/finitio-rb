@@ -15,8 +15,8 @@ module Finitio
         let(:source){ ".Integer" }
 
         it 'compiles to a BuiltinType' do
-          compiled.should be_a(BuiltinType)
-          compiled.ruby_type.should be(Integer)
+          expect(compiled).to be_a(BuiltinType)
+          expect(compiled.ruby_type).to be(Integer)
         end
       end
 
@@ -24,8 +24,8 @@ module Finitio
         let(:source){ ".Finitio::Type" }
 
         it 'compiles to a BuiltinType' do
-          compiled.should be_a(BuiltinType)
-          compiled.ruby_type.should be(::Finitio::Type)
+          expect(compiled).to be_a(BuiltinType)
+          expect(compiled.ruby_type).to be(::Finitio::Type)
         end
       end
     end
@@ -37,7 +37,7 @@ module Finitio
         subject.to_ast
       }
 
-      it{ ast.should eq([:builtin_type, "Finitio::Type"]) }
+      it{ expect(ast).to eq([:builtin_type, "Finitio::Type"]) }
     end
 
   end

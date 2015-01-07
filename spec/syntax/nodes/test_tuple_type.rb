@@ -15,8 +15,8 @@ module Finitio
         let(:input){ '{ }' }
 
         it 'compiles to a TupleType' do
-          compiled.should be_a(TupleType)
-          compiled.heading.should be_empty
+          expect(compiled).to be_a(TupleType)
+          expect(compiled.heading).to be_empty
         end
       end
 
@@ -24,8 +24,8 @@ module Finitio
         let(:input){ '{a: .Integer}' }
 
         it 'compiles to a TupleType' do
-          compiled.should be_a(TupleType)
-          compiled.heading.size.should eq(1)
+          expect(compiled).to be_a(TupleType)
+          expect(compiled.heading.size).to eq(1)
         end
       end
 
@@ -33,8 +33,8 @@ module Finitio
         let(:input){ '{a: .Integer, b: .Float}' }
 
         it 'compiles to a TupleType' do
-          compiled.should be_a(TupleType)
-          compiled.heading.size.should eq(2)
+          expect(compiled).to be_a(TupleType)
+          expect(compiled.heading.size).to eq(2)
         end
       end
 
@@ -42,8 +42,8 @@ module Finitio
         let(:input){ '{a: .Integer, b :? .Float}' }
 
         it 'compiles to a MultiTupleType' do
-          compiled.should be_a(MultiTupleType)
-          compiled.heading.size.should eq(2)
+          expect(compiled).to be_a(MultiTupleType)
+          expect(compiled.heading.size).to eq(2)
         end
       end
 
@@ -51,9 +51,9 @@ module Finitio
         let(:input){ '{a: .Integer, ...}' }
 
         it 'compiles to a MultiTupleType' do
-          compiled.should be_a(MultiTupleType)
-          compiled.heading.size.should eq(1)
-          compiled.heading.should be_allow_extra
+          expect(compiled).to be_a(MultiTupleType)
+          expect(compiled.heading.size).to eq(1)
+          expect(compiled.heading).to be_allow_extra
         end
       end
     end
@@ -65,7 +65,7 @@ module Finitio
         let(:input){ '{a: .Integer}' }
 
         it{
-          ast.should eq([
+          expect(ast).to eq([
             :tuple_type,
             [
               :heading,
@@ -79,7 +79,7 @@ module Finitio
         let(:input){ '{a :? .Integer}' }
 
         it{
-          ast.should eq([
+          expect(ast).to eq([
             :multi_tuple_type,
             [
               :heading,

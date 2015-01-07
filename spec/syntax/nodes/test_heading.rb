@@ -15,8 +15,8 @@ module Finitio
         let(:input){ '  ' }
 
         it 'compiles to a Heading' do
-          compiled.should be_a(Heading)
-          compiled.to_name.should eq('')
+          expect(compiled).to be_a(Heading)
+          expect(compiled.to_name).to eq('')
         end
       end
 
@@ -24,8 +24,8 @@ module Finitio
         let(:input){ 'a: .Integer' }
 
         it 'compiles to a Heading' do
-          compiled.should be_a(Heading)
-          compiled.to_name.should eq('a: Integer')
+          expect(compiled).to be_a(Heading)
+          expect(compiled.to_name).to eq('a: Integer')
         end
       end
 
@@ -33,8 +33,8 @@ module Finitio
         let(:input){ 'a: .Integer, b: .Float' }
 
         it 'compiles to a Heading' do
-          compiled.should be_a(Heading)
-          compiled.to_name.should eq('a: Integer, b: Float')
+          expect(compiled).to be_a(Heading)
+          expect(compiled.to_name).to eq('a: Integer, b: Float')
         end
       end
 
@@ -42,8 +42,8 @@ module Finitio
         let(:input){ 'a: .Integer, b :? .Float' }
 
         it 'compiles to a Heading' do
-          compiled.should be_a(Heading)
-          compiled.to_name.should eq('a: Integer, b :? Float')
+          expect(compiled).to be_a(Heading)
+          expect(compiled.to_name).to eq('a: Integer, b :? Float')
         end
       end
 
@@ -51,8 +51,8 @@ module Finitio
         let(:input){ 'a: .Integer, ...' }
 
         it 'compiles to a Heading' do
-          compiled.should be_a(Heading)
-          compiled.to_name.should eq('a: Integer, ...')
+          expect(compiled).to be_a(Heading)
+          expect(compiled.to_name).to eq('a: Integer, ...')
         end
       end
     end
@@ -65,7 +65,7 @@ module Finitio
       }
 
       it{
-        ast.should eq([
+        expect(ast).to eq([
           :heading,
           [ :attribute, "a", [:builtin_type, "Integer" ]],
           [ :attribute, "b", [:builtin_type, "Float" ]]

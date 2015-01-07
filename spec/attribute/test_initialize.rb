@@ -6,9 +6,9 @@ module Finitio
       subject{ Attribute.new(:red, intType) }
 
       it 'should correctly set the instance variables' do
-        subject.name.should eq(:red)
-        subject.type.should eq(intType)
-        subject.should be_required
+        expect(subject.name).to eq(:red)
+        expect(subject.type).to eq(intType)
+        expect(subject).to be_required
       end
     end
 
@@ -16,9 +16,9 @@ module Finitio
       subject{ Attribute.new(:red, intType, false) }
 
       it 'should correctly set the instance variables' do
-        subject.name.should eq(:red)
-        subject.type.should eq(intType)
-        subject.should_not be_required
+        expect(subject.name).to eq(:red)
+        expect(subject.type).to eq(intType)
+        expect(subject).not_to be_required
       end
     end
 

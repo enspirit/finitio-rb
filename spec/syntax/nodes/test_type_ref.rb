@@ -25,12 +25,12 @@ module Finitio
     let(:input){ 'Int' }
 
     it 'compiles to a the BuiltinType' do
-      compiled.should be_a(BuiltinType)
-      compiled.name.should eq("Int")
+      expect(compiled).to be_a(BuiltinType)
+      expect(compiled.name).to eq("Int")
     end
 
     it 'has the expected AST' do
-      ast.should eq([:type_ref, "Int"])
+      expect(ast).to eq([:type_ref, "Int"])
     end
 
   end

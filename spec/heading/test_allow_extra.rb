@@ -9,15 +9,15 @@ module Finitio
     end
 
     it 'is false by default' do
-      heading([r]).should_not be_allow_extra
+      expect(heading([r])).not_to be_allow_extra
     end
 
     it 'can be set to true' do
-      heading([r], allow_extra: true).should be_allow_extra
+      expect(heading([r], allow_extra: true)).to be_allow_extra
     end
 
     it 'can be set to false explicitely' do
-      heading([r], allow_extra: false).should_not be_allow_extra
+      expect(heading([r], allow_extra: false)).not_to be_allow_extra
     end
 
   end

@@ -6,11 +6,11 @@ module Finitio
     let(:h){ Heading.new([a]) }
 
     it 'returns the attribute by name' do
-      h[:a].should be(a)
+      expect(h[:a]).to be(a)
     end
 
     it 'returns nil if no such attribute' do
-      h[:b].should be_nil
+      expect(h[:b]).to be_nil
     end
 
   end

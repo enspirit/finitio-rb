@@ -9,7 +9,7 @@ module Finitio
       it{ should be_a(BuiltinType) }
 
       it 'should have the correct ruby type' do
-        subject.ruby_type.should be(Integer)
+        expect(subject.ruby_type).to be(Integer)
       end
     end
 
@@ -25,7 +25,7 @@ module Finitio
       it_should_behave_like "The Integer builtin type"
 
       it 'should have the correct name' do
-        subject.name.should eq("Integer")
+        expect(subject.name).to eq("Integer")
       end
     end
 
@@ -37,7 +37,7 @@ module Finitio
       it_should_behave_like "The Integer builtin type"
 
       it 'should have the correct name' do
-        subject.name.should eq("Int")
+        expect(subject.name).to eq("Int")
       end
     end
 

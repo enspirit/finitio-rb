@@ -5,7 +5,7 @@ module Finitio
     let(:type){ BuiltinType.new(Integer) }
 
     it 'should set instance variables' do
-      type.ruby_type.should be(Integer)
+      expect(type.ruby_type).to be(Integer)
     end
 
   end

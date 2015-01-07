@@ -8,22 +8,22 @@ module Finitio
     let(:uType4) { UnionType.new([intType])            }
 
     it 'should apply structural equality' do
-      (uType  == uType2).should be_true
-      (uType  == uType3).should be_true
-      (uType2 == uType3).should be_true
+      expect(uType  == uType2).to be_true
+      expect(uType  == uType3).to be_true
+      expect(uType2 == uType3).to be_true
     end
 
     it 'should apply distinguish different types' do
-      (uType == uType4).should be_false
-      (uType == intType).should be_false
+      expect(uType == uType4).to be_false
+      expect(uType == intType).to be_false
     end
 
     it 'should be a total function, with nil for non types' do
-      (uType == 12).should be_false
+      expect(uType == 12).to be_false
     end
 
     it 'should implement hash accordingly' do
-      [uType, uType2, uType3].map(&:hash).uniq.size.should eq(1)
+      expect([uType, uType2, uType3].map(&:hash).uniq.size).to eq(1)
     end
 
   end

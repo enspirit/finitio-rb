@@ -9,14 +9,14 @@ module Finitio
       it{ should be_a(SubType) }
 
       it 'should have the BuiltinType(Fixnum) super type' do
-        subject.super_type.should be_a(BuiltinType)
-        subject.super_type.ruby_type.should be(Fixnum)
+        expect(subject.super_type).to be_a(BuiltinType)
+        expect(subject.super_type.ruby_type).to be(Fixnum)
       end
 
       it 'should have the correct constraint' do
-        subject.dress(10).should eq(10)
-        ->{ subject.dress(-12) }.should raise_error(TypeError)
-        ->{ subject.dress(12) }.should raise_error(TypeError)
+        expect(subject.dress(10)).to eq(10)
+        expect{ subject.dress(-12) }.to raise_error(TypeError)
+        expect{ subject.dress(12) }.to raise_error(TypeError)
       end
     end
 
@@ -44,8 +44,8 @@ module Finitio
       it { should be_a(SubType) }
 
       it 'should have the correct constraint' do
-        subject.dress('abc').should eq('abc')
-        ->{ subject.dress('123') }.should raise_error(TypeError)
+        expect(subject.dress('abc')).to eq('abc')
+        expect{ subject.dress('123') }.to raise_error(TypeError)
       end
     end
 

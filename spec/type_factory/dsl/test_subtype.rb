@@ -13,14 +13,14 @@ module Finitio
       it{ should be_a(SubType) }
 
       it 'should have the BuiltinType(Integer) super type' do
-        subject.super_type.should be_a(BuiltinType)
-        subject.super_type.ruby_type.should be(Integer)
+        expect(subject.super_type).to be_a(BuiltinType)
+        expect(subject.super_type.ruby_type).to be(Integer)
       end
 
       it 'should have the correct constraint' do
-        ->{
+        expect{
           subject.dress(-12)
-        }.should raise_error(TypeError)
+        }.to raise_error(TypeError)
       end
     end
 
@@ -29,13 +29,13 @@ module Finitio
       it{ should be_a(SubType) }
 
       it 'should have the BuiltinType(Integer) super type' do
-        subject.super_type.should be_a(BuiltinType)
-        subject.super_type.ruby_type.should be(Integer)
+        expect(subject.super_type).to be_a(BuiltinType)
+        expect(subject.super_type.ruby_type).to be(Integer)
       end
 
       it 'should have the correct constraints' do
         subject.constraints.each do |c|
-          c.should be_a(Constraint)
+          expect(c).to be_a(Constraint)
         end
       end
     end
@@ -85,7 +85,7 @@ module Finitio
       it_should_behave_like "The SmallInt structural type"
 
       it 'should have the correct name' do
-        subject.name.should eq("SmallInt")
+        expect(subject.name).to eq("SmallInt")
       end
     end
 

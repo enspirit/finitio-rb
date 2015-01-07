@@ -15,9 +15,9 @@ module Finitio
         let(:input){ '{.Integer}' }
 
         it 'compiles to a SeqType' do
-          compiled.should be_a(SetType)
-          compiled.elm_type.should be_a(BuiltinType)
-          compiled.elm_type.ruby_type.should be(Integer)
+          expect(compiled).to be_a(SetType)
+          expect(compiled.elm_type).to be_a(BuiltinType)
+          expect(compiled.elm_type.ruby_type).to be(Integer)
         end
       end
     end
@@ -27,7 +27,7 @@ module Finitio
 
       let(:ast){ subject.to_ast }
 
-      it{ ast.should eq([
+      it{ expect(ast).to eq([
           :set_type,
           [:builtin_type, "Integer"]
         ])

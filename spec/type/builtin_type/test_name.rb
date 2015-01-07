@@ -8,7 +8,7 @@ module Finitio
       let(:type){ BuiltinType.new(Integer) }
 
       it 'uses the default name' do
-        subject.should eq("Integer")
+        expect(subject).to eq("Integer")
       end
     end
 
@@ -16,7 +16,7 @@ module Finitio
       let(:type){ BuiltinType.new(Integer, "int") }
 
       it 'uses the specified name' do
-        subject.should eq("int")
+        expect(subject).to eq("int")
       end
     end
 

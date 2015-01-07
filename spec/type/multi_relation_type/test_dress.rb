@@ -29,8 +29,8 @@ module Finitio
       }
 
       it 'should coerce to an Enumerable of tuples' do
-        subject.should be_a(Enumerable)
-        subject.to_a.should eq(expected)
+        expect(subject).to be_a(Enumerable)
+        expect(subject.to_a).to eq(expected)
       end
     end
 
@@ -49,8 +49,8 @@ module Finitio
       }
 
       it 'should coerce to an Enumerable of tuples' do
-        subject.should be_a(Enumerable)
-        subject.to_a.should eq(expected)
+        expect(subject).to be_a(Enumerable)
+        expect(subject.to_a).to eq(expected)
       end
     end
 
@@ -63,8 +63,8 @@ module Finitio
       }
 
       it 'should coerce to an Enumerable of tuples' do
-        subject.should be_a(Enumerable)
-        subject.to_a.should eq(expected)
+        expect(subject).to be_a(Enumerable)
+        expect(subject.to_a).to eq(expected)
       end
     end
 
@@ -80,16 +80,16 @@ module Finitio
         }
 
         it 'should raise a TypeError' do
-          subject.should be_a(TypeError)
-          subject.message.should eq("Invalid value `foo` for colors")
+          expect(subject).to be_a(TypeError)
+          expect(subject.message).to eq("Invalid value `foo` for colors")
         end
 
         it 'should have no cause' do
-          subject.cause.should be_nil
+          expect(subject.cause).to be_nil
         end
 
         it 'should have an empty location' do
-          subject.location.should eq('')
+          expect(subject.location).to eq('')
         end
       end
 
@@ -99,16 +99,16 @@ module Finitio
         }
 
         it 'should raise a TypeError' do
-          subject.should be_a(TypeError)
-          subject.message.should eq("Invalid value `foo` for {r: Byte, g: Byte, b :? Byte}")
+          expect(subject).to be_a(TypeError)
+          expect(subject.message).to eq("Invalid value `foo` for {r: Byte, g: Byte, b :? Byte}")
         end
 
         it 'should have no cause' do
-          subject.cause.should be_nil
+          expect(subject.cause).to be_nil
         end
 
         it 'should have the correct location' do
-          subject.location.should eq('0')
+          expect(subject.location).to eq('0')
         end
       end
 
@@ -121,16 +121,16 @@ module Finitio
         }
 
         it 'should raise a TypeError' do
-          subject.should be_a(TypeError)
-          subject.message.should eq("Missing attribute `g`")
+          expect(subject).to be_a(TypeError)
+          expect(subject.message).to eq("Missing attribute `g`")
         end
 
         it 'should have no cause' do
-          subject.cause.should be_nil
+          expect(subject.cause).to be_nil
         end
 
         it 'should have the correct location' do
-          subject.location.should eq('1')
+          expect(subject.location).to eq('1')
         end
       end
 
@@ -143,16 +143,16 @@ module Finitio
         }
 
         it 'should raise a TypeError' do
-          subject.should be_a(TypeError)
-          subject.message.should eq("Unrecognized attribute `f`")
+          expect(subject).to be_a(TypeError)
+          expect(subject.message).to eq("Unrecognized attribute `f`")
         end
 
         it 'should have no cause' do
-          subject.cause.should be_nil
+          expect(subject.cause).to be_nil
         end
 
         it 'should have the correct location' do
-          subject.location.should eq('1')
+          expect(subject.location).to eq('1')
         end
       end
 
@@ -165,16 +165,16 @@ module Finitio
         }
 
         it 'should raise a TypeError' do
-          subject.should be_a(TypeError)
-          subject.message.should eq("Invalid value `12.0` for Byte")
+          expect(subject).to be_a(TypeError)
+          expect(subject.message).to eq("Invalid value `12.0` for Byte")
         end
 
         it 'should have a cause' do
-          subject.cause.should_not be_nil
+          expect(subject.cause).not_to be_nil
         end
 
         it 'should have the correct location' do
-          subject.location.should eq('1/b')
+          expect(subject.location).to eq('1/b')
         end
       end
 
@@ -188,16 +188,16 @@ module Finitio
         }
 
         it 'should raise a TypeError' do
-          subject.should be_a(TypeError)
-          subject.message.should eq("Duplicate tuple")
+          expect(subject).to be_a(TypeError)
+          expect(subject.message).to eq("Duplicate tuple")
         end
 
         it 'should have no cause' do
-          subject.cause.should be_nil
+          expect(subject.cause).to be_nil
         end
 
         it 'should have the correct location' do
-          subject.location.should eq('2')
+          expect(subject.location).to eq('2')
         end
       end
     end

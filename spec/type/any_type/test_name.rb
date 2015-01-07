@@ -8,7 +8,7 @@ module Finitio
       let(:type){ AnyType.new }
 
       it 'uses the default name' do
-        subject.should eq("Any")
+        expect(subject).to eq("Any")
       end
     end
 
@@ -16,7 +16,7 @@ module Finitio
       let(:type){ AnyType.new("foo") }
 
       it 'uses the specified name' do
-        subject.should eq("foo")
+        expect(subject).to eq("foo")
       end
     end
 

@@ -13,23 +13,23 @@ module Finitio
     let(:type4)  { MultiRelationType.new(h4) }
 
     it 'should apply structural equality' do
-      (type1 == type2).should be_true
-      (type2 == type1).should be_true
+      expect(type1 == type2).to be_true
+      expect(type2 == type1).to be_true
     end
 
     it 'should apply distinguish different types' do
-      (type1 == type3).should be_false
-      (type2 == type3).should be_false
-      (type1 == type4).should be_false
+      expect(type1 == type3).to be_false
+      expect(type2 == type3).to be_false
+      expect(type1 == type4).to be_false
     end
 
     it 'should be a total function, with false for non types' do
-      (type1 == 12).should eq(false)
+      expect(type1 == 12).to eq(false)
     end
 
     it 'should implement hash accordingly' do
-      [type1, type2].map(&:hash).uniq.size.should eq(1)
-      type1.hash.should_not eq(type4.hash)
+      expect([type1, type2].map(&:hash).uniq.size).to eq(1)
+      expect(type1.hash).not_to eq(type4.hash)
     end
 
   end

@@ -18,8 +18,8 @@ module Finitio
       it{ should be_a(AdType) }
 
       it 'should set the instance variables' do
-        subject.ruby_type.should be(Color)
-        subject.contracts.should be_a(Array)
+        expect(subject.ruby_type).to be(Color)
+        expect(subject.contracts).to be_a(Array)
       end
     end
 
@@ -27,9 +27,9 @@ module Finitio
       subject{ AdType.new("foo", {}) }
 
       it 'should raise an error' do
-        ->{
+        expect{
           subject
-        }.should raise_error(ArgumentError, 'Module expected, got `foo`')
+        }.to raise_error(ArgumentError, 'Module expected, got `foo`')
       end
     end
 
@@ -37,9 +37,9 @@ module Finitio
       subject{ AdType.new(Object, "bar") }
 
       it 'should raise an error' do
-        ->{
+        expect{
           subject
-        }.should raise_error(ArgumentError, '[Contract] expected, got `bar`')
+        }.to raise_error(ArgumentError, '[Contract] expected, got `bar`')
       end
     end
 

@@ -13,17 +13,17 @@ module Finitio
     it{ should be_a(System) }
 
     it 'should not be the same object' do
-      subject.should_not be(system)
+      expect(subject).not_to be(system)
     end
 
     it 'should have intType' do
-      subject['intType'].should eq(intType)
+      expect(subject['intType']).to eq(intType)
     end
 
     it 'should not share internals with the original' do
       subject.add_type(floatType)
-      subject['floatType'].should_not be_nil
-      system['floatType'].should be_nil
+      expect(subject['floatType']).not_to be_nil
+      expect(system['floatType']).to be_nil
     end
 
   end

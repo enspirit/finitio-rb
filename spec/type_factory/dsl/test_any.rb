@@ -20,7 +20,7 @@ module Finitio
       it{ should be_a(AnyType) }
 
       it 'should have the name' do
-        subject.name.should eq('foo')
+        expect(subject.name).to eq('foo')
       end
     end
 

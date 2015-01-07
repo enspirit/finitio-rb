@@ -14,7 +14,7 @@ module Finitio
       }
 
       it 'should coerce to an array' do
-        subject.should eq(arg)
+        expect(subject).to eq(arg)
       end
     end
 
@@ -30,16 +30,16 @@ module Finitio
         }
 
         it 'should raise a TypeError' do
-          subject.should be_a(TypeError)
-          subject.message.should eq("Invalid value `foo` for point")
+          expect(subject).to be_a(TypeError)
+          expect(subject.message).to eq("Invalid value `foo` for point")
         end
 
         it 'should have no cause' do
-          subject.cause.should be_nil
+          expect(subject.cause).to be_nil
         end
 
         it 'should have an empty location' do
-          subject.location.should eq('')
+          expect(subject.location).to eq('')
         end
       end
 
@@ -49,16 +49,16 @@ module Finitio
         }
 
         it 'should raise a TypeError' do
-          subject.should be_a(TypeError)
-          subject.message.should eq("Struct size mismatch (1 for 2)")
+          expect(subject).to be_a(TypeError)
+          expect(subject.message).to eq("Struct size mismatch (1 for 2)")
         end
 
         it 'should have no cause' do
-          subject.cause.should be_nil
+          expect(subject.cause).to be_nil
         end
 
         it 'should have an empty location' do
-          subject.location.should eq('')
+          expect(subject.location).to eq('')
         end
       end
 
@@ -68,16 +68,16 @@ module Finitio
         }
 
         it 'should raise a TypeError' do
-          subject.should be_a(TypeError)
-          subject.message.should eq("Struct size mismatch (3 for 2)")
+          expect(subject).to be_a(TypeError)
+          expect(subject.message).to eq("Struct size mismatch (3 for 2)")
         end
 
         it 'should have no cause' do
-          subject.cause.should be_nil
+          expect(subject.cause).to be_nil
         end
 
         it 'should have an empty location' do
-          subject.location.should eq('')
+          expect(subject.location).to eq('')
         end
       end
 
@@ -87,16 +87,16 @@ module Finitio
         }
 
         it 'should raise a TypeError' do
-          subject.should be_a(TypeError)
-          subject.message.should eq("Invalid value `bar` for floatType")
+          expect(subject).to be_a(TypeError)
+          expect(subject.message).to eq("Invalid value `bar` for floatType")
         end
 
         it 'should have no cause' do
-          subject.cause.should be_nil
+          expect(subject.cause).to be_nil
         end
 
         it 'should have the correct location' do
-          subject.location.should eq("1")
+          expect(subject.location).to eq("1")
         end
       end
     end

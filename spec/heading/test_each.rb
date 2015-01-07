@@ -9,7 +9,7 @@ module Finitio
     context 'without a block' do
 
       it 'should return an enumerator' do
-        h.each.should be_a(Enumerator)
+        expect(h.each).to be_a(Enumerator)
       end
     end
 
@@ -20,7 +20,7 @@ module Finitio
         h.each do |attr|
           seen << attr
         end
-        seen.should eq([a, b])
+        expect(seen).to eq([a, b])
       end
     end
 

@@ -12,7 +12,7 @@ module Finitio
       it{ should be_a(TupleType) }
 
       it 'correctly sets the instance variable' do
-        subject.heading.should eq(heading)
+        expect(subject.heading).to eq(heading)
       end
     end
 
@@ -20,9 +20,9 @@ module Finitio
       subject{ TupleType.new("foo") }
 
       it 'should raise an error' do
-        ->{
+        expect{
           subject
-        }.should raise_error(ArgumentError, "Heading expected, got `foo`")
+        }.to raise_error(ArgumentError, "Heading expected, got `foo`")
       end
     end
 

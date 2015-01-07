@@ -16,7 +16,7 @@ module Finitio
       it{ should eq(intType) }
 
       it 'should have the correct name' do
-        subject.name.should eq("Int")
+        expect(subject.name).to eq("Int")
       end
     end
 

@@ -9,7 +9,7 @@ module Finitio
       it{ should be_a(UnionType) }
 
       it 'should have the correct candidates' do
-        subject.candidates.should eq([intType, floatType])
+        expect(subject.candidates).to eq([intType, floatType])
       end
     end
 
@@ -25,7 +25,7 @@ module Finitio
       it_should_behave_like "The Int|Float union type"
 
       it 'should have the correct name' do
-        subject.name.should eq("MyUnion")
+        expect(subject.name).to eq("MyUnion")
       end
     end
 
@@ -37,7 +37,7 @@ module Finitio
       it_should_behave_like "The Int|Float union type"
 
       it 'should have the correct name' do
-        subject.name.should eq("Integer|Float")
+        expect(subject.name).to eq("Integer|Float")
       end
     end
 
@@ -49,7 +49,7 @@ module Finitio
       it_should_behave_like "The Int|Float union type"
 
       it 'should have the correct name' do
-        subject.name.should eq("Integer|Float")
+        expect(subject.name).to eq("Integer|Float")
       end
     end
 
@@ -61,7 +61,7 @@ module Finitio
       it_should_behave_like "The Int|Float union type"
 
       it 'should have the correct name' do
-        subject.name.should eq("intType|floatType")
+        expect(subject.name).to eq("intType|floatType")
       end
     end
 
@@ -73,7 +73,7 @@ module Finitio
       it_should_behave_like "The Int|Float union type"
 
       it 'should have the correct name' do
-        subject.name.should eq("Integer|floatType")
+        expect(subject.name).to eq("Integer|floatType")
       end
     end
 

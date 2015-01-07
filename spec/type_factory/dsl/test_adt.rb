@@ -14,11 +14,11 @@ module Finitio
       it{ should be_a(AdType) }
 
       it 'should have the correct ruby type' do
-        subject.ruby_type.should be(Color)
+        expect(subject.ruby_type).to be(Color)
       end
 
       it 'should have the two contracts' do
-        subject.contracts.map(&:name).should eq([:rgb, :hex])
+        expect(subject.contracts.map(&:name)).to eq([:rgb, :hex])
       end
     end
 
@@ -34,7 +34,7 @@ module Finitio
       it_should_behave_like "The <Color> type"
 
       it 'should have the correct name' do
-        subject.name.should eq("Color")
+        expect(subject.name).to eq("Color")
       end
     end
 
@@ -46,7 +46,7 @@ module Finitio
       it_should_behave_like "The <Color> type"
 
       it 'should have the correct name' do
-        subject.name.should eq("MyColor")
+        expect(subject.name).to eq("MyColor")
       end
     end
 

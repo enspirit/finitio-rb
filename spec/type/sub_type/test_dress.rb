@@ -22,17 +22,17 @@ module Finitio
         let(:arg){ 12.0 }
 
         it 'should raise an Error' do
-          subject.should be_a(TypeError)
-          subject.message.should eq("Invalid value `12.0` for byte")
+          expect(subject).to be_a(TypeError)
+          expect(subject.message).to eq("Invalid value `12.0` for byte")
         end
 
         it "should have the proper cause from super type's up" do
-          subject.cause.should be_a(TypeError)
-          subject.cause.message.should eq("Invalid value `12.0` for intType")
+          expect(subject.cause).to be_a(TypeError)
+          expect(subject.cause.message).to eq("Invalid value `12.0` for intType")
         end
 
         it "should have an empty location" do
-          subject.location.should eq('')
+          expect(subject.location).to eq('')
         end
       end
 
@@ -40,16 +40,16 @@ module Finitio
         let(:arg){ -12 }
 
         it 'should raise an Error' do
-          subject.should be_a(TypeError)
-          subject.message.should eq("Invalid value `-12` for byte")
+          expect(subject).to be_a(TypeError)
+          expect(subject.message).to eq("Invalid value `-12` for byte")
         end
 
         it "should have no cause" do
-          subject.cause.should be_nil
+          expect(subject.cause).to be_nil
         end
 
         it "should have an empty location" do
-          subject.location.should eq('')
+          expect(subject.location).to eq('')
         end
       end
 
@@ -57,16 +57,16 @@ module Finitio
         let(:arg){ 1000 }
 
         it 'should raise an Error' do
-          subject.should be_a(TypeError)
-          subject.message.should eq("Invalid value `1000` for byte")
+          expect(subject).to be_a(TypeError)
+          expect(subject.message).to eq("Invalid value `1000` for byte")
         end
 
         it "should have no cause" do
-          subject.cause.should be_nil
+          expect(subject.cause).to be_nil
         end
 
         it "should have an empty location" do
-          subject.location.should eq('')
+          expect(subject.location).to eq('')
         end
       end
     end

@@ -26,16 +26,16 @@ module Finitio
       }
 
       it 'should raise an Error' do
-        subject.should be_a(TypeError)
-        subject.message.should eq("Invalid value `foo` for union")
+        expect(subject).to be_a(TypeError)
+        expect(subject.message).to eq("Invalid value `foo` for union")
       end
 
       it 'should have no cause' do
-        subject.cause.should be_nil
+        expect(subject.cause).to be_nil
       end
 
       it 'should have an empty location' do
-        subject.location.should eq('')
+        expect(subject.location).to eq('')
       end
     end
 

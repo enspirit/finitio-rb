@@ -14,7 +14,7 @@ module Finitio
       }
 
       it 'compiles to an AnyType' do
-        compiled.should be_a(AnyType)
+        expect(compiled).to be_a(AnyType)
       end
     end
 
@@ -23,7 +23,7 @@ module Finitio
         subject.to_ast
       }
 
-      it{ ast.should eq([:any_type]) }
+      it{ expect(ast).to eq([:any_type]) }
     end
 
   end

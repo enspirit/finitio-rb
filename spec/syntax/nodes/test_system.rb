@@ -14,7 +14,7 @@ module Finitio
       let(:input){ "Int = .Integer\n{r: Int}" }
 
       it 'has the expected AST' do
-        ast.should eq([
+        expect(ast).to eq([
           :system,
           [:type_def, "Int", [:builtin_type, "Integer"]],
           [:tuple_type, [:heading, [:attribute, "r", [:type_ref, "Int"]]]]
@@ -26,7 +26,7 @@ module Finitio
       let(:input){ "Int = .Integer" }
 
       it 'has the expected AST' do
-        ast.should eq([
+        expect(ast).to eq([
           :system,
           [:type_def, "Int", [:builtin_type, "Integer"]]
         ])
@@ -37,7 +37,7 @@ module Finitio
       let(:input){ "{r: .Integer}" }
 
       it 'has the expected AST' do
-        ast.should eq([
+        expect(ast).to eq([
           :system,
           [:tuple_type, [:heading, [:attribute, "r", [:builtin_type, "Integer"]]]]
         ])

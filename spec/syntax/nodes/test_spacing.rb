@@ -16,7 +16,7 @@ module Finitio
         let(:input){ source }
 
         it 'should parse' do
-          subject.should eq(source)
+          expect(subject).to eq(source)
         end
       end
     end

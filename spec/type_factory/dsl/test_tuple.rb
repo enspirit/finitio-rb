@@ -13,7 +13,7 @@ module Finitio
       it{ should be_a(TupleType) }
 
       it 'should have the correct heading' do
-        subject.heading.should eq(heading)
+        expect(subject.heading).to eq(heading)
       end
     end
 
@@ -29,7 +29,7 @@ module Finitio
       it_should_behave_like "The Tuple[a: Int] type"
 
       it 'should have the correct name' do
-        subject.name.should eq("MyTuple")
+        expect(subject.name).to eq("MyTuple")
       end
     end
 
@@ -41,7 +41,7 @@ module Finitio
       it_should_behave_like "The Tuple[a: Int] type"
 
       it 'should have the correct name' do
-        subject.name.should eq("{a: Integer}")
+        expect(subject.name).to eq("{a: Integer}")
       end
     end
 
@@ -53,7 +53,7 @@ module Finitio
       it_should_behave_like "The Tuple[a: Int] type"
 
       it 'should have the correct name' do
-        subject.name.should eq("MyTuple")
+        expect(subject.name).to eq("MyTuple")
       end
     end
 
@@ -65,7 +65,7 @@ module Finitio
       it_should_behave_like "The Tuple[a: Int] type"
 
       it 'should have the correct name' do
-        subject.name.should eq("{a: intType}")
+        expect(subject.name).to eq("{a: intType}")
       end
     end
 

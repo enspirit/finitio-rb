@@ -16,8 +16,8 @@ module Finitio
       it{ should be_a(System) }
 
       it 'should have main type' do
-        subject.main.should be_a(BuiltinType)
-        subject['Main'].should be(subject.main)
+        expect(subject.main).to be_a(BuiltinType)
+        expect(subject['Main']).to be(subject.main)
       end
     end
 
@@ -32,8 +32,8 @@ module Finitio
       it{ should be_a(System) }
 
       it 'should have main type' do
-        subject.main.should be_a(AliasType)
-        subject['Main'].should be(subject.main)
+        expect(subject.main).to be_a(AliasType)
+        expect(subject['Main']).to be(subject.main)
       end
     end
 

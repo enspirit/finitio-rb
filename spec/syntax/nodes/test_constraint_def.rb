@@ -18,11 +18,11 @@ module Finitio
       let(:input){ '(i | i >= 0)' }
 
       it 'compiles to an Array' do
-        compiled.should be_a(Array)
+        expect(compiled).to be_a(Array)
       end
 
       it 'has the expected AST' do
-        ast.should eq([
+        expect(ast).to eq([
           [
             :constraint,
             "default",

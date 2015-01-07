@@ -13,7 +13,7 @@ module Finitio
       it{ should be_a(MultiTupleType) }
 
       it 'should have the correct heading' do
-        subject.heading.should eq(heading)
+        expect(subject.heading).to eq(heading)
       end
     end
 
@@ -29,7 +29,7 @@ module Finitio
       it_should_behave_like "The Tuple[a :? Int] type"
 
       it 'should have the correct name' do
-        subject.name.should eq("MyTuple")
+        expect(subject.name).to eq("MyTuple")
       end
     end
 

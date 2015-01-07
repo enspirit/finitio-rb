@@ -12,8 +12,8 @@ describe Finitio, "system" do
     it{ should be_a(Finitio::System) }
 
     it 'should have the expected types' do
-      subject["Posint"].should be_a(Finitio::SubType)
-      subject["Point"].should be_a(Finitio::TupleType)
+      expect(subject["Posint"]).to be_a(Finitio::SubType)
+      expect(subject["Point"]).to be_a(Finitio::TupleType)
     end
   end
 
@@ -25,7 +25,7 @@ describe Finitio, "system" do
     it{ should be_a(Finitio::System) }
 
     it 'should have the expected types' do
-      subject["Posint"].should be_a(Finitio::SubType)
+      expect(subject["Posint"]).to be_a(Finitio::SubType)
     end
   end
 

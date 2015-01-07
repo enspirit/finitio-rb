@@ -20,7 +20,7 @@ module Finitio
       }
 
       it 'should coerce to a tuple' do
-        subject.should eq(r: 12, g: 13, b: 255)
+        expect(subject).to eq(r: 12, g: 13, b: 255)
       end
     end
 
@@ -36,16 +36,16 @@ module Finitio
         }
 
         it 'should raise a TypeError' do
-          subject.should be_a(TypeError)
-          subject.message.should eq("Invalid value `foo` for color")
+          expect(subject).to be_a(TypeError)
+          expect(subject.message).to eq("Invalid value `foo` for color")
         end
 
         it 'should have no cause' do
-          subject.cause.should be_nil
+          expect(subject.cause).to be_nil
         end
 
         it 'should have an empty location' do
-          subject.location.should eq('')
+          expect(subject.location).to eq('')
         end
       end
 
@@ -55,16 +55,16 @@ module Finitio
         }
 
         it 'should raise a TypeError' do
-          subject.should be_a(TypeError)
-          subject.message.should eq("Missing attribute `b`")
+          expect(subject).to be_a(TypeError)
+          expect(subject.message).to eq("Missing attribute `b`")
         end
 
         it 'should have no cause' do
-          subject.cause.should be_nil
+          expect(subject.cause).to be_nil
         end
 
         it 'should have an empty location' do
-          subject.location.should eq('')
+          expect(subject.location).to eq('')
         end
       end
 
@@ -74,16 +74,16 @@ module Finitio
         }
 
         it 'should raise a TypeError' do
-          subject.should be_a(TypeError)
-          subject.message.should eq("Unrecognized attribute `extr`")
+          expect(subject).to be_a(TypeError)
+          expect(subject.message).to eq("Unrecognized attribute `extr`")
         end
 
         it 'should have no cause' do
-          subject.cause.should be_nil
+          expect(subject.cause).to be_nil
         end
 
         it 'should have an empty location' do
-          subject.location.should eq('')
+          expect(subject.location).to eq('')
         end
       end
 
@@ -93,17 +93,17 @@ module Finitio
         }
 
         it 'should raise a TypeError' do
-          subject.should be_a(TypeError)
-          subject.message.should eq("Invalid value `12.0` for Byte")
+          expect(subject).to be_a(TypeError)
+          expect(subject.message).to eq("Invalid value `12.0` for Byte")
         end
 
         it 'should have the correct cause' do
-          subject.cause.should be_a(TypeError)
-          subject.cause.message.should eq("Invalid value `12.0` for intType")
+          expect(subject.cause).to be_a(TypeError)
+          expect(subject.cause.message).to eq("Invalid value `12.0` for intType")
         end
 
         it 'should have the correct location' do
-          subject.location.should eq("r")
+          expect(subject.location).to eq("r")
         end
       end
     end

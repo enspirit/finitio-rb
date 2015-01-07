@@ -18,20 +18,20 @@ module Finitio
       let(:input){ 'a >= 10' }
 
       it 'compiles to an Constraint' do
-        compiled.should be_a(Constraint)
+        expect(compiled).to be_a(Constraint)
       end
 
       it 'is anonymous' do
-        compiled.should be_anonymous
+        expect(compiled).to be_anonymous
       end
 
       it 'should be the correct Proc' do
-        compiled.===(12).should be_true
-        compiled.===(9).should be_false
+        expect(compiled.===(12)).to be_true
+        expect(compiled.===(9)).to be_false
       end
 
       it 'has the expected AST' do
-        ast.should eq([
+        expect(ast).to eq([
           :constraint,
           "default",
           [:fn, [:parameters, "a"], [:source, "a >= 10"]]

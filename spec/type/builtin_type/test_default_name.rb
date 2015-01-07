@@ -5,7 +5,7 @@ module Finitio
     let(:type){ BuiltinType.new(Integer, "int") }
 
     it 'uses the ruby name' do
-      type.default_name.should eq("Integer")
+      expect(type.default_name).to eq("Integer")
     end
 
   end

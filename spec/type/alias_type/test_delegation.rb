@@ -5,24 +5,24 @@ module Finitio
     let(:type){ AliasType.new(intType, 'Alias') }
 
     it 'should delegate hash' do
-      type.hash.should eq(intType.hash)
+      expect(type.hash).to eq(intType.hash)
     end
 
     it 'should delegate ==' do
-      (intType == type).should be_true
-      (type == intType).should be_true
+      expect(intType == type).to be_true
+      expect(type == intType).to be_true
     end
 
     it 'should delegate dress' do
-      type.dress(12).should eq(12)
+      expect(type.dress(12)).to eq(12)
     end
 
     it 'should delegate include?' do
-      type.include?(12).should be_true
+      expect(type.include?(12)).to be_true
     end
 
     it 'should delegate to_s' do
-      type.to_s.should eq(intType.to_s)
+      expect(type.to_s).to eq(intType.to_s)
     end
 
   end

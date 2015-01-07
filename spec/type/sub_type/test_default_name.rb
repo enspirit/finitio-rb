@@ -7,7 +7,7 @@ module Finitio
     subject{ type.default_name }
 
     it 'uses the first constraint name' do
-      subject.should eq("Positive")
+      expect(subject).to eq("Positive")
     end
 
   end

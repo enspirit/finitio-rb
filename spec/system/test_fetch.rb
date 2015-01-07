@@ -14,7 +14,7 @@ module Finitio
       let(:name){ "intType" }
 
       it 'should return the type' do
-        subject.should eq(intType)
+        expect(subject).to eq(intType)
       end
     end
 
@@ -22,9 +22,9 @@ module Finitio
       let(:name){ "noSuchOne" }
 
       it 'should raise an error' do
-        ->{
+        expect{
           subject
-        }.should raise_error(KeyError, /noSuchOne/)
+        }.to raise_error(KeyError, /noSuchOne/)
       end
     end
 
@@ -34,7 +34,7 @@ module Finitio
       }
 
       it 'should yield the block' do
-        subject.should eq("bar")
+        expect(subject).to eq("bar")
       end
     end
 

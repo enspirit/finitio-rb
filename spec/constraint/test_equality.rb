@@ -7,32 +7,32 @@ module Finitio
     end
 
     it 'recognizes same procs' do
-      constraint(byte_min).should eq(constraint(byte_min))
+      expect(constraint(byte_min)).to eq(constraint(byte_min))
     end
 
     it 'recognizes non constraints' do
-      constraint(byte_min).should_not eq(nil)
-      constraint(byte_min).should_not eq(1)
+      expect(constraint(byte_min)).not_to eq(nil)
+      expect(constraint(byte_min)).not_to eq(1)
     end
 
     it 'recognizes non equivalent constraints' do
-      constraint(byte_min).should_not eq(constraint(byte_max))
+      expect(constraint(byte_min)).not_to eq(constraint(byte_max))
     end
 
     it 'does not take name into accound' do
-      constraint(byte_min, :foo).should eq(constraint(byte_min, :bar))
+      expect(constraint(byte_min, :foo)).to eq(constraint(byte_min, :bar))
     end
 
     it 'implements hash accordingly' do
       c1 = constraint(byte_min)
       c2 = constraint(byte_min)
-      c1.hash.should eq(c2.hash)
+      expect(c1.hash).to eq(c2.hash)
     end
 
     it 'is smart enough to have different hash codes for different constraints' do
       c1 = constraint(byte_min)
       c2 = constraint(byte_max)
-      c1.hash.should_not eq(c2.hash)
+      expect(c1.hash).not_to eq(c2.hash)
     end
 
   end

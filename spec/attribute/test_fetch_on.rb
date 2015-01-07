@@ -10,9 +10,9 @@ module Finitio
       let(:arg){ 12 }
 
       it 'should raise an error' do
-        ->{
+        expect{
           subject
-        }.should raise_error(ArgumentError, "Object responding to `fetch` expected")
+        }.to raise_error(ArgumentError, "Object responding to `fetch` expected")
       end
     end
 
@@ -32,9 +32,9 @@ module Finitio
       let(:arg){ { other: 123 } }
 
       it 'should raise an error' do
-        ->{
+        expect{
           attr.fetch_on(arg)
-        }.should raise_error(KeyError)
+        }.to raise_error(KeyError)
       end
     end
 
@@ -42,7 +42,7 @@ module Finitio
       let(:arg){ { other: 123 } }
 
       it 'should yield the block' do
-        attr.fetch_on(arg){ "none" }.should eq("none")
+        expect(attr.fetch_on(arg){ "none" }).to eq("none")
       end
     end
 

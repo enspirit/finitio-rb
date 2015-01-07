@@ -14,12 +14,12 @@ module Finitio
       let(:input){ 'a >= 10' }
 
       it 'compiles to an Proc' do
-        compiled.should be_a(Proc)
+        expect(compiled).to be_a(Proc)
       end
 
       it 'should be the correct Proc' do
-        compiled.call(12).should be_true
-        compiled.call(9).should be_false
+        expect(compiled.call(12)).to be_true
+        expect(compiled.call(9)).to be_false
       end
     end
 
@@ -27,7 +27,7 @@ module Finitio
       let(:input){ '(a >= 10)' }
 
       it 'compiles to an Proc' do
-        compiled.should be_a(Proc)
+        expect(compiled).to be_a(Proc)
       end
     end
 
@@ -35,7 +35,7 @@ module Finitio
       let(:input){ 'acall(a)' }
 
       it 'compiles to an Proc' do
-        compiled.should be_a(Proc)
+        expect(compiled).to be_a(Proc)
       end
     end
 
@@ -43,7 +43,7 @@ module Finitio
       let(:input){ 's =~ /^(test)$/' }
 
       it 'compiles to an Proc' do
-        compiled.should be_a(Proc)
+        expect(compiled).to be_a(Proc)
       end
     end
 

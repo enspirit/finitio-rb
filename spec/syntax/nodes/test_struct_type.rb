@@ -15,8 +15,8 @@ module Finitio
         let(:input){ '<.Integer, .Float>' }
 
         it 'compiles to a StructType' do
-          compiled.should be_a(StructType)
-          compiled.component_types.should eq([intType, floatType])
+          expect(compiled).to be_a(StructType)
+          expect(compiled.component_types).to eq([intType, floatType])
         end
       end
     end
@@ -26,7 +26,7 @@ module Finitio
 
       let(:ast){ subject.to_ast }
 
-      it{ ast.should eq([
+      it{ expect(ast).to eq([
           :struct_type,
           [:builtin_type, "Integer"],
           [:builtin_type, "Float"]

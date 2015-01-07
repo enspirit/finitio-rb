@@ -15,7 +15,7 @@ module Finitio
       it{ should be_a(MultiRelationType) }
 
       it 'should have the correct heading' do
-        subject.heading.should eq(heading)
+        expect(subject.heading).to eq(heading)
       end
     end
 
@@ -31,7 +31,7 @@ module Finitio
       it_should_behave_like "The Relation[a :? Int] type"
 
       it 'should have the correct name' do
-        subject.name.should eq("MyRelation")
+        expect(subject.name).to eq("MyRelation")
       end
     end
 

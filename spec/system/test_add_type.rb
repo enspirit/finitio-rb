@@ -10,12 +10,12 @@ module Finitio
       let(:type){ intType }
 
       it 'should return the created type' do
-        subject.should be(type)
+        expect(subject).to be(type)
       end
 
       it 'should add the type' do
         subject
-        system[type.name].should be(type)
+        expect(system[type.name]).to be(type)
       end
     end
 
@@ -23,9 +23,9 @@ module Finitio
       let(:type){ "foo" }
 
       it 'should raise an error' do
-        ->{
+        expect{
           subject
-        }.should raise_error(ArgumentError, "Unable to factor a Finitio::Type from `foo`")
+        }.to raise_error(ArgumentError, "Unable to factor a Finitio::Type from `foo`")
       end
     end
 
@@ -37,9 +37,9 @@ module Finitio
       end
 
       it 'should raise an error' do
-        ->{
+        expect{
           subject
-        }.should raise_error(Finitio::Error, "Duplicate type name `intType`")
+        }.to raise_error(Finitio::Error, "Duplicate type name `intType`")
       end
     end
 

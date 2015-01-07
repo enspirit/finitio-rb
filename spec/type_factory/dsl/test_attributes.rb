@@ -9,7 +9,7 @@ module Finitio
       it{ should be_a(Array) }
 
       it 'should be the correct pair' do
-        subject.should eq([ Attribute.new(:a, intType), Attribute.new(:b, floatType) ])
+        expect(subject).to eq([ Attribute.new(:a, intType), Attribute.new(:b, floatType) ])
       end
     end
 

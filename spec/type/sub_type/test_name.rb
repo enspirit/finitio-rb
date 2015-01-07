@@ -8,7 +8,7 @@ module Finitio
       let(:type){ SubType.new(intType, [positive], "Foo") }
 
       it 'uses the specified one' do
-        subject.should eq("Foo")
+        expect(subject).to eq("Foo")
       end
     end
 
@@ -16,7 +16,7 @@ module Finitio
       let(:type){ SubType.new(intType, [positive]) }
 
       it 'uses the first constraint name' do
-        subject.should eq("Positive")
+        expect(subject).to eq("Positive")
       end
     end
 

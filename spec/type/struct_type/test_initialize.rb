@@ -12,9 +12,9 @@ module Finitio
       subject{ StructType.new("foo") }
 
       it 'should raise an error' do
-        ->{
+        expect{
           subject
-        }.should raise_error(ArgumentError, "[Finitio::Type] expected, got `foo`")
+        }.to raise_error(ArgumentError, "[Finitio::Type] expected, got `foo`")
       end
     end
 

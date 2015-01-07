@@ -23,11 +23,11 @@ module Finitio
 
       it 'add the type to the system' do
         compiled
-        sys["Int"].should be_a(BuiltinType)
+        expect(sys["Int"]).to be_a(BuiltinType)
       end
 
       it 'has the expected AST' do
-        ast.should eq([:type_def, "Int", [:builtin_type, "Integer"]])
+        expect(ast).to eq([:type_def, "Int", [:builtin_type, "Integer"]])
       end
     end
 
@@ -44,12 +44,12 @@ module Finitio
 
       it 'add the type to the system' do
         compiled
-        sys["Alias"].should be_a(AliasType)
-        sys["Alias"].should eq(legacy)
+        expect(sys["Alias"]).to be_a(AliasType)
+        expect(sys["Alias"]).to eq(legacy)
       end
 
       it 'has the expected AST' do
-        ast.should eq([:type_def, "Alias", [:type_ref, "Int"]])
+        expect(ast).to eq([:type_def, "Alias", [:type_ref, "Int"]])
       end
     end
 

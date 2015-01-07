@@ -4,7 +4,7 @@ module Finitio
 
     let(:type){ AliasType.new(intType, 'Alias') }
 
-    it{ type.name.should eq('Alias') }
+    it{ expect(type.name).to eq('Alias') }
 
   end
 end

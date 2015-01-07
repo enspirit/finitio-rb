@@ -9,7 +9,7 @@ module Finitio
       it{ should be_a(StructType) }
 
       it 'should have the correct components' do
-        subject.component_types.should eq([intType, floatType])
+        expect(subject.component_types).to eq([intType, floatType])
       end
     end
 
@@ -25,7 +25,7 @@ module Finitio
       it_should_behave_like "The <Int, Float> type"
 
       it 'should have the correct name' do
-        subject.name.should eq("MyTuple")
+        expect(subject.name).to eq("MyTuple")
       end
     end
 
@@ -37,7 +37,7 @@ module Finitio
       it_should_behave_like "The <Int, Float> type"
 
       it 'should have the correct name' do
-        subject.name.should eq("<Integer, Float>")
+        expect(subject.name).to eq("<Integer, Float>")
       end
     end
 

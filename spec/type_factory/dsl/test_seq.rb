@@ -9,7 +9,7 @@ module Finitio
       it{ should be_a(SeqType) }
 
       it 'should have the correct element type' do
-        subject.elm_type.should eq(intType)
+        expect(subject.elm_type).to eq(intType)
       end
     end
 
@@ -25,7 +25,7 @@ module Finitio
       it_should_behave_like "The Seq[Int] type"
 
       it 'should have the correct name' do
-        subject.name.should eq("[Integer]")
+        expect(subject.name).to eq("[Integer]")
       end
     end
 
@@ -37,7 +37,7 @@ module Finitio
       it_should_behave_like "The Seq[Int] type"
 
       it 'should have the correct name' do
-        subject.name.should eq("[intType]")
+        expect(subject.name).to eq("[intType]")
       end
     end
 
@@ -49,7 +49,7 @@ module Finitio
       it_should_behave_like "The Seq[Int] type"
 
       it 'should have the correct name' do
-        subject.name.should eq("MySeq")
+        expect(subject.name).to eq("MySeq")
       end
     end
 

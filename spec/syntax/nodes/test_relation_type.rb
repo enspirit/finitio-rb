@@ -15,8 +15,8 @@ module Finitio
         let(:input){ '{{ }}' }
 
         it 'compiles to a RelationType' do
-          compiled.should be_a(RelationType)
-          compiled.heading.should be_empty
+          expect(compiled).to be_a(RelationType)
+          expect(compiled.heading).to be_empty
         end
       end
 
@@ -24,8 +24,8 @@ module Finitio
         let(:input){ '{{a: .Integer}}' }
 
         it 'compiles to a RelationType' do
-          compiled.should be_a(RelationType)
-          compiled.heading.size.should eq(1)
+          expect(compiled).to be_a(RelationType)
+          expect(compiled.heading.size).to eq(1)
         end
       end
 
@@ -33,8 +33,8 @@ module Finitio
         let(:input){ '{{a: .Integer, b: .Float}}' }
 
         it 'compiles to a RelationType' do
-          compiled.should be_a(RelationType)
-          compiled.heading.size.should eq(2)
+          expect(compiled).to be_a(RelationType)
+          expect(compiled.heading.size).to eq(2)
         end
       end
 
@@ -42,8 +42,8 @@ module Finitio
         let(:input){ '{{a: .Integer, b :? .Float}}' }
 
         it 'compiles to a MultiRelationType' do
-          compiled.should be_a(MultiRelationType)
-          compiled.heading.size.should eq(2)
+          expect(compiled).to be_a(MultiRelationType)
+          expect(compiled.heading.size).to eq(2)
         end
       end
     end
@@ -55,7 +55,7 @@ module Finitio
         let(:input){ '{{a: .Integer}}' }
 
         it{
-          ast.should eq([
+          expect(ast).to eq([
             :relation_type,
             [
               :heading,
@@ -69,7 +69,7 @@ module Finitio
         let(:input){ '{{a :? .Integer}}' }
 
         it{
-          ast.should eq([
+          expect(ast).to eq([
             :multi_relation_type,
             [
               :heading,

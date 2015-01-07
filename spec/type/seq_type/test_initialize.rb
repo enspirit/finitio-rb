@@ -10,7 +10,7 @@ module Finitio
       it{ should be_a(SeqType) }
 
       it 'should set the instance variables' do
-        subject.elm_type.should eq(intType)
+        expect(subject.elm_type).to eq(intType)
       end
     end
 
@@ -18,9 +18,9 @@ module Finitio
       subject{ SeqType.new("foo") }
 
       it 'should raise an error' do
-        ->{
+        expect{
           subject
-        }.should raise_error(ArgumentError, 'Finitio::Type expected, got `foo`')
+        }.to raise_error(ArgumentError, 'Finitio::Type expected, got `foo`')
       end
     end
 

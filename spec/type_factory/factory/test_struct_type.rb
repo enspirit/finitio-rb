@@ -10,7 +10,7 @@ module Finitio
       it{ should be_a(StructType) }
 
       it 'should have the expected components' do
-        subject.component_types.should eq([intType, floatType])
+        expect(subject.component_types).to eq([intType, floatType])
       end
     end
 

@@ -19,7 +19,7 @@ module Finitio
         it{ should eq(expected) }
 
         it 'should have the correct name' do
-          subject.name.should eq("MySeq")
+          expect(subject.name).to eq("MySeq")
         end
       end
     end
@@ -36,7 +36,7 @@ module Finitio
       it{ should eq(expected) }
 
       it 'should have the correct name' do
-        subject.name.should eq("MySeq")
+        expect(subject.name).to eq("MySeq")
       end
     end
 

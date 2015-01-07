@@ -18,17 +18,17 @@ module Finitio
       let(:input){ '.Color <rgb> {r: .Integer, g: .Integer, b: .Integer}' }
 
       it 'compiles to an AdType' do
-        compiled.should be_a(AdType)
-        compiled.ruby_type.should be(Color)
-        compiled.contract_names.should eq([:rgb])
+        expect(compiled).to be_a(AdType)
+        expect(compiled.ruby_type).to be(Color)
+        expect(compiled.contract_names).to eq([:rgb])
       end
 
       it 'should behave as expected' do
-        compiled.dress(r: 138, g: 43, b: 226).should eq(blueviolet)
+        expect(compiled.dress(r: 138, g: 43, b: 226)).to eq(blueviolet)
       end
 
       it 'has expected AST' do
-        ast.should eq([
+        expect(ast).to eq([
           :ad_type,
           "Color",
           [:contract,
@@ -54,17 +54,17 @@ module Finitio
       }
 
       it 'compiles to an AdType' do
-        compiled.should be_a(AdType)
-        compiled.ruby_type.should be(Color)
-        compiled.contract_names.should eq([:rgb, :hex])
+        expect(compiled).to be_a(AdType)
+        expect(compiled.ruby_type).to be(Color)
+        expect(compiled.contract_names).to eq([:rgb, :hex])
       end
 
       it 'should behave as expected' do
-        compiled.dress("#8A2BE2").should eq(blueviolet)
+        expect(compiled.dress("#8A2BE2")).to eq(blueviolet)
       end
 
       it 'has expected AST' do
-        ast.should eq([
+        expect(ast).to eq([
           :ad_type,
           "Color",
           [:contract,
@@ -89,20 +89,20 @@ module Finitio
       let(:input){ '<as> {r: .Integer}' }
 
       it 'compiles to an AdType' do
-        compiled.should be_a(AdType)
-        compiled.ruby_type.should be_nil
-        compiled.contract_names.should eq([:as])
+        expect(compiled).to be_a(AdType)
+        expect(compiled.ruby_type).to be_nil
+        expect(compiled.contract_names).to eq([:as])
       end
 
       it 'should behave as expected' do
-        compiled.dress(r: 12).should eq(r: 12)
-        ->{
+        expect(compiled.dress(r: 12)).to eq(r: 12)
+        expect{
           compiled.dress("foo")
-        }.should raise_error(TypeError)
+        }.to raise_error(TypeError)
       end
 
       it 'has expected AST' do
-        ast.should eq([
+        expect(ast).to eq([
           :ad_type,
           nil,
           [:contract,
@@ -121,9 +121,9 @@ module Finitio
       let(:input){ '.Color <rgb> {r: .Integer}, <rgb> .String' }
 
       it 'raises an error' do
-        ->{
+        expect{
           compiled
-        }.should raise_error(Error, "Duplicate contract name `rgb`")
+        }.to raise_error(Error, "Duplicate contract name `rgb`")
       end
     end
 
@@ -131,23 +131,23 @@ module Finitio
       let(:input){ '.DateTime <iso> .String \( s | DateTime.parse(s) ) \( d | d.to_s )' }
 
       it 'compiles to an AdType' do
-        compiled.should be_a(AdType)
-        compiled.ruby_type.should be(DateTime)
-        compiled.contract_names.should eq([:iso])
+        expect(compiled).to be_a(AdType)
+        expect(compiled.ruby_type).to be(DateTime)
+        expect(compiled.contract_names).to eq([:iso])
       end
 
       it 'should behave as expected' do
-        compiled.dress("2014-01-19T12:00").should be_a(DateTime)
+        expect(compiled.dress("2014-01-19T12:00")).to be_a(DateTime)
       end
 
       it 'should hide errors' do
         err = compiled.dress("foo") rescue $!
-        err.should be_a(TypeError)
-        err.message.should eq("Invalid value `foo` for DateTime")
+        expect(err).to be_a(TypeError)
+        expect(err.message).to eq("Invalid value `foo` for DateTime")
       end
 
       it 'has expected AST' do
-        ast.should eq([
+        expect(ast).to eq([
           :ad_type,
           "DateTime",
           [:contract,
