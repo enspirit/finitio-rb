@@ -26,8 +26,8 @@ module Finitio
       end
 
       it 'should be the correct Proc' do
-        expect(compiled.===(12)).to be_true
-        expect(compiled.===(9)).to be_false
+        expect(compiled.===(12)).to eq(true)
+        expect(compiled.===(9)).to eq(false)
       end
 
       it 'has the expected AST' do

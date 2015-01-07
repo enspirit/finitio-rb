@@ -9,13 +9,13 @@ module Finitio
     context 'with nil' do
       let(:arg){ nil }
 
-      it{ should be_true }
+      it{ should eq(true) }
     end
 
     context 'when an Integer' do
       let(:arg){ 12 }
 
-      it{ should be_true }
+      it{ should eq(true) }
     end
 
   end

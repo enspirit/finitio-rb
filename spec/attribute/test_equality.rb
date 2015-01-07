@@ -8,16 +8,16 @@ module Finitio
     let(:attr4){ Attribute.new(:red, intType, false) }
 
     it 'should apply structural equality' do
-      expect(attr1 == attr2).to be_true
+      expect(attr1 == attr2).to eq(true)
     end
 
     it 'should distinguish different attributes' do
-      expect(attr1 == attr3).to be_false
-      expect(attr1 == attr4).to be_false
+      expect(attr1 == attr3).to eq(false)
+      expect(attr1 == attr4).to eq(false)
     end
 
     it 'should false against non Attribute' do
-      expect(attr1 == 12).to be_false
+      expect(attr1 == 12).to eq(false)
     end
 
     it 'should implement hash accordingly' do

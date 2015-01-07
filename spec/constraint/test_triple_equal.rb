@@ -5,8 +5,8 @@ module Finitio
     let(:constraint){ Constraint.new(byte_full) }
 
     it 'delegates to the proc' do
-      expect(constraint.===(17)).to be_true
-      expect(constraint.===(1700)).to be_false
+      expect(constraint.===(17)).to eq(true)
+      expect(constraint.===(1700)).to eq(false)
     end
 
   end

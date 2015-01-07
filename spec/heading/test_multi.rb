@@ -23,7 +23,7 @@ module Finitio
         [ ]
       }
 
-      it{ should be_false }
+      it{ should eq(false) }
     end
 
     context 'with required attributes only' do
@@ -31,7 +31,7 @@ module Finitio
         [ red, blue ]
       }
 
-      it{ should be_false }
+      it{ should eq(false) }
     end
 
     context 'with some optional attributes' do
@@ -39,7 +39,7 @@ module Finitio
         [ red, maybe_blue ]
       }
 
-      it{ should be_true }
+      it{ should eq(true) }
     end
 
     context 'with allow_extra set to true' do
@@ -50,7 +50,7 @@ module Finitio
         {allow_extra: true}
       }
 
-      it{ should be_true }
+      it{ should eq(true) }
     end
 
   end

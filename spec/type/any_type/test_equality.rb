@@ -7,19 +7,19 @@ module Finitio
     let(:fltType) { BuiltinType.new(Float)   }
 
     it 'should apply structural equality' do
-      expect(anyType == anyType2).to be_true
+      expect(anyType == anyType2).to eq(true)
     end
 
     it 'should apply distinguish different types' do
-      expect(anyType == fltType).to be_false
+      expect(anyType == fltType).to eq(false)
     end
 
     it 'should be a total function, with nil for non types' do
-      expect(anyType == 12).to be_false
+      expect(anyType == 12).to eq(false)
     end
 
     it 'should implement hash accordingly' do
-      expect(anyType.hash == anyType2.hash).to be_true
+      expect(anyType.hash == anyType2.hash).to eq(true)
     end
 
   end

@@ -13,25 +13,25 @@ module Finitio
     context 'when a valid hash' do
       let(:arg){ {a: 12} }
 
-      it{ should be_true }
+      it{ should eq(true) }
     end
 
     context 'when an invalid hash (too many attributes)' do
       let(:arg){ {a: 12, b: 15} }
 
-      it{ should be_false }
+      it{ should eq(false) }
     end
 
     context 'when an invalid hash (too few attributes)' do
       let(:arg){ {b: 12} }
 
-      it{ should be_false }
+      it{ should eq(false) }
     end
 
     context 'when an invalid hash (wrong type)' do
       let(:arg){ {a: 12.0} }
 
-      it{ should be_false }
+      it{ should eq(false) }
     end
 
   end

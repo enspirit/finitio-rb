@@ -18,8 +18,8 @@ module Finitio
       end
 
       it 'should be the correct Proc' do
-        expect(compiled.call(12)).to be_true
-        expect(compiled.call(9)).to be_false
+        expect(compiled.call(12)).to eq(true)
+        expect(compiled.call(9)).to eq(false)
       end
     end
 

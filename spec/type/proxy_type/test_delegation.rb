@@ -17,8 +17,8 @@ module Finitio
     end
 
     it 'should delegate ==' do
-      expect(intType == proxy).to be_true
-      expect(proxy == intType).to be_true
+      expect(intType == proxy).to eq(true)
+      expect(proxy == intType).to eq(true)
     end
 
     it 'should delegate dress' do
@@ -26,7 +26,7 @@ module Finitio
     end
 
     it 'should delegate include?' do
-      expect(proxy.include?(12)).to be_true
+      expect(proxy.include?(12)).to eq(true)
     end
 
     it 'should delegate to_s' do

@@ -9,7 +9,7 @@ module Finitio
     context 'when included on empty array' do
       let(:arg){ [] }
 
-      it{ should be_true }
+      it{ should eq(true) }
     end
 
     context 'when included on non empty array' do
@@ -19,13 +19,13 @@ module Finitio
         arg << 12
       end
 
-      it{ should be_true }
+      it{ should eq(true) }
     end
 
     context 'when not an array' do
       let(:arg){ Set.new }
 
-      it{ should be_false }
+      it{ should eq(false) }
     end
 
     context 'when an array with non ints' do
@@ -36,7 +36,7 @@ module Finitio
         arg << "foo"
       end
 
-      it{ should be_false }
+      it{ should eq(false) }
     end
 
   end

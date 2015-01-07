@@ -9,8 +9,8 @@ module Finitio
     end
 
     it 'should delegate ==' do
-      expect(intType == type).to be_true
-      expect(type == intType).to be_true
+      expect(intType == type).to eq(true)
+      expect(type == intType).to eq(true)
     end
 
     it 'should delegate dress' do
@@ -18,7 +18,7 @@ module Finitio
     end
 
     it 'should delegate include?' do
-      expect(type.include?(12)).to be_true
+      expect(type.include?(12)).to eq(true)
     end
 
     it 'should delegate to_s' do

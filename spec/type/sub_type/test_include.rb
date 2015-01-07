@@ -9,25 +9,25 @@ module Finitio
     context 'when included on int' do
       let(:arg){ 12 }
 
-      it{ should be_true }
+      it{ should eq(true) }
     end
 
     context 'when not included on int (I)' do
       let(:arg){ -12 }
 
-      it{ should be_false }
+      it{ should eq(false) }
     end
 
     context 'when not included on int (II)' do
       let(:arg){ 256 }
 
-      it{ should be_false }
+      it{ should eq(false) }
     end
 
     context 'when not included' do
       let(:arg){ "12" }
 
-      it{ should be_false }
+      it{ should eq(false) }
     end
 
   end
