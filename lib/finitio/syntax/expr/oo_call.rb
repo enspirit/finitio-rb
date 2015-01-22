@@ -4,11 +4,14 @@ module Finitio
       module OOCall
         include Expr
 
-        capture :left, :right
+        capture :left
 
         def to_proc_source
-          l, r = left.to_proc_source, right.to_proc_source
-          "#{l}.fetch(#{r})"
+          l = left.to_proc_source
+          r = captures[:right]
+          .map{|s| "fetch('#{s.to_proc_source}')" }
+          .join('.')
+          "#{l}.#{r}"
         end
 
         def _free_variables(fvs)

@@ -92,7 +92,7 @@ grammar Finitio::Syntax::Expressions
   ### Function calls
 
   rule oo_call
-      (left:fn_call '.' right:oo_call)
+      (left:fn_call ('.' right:identifier_expr)+)
       <Finitio::Syntax::Expr::OOCall>
     | fn_call
   end

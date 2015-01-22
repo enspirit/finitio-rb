@@ -7,7 +7,7 @@ module Finitio
         capture :fn
 
         def to_proc_source
-          args = captures[:expr].map{|t| t.to_proc_source }
+          args = captures[:expr].map(&:to_proc_source)
           first, rest = args.first, args[1..-1]
           "#{first}.#{fn}(#{rest.join(',')})"
         end
