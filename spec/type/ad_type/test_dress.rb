@@ -3,11 +3,11 @@ module Finitio
   describe AdType, 'dress' do
 
     let(:rgb){
-      Contract.new(intType, ->(i){ i*2 }, Finitio::IDENTITY, :rgb)
+      Contract.new(intType, ->(i){ Color.new(i,i,i) }, Finitio::IDENTITY, :rgb)
     }
 
     let(:hex){
-      Contract.new(floatType, ->(f){ f*3 }, Finitio::IDENTITY, :hex)
+      Contract.new(floatType, ->(f){ Color.new(f.to_i,f.to_i,f.to_i) }, Finitio::IDENTITY, :hex)
     }
 
     let(:type){
@@ -27,13 +27,13 @@ module Finitio
     context 'with an integer' do
       let(:arg){ 12 }
 
-      it{ should eq(24) }
+      it{ should eq(Color.new(12,12,12)) }
     end
 
     context 'with a float' do
       let(:arg){ 12.0 }
 
-      it{ should eq(36.0) }
+      it{ should eq(Color.new(12,12,12)) }
     end
 
     context 'with an unrecognized' do
