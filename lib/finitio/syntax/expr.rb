@@ -3,15 +3,33 @@ module Finitio
     module Expr
       include Node
 
+      WORLD_VAR = "__world"
+
       def self.included(by)
         by.extend(Node::ClassHelpers)
       end
 
-      def to_proc(varnames = [])
-        ::Kernel.eval "->(#{varnames.join(',')}){ #{to_proc_source(varnames)} }"
+      def to_proc
+        initializer = free_variables
+          .map{|v| "#{v} = __world.fetch('#{v}')" }
+          .join("\n")
+        ::Kernel.eval <<-SRC
+          ->(__world){
+            #{initializer}
+            #{to_proc_source}
+          }
+        SRC
       end
 
-      def to_proc_source(varnames)
+      def to_proc_source
+        raise NotImplementedError
+      end
+
+      def free_variables
+        [].tap{|fvs| _free_variables(fvs) }.uniq
+      end
+
+      def _free_variables(fvs)
         raise NotImplementedError
       end
 

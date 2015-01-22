@@ -3,7 +3,7 @@ grammar Finitio::Syntax::Lexer
   # LEXER (keywords)
 
   rule keyword
-    'and' | 'or' | 'not'
+    'and' | 'or' | 'not' | 'true' | 'false'
   end
 
   # LEXER (names)

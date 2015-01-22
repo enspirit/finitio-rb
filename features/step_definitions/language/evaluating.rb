@@ -20,15 +20,15 @@ end
 
 Then(/^evaluating it with x=(.*?) yields (.*?)$/) do |value, expected|
   @ast_node ||= parse_expression
-  proc = @ast_node.to_proc([:x])
+  proc = @ast_node.to_proc
   value, expected = [value, expected].map{|x| ::Kernel.eval(x) }
-  proc.call(value).should eq(expected)
+  proc.call({"x" => value}).should eq(expected)
 end
 
 Then(/^evaluating it yields (.*?)$/) do |expected|
   @ast_node ||= parse_expression
   proc = @ast_node.to_proc
   expected = ::Kernel.eval(expected)
-  proc.call().should eq(expected)
+  proc.call({}).should eq(expected)
 end
 

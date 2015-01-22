@@ -6,8 +6,12 @@ module Finitio
 
         capture :expr
 
-        def to_proc_source(varnames)
-          expr.to_proc_source(varnames)
+        def to_proc_source
+          expr.to_proc_source
+        end
+
+        def _free_variables(fvs)
+          expr._free_variables(fvs)
         end
 
       end # module Parenthesized

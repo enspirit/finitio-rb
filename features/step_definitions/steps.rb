@@ -1,3 +1,5 @@
+require 'ostruct'
+
 Before do
   @system = Finitio::TEST_SYSTEM
 end

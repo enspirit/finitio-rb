@@ -6,8 +6,11 @@ module Finitio
 
         capture :literal
 
-        def to_proc_source(varnames)
+        def to_proc_source
           literal.to_ruby
+        end
+
+        def _free_variables(fvs)
         end
 
       end # module Identifier

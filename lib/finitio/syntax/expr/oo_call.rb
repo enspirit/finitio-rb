@@ -6,9 +6,13 @@ module Finitio
 
         capture :left, :right
 
-        def to_proc_source(varnames)
-          l, r = left.to_proc_source(varnames), right.to_proc_source(varnames)
-          "#{l}.#{r}"
+        def to_proc_source
+          l, r = left.to_proc_source, right.to_proc_source
+          "#{l}.fetch(#{r})"
+        end
+
+        def _free_variables(fvs)
+          left._free_variables(fvs)
         end
 
       end # module OOCall

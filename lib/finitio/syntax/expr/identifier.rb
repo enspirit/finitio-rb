@@ -4,11 +4,12 @@ module Finitio
       module Identifier
         include Expr
 
-        def to_proc_source(varnames)
-          unless varnames.map(&:to_s).include?(self.to_s)
-            raise Error, "No such variable `#{to_str}`"
-          end
+        def to_proc_source(free = true)
           self.to_str
+        end
+
+        def _free_variables(fvs)
+          fvs << self.to_str
         end
 
       end # module Identifier

@@ -6,9 +6,13 @@ module Finitio
 
         capture :term
 
-        def to_proc_source(varnames)
-          l = term.to_proc_source(varnames)
+        def to_proc_source
+          l = term.to_proc_source
           "!(#{l})"
+        end
+
+        def _free_variables(fvs)
+          term._free_variables(fvs)
         end
 
       end # module LogicNot

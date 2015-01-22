@@ -6,9 +6,13 @@ module Finitio
 
         capture :term
 
-        def to_proc_source(varnames)
-          r = term.to_proc_source(varnames)
+        def to_proc_source
+          r = term.to_proc_source
           "-#{r}"
+        end
+
+        def _free_variables(fvs)
+          term._free_variables(fvs)
         end
 
       end # module UnaryMinusOp

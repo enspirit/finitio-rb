@@ -117,7 +117,7 @@ grammar Finitio::Syntax::Expressions
   end
 
   rule literal_expr
-    (!keyword literal)
+    (!eof literal)
     <Finitio::Syntax::Expr::Literal>
   end
 

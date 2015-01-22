@@ -6,10 +6,16 @@ module Finitio
 
         capture :fn
 
-        def to_proc_source(varnames)
-          args = captures[:expr].map{|t| t.to_proc_source(varnames) }
+        def to_proc_source
+          args = captures[:expr].map{|t| t.to_proc_source }
           first, rest = args.first, args[1..-1]
           "#{first}.#{fn}(#{rest.join(',')})"
+        end
+
+        def _free_variables(fvs)
+          captures[:expr].each do |e|
+            e._free_variables(fvs)
+          end
         end
 
       end # module FnCall
