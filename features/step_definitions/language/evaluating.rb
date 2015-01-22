@@ -22,7 +22,7 @@ Then(/^evaluating it with x=(.*?) yields (.*?)$/) do |value, expected|
   @ast_node ||= parse_expression
   proc = @ast_node.to_proc
   value, expected = [value, expected].map{|x| ::Kernel.eval(x) }
-  proc.call({"x" => value}).should eq(expected)
+  proc.call({x: value}).should eq(expected)
 end
 
 Then(/^evaluating it yields (.*?)$/) do |expected|
@@ -31,4 +31,3 @@ Then(/^evaluating it yields (.*?)$/) do |expected|
   expected = ::Kernel.eval(expected)
   proc.call({}).should eq(expected)
 end
-

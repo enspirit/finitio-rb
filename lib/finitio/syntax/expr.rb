@@ -9,9 +9,9 @@ module Finitio
         by.extend(Node::ClassHelpers)
       end
 
-      def to_proc
+      def to_proc(options = { fetch_mode: :string })
         initializer = free_variables
-          .map{|v| "#{v} = __world.fetch('#{v}')" }
+          .map{|v| "#{v} = __world.fetch(:#{v})" }
           .join("\n")
         ::Kernel.eval <<-SRC
           ->(__world){
