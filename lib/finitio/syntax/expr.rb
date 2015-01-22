@@ -9,12 +9,20 @@ module Finitio
         by.extend(Node::ClassHelpers)
       end
 
-      def to_proc(options = { fetch_mode: :string })
+      def to_proc()
+        src = to_proc_src
+        ::Kernel.eval src
+      end
+
+      def to_proc_src
         initializer = free_variables
           .map{|v| "#{v} = __world.fetch(:#{v})" }
           .join("\n")
-        ::Kernel.eval <<-SRC
+        <<-SRC
           ->(__world){
+            unless __world.is_a?(Hash) && __world.keys.all?{|k| k.is_a?(Symbol) }
+              raise "Invalid world: " + __world.inspect
+            end
             #{initializer}
             #{to_proc_source}
           }
