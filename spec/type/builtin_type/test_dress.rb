@@ -21,7 +21,7 @@ module Finitio
 
       it 'should raise an Error' do
         expect(subject).to be_a(TypeError)
-        expect(subject.message).to eq("Invalid value `12.0` for int")
+        expect(subject.message).to eq("Invalid int `12.0`")
       end
 
       it 'should have no location' do

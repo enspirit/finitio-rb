@@ -37,4 +37,4 @@ Feature: MultiTupleType
     Given I dress JSON's '{ "name": "Finitio", "age": -1 }' with Info
     Then it should be a TypeError as:
       | message                    | location |
-      | Invalid value `-1` for Age | age      |
+      | Invalid Age `-1`           | age      |

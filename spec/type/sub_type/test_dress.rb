@@ -23,12 +23,12 @@ module Finitio
 
         it 'should raise an Error' do
           expect(subject).to be_a(TypeError)
-          expect(subject.message).to eq("Invalid value `12.0` for byte")
+          expect(subject.message).to eq("Invalid byte `12.0`")
         end
 
         it "should have the proper cause from super type's up" do
           expect(subject.cause).to be_a(TypeError)
-          expect(subject.cause.message).to eq("Invalid value `12.0` for intType")
+          expect(subject.cause.message).to eq("Invalid intType `12.0`")
         end
 
         it "should have an empty location" do
@@ -41,7 +41,7 @@ module Finitio
 
         it 'should raise an Error' do
           expect(subject).to be_a(TypeError)
-          expect(subject.message).to eq("Invalid value `-12` for byte")
+          expect(subject.message).to eq("Invalid byte `-12`")
         end
 
         it "should have no cause" do
@@ -58,7 +58,7 @@ module Finitio
 
         it 'should raise an Error' do
           expect(subject).to be_a(TypeError)
-          expect(subject.message).to eq("Invalid value `1000` for byte")
+          expect(subject.message).to eq("Invalid byte `1000`")
         end
 
         it "should have no cause" do

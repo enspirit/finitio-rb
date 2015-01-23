@@ -18,7 +18,7 @@ Feature: Missing information using Nil
     Given I dress JSON's 'null' with Integer
     Then it should be a TypeError as:
       | message                          |
-      | Invalid value `null` for Integer |
+      | Invalid Integer `null`           |
 
   Scenario: Validating nil against MaybeInt
 

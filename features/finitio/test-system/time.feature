@@ -14,11 +14,11 @@ Feature: TestSystem.Time
     Given I dress JSON's '"2014-03-13T98:20:11"'
     Then it should be a TypeError as:
       | message                                      |
-      | Invalid value `2014-03-13T98:20:11` for Time |
+      | Invalid Time `2014-03-13T98:20:11`           |
 
   Scenario: Against null
 
     Given I dress JSON's 'null'
     Then it should be a TypeError as:
       | message                       |
-      | Invalid value `null` for Time |
+      | Invalid Time `null`           |

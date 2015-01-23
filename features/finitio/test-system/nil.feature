@@ -14,4 +14,4 @@ Feature: TestSystem.Nil
 
     Then it should be a TypeError as:
       | message                        |
-      | Invalid value `bar` for Nil    |
+      | Invalid Nil `bar`              |

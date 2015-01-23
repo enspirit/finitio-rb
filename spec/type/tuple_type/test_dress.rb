@@ -37,7 +37,7 @@ module Finitio
 
         it 'should raise a TypeError' do
           expect(subject).to be_a(TypeError)
-          expect(subject.message).to eq("Invalid value `foo` for color")
+          expect(subject.message).to eq("Invalid color `foo`")
         end
 
         it 'should have no cause' do
@@ -94,12 +94,12 @@ module Finitio
 
         it 'should raise a TypeError' do
           expect(subject).to be_a(TypeError)
-          expect(subject.message).to eq("Invalid value `12.0` for Byte")
+          expect(subject.message).to eq("Invalid Byte `12.0`")
         end
 
         it 'should have the correct cause' do
           expect(subject.cause).to be_a(TypeError)
-          expect(subject.cause.message).to eq("Invalid value `12.0` for intType")
+          expect(subject.cause.message).to eq("Invalid intType `12.0`")
         end
 
         it 'should have the correct location' do

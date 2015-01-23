@@ -14,18 +14,18 @@ Feature: TestSystem.String
     Given I dress JSON's 'null'
     Then it should be a TypeError as:
       | message                         |
-      | Invalid value `null` for String |
+      | Invalid String `null`           |
 
   Scenario: Against true
 
     Given I dress JSON's 'true'
     Then it should be a TypeError as:
       | message                         |
-      | Invalid value `true` for String |
+      | Invalid String `true`           |
 
   Scenario: Against an integer
 
     Given I dress JSON's '12'
     Then it should be a TypeError as:
       | message                       |
-      | Invalid value `12` for String |
+      | Invalid String `12`           |

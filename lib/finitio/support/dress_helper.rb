@@ -45,7 +45,7 @@ module Finitio
 
     def default_error_message(type, value)
       value_s, type_s = value_to_s(value), type_to_s(type)
-      "Invalid value `#{value_s}` for #{type_s}"
+      "Invalid #{type_s} `#{value_s}`"
     end
 
     def location

@@ -81,7 +81,7 @@ module Finitio
 
         it 'should raise a TypeError' do
           expect(subject).to be_a(TypeError)
-          expect(subject.message).to eq("Invalid value `foo` for colors")
+          expect(subject.message).to eq("Invalid colors `foo`")
         end
 
         it 'should have no cause' do
@@ -100,7 +100,7 @@ module Finitio
 
         it 'should raise a TypeError' do
           expect(subject).to be_a(TypeError)
-          expect(subject.message).to eq("Invalid value `foo` for {r: Byte, g: Byte, b :? Byte}")
+          expect(subject.message).to eq("Invalid {r: Byte, g: Byte, b :? Byte} `foo`")
         end
 
         it 'should have no cause' do
@@ -166,7 +166,7 @@ module Finitio
 
         it 'should raise a TypeError' do
           expect(subject).to be_a(TypeError)
-          expect(subject.message).to eq("Invalid value `12.0` for Byte")
+          expect(subject.message).to eq("Invalid Byte `12.0`")
         end
 
         it 'should have a cause' do

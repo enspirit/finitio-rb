@@ -18,4 +18,4 @@ Feature: Validating against Finitio scalars
     Given I dress JSON's '"foo"' with Byte
     Then it should be a TypeError as:
       | message                      |
-      | Invalid value `foo` for Byte |
+      | Invalid Byte `foo`           |

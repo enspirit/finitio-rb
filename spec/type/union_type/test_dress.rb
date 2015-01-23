@@ -2,7 +2,7 @@ require 'spec_helper'
 module Finitio
   describe UnionType, "dress" do
 
-    let(:type)      { UnionType.new([intType, floatType], "union") }
+    let(:type){ UnionType.new([intType, floatType], "union") }
 
     subject{ type.dress(arg) }
 
@@ -27,7 +27,7 @@ module Finitio
 
       it 'should raise an Error' do
         expect(subject).to be_a(TypeError)
-        expect(subject.message).to eq("Invalid value `foo` for union")
+        expect(subject.message).to eq("Invalid union `foo`")
       end
 
       it 'should have no cause' do

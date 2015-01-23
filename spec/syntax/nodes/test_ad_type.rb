@@ -143,7 +143,7 @@ module Finitio
       it 'should hide errors' do
         err = compiled.dress("foo") rescue $!
         expect(err).to be_a(TypeError)
-        expect(err.message).to eq("Invalid value `foo` for DateTime")
+        expect(err.message).to eq("Invalid DateTime `foo`")
       end
 
       it 'has expected AST' do

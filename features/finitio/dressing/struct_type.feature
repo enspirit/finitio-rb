@@ -32,4 +32,4 @@ Feature: StructType
     Given I dress JSON's '["Finitio", -1]' with Info
     Then it should be a TypeError as:
       | message                    | location |
-      | Invalid value `-1` for Age |        1 |
+      | Invalid Age `-1`           |        1 |

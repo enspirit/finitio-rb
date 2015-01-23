@@ -24,7 +24,7 @@ module Finitio
       it 'should raise an error' do
         expect{
           subject
-        }.to raise_error("Invalid value `foo` for {Byte}")
+        }.to raise_error("Invalid {Byte} `foo`")
       end
     end
 
@@ -37,7 +37,7 @@ module Finitio
 
       it 'should raise an error' do
         expect(subject).to be_a(TypeError)
-        expect(subject.message).to eq("Invalid value `-12` for Byte")
+        expect(subject.message).to eq("Invalid Byte `-12`")
       end
 
       it 'should have correct location' do

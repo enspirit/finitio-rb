@@ -30,7 +30,7 @@ Background:
 
     Then it should be a TypeError as:
       | message                       | location |
-      | Invalid value `-121` for Byte | 1/g      |
+      | Invalid Byte `-121`           | 1/g      |
 
   Scenario: Validating against an invalid Colors representation (II)
 

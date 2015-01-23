@@ -31,7 +31,7 @@ module Finitio
 
         it 'should raise a TypeError' do
           expect(subject).to be_a(TypeError)
-          expect(subject.message).to eq("Invalid value `foo` for point")
+          expect(subject.message).to eq("Invalid point `foo`")
         end
 
         it 'should have no cause' do
@@ -88,7 +88,7 @@ module Finitio
 
         it 'should raise a TypeError' do
           expect(subject).to be_a(TypeError)
-          expect(subject.message).to eq("Invalid value `bar` for floatType")
+          expect(subject.message).to eq("Invalid floatType `bar`")
         end
 
         it 'should have no cause' do

@@ -42,7 +42,7 @@ module Finitio
       it 'should raise an error' do
         expect{
           subject
-        }.to raise_error(TypeError, "Invalid value `foo` for Color")
+        }.to raise_error(TypeError, "Invalid Color `foo`")
       end
     end
 
@@ -57,7 +57,7 @@ module Finitio
       it 'should hide the error' do
         err = type.dress(12) rescue $!
         expect(err).to be_a(TypeError)
-        expect(err.message).to eq("Invalid value `12` for Color")
+        expect(err.message).to eq("Invalid Color `12`")
       end
     end
 

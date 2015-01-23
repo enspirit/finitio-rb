@@ -49,7 +49,7 @@ Feature: Validating against Finitio tuples
 
     Then it should be a TypeError as:
       | message                      | location |
-      | Invalid value `foo` for Byte | r        |
+      | Invalid Byte `foo`           | r        |
 
 
   Scenario: Validating a Color representation with an invalid value
@@ -61,5 +61,5 @@ Feature: Validating against Finitio tuples
 
     Then it should be a TypeError as:
       | message                      | location |
-      | Invalid value `-12` for Byte | r        |
+      | Invalid Byte `-12`           | r        |
 
