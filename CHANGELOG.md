@@ -5,6 +5,10 @@
   * Finitio.parse now returns the parsing tree, no longer the compiled system,
     use Finitio.system instead.
 
+  * Dress error messages have been changed from `Invalid value xxx for Type` to
+    a more friendly `Invalid Type xxx`. The rationale is that end-users might
+    be exposed to those messages in practice. The new messages seem less cryptic.
+
 * Major enhancements
 
   * Types no longer have to declared before being used. In order words, the
@@ -41,6 +45,11 @@
         This.Is.A.NameSpaced.Type = .Integer( i | i >= 0 )
         { length: This.Is.A.NameSpaced.Type }
         ```
+
+  * Error now have an `root_cause` helper.
+
+  * Dress errors resulting from Union and AdType now set a cause to the first
+    error encountered during the various attempts to dress.
 
 * Breaking changes on undocumented APIs
 
