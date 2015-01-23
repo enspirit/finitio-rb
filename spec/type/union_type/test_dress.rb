@@ -30,8 +30,9 @@ module Finitio
         expect(subject.message).to eq("Invalid union `foo`")
       end
 
-      it 'should have no cause' do
-        expect(subject.cause).to be_nil
+      it 'should have a cause' do
+        expect(subject.cause).to be_a(TypeError)
+        expect(subject.cause.message).to eq("Invalid intType `foo`")
       end
 
       it 'should have an empty location' do

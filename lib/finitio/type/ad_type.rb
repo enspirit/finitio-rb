@@ -92,6 +92,9 @@ module Finitio
       # Up should be idempotent with respect to the ADT
       return value if ruby_type and value.is_a?(ruby_type)
 
+      # Dressed value and first exception
+      dressed, error = nil, nil
+
       # Try each contract in turn. Do nothing on TypeError as
       # the next candidate could be the good one! Return the
       # first successfully dressed.
@@ -101,7 +104,12 @@ module Finitio
         success, dressed = handler.just_try do
           contract.infotype.dress(value, handler)
         end
-        next unless success
+
+        # Save very first error on failure
+        unless success
+          error ||= dressed
+          next
+        end
 
         # Seems nice, just try to get one stage higher now
         success, dressed = handler.just_try(StandardError) do
@@ -114,11 +122,13 @@ module Finitio
                   " #{ruby_type} expected, got #{dressed.class}"
           end
           return dressed
+        else
+          error ||= dressed
         end
       end
 
       # No one succeeded, just fail
-      handler.failed!(self, value)
+      handler.failed!(self, value, error)
     end
 
   end # class AdType

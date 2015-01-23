@@ -24,8 +24,8 @@ module Finitio
     def just_try(rescue_on = TypeError)
       [ true, yield ]
     rescue rescue_on => cause
-      STDERR.puts cause.inspect
-      [ false, nil ]
+      #STDERR.puts cause.inspect
+      [ false, cause ]
     end
 
     def try(type, value)

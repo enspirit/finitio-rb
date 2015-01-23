@@ -51,6 +51,7 @@ module Finitio
     # returned by the first one that does not fail. Fail with an TypeError if no
     # candidate succeeds at tranforming `value`.
     def dress(value, handler = DressHelper.new)
+      error = nil
 
       # Do nothing on TypeError as the next candidate could be the good one!
       candidates.each do |c|
@@ -58,10 +59,11 @@ module Finitio
           c.dress(value, handler)
         end
         return uped if success
+        error ||= uped
       end
 
       # No one succeed, just fail
-      handler.failed!(self, value)
+      handler.failed!(self, value, error)
     end
 
     def default_name
