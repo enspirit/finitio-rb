@@ -9,7 +9,7 @@ module Finitio
         def to_proc_source
           l = left.to_proc_source
           r = captures[:right]
-          .map{|s| "fetch('#{s.to_proc_source}')" }
+          .map{|s| "fetch(:#{s.to_proc_source})" }
           .join('.')
           "#{l}.#{r}"
         end

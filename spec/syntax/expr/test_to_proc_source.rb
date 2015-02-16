@@ -31,11 +31,11 @@ module Finitio
       context "on a OO call" do
 
         it 'works' do
-          expect(source("foo.bar")).to eq(%Q{foo.fetch('bar')})
+          expect(source("foo.bar")).to eq(%Q{foo.fetch(:bar)})
         end
 
         it 'works' do
-          expect(source("foo.bar.baz")).to eq(%Q{foo.fetch('bar').fetch('baz')})
+          expect(source("foo.bar.baz")).to eq(%Q{foo.fetch(:bar).fetch(:baz)})
         end
       end
     end
