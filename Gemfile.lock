@@ -9,7 +9,7 @@ GEM
   specs:
     awesome_print (1.6.1)
     builder (3.2.2)
-    citrus (3.0.1)
+    citrus (3.0.2)
     coveralls (0.7.2)
       multi_json (~> 1.3)
       rest-client (= 1.6.7)
