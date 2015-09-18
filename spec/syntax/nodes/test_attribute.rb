@@ -52,8 +52,14 @@ module Finitio
 
         it{ expect(ast).to eq([:attribute, "a", [:builtin_type, "Integer"], false]) }
       end
+
+      context '_ : .Integer' do
+        let(:input){ '_ : .Integer' }
+
+        it{ expect(ast).to eq([:attribute, "_", [:builtin_type, "Integer"]]) }
+      end
+
     end
     
-
   end
 end

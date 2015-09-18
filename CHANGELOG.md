@@ -46,6 +46,8 @@
         { length: This.Is.A.NameSpaced.Type }
         ```
 
+  * Attribute names can now start with an underscore, e.g. '_links'
+
   * Error now have an `root_cause` helper.
 
   * Dress errors resulting from Union and AdType now set a cause to the first

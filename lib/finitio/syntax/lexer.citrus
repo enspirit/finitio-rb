@@ -21,7 +21,7 @@ grammar Finitio::Syntax::Lexer
   end
 
   rule attribute_name
-    /[a-z][a-zA-Z0-9_]*/
+    /[a-z_][a-zA-Z0-9_]*/
   end
 
   rule type_name
