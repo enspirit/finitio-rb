@@ -11,14 +11,14 @@ module Finitio
 
       def to_proc()
         src = to_proc_src
-        ::Kernel.eval src
+        ::Kernel.eval(src)
       end
 
       def to_proc_src
         initializer = free_variables
           .map{|v| "#{v} = __world.fetch(:#{v})" }
           .join("\n")
-        <<-SRC
+        <<-SRC.gsub(/^[ ]{10}/m,'')
           ->(__world){
             unless __world.is_a?(Hash) && __world.keys.all?{|k| k.is_a?(Symbol) }
               raise "Invalid world: " + __world.inspect
