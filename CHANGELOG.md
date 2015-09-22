@@ -1,4 +1,9 @@
-# 0.5.0 / HEAD
+# 0.5.1 / 2015-09-22
+
+* Enabled memoization in parser to avoid very long parsing time on complex
+  schemas.
+
+# 0.5.0 / 2015-09-18
 
 * Breaking changes on public API
 
