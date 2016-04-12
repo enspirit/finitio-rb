@@ -52,7 +52,7 @@ module Finitio
   protected
 
     def looks_a_tuple?(value)
-      value.is_a?(Hash) or value.respond_to?(:fetch)
+      value.is_a?(Hash) or [:keys, :fetch].all?{|k| value.respond_to?(k) }
     end
 
     def attr_names
