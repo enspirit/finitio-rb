@@ -5,11 +5,12 @@ module Finitio
 
       def compile(factory)
         cds = captures[:sub_type].map{|x| x.compile(factory) }
-        factory.union(cds)
+        cds.size == 1 ? cds.first : factory.union(cds)
       end
 
       def to_ast
-        captures[:sub_type].map(&:to_ast).unshift(:union_type)
+        cds = captures[:sub_type].map(&:to_ast)
+        cds.size == 1 ? cds.first : cds.unshift(:union_type)
       end
 
     end # module UnionType

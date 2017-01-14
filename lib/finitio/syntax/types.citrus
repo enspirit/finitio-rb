@@ -22,15 +22,13 @@ grammar Finitio::Syntax::Types
   # union and sub types
 
   rule union_type
-      (sub_type (pipe sub_type)+)
-      <Finitio::Syntax::UnionType>
-    | sub_type
+    (sub_type (pipe sub_type)*)
+    <Finitio::Syntax::UnionType>
   end
 
   rule sub_type
-      (rel_type constraint_def)
-      <Finitio::Syntax::SubType>
-    | rel_type
+    (rel_type constraint_def?)
+    <Finitio::Syntax::SubType>
   end
 
   rule constraint_def

@@ -7,12 +7,19 @@ module Finitio
 
       def compile(factory)
         s = rel_type.compile(factory)
-        c = constraint_def.compile(factory)
-        factory.subtype(s, c)
+        if c = constraint_def
+          factory.subtype(s, c.compile(factory))
+        else
+          s
+        end
       end
 
       def to_ast
-        [:sub_type, rel_type.to_ast] + constraint_def.to_ast
+        if c = constraint_def
+          [:sub_type, rel_type.to_ast] + constraint_def.to_ast
+        else
+          rel_type.to_ast
+        end
       end
 
     end # module SubType
