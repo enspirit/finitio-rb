@@ -17,18 +17,18 @@ module Finitio
     end
 
     def self.ast(source)
-      parse(source, root: "system", memoize: true).to_ast
+      parse(source, root: "system").to_ast
     end
 
     def self.compile(source, cpl = nil)
       cpl = Compilation.coerce(cpl)
-      parse(source, root: "system", memoize: true).compile(cpl)
+      parse(source, root: "system").compile(cpl)
       cpl.resolve_proxies!.system
     end
 
     def self.compile_type(source, cpl = nil)
       cpl = Compilation.coerce(cpl)
-      parse(source, root: "type", memoize: true).compile(cpl)
+      parse(source, root: "type").compile(cpl)
     end
 
   end # module Syntax
