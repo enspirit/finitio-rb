@@ -1,3 +1,10 @@
+# 0.5.1 / 2017-01-08
+
+* Disable memoization in parser because it leads to terrible performance
+  issues on some schemas.
+* Avoid alternatives on high-level rules (Union, SubType) to prevent many
+  fallbacks that kill performance without memoization enabled.
+
 # 0.5.1 / 2015-09-22
 
 * Enabled memoization in parser to avoid very long parsing time on complex
