@@ -48,6 +48,12 @@ module Finitio
       it{ should eq('red: intType, ...') }
     end
 
+    context 'when allowing extra to a type' do
+      let(:heading){ Heading.new([red], allow_extra: intType) }
+
+      it{ should eq('red: intType, ...: intType') }
+    end
+
     context 'when allowing extra only' do
       let(:heading){ Heading.new([], allow_extra: true) }
 

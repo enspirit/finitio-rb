@@ -72,8 +72,13 @@ grammar Finitio::Syntax::Types
   end
 
   rule heading
-    (attribute? (opt_comma attribute)* (opt_comma allow_extra:dots)? opt_comma?)
+    (attribute? (opt_comma attribute)* (opt_comma allow_extra:heading_extra)? opt_comma?)
     <Finitio::Syntax::Heading>
+  end
+
+  rule heading_extra
+    (dots (':' spacing extra_type:type)?)
+    <Finitio::Syntax::HeadingExtra>
   end
 
   rule attribute

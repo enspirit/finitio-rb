@@ -53,5 +53,16 @@ module Finitio
       it{ should eq(true) }
     end
 
+    context 'with allow_extra set to a type' do
+      let(:attributes){
+        [ red, blue ]
+      }
+      let(:options){
+        {allow_extra: intType}
+      }
+
+      it{ should eq(true) }
+    end
+
   end
 end

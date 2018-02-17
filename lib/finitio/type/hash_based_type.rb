@@ -11,10 +11,11 @@ module Finitio
 
     def include?(value)
       value.is_a?(Hash) &&
-      valid_attrs?(value) &&
       heading.all?{|a|
         value.has_key?(a.name) ? a.type.include?(value[a.name]) : true
-      }
+      } &&
+      !missing_attr?(value) &&
+      valid_extra_attrs?(value)
     end
 
     # Convert `value` (supposed to be Hash) to a Tuple, by checking attributes
@@ -23,11 +24,6 @@ module Finitio
     def dress(value, handler = DressHelper.new)
       handler.failed!(self, value) unless looks_a_tuple?(value)
 
-      # Check for extra attributes
-      unless heading.allow_extra? or (extra = extra_attrs(value, true)).empty?
-        handler.fail!("Unrecognized attribute `#{extra.first}`")
-      end
-
       # Check for missing attributes
       unless (missing = missing_attrs(value, true)).empty?
         handler.fail!("Missing attribute `#{missing.first}`")
@@ -35,6 +31,21 @@ module Finitio
 
       # Uped values, i.e. tuple under construction
       uped = {}
+
+      # Check for extra attributes
+      extra = extra_attrs(value, true)
+      case extra_type = heading.extra_type
+      when NilClass
+        handler.fail!("Unrecognized attribute `#{extra.first}`") unless extra.empty?
+      when ANY_TYPE
+        # ok, nothing to do
+      else
+        extra.each do |attr|
+          handler.deeper(attr) do
+            uped[attr.to_sym] = extra_type.dress(value.fetch(attr), handler)
+          end
+        end
+      end
 
       # Up each attribute in turn now. Fail on missing ones.
       heading.each do |attribute|
@@ -71,10 +82,6 @@ module Finitio
       attrs(value.keys, to_s) - attrs(attr_names, to_s)
     end
 
-    def extra_attr?(value, to_s = false)
-      !extra_attrs(value, to_s).empty?
-    end
-
     def missing_attrs(value, to_s = false)
       attrs(req_attr_names, to_s) - attrs(value.keys, to_s)
     end
@@ -83,8 +90,12 @@ module Finitio
       !missing_attrs(value, to_s).empty?
     end
 
-    def valid_attrs?(value, to_s = false)
-      (heading.allow_extra? || !extra_attr?(value, to_s)) && !missing_attr?(value)
+    def valid_extra_attrs?(value)
+      extra = self.extra_attrs(value)
+      return extra.empty? unless heading.allow_extra?
+      extra_type = heading.extra_type
+      return true if extra_type == ANY_TYPE
+      extra.all?{|attr| extra_type.include?(value[attr]) }
     end
 
   end # module HashBasedType

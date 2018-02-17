@@ -1,4 +1,8 @@
-# 0.5.1 / 2017-01-08
+# 0.6.0 / 2018-02-17
+
+* Add support for typed extra attributes, e.g. { ...: Integer }
+
+# 0.5.2 / 2017-01-08
 
 * Disable memoization in parser because it leads to terrible performance
   issues on some schemas.

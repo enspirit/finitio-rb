@@ -6,6 +6,7 @@ Feature: MultiTupleType
       """
       Age   = Integer( i | i>=0 )
       Info  = { name : String, age :? Age }
+      ExtraAge = { ...: Age }
       """
 
   Scenario: Dressing a valid multi tuple
@@ -17,6 +18,11 @@ Feature: MultiTupleType
 
     Given I dress JSON's '{ "name": "Finitio" }' with Info
     Then the result should be a representation for Info
+
+  Scenario: Dressing valid extra ages
+
+    Given I dress JSON's '{ "one": 12, "two": 14 }' with ExtraAge
+    Then the result should be a representation for ExtraAge
 
   Scenario: Dressing when name is missing
 
@@ -38,3 +44,10 @@ Feature: MultiTupleType
     Then it should be a TypeError as:
       | message                    | location |
       | Invalid Age `-1`           | age      |
+
+  Scenario: Dressing invalid extra ages
+
+    Given I dress JSON's '{ "one": 12, "two": "foobar" }' with ExtraAge
+    Then it should be a TypeError as:
+      | message                    | location |
+      | Invalid Age `foobar`       | two      |

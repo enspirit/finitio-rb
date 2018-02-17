@@ -29,3 +29,14 @@ Feature: Support for rich tuple types
     Then it compiles to a tuple type
     And `length` is mandatory
     And it allows extra attributes
+
+  Scenario: Support for typed extra attributes
+
+    Given the System is
+      """
+      { length: Integer, ...: Integer }
+      """
+    Then it compiles to a tuple type
+    And `length` is mandatory
+    And it allows Integer extra attributes
+    And it disallows Real extra attributes

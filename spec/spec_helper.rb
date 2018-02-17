@@ -44,6 +44,10 @@ end
 
 module SpecHelpers
 
+  def anyType
+    Finitio::AnyType.new
+  end
+
   def intType
     Finitio::BuiltinType.new(Integer, "intType")
   end
@@ -72,8 +76,20 @@ module SpecHelpers
     @positive ||= Finitio::Constraint.new(->(i){ i>=0 }, :positive)
   end
 
+  def negative
+    @negative ||= Finitio::Constraint.new(->(i){ i<0 }, :negative)
+  end
+
   def byte
     Finitio::SubType.new(intType, [byte_full])
+  end
+
+  def posInt
+    Finitio::SubType.new(intType, [positive])
+  end
+
+  def negInt
+    Finitio::SubType.new(intType, [negative])
   end
 
   def type_factory

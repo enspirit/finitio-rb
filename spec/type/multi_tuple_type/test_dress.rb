@@ -122,7 +122,7 @@ module Finitio
       end
     end
 
-    context 'when not allowing extra' do
+    context 'when allow_extra is set to true' do
       let(:heading){
         Heading.new([r, g, maybe_b], allow_extra: true)
       }
@@ -138,6 +138,40 @@ module Finitio
 
         it 'should return a coerced/projection' do
           expect(subject).to eq(r: 12, g: 13)
+        end
+      end
+    end
+
+    context 'when allow_extra is set to a specific type' do
+      let(:heading){
+        Heading.new([r, g, maybe_b], allow_extra: negInt)
+      }
+
+      subject do
+        type.dress(arg) rescue $!
+      end
+
+      context 'with an invalid extra attribute' do
+        let(:arg){
+          { "r" => 12, "g" => 13, "extr" => 165 }
+        }
+
+        it 'should raise a TypeError' do
+          expect(subject).to be_a(TypeError)
+        end
+      end
+
+      context 'with a valid extra attribute' do
+        let(:arg){
+          { "r" => 12, "g" => 13, "extr" => -165 }
+        }
+
+        it 'should not raise a TypeError' do
+          expect(subject).not_to be_a(TypeError)
+        end
+
+        it 'should return a coerced/projection' do
+          expect(subject).to eq(r: 12, g: 13, extr: -165)
         end
       end
     end

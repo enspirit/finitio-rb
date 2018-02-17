@@ -55,22 +55,60 @@ module Finitio
           expect(compiled.to_name).to eq('a: Integer, ...')
         end
       end
+
+      context 'a: .Integer, ...: .String' do
+        let(:input){ 'a: .Integer, ...: .String' }
+
+        it 'compiles to a Heading' do
+          expect(compiled).to be_a(Heading)
+          expect(compiled.to_name).to eq('a: Integer, ...: String')
+        end
+      end
     end
 
     describe "AST" do
-      let(:input){ 'a: .Integer, b: .Float' }
 
       let(:ast){
         subject.to_ast
       }
 
-      it{
-        expect(ast).to eq([
-          :heading,
-          [ :attribute, "a", [:builtin_type, "Integer" ]],
-          [ :attribute, "b", [:builtin_type, "Float" ]]
-        ])
-      }
+      context 'when not using allow extra' do
+        let(:input){ 'a: .Integer, b: .Float' }
+
+        it{
+          expect(ast).to eq([
+            :heading,
+            [ :attribute, "a", [:builtin_type, "Integer" ]],
+            [ :attribute, "b", [:builtin_type, "Float" ]]
+          ])
+        }
+      end
+
+      context 'when specifying allow extra without type' do
+        let(:input){ 'a: .Integer, b: .Float, ...' }
+
+        it{
+          expect(ast).to eq([
+            :heading,
+            [ :attribute, "a", [:builtin_type, "Integer" ]],
+            [ :attribute, "b", [:builtin_type, "Float" ]],
+            { allow_extra: true }
+          ])
+        }
+      end
+
+      context 'when specifying allow extra type' do
+        let(:input){ 'a: .Integer, b: .Float, ...: .String' }
+
+        it{
+          expect(ast).to eq([
+            :heading,
+            [ :attribute, "a", [:builtin_type, "Integer" ]],
+            [ :attribute, "b", [:builtin_type, "Float" ]],
+            { allow_extra: [:builtin_type, "String"] }
+          ])
+        }
+      end
     end
   end
 end

@@ -51,7 +51,7 @@ module Finitio
       end
     end
 
-    context 'with extra allowed' do
+    context 'with allow_extra set to true' do
       let(:heading){
         Heading.new([a, maybe_b], allow_extra: true)
       }
@@ -66,6 +66,36 @@ module Finitio
         let(:arg){ {a: 12, c: 15} }
 
         it{ should eq(true) }
+      end
+    end
+
+    context 'with allow_extra set to a specific type' do
+      let(:heading){
+        Heading.new([a, maybe_b], allow_extra: negInt)
+      }
+
+      context 'when valid hash, yet with no extra attribute' do
+        let(:arg){ {a: 12} }
+
+        it{ should eq(true) }
+      end
+
+      context 'when a valid b' do
+        let(:arg){ {a: 12, b: 15} }
+
+        it{ should eq(true) }
+      end
+
+      context 'when a valid c' do
+        let(:arg){ {a: 12, b: 15, c: -120} }
+
+        it{ should eq(true) }
+      end
+
+      context 'when an invalid c' do
+        let(:arg){ {a: 12, b: 15, c: 120} }
+
+        it{ should eq(false) }
       end
     end
 

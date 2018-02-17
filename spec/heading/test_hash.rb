@@ -25,7 +25,13 @@ module Finitio
     it 'is good enough to distinguish between extra allowance' do
       h1 = heading([r], allow_extra: true)
       h2 = heading([r], allow_extra: false)
+      h3 = heading([r], allow_extra: anyType)
+      h4 = heading([r], allow_extra: intType)
+      h5 = heading([r], allow_extra: intType)
       expect(h1.hash).not_to eq(h2.hash)
+      expect(h1.hash).to eq(h3.hash)
+      expect(h1.hash).not_to eq(h4.hash)
+      expect(h4.hash).to eq(h5.hash)
     end
 
     it 'is be good enough to distinguish between different headings' do

@@ -43,6 +43,16 @@ Then(/^it allows extra attributes$/) do
   @main.heading.should be_allow_extra
 end
 
+Then(/^it allows Integer extra attributes$/) do
+  @main.heading.extra_type.should be_a(Finitio::BuiltinType)
+  @main.heading.extra_type.ruby_type.should eq(Integer)
+end
+
+Then(/^it disallows Real extra attributes$/) do
+  @main.heading.extra_type.should be_a(Finitio::BuiltinType)
+  @main.heading.extra_type.ruby_type.should_not eq(Float)
+end
+
 Then(/^metadata at (.*?) should be as follows$/) do |path, table|
   @system.should be_a(Finitio::System)
   table.hashes.each do |expected|

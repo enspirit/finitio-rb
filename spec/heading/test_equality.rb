@@ -25,7 +25,13 @@ module Finitio
     it 'distinguishes between extra allowance' do
       h1 = heading([r], allow_extra: true)
       h2 = heading([r], allow_extra: false)
+      h3 = heading([r], allow_extra: anyType)
+      h4 = heading([r], allow_extra: intType)
+      h5 = heading([r], allow_extra: intType)
       expect(h1).not_to eq(h2)
+      expect(h1).to eq(h3)
+      expect(h1).not_to eq(h4)
+      expect(h4).to eq(h5)
     end
 
     it 'distinguishes between attribute types' do

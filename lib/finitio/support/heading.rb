@@ -38,8 +38,13 @@ module Finitio
     end
 
     def allow_extra?
+      !!options[:allow_extra]
+    end
+
+    def allow_extra
       options[:allow_extra]
     end
+    alias :extra_type :allow_extra
 
     def each(&bl)
       return to_enum unless bl
@@ -51,6 +56,7 @@ module Finitio
       if allow_extra?
         name << ", " unless empty?
         name << "..."
+        name << ": #{allow_extra.name}" unless allow_extra == ANY_TYPE
       end
       name
     end
@@ -88,9 +94,16 @@ module Finitio
     end
 
     def normalize_options(opts)
-      options = DEFAULT_OPTIONS
-      options = options.merge(opts).freeze if opts
-      options
+      options = DEFAULT_OPTIONS.dup
+      options = options.merge(opts) if opts
+      options[:allow_extra] = case extra = options[:allow_extra]
+      when TrueClass            then ANY_TYPE
+      when NilClass, FalseClass then nil
+      when Type                 then extra
+      else
+        raise ArgumentError, "Unrecognized allow_extra: #{extra}"
+      end
+      options.freeze
     end
 
   end # class Heading

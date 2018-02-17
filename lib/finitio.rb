@@ -11,6 +11,8 @@ module Finitio
 
   IDENTITY = ->(object){ object }
 
+  ANY_TYPE = AnyType.new
+
   def parse(source)
     require "finitio/syntax"
     Syntax.parse(source)

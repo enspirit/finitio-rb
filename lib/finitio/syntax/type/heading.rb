@@ -18,11 +18,14 @@ module Finitio
       end
 
       def compile(factory)
-        Finitio::Heading.new(attributes(factory), allow_extra: allow_extra?)
+        options = allow_extra ? allow_extra.compile(factory) : {}
+        Finitio::Heading.new(attributes(factory), options)
       end
 
       def to_ast
-        captures[:attribute].map(&:to_ast).unshift(:heading)
+        ast = captures[:attribute].map(&:to_ast).unshift(:heading)
+        ast << allow_extra.to_ast if allow_extra
+        ast
       end
 
     end # module Heading
