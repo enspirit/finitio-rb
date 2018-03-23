@@ -1,3 +1,8 @@
+# 0.6.1 / 2018-03-23
+
+* Fix support for typed extra attributes, a KeyError was raised when
+  keys were Symbols and not Strings.
+
 # 0.6.0 / 2018-02-17
 
 * Add support for typed extra attributes, e.g. { ...: Integer }

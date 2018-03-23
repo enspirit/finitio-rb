@@ -42,7 +42,8 @@ module Finitio
       else
         extra.each do |attr|
           handler.deeper(attr) do
-            uped[attr.to_sym] = extra_type.dress(value.fetch(attr), handler)
+            attr_value = value.fetch(attr){|k| value.fetch(attr.to_sym) }
+            uped[attr.to_sym] = extra_type.dress(attr_value, handler)
           end
         end
       end

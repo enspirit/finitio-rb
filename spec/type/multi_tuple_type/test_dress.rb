@@ -27,6 +27,16 @@ module Finitio
         end
       end
 
+      context 'with a valid Hash with Symbol keys' do
+        let(:arg){
+          { r: 12, g: 13, b: 255 }
+        }
+
+        it 'should coerce to a tuple' do
+          expect(subject).to eq(r: 12, g: 13, b: 255)
+        end
+      end
+
       context 'with a valid Hash and no optional' do
         let(:arg){
           { "r" => 12, "g" => 13 }
@@ -164,6 +174,20 @@ module Finitio
       context 'with a valid extra attribute' do
         let(:arg){
           { "r" => 12, "g" => 13, "extr" => -165 }
+        }
+
+        it 'should not raise a TypeError' do
+          expect(subject).not_to be_a(TypeError)
+        end
+
+        it 'should return a coerced/projection' do
+          expect(subject).to eq(r: 12, g: 13, extr: -165)
+        end
+      end
+
+      context 'with a valid extra attribute and Symbol keys' do
+        let(:arg){
+          { r: 12, g: 13, extr: -165 }
         }
 
         it 'should not raise a TypeError' do
