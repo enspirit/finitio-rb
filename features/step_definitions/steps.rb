@@ -7,9 +7,13 @@ end
 
 Given(/^the System is(, within '(.*?)')?$/) do |_,path,source|
   if path
-    target = Path.dir.parent/path
-    target.write(source)
-    @system = Finitio.system(target)
+    begin
+      target = Path.dir.parent/path
+      target.write(source)
+      @system = Finitio.system(target)
+    rescue => ex
+      @system = ex
+    end
   else
     @system = Finitio::TEST_SYSTEM.parse(source)
   end

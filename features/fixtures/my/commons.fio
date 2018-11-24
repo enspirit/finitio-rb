@@ -1,1 +1,3 @@
-Euros = .Fixnum
+@import finitio/data
+
+Euros = Integer

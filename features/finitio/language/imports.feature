@@ -20,7 +20,6 @@ Feature: Imports
     Then it compiles fine
     Given I dress JSON's '12'
     Then the result should be a representation for Euros
-    And  the result should be the integer 12
 
     Given the System is, within 'fixtures/my/test.fio'
       """
@@ -31,4 +30,13 @@ Feature: Imports
     Then it compiles fine
     Given I dress JSON's '12'
     Then the result should be a representation for Euros
-    And  the result should be the integer 12
+
+    Given "my" has been registered as stdlib
+    Given the System is, within 'fixtures/my/test.fio'
+      """
+      @import my/commons
+
+      Integer
+      """
+    Then it does not compile
+    And the error should be "No such type `Integer`"
