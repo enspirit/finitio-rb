@@ -1,4 +1,5 @@
 require 'ostruct'
+require 'path'
 
 Before do
   @system = Finitio::TEST_SYSTEM
