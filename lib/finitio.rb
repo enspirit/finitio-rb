@@ -1,5 +1,6 @@
 require 'set'
 require 'time'
+require 'pathname'
 
 module Finitio
 
@@ -12,6 +13,14 @@ module Finitio
   IDENTITY = ->(object){ object }
 
   ANY_TYPE = AnyType.new
+
+  STDLIB_PATHS = [
+    File.expand_path('../finitio/stdlib', __FILE__)
+  ]
+
+  def stdlib_path(path)
+    STDLIB_PATHS << path
+  end
 
   def parse(source)
     require "finitio/syntax"
@@ -31,6 +40,6 @@ module Finitio
   extend self
 
   DEFAULT_SYSTEM = system(File.read(
-    File.expand_path('../finitio/Finitio/default.fio', __FILE__)
+    File.expand_path('../finitio/stdlib/finitio/data.fio', __FILE__)
   ))
 end # module Finitio

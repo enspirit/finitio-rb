@@ -38,5 +38,42 @@ module Finitio
       end
     end
 
+    context 'with an imported type' do
+      subject{
+        s = System.new
+        s.add_import(system)
+        s.fetch("intType", imports, &fallback)
+      }
+
+      context "specifying the use of imports" do
+        let(:imports) { true }
+        let(:fallback){ ->(name){ raise } }
+
+        it 'should return the type' do
+          expect(subject).to eq(intType)
+        end
+      end
+
+      context "specifying not to use the imports" do
+        let(:imports) { false }
+        let(:fallback){ ->(name){ "bar" } }
+
+        it 'should yield the fallback block' do
+          expect(subject).to eq("bar")
+        end
+      end
+
+      context "specifying not to use the imports and no fallbak" do
+        let(:imports) { false }
+        let(:fallback){ nil }
+
+        it 'should yield the fallback block' do
+          expect {
+            subject
+          }.to raise_error
+        end
+      end
+    end
+
   end
 end

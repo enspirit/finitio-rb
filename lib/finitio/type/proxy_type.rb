@@ -25,15 +25,15 @@ module Finitio
       :to_s
     ].each do |meth|
       define_method(meth) do |*args, &bl|
-        raise Error, "Proxy `#{target_name}` not resolved" unless @target
+        raise Error, "No such type `#{@target_name}` (proxy not resolved?)" unless @target
         @target.send(meth, *args, &bl)
       end
     end
 
     def resolve(system)
-      @target = system.fetch(target_name) do
+      @target = system.fetch(target_name){
         raise Error, "No such type `#{target_name}`"
-      end
+      }
     end
 
   end # class ProxyType
