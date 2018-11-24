@@ -4,8 +4,16 @@ module Finitio
   #
   class System
 
-    def initialize(types = {})
+    def initialize(types = {}, imports = [])
       @types = types
+      @imports = imports
+    end
+
+    attr_reader :types, :imports
+    private :types, :imports
+
+    def add_import(system)
+      @imports << system
     end
 
     def add_type(type, name = nil, metadata = nil)
@@ -19,7 +27,9 @@ module Finitio
     end
 
     def get_type(name)
-      @types[name] || @types[name.to_s]
+      fetch(name){|_|
+        fetch(name.to_s){ nil }
+      }
     end
     alias :[] :get_type
 
@@ -27,9 +37,27 @@ module Finitio
       self['Main']
     end
 
-    def fetch(name, &bl)
-      @types.fetch(name, &bl)
+    def fetch(name, with_imports = true, &bl)
+      if with_imports
+        @types.fetch(name) do
+          _fetch(name, @imports, &bl)
+        end
+      else
+        @types.fetch(name, &bl)
+      end
     end
+
+    def _fetch(name, imports, &bl)
+      if imports.empty?
+        raise KeyError, %Q{key not found: "#{name}"} unless bl
+        bl.call(name)
+      else
+        imports.first.fetch(name, false) do
+          _fetch(name, imports[1..-1], &bl)
+        end
+      end
+    end
+    private :_fetch
 
     def factory
       @factory ||= TypeFactory.new
@@ -56,7 +84,7 @@ module Finitio
     end
 
     def dup
-      System.new(@types.dup)
+      System.new(@types.dup, @imports.dup)
     end
 
   end # class System

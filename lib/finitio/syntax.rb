@@ -3,6 +3,10 @@ require_relative 'syntax/node'
 require_relative 'syntax/literal'
 require_relative 'syntax/expr'
 require_relative 'syntax/type'
+require_relative 'syntax/import'
+require_relative 'syntax/imports'
+require_relative 'syntax/definitions'
+require_relative 'syntax/system'
 module Finitio
   module Syntax
 
@@ -21,13 +25,13 @@ module Finitio
     end
 
     def self.compile(source, cpl = nil)
-      cpl = Compilation.coerce(cpl)
+      cpl = Compilation.coerce(cpl, source)
       parse(source, root: "system").compile(cpl)
       cpl.resolve_proxies!.system
     end
 
     def self.compile_type(source, cpl = nil)
-      cpl = Compilation.coerce(cpl)
+      cpl = Compilation.coerce(cpl, source)
       parse(source, root: "type").compile(cpl)
     end
 

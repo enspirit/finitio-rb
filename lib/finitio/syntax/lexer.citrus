@@ -32,6 +32,10 @@ grammar Finitio::Syntax::Lexer
     /[a-zA-Z0-9:]+/
   end
 
+  rule import_url
+    (!space .)+
+  end
+
   # LEXER symbols
 
   rule equal

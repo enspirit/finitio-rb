@@ -2,6 +2,14 @@ Then(/^it compiles fine$/) do
   @system.should be_a(Finitio::System)
 end
 
+Then(/^it does not compile$/) do
+  @system.should be_a(Finitio::Error)
+end
+
+Then(/^the error should be "(.*?)"$/) do |msg|
+  @system.message.should match(msg)
+end
+
 Then(/^it compiles to a tuple type$/) do
   @system.should be_a(Finitio::System)
   @main   = @system.main
