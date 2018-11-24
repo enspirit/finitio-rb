@@ -21,3 +21,14 @@ Feature: Imports
     Given I dress JSON's '12'
     Then the result should be a representation for Euros
     And  the result should be the integer 12
+
+    Given the System is, within 'fixtures/my/test.fio'
+      """
+      @import ./commons
+
+      Euros
+      """
+    Then it compiles fine
+    Given I dress JSON's '12'
+    Then the result should be a representation for Euros
+    And  the result should be the integer 12

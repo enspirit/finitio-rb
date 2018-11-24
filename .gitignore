@@ -5,3 +5,4 @@ doc/api
 .yardoc
 .bundle
 vendor
+features/fixtures/my/test.fio
