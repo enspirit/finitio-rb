@@ -84,7 +84,7 @@ module Finitio
     end
 
     def dup
-      System.new(@types.dup)
+      System.new(@types.dup, @imports.dup)
     end
 
   end # class System
