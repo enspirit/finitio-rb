@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    finitio (0.6.1)
+    finitio (0.7.0)
       citrus (>= 2.4, < 4.0)
 
 GEM

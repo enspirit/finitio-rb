@@ -19,7 +19,9 @@ require 'finitio'
 require 'json'
 
 # Let load a schema
-schema = Finitio::DEFAULT_SYSTEM.parse <<-FIO
+schema = Finitio.system <<-FIO
+  @import finitio/data
+
   {
     name: String( s | s.strip.size > 0 ),
     at: DateTime
@@ -98,6 +100,91 @@ module RgbContract
 end
 ```
 
+## Decompose complex system with imports
+
+It is useful to decompose complex systems in many files using the import
+feature. The latter works with relative file paths like this:
+
+```
+# child.fio
+
+Posint = .Integer(i | i >= 0)
+```
+
+```
+# parent.fio
+@import ./child.fio
+
+# Child's types are available inside the system, but not outside it, that
+# is, imported types are not themselves exported
+Byte = Posint(i | i <= 255 )
+```
+
+```
+@import ./parent.fio
+
+# This will work
+HalfByte = Byte(i | i <= 128)
+
+# But this will not: Posint is not defined
+Posint(i | i <= 128)
+```
+
+See the next section about the standard library if you need to share types
+without relying on relative paths.
+
+## Standard library
+
+Usual type definitions are already defined for simple data types, forming
+Finitio's default system:
+
+* Most ruby native (data) classes are already aliased to avoid explicit use of
+  builtins. In particular, `Integer`, `String`, etc.
+
+* A `Boolean` union type also hides the TrueClass and FalseClass distinction.
+
+* Date, Time and DateTime ADTs are also provided that perform common
+  conversions from JSON strings, through iso8601.
+
+This system is best used through Finitio's so-called "standard library", e.g.
+
+```
+@import finitio/data
+
+# String, Integer, Boolean, etc. are now available in this system
+```
+
+See `lib/finitio/stdlib/*.fio` for the precise definition of the standard library.
+
+### Contributing to the standard library
+
+Ruby gems may contribute to the standard library by specifying resolve paths.
+We suggest the following system file structure inside your gem source code:
+
+```
+lib
+  myrubygem
+  myrubygem.rb
+finitio
+  myrubygem
+    base.fio
+    advanced.fio
+```
+
+Registering the standard library path can then be done as follows:
+
+```
+# inside myrubygem.rb
+Finitio.stdlib_path(File.expand_path('../../finitio', __FILE__))
+```
+
+Then, a Finitio schema will have access to the types defined in your extension:
+
+```
+@import myrubygem/base
+@import myrubygem/advanced
+```
+
 ## About representations
 
 The `Rep` representation function mapping *Finitio* types to ruby classes is
@@ -135,14 +222,3 @@ Rep({{Ai => Ti}}) = Set<Hash<Symbol => Rep(Ti)>>
 # specified. ADTs behave as Union types if no class is bound.
 Rep(.Builtin <rep> ...) = Builtin
 ```
-
-## About the default system
-
-See `lib/finitio/Finitio/default.fio` for the precise definition of the default
-system. In summary,
-
-* Most ruby native (data) classes are already aliased to avoid explicit use of
-  builtins. In particular, `Integer`, `String`, etc.
-* A `Boolean` union type also hides the TrueClass and FalseClass distinction.
-* Date, Time and DateTime ADTs are also provided that perform common
-  conversions from JSON strings, through iso8601.

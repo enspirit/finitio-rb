@@ -1,3 +1,16 @@
+# 0.7.0 / 2019-02-28
+
+* Implement (basic) @import feature, working with relative paths
+  and a standard library. The standard library systems are memoized
+  to avoid unnecessary parsing and compilation.
+
+* `System#check_and_warn` allows discovering warnings, infos and
+  errors in system definitions, such as duplicate type definitions
+  and import overrides.
+
+* WARN: Finitio::DEFAULT_SYSTEM is deprecated. Use @import
+  finitio/data instead.
+
 # 0.6.1 / 2018-03-23
 
 * Fix support for typed extra attributes, a KeyError was raised when
