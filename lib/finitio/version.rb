@@ -3,7 +3,7 @@ module Finitio
 
     MAJOR = 0
     MINOR = 7
-    TINY  = "0-rc1"
+    TINY  = "0-rc2"
 
     def self.to_s
       [ MAJOR, MINOR, TINY ].join('.')
