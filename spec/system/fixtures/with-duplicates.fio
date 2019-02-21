@@ -1,0 +1,6 @@
+@import finitio/data
+@import ./system
+
+NilClass = .NilClass
+Posint = .Integer( i | i >= 0 )
+Negint = .Integer( i | i <= 0 )

@@ -1,0 +1,2 @@
+Posint = .Integer( i | i >= 0 )
+Negint = .Integer( i | i < 0 )
