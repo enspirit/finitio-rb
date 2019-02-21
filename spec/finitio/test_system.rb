@@ -29,4 +29,12 @@ describe Finitio, "system" do
     end
   end
 
+  context "feedback about duplicate types" do
+    subject{
+      Finitio.system(Path.dir/"with-duplicates.fio")
+    }
+
+    it{ should be_a(Finitio::System) }
+  end
+
 end

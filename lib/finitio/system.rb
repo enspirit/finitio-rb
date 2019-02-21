@@ -26,6 +26,16 @@ module Finitio
       @types[type.name] = type
     end
 
+    def each_type(&bl)
+      @types.values.each(&bl)
+    end
+    private :each_type
+
+    def each_import(&bl)
+      @imports.each(&bl)
+    end
+    private :each_import
+
     def get_type(name)
       fetch(name){|_|
         fetch(name.to_s){ nil }
@@ -85,6 +95,21 @@ module Finitio
 
     def dup
       System.new(@types.dup, @imports.dup)
+    end
+
+    def check_and_warn(io = STDERR)
+      each_type do |t|
+        next unless t.named?
+        each_import do |i|
+          next unless found = i.get_type(t.name)
+          if found == t
+            STDERR.puts "WARN: duplicate type def `#{t.name}`"
+          else
+            STDERR.puts "NOTICE: Type erasure `#{t.name}`"
+          end
+        end
+      end
+      self
     end
 
   end # class System
