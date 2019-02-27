@@ -7,7 +7,7 @@ module Finitio
 
       def compile(system)
         file = system.resolve_url(import_url)
-        imported = Finitio.system(file)
+        imported = Finitio.send(:_system, file)
         system.add_import(imported)
         system
       end
