@@ -1,3 +1,5 @@
 @import finitio/data
+@import finitio/system
 
 NilClass = .NilClass
+Posint = .Integer( i | i >= 0 )

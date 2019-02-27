@@ -96,6 +96,11 @@ module Finitio
           ]
         ])
       end
+
+      it 'is equal to itself by code' do
+        j = Syntax.parse(input, root: "contract").compile(type_factory, nil)
+        expect(j).to eql(compiled)
+      end
     end
 
     context 'A contract with external dressers' do

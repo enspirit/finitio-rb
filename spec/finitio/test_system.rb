@@ -30,8 +30,11 @@ describe Finitio, "system" do
   end
 
   context "feedback about duplicate types" do
+    before {
+      Finitio.stdlib_path(Path.dir.parent)
+    }
     subject{
-      Finitio.system(Path.dir/"with-duplicates.fio")
+      Finitio.system(Path.dir/"with-duplicates.fio").check_and_warn
     }
 
     it{ should be_a(Finitio::System) }

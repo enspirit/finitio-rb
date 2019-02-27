@@ -21,6 +21,11 @@ module Finitio
         expect(compiled.call(12)).to eq(true)
         expect(compiled.call(9)).to eq(false)
       end
+
+      it 'is equal to itself' do
+        j = Syntax.parse(input, root: "expression").compile("a")
+        expect(j).to eq(compiled)
+      end
     end
 
     context '(a >= 10)' do

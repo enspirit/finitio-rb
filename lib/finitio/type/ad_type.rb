@@ -131,5 +131,18 @@ module Finitio
       handler.failed!(self, value, error)
     end
 
+    def hash
+      [ ruby_type, contracts ].hash
+    end
+
+    def ==(other)
+      super || (
+        other.is_a?(AdType) &&
+        ruby_type == other.ruby_type &&
+        contracts == other.contracts
+      )
+    end
+    alias :eql? :==
+
   end # class AdType
 end # module Finitio

@@ -30,6 +30,11 @@ module Finitio
           [:constraint, "default", [:fn, [:parameters, "i"], [:source, "i >= 0"]]]
         ])
       end
+
+      it 'is equal to the same type' do
+        j = Syntax.parse(input, root: "sub_type").compile(type_factory)
+        expect(j).to eq(compiled)
+      end
     end
 
     context '.Integer( i | positive: i >= 0 )' do
