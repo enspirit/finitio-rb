@@ -104,8 +104,10 @@ module Finitio
           next unless found = i.get_type(t.name)
           if found == t
             STDERR.puts "WARN: duplicate type def `#{t.name}`"
+            break
           else
             STDERR.puts "NOTICE: Type erasure `#{t.name}`"
+            break
           end
         end
       end
