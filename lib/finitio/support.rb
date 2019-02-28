@@ -1,3 +1,4 @@
+require_relative 'support/proc_with_code'
 require_relative 'support/metadata'
 require_relative 'support/attribute'
 require_relative 'support/constraint'

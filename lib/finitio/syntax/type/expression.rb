@@ -4,8 +4,7 @@ module Finitio
       include Node
 
       def compile(var_name)
-        expr = "->(#{var_name}){ #{to_str} }"
-        ::Kernel.eval(expr)
+        ProcWithCode.new(var_name, to_str)
       end
 
     end # module Expression

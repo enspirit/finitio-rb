@@ -43,6 +43,7 @@ module Finitio
           ]
         ])
       end
+
     end
 
     context 'Two contracts' do
@@ -159,6 +160,11 @@ module Finitio
             ]
           ]
         ])
+      end
+
+      it 'is equal to itself' do
+        j = Syntax.parse(input, root: "ad_type").compile(type_factory)
+        expect(j).to eql(compiled)
       end
     end
 

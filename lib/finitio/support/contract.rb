@@ -29,5 +29,20 @@ module Finitio
       @undresser = clazz.instance_method(:"to_#{name}")
     end
 
+    def hash
+      infotype.hash ^ dresser.hash ^ undresser.hash
+    end
+
+    def ==(other)
+      super || (
+        other.is_a?(Contract) &&
+        name == other.name &&
+        infotype == other.infotype &&
+        dresser == other.dresser &&
+        undresser == other.undresser
+      )
+    end
+    alias :eql? :==
+
   end # class Contract
 end # module Finitio
