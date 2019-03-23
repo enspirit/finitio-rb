@@ -54,6 +54,16 @@ module Finitio
       raise NotImplementedError, "Missing #{self.class.name}#dress"
     end
 
+    def suppremum(other)
+      return self if other == self
+      other._suppremum(self)
+    end
+
+    def _suppremum(other)
+      UnionType.new([other, self])
+    end
+    protected :_suppremum
+
     def to_s
       name.to_s
     end

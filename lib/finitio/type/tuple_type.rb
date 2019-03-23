@@ -44,5 +44,9 @@ module Finitio
       "{#{heading.to_name}}"
     end
 
+    def suppremum(other)
+      super(other, TupleType, MultiTupleType)
+    end
+
   end # class TupleType
 end # module Finitio

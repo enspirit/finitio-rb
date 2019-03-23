@@ -20,5 +20,12 @@ module Finitio
       self.class.hash ^ self.elm_type.hash
     end
 
+    def suppremum(other)
+      return super unless other.is_a?(CollectionType)
+      return self if other.is_a?(CollectionType) && elm_type == other.elm_type
+      builder = self.class == other.class ? self.class : SeqType
+      builder.new(elm_type.suppremum(other.elm_type))
+    end
+
   end # module CollectionType
 end # module Finitio

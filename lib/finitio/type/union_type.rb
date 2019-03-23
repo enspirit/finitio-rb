@@ -70,6 +70,17 @@ module Finitio
       candidates.map(&:name).join('|')
     end
 
+    def suppremum(other)
+      return self if other == self
+      cs = if (other.is_a?(UnionType))
+        candidates + other.candidates
+      else
+        candidates + [other]
+      end
+      UnionType.new(cs.uniq)
+    end
+    alias :_suppremum :suppremum
+
     def ==(other)
       super || (
         other.is_a?(UnionType) && set_equal?(candidates, other.candidates)

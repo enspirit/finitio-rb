@@ -61,6 +61,32 @@ module Finitio
       name
     end
 
+    def looks_similar?(other)
+      return self if other == self
+      shared, mine, yours = Support.compare_attrs(attributes, other.attributes)
+      shared.length >= mine.length && shared.length >= yours.length
+    end
+
+    def suppremum(other)
+      raise ArgumentError unless other.is_a?(Heading)
+      return self if other == self
+      options = { allow_extra: allow_extra? || other.allow_extra? }
+      shared, mine, yours = Support.compare_attrs(attributes, other.attributes)
+      attributes = shared.map{|attr|
+        a1, o1 = self[attr], other[attr]
+        Attribute.new(attr, a1.type.suppremum(o1.type), a1.required && o1.required)
+      }
+      attributes += mine.map{|attrname|
+        attr = self[attrname]
+        Attribute.new(attr.name, attr.type, false)
+      }
+      attributes += yours.map{|attrname|
+        attr = other[attrname]
+        Attribute.new(attr.name, attr.type, false)
+      }
+      Heading.new(attributes, options)
+    end
+
     def ==(other)
       return nil unless other.is_a?(Heading)
       attributes == other.attributes && options == other.options
@@ -83,7 +109,7 @@ module Finitio
       attributes = {}
       attrs.each do |attr|
         unless attr.is_a?(Attribute)
-          raise ArgumentError, "Enumerable[Attribute] expected"
+          raise ArgumentError, "Enumerable[Attribute] expected, got a `#{attr.inspect}`"
         end
         if attributes[attr.name]
           raise ArgumentError, "Attribute names must be unique"
