@@ -27,7 +27,7 @@ module Finitio
     include CollectionType
 
     def representator
-      [elmType]
+      [elm_type]
     end
 
     def include?(value)

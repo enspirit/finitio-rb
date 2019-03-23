@@ -15,6 +15,15 @@ module Finitio
       heading.fetch(attrname)
     end
 
+    def suppremum(other, simple_class, multi_class)
+      return self if self == other
+      return super(other) unless other.is_a?(simple_class) or other.is_a?(multi_class)
+      return super(other) unless heading.looks_similar?(other.heading)
+      result_heading = heading.suppremum(other.heading)
+      builder = result_heading.multi? ? multi_class : simple_class
+      builder.new(result_heading)
+    end
+
     def ==(other)
       super || (other.is_a?(self.class) && heading == other.heading)
     end

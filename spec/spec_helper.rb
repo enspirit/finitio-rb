@@ -60,6 +60,10 @@ module SpecHelpers
     Finitio::BuiltinType.new(NilClass, "nilType")
   end
 
+  def stringType
+    Finitio::BuiltinType.new(String, "stringType")
+  end
+
   def byte_full
     @byte_full ||= Finitio::Constraint.new(->(i){ i>=0 && i<=255 }, :byte)
   end

@@ -38,6 +38,14 @@ module Finitio
       value
     end
 
+    def suppremum(other)
+      self
+    end
+
+    def _suppremum(other)
+      self
+    end
+
     def ==(other)
       super || other.is_a?(AnyType)
     end

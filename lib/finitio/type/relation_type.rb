@@ -36,5 +36,9 @@ module Finitio
       "{{#{heading.to_name}}}"
     end
 
+    def suppremum(other)
+      super(other, RelationType, MultiRelationType)
+    end
+
   end # class RelationType
 end # module Finitio
