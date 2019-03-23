@@ -10,7 +10,7 @@ module Finitio
     end
 
     attr_reader :types, :imports
-    private :types, :imports
+    private :imports
 
     def add_import(system)
       @imports << system
