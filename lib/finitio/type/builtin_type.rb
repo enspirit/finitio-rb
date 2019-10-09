@@ -53,5 +53,9 @@ module Finitio
       self.class.hash ^ ruby_type.hash
     end
 
+    def resolve_proxies(system)
+      self
+    end
+
   end # class BuiltinType
 end # module Finitio

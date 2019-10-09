@@ -60,6 +60,14 @@ module SpecHelpers
     Finitio::BuiltinType.new(NilClass, "nilType")
   end
 
+  def trueType
+    @trueType ||= Finitio::BuiltinType.new(TrueClass, "trueType")
+  end
+
+  def falseType
+    @falseType ||= Finitio::BuiltinType.new(FalseClass, "falseType")
+  end
+
   def stringType
     Finitio::BuiltinType.new(String, "stringType")
   end

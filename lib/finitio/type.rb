@@ -74,6 +74,10 @@ module Finitio
       }
     end
 
+    def resolve_proxies(system)
+      raise NotImplementedError, "resolve_proxies must be overriden"
+    end
+
   protected
 
     def set_equal?(s1, s2)

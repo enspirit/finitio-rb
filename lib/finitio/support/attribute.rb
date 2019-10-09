@@ -55,5 +55,9 @@ module Finitio
       name.hash ^ type.hash ^ required.hash
     end
 
+    def resolve_proxies(system)
+      Attribute.new(name, type.resolve_proxies(system), required, metadata)
+    end
+
   end # class Attribute
 end # module Finitio

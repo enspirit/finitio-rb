@@ -27,5 +27,9 @@ module Finitio
       builder.new(elm_type.suppremum(other.elm_type))
     end
 
+    def resolve_proxies(system)
+      self.class.new(elm_type.resolve_proxies(system), name, metadata)
+    end
+
   end # module CollectionType
 end # module Finitio

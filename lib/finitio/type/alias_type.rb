@@ -33,5 +33,9 @@ module Finitio
       end
     end
 
+    def resolve_proxies(system)
+      AliasType.new(target.resolve_proxies(system), name, metadata)
+    end
+
   end # class AliasType
 end # module Finitio

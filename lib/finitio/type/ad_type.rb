@@ -144,5 +144,9 @@ module Finitio
     end
     alias :eql? :==
 
+    def resolve_proxies(system)
+      AdType.new(ruby_type, contracts.map{|t| t.resolve_proxies(system)}, name, metadata)
+    end
+
   end # class AdType
 end # module Finitio

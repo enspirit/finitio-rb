@@ -92,5 +92,9 @@ module Finitio
       self.class.hash ^ set_hash(self.candidates)
     end
 
+    def resolve_proxies(system)
+      UnionType.new(candidates.map{|t| t.resolve_proxies(system)}, name, metadata)
+    end
+
   end # class UnionType
 end # module Finitio

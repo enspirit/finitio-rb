@@ -4,7 +4,6 @@ module Finitio
     def initialize(system = System.new, factory = TypeFactory.new, source = nil)
       @system  = system
       @factory = factory
-      @proxies = []
       @source = source
     end
     attr_reader :system, :factory, :proxies, :source
@@ -48,11 +47,8 @@ module Finitio
       Pathname.new(file)
     end
 
-    def resolve_proxies!
-      proxies.each do |p|
-        p.resolve(system)
-      end
-      self
+    def resolve_proxies
+      system.resolve_proxies
     end
 
     # Delegation to Factory
@@ -61,12 +57,6 @@ module Finitio
       define_method(dsl_method){|*args, &bl|
         factory.public_send(dsl_method, *args, &bl)
       }
-    end
-
-    def proxy(*args, &bl)
-      proxy = factory.proxy(*args, &bl)
-      proxies << proxy
-      proxy
     end
 
     # Delegation to System

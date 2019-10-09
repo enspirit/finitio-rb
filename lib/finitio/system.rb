@@ -89,6 +89,16 @@ module Finitio
       Syntax.compile(source, self.dup)
     end
 
+    def resolve_proxies(recurse = true)
+      rebuilt = {}
+      scope = FetchScope.new(self, rebuilt)
+      types.each_with_object(rebuilt) do |(name,type),memo|
+        rebuilt[name] = type.resolve_proxies(scope)
+      end
+      resolved = System.new(rebuilt, imports)
+      recurse ? resolved.resolve_proxies(false) : resolved
+    end
+
     def inspect
       @types.each_pair.map{|k,v| "#{k} = #{v}" }.join("\n")
     end

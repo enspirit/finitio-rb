@@ -93,5 +93,9 @@ module Finitio
       self.class.hash ^ super_type.hash ^ set_hash(constraints)
     end
 
+    def resolve_proxies(system)
+      SubType.new(super_type.resolve_proxies(system), constraints, name, metadata)
+    end
+
   end # class SubType
 end # module Finitio
