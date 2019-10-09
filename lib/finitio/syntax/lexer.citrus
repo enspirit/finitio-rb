@@ -25,7 +25,7 @@ grammar Finitio::Syntax::Lexer
   end
 
   rule type_name
-    /[A-Z][a-zA-Z]+(\.[A-Z][a-zA-Z]+)*/
+    /[A-Z][a-zA-Z]*(\.[A-Z][a-zA-Z]+)*/
   end
 
   rule builtin_type_name

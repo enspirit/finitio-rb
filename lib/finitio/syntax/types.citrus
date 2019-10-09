@@ -6,8 +6,13 @@ grammar Finitio::Syntax::Types
   include Finitio::Syntax::Literals
 
   rule type_def
-    (metadata? type_name equal type)
+    (metadata? type_name ('<' vars:high_order_vars '>')? equal type)
     <Finitio::Syntax::TypeDef>
+  end
+
+  rule high_order_vars
+    (type_name (comma type_name)*)
+    <Finitio::Syntax::HighOrderVars>
   end
 
   rule main_type
@@ -58,6 +63,7 @@ grammar Finitio::Syntax::Types
   rule rel_type
       relation_type
     | tuple_type
+    | high_order_type_instantiation
     | collection_type
   end
 
@@ -108,6 +114,13 @@ grammar Finitio::Syntax::Types
   rule struct_type
     ('<' type (comma type)* '>')
     <Finitio::Syntax::StructType>
+  end
+
+  # high-order types
+
+  rule high_order_type_instantiation
+    (high:type_name '<' vars:high_order_vars '>')
+    <Finitio::Syntax::HighOrderTypeInstantiation>
   end
 
   # terminal forms
