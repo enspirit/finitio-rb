@@ -33,5 +33,9 @@ module Finitio
       self.class.hash ^ heading.hash
     end
 
+    def resolve_proxies(system)
+      self.class.new(heading.resolve_proxies(system), name, metadata)
+    end
+
   end # module HeadingBasedType
 end # module Finitio

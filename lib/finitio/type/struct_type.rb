@@ -80,5 +80,9 @@ module Finitio
       self.class.hash ^ component_types.hash
     end
 
+    def resolve_proxies(system)
+      StructType.new(component_types.map{|t| t.resolve_proxies(system)}, name, metadata)
+    end
+
   end # class StructType
 end # module Finitio

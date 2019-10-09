@@ -89,6 +89,11 @@ module Finitio
       Syntax.compile(source, self.dup)
     end
 
+    def resolve_proxies
+      ts = Hash[types.map{|k,v| [ k, v.resolve_proxies(self) ] }]
+      System.new(ts, imports)
+    end
+
     def inspect
       @types.each_pair.map{|k,v| "#{k} = #{v}" }.join("\n")
     end

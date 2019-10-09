@@ -44,5 +44,9 @@ module Finitio
     end
     alias :eql? :==
 
+    def resolve_proxies(system)
+      Contract.new(infotype.resolve_proxies(system), dresser, undresser, name, metadata)
+    end
+
   end # class Contract
 end # module Finitio

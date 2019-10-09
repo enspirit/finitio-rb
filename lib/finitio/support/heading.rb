@@ -99,6 +99,11 @@ module Finitio
     attr_reader :attributes, :options
     protected   :attributes, :options
 
+    def resolve_proxies(system)
+      as = attributes.map{|k,a| a.resolve_proxies(system) }
+      Heading.new(as, options)
+    end
+
   private
 
     def normalize_attributes(attrs)

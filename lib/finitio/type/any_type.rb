@@ -55,5 +55,9 @@ module Finitio
       self.class.hash ^ 37
     end
 
+    def resolve_proxies(system)
+      self
+    end
+
   end # class AnyType
 end # module Finitio

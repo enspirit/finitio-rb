@@ -11,28 +11,13 @@ module Finitio
     end
     attr_reader :target_name, :target
 
-    [
-      :representator,
-      :name,
-      :name=,
-      :default_name,
-      :dress,
-      :undress,
-      :include?,
-      :==,
-      :eql?,
-      :hash,
-      :to_s
-    ].each do |meth|
-      define_method(meth) do |*args, &bl|
-        raise Error, "No such type `#{@target_name}` (proxy not resolved?)" unless @target
-        @target.send(meth, *args, &bl)
-      end
+    def default_name
+      "_#{target_name}_"
     end
 
-    def resolve(system)
-      @target = system.fetch(target_name){
-        raise Error, "No such type `#{target_name}`"
+    def resolve_proxies(system)
+      system.fetch(target_name){
+        raise Error, "No such type `#{target_name}` in #{system}"
       }
     end
 
