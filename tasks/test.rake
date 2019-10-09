@@ -18,7 +18,7 @@ namespace :test do
     require 'cucumber/rake/task'
 
     Cucumber::Rake::Task.new(:cucumber) do |t|
-      t.cucumber_opts = "features --format pretty"
+      t.cucumber_opts = "features --format progress"
     end
   rescue LoadError => ex
     task :unit do
