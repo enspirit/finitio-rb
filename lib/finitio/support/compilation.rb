@@ -1,18 +1,19 @@
 module Finitio
   class Compilation
 
-    def initialize(system = System.new, factory = TypeFactory.new, source = nil)
+    def initialize(system = System.new, factory = TypeFactory.new, scope = nil, source = nil)
       @system  = system
       @factory = factory
+      @scope = scope || FetchScope.new(system, {})
       @source = source
     end
-    attr_reader :system, :factory, :proxies, :source
+    attr_reader :system, :factory, :scope, :source
 
     def self.coerce(arg, source = nil)
       case arg
-      when NilClass    then new(System.new, TypeFactory.new, source)
-      when System      then new(arg, arg.factory, source)
-      when TypeFactory then new(System.new, arg, source)
+      when NilClass    then new(System.new, TypeFactory.new, nil, source)
+      when System      then new(arg, arg.factory, nil, source)
+      when TypeFactory then new(System.new, arg, nil, source)
       else
         raise ArgumentError, "Unable to coerce `#{arg}`"
       end
@@ -63,12 +64,21 @@ module Finitio
 
     [
       :add_type,
-      :fetch,
       :main,
     ].each do |meth|
       define_method(meth) do |*args, &bl|
         system.public_send(meth, *args, &bl)
       end
+    end
+
+    # Delegation to FetchScope
+
+    def fetch(type_name, &bl)
+      scope.fetch(type_name, &bl)
+    end
+
+    def with_scope(overrides)
+      Compilation.new(system, factory, scope.with(overrides), source)
     end
 
   end # class Compilation
