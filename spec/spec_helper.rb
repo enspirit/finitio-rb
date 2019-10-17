@@ -2,6 +2,7 @@ $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'path'
 require 'finitio'
 require 'finitio/syntax'
+require 'finitio/generation'
 
 require 'coveralls'
 Coveralls.wear!

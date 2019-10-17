@@ -1,9 +1,12 @@
 # 0.8.0
 
-* Add Type#unconstrained that returns a super type with all user specific
+* Add `Type#unconstrained` that returns a super type with all user specific
   constraints removed on sub types, recursively on all non scalar types.
 
 * Add high-order types, such as `Collection<T> = [T]`
+
+* Add support for random data generation through `Finitio::Generation`.
+  Please `require 'finitio/generation'` to use it.
 
 # 0.7.0 / 2019-02-28
 
