@@ -148,5 +148,9 @@ module Finitio
       AdType.new(ruby_type, contracts.map{|t| t.resolve_proxies(system)}, name, metadata)
     end
 
+    def unconstrained
+      AdType.new(ruby_type, contracts.map{|c| c.unconstrained}, name, metadata)
+    end
+
   end # class AdType
 end # module Finitio

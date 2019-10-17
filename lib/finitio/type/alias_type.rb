@@ -37,5 +37,9 @@ module Finitio
       AliasType.new(target.resolve_proxies(system), name, metadata)
     end
 
+    def unconstrained
+      AliasType.new(target.unconstrained, name, metadata)
+    end
+
   end # class AliasType
 end # module Finitio

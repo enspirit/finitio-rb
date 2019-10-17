@@ -21,5 +21,10 @@ module Finitio
       }
     end
 
+    def unconstrained
+      return @target.unconstrained if @target
+      raise Error, "`unconstrained` cannot be call whithout proxies being resolved"
+    end
+
   end # class ProxyType
 end # module Finitio

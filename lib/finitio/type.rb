@@ -64,6 +64,10 @@ module Finitio
     end
     protected :_suppremum
 
+    def unconstrained
+      self
+    end
+
     def to_s
       name.to_s
     end

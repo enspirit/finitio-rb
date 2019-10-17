@@ -104,6 +104,10 @@ module Finitio
       Heading.new(as, options)
     end
 
+    def unconstrained
+      Heading.new(attributes.values.map{|a| a.unconstrained }, options)
+    end
+
   private
 
     def normalize_attributes(attrs)

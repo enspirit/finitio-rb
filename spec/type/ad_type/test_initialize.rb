@@ -2,16 +2,9 @@ require 'spec_helper'
 module Finitio
   describe AdType, 'initialize' do
 
-    let(:rgb){
-      Contract.new(intType, Color.method(:rgb), Finitio::IDENTITY, :rgb)
-    }
-
-    let(:hex){
-      Contract.new(floatType, Color.method(:hex), Finitio::IDENTITY, :hex)
-    }
 
     subject{
-      AdType.new(Color, [rgb, hex])
+      AdType.new(Color, [rgb_contract, hex_contract])
     }
 
     context 'with valid arguments' do

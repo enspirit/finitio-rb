@@ -48,5 +48,9 @@ module Finitio
       Contract.new(infotype.resolve_proxies(system), dresser, undresser, name, metadata)
     end
 
+    def unconstrained
+      Contract.new(infotype.unconstrained, dresser, undresser, name, metadata)
+    end
+
   end # class Contract
 end # module Finitio

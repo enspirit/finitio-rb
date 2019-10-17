@@ -81,6 +81,10 @@ module Finitio
       uped
     end
 
+    def unconstrained
+      super_type.unconstrained
+    end
+
     def ==(other)
       super || (
         other.is_a?(SubType) && (other.super_type == super_type) &&

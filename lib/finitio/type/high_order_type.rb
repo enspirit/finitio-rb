@@ -31,5 +31,9 @@ module Finitio
       defn.resolve_proxies(compilation.with_scope(overrides))
     end
 
+    def unconstrained
+      HighOrderType.new(vars, defn.unconstrained, name, metadata)
+    end
+
   end # class HighOrderType
 end # module Finitio

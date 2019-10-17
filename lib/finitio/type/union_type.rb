@@ -96,5 +96,9 @@ module Finitio
       UnionType.new(candidates.map{|t| t.resolve_proxies(system)}, name, metadata)
     end
 
+    def unconstrained
+      UnionType.new(candidates.map{|c| c.unconstrained }, name, metadata)
+    end
+
   end # class UnionType
 end # module Finitio

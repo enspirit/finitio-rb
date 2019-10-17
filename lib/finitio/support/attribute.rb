@@ -59,5 +59,9 @@ module Finitio
       Attribute.new(name, type.resolve_proxies(system), required, metadata)
     end
 
+    def unconstrained
+      Attribute.new(name, type.unconstrained, required, metadata)
+    end
+
   end # class Attribute
 end # module Finitio

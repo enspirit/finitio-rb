@@ -84,5 +84,9 @@ module Finitio
       StructType.new(component_types.map{|t| t.resolve_proxies(system)}, name, metadata)
     end
 
+    def unconstrained
+      StructType.new(component_types.map{|t| t.unconstrained}, name, metadata)
+    end
+
   end # class StructType
 end # module Finitio

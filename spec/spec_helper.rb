@@ -49,15 +49,15 @@ module SpecHelpers
   end
 
   def intType
-    Finitio::BuiltinType.new(Integer, "intType")
+    @intType ||= Finitio::BuiltinType.new(Integer, "intType")
   end
 
   def floatType
-    Finitio::BuiltinType.new(Float, "floatType")
+    @floatType ||= Finitio::BuiltinType.new(Float, "floatType")
   end
 
   def nilType
-    Finitio::BuiltinType.new(NilClass, "nilType")
+    @nilType ||= Finitio::BuiltinType.new(NilClass, "nilType")
   end
 
   def trueType
@@ -69,7 +69,7 @@ module SpecHelpers
   end
 
   def stringType
-    Finitio::BuiltinType.new(String, "stringType")
+    @stringType ||= Finitio::BuiltinType.new(String, "stringType")
   end
 
   def byte_full
@@ -93,15 +93,19 @@ module SpecHelpers
   end
 
   def byte
-    Finitio::SubType.new(intType, [byte_full])
+    @byte ||= Finitio::SubType.new(intType, [byte_full])
+  end
+
+  def pos_byte
+    @pos_byte ||= Finitio::SubType.new(byte, [positive])
   end
 
   def posInt
-    Finitio::SubType.new(intType, [positive])
+    @posInt ||= Finitio::SubType.new(intType, [positive])
   end
 
   def negInt
-    Finitio::SubType.new(intType, [negative])
+    @negInt ||= Finitio::SubType.new(intType, [negative])
   end
 
   def type_factory
@@ -114,6 +118,14 @@ module SpecHelpers
 
   def blueviolet
     Color.new(138, 43, 226)
+  end
+
+  def rgb_contract
+    @rgb_contract ||= Finitio::Contract.new(byte, Color.method(:rgb), Finitio::IDENTITY, :rgb)
+  end
+
+  def hex_contract
+    @hex_contract ||= Finitio::Contract.new(floatType, Color.method(:hex), Finitio::IDENTITY, :hex)
   end
 
 end

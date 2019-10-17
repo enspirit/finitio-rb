@@ -37,5 +37,9 @@ module Finitio
       self.class.new(heading.resolve_proxies(system), name, metadata)
     end
 
+    def unconstrained
+      self.class.new(heading.unconstrained, name, metadata)
+    end
+
   end # module HeadingBasedType
 end # module Finitio

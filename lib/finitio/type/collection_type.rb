@@ -31,5 +31,9 @@ module Finitio
       self.class.new(elm_type.resolve_proxies(system), name, metadata)
     end
 
+    def unconstrained
+      self.class.new(elm_type.unconstrained, name, metadata)
+    end
+
   end # module CollectionType
 end # module Finitio
