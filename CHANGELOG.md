@@ -1,4 +1,4 @@
-# 0.8.0
+# 0.8.0 - 2019/10/21
 
 * Add `Type#unconstrained` that returns a super type with all user specific
   constraints removed on sub types, recursively on all non scalar types.
