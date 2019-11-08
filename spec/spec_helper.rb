@@ -3,6 +3,7 @@ require 'path'
 require 'finitio'
 require 'finitio/syntax'
 require 'finitio/generation'
+require 'finitio/json_schema'
 
 require 'coveralls'
 Coveralls.wear!
@@ -126,7 +127,7 @@ module SpecHelpers
   end
 
   def hex_contract
-    @hex_contract ||= Finitio::Contract.new(floatType, Color.method(:hex), Finitio::IDENTITY, :hex)
+    @hex_contract ||= Finitio::Contract.new(stringType, Color.method(:hex), Finitio::IDENTITY, :hex)
   end
 
 end

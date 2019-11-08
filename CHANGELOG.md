@@ -1,3 +1,9 @@
+# 0.9.0
+
+* Add Type#to_json_schema that converts Finitio types to JSON schema
+  representations. This first implementation skips all constraints on sub types,
+  though. You need to explicitly require 'finitio/json_schema' to use it.
+
 # 0.8.0 - 2019/10/21
 
 * Add `Type#unconstrained` that returns a super type with all user specific
