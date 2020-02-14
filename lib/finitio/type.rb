@@ -72,6 +72,10 @@ module Finitio
       name.to_s
     end
 
+    def pretty_string(offset)
+      ' ' * offset + name
+    end
+
     def ==(other)
       super || [ProxyType, AliasType].any?{|t|
         other.is_a?(t) && other == self

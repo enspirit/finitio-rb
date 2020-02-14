@@ -45,6 +45,14 @@ module Finitio
       required ? "#{name}: #{type}" : "#{name} :? #{type}"
     end
 
+    def pretty_string(offset)
+      if required
+        ' ' * offset + "#{name}: #{type.pretty_string(0)}"
+      else
+        ' ' * offset + "#{name} :? #{type.pretty_string(0)}"
+      end
+    end
+
     def ==(other)
       other.is_a?(Attribute) && name==other.name && \
       type==other.type && required==other.required

@@ -48,5 +48,11 @@ module Finitio
       super(other, TupleType, MultiTupleType)
     end
 
+    def pretty_string(offset)
+      "#{' ' * offset}{
+#{heading.pretty_string(offset + 2)}
+#{' ' * offset}}"
+    end
+
   end # class TupleType
 end # module Finitio

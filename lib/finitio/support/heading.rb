@@ -61,6 +61,18 @@ module Finitio
       name
     end
 
+    def pretty_string(offset)
+      s = @attributes.values.map {|v|
+        v.pretty_string(offset)
+      }.join(",\n")
+      if allow_extra?
+        s << ",\n" + (' ' * offset) unless empty?
+        s << "..."
+        s << ": #{allow_extra.name}" unless allow_extra == ANY_TYPE
+      end
+      s
+    end
+
     def looks_similar?(other)
       return self if other == self
       shared, mine, yours = Support.compare_attrs(attributes, other.attributes)
