@@ -1,4 +1,4 @@
-# 0.9.0
+# 0.9.0 - 2020/12/16
 
 * Add Type#to_json_schema that converts Finitio types to JSON schema
   representations. This first implementation skips all constraints on sub types,
