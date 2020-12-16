@@ -4,15 +4,15 @@ module Finitio
   describe Inference do
 
     let(:system) {
-      Finitio.system <<-FIO
-@import finitio/data
+      Finitio.system <<~FIO
+        @import finitio/data
 
-Nil = .NilClass
-Boolean = .TrueClass|.FalseClass
-Integer = .Integer
-Date = .Date <iso8601> .String \\( s | Date.iso8601(s) )
-                               \\( d | d.iso8601       )
-String = .String
+        Nil = .NilClass
+        Boolean = .TrueClass|.FalseClass
+        Integer = .Integer
+        Date = .Date <iso8601> .String \\( s | Date.iso8601(s) )
+                                       \\( d | d.iso8601       )
+        String = .String
       FIO
     }
 
