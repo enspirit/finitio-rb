@@ -1,3 +1,8 @@
+# 0.9.1 - 2020/12/24
+
+* Fixes a bug where proxy types are not properly resolved when used
+  in a heading extra, e.g. `{ ...: Proxy }`
+
 # 0.9.0 - 2020/12/16
 
 * Add Type#to_json_schema that converts Finitio types to JSON schema

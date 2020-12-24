@@ -100,8 +100,14 @@ module Finitio
     protected   :attributes, :options
 
     def resolve_proxies(system)
-      as = attributes.map{|k,a| a.resolve_proxies(system) }
-      Heading.new(as, options)
+      as = attributes.map{|k,a|
+        a.resolve_proxies(system)
+      }
+      opts = options.dup
+      if options[:allow_extra] && options[:allow_extra].is_a?(Type)
+        opts[:allow_extra] = opts[:allow_extra].resolve_proxies(system)
+      end
+      Heading.new(as, opts)
     end
 
     def unconstrained
