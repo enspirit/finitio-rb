@@ -1,19 +1,15 @@
 language: ruby
+cache: bundler
 rvm:
-  - 1.9
-  - 2.0
-  - 2.1
-  - 2.2
+  - 2.3
+  - 2.4
   - 2.5
   - 2.6
   - 2.7
   - ruby-head
-  - jruby-19mode
-  - jruby-head
-  - rbx-19mode
-  - rbx-head
 matrix:
   allow_failures:
-    - rvm: rbx-19mode
-    - rvm: rbx-head
     - rvm: ruby-head
+before_install:
+  - gem install bundler
+install: bundle install --jobs=3 --retry=3

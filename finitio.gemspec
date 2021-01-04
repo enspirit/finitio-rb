@@ -20,14 +20,15 @@ Gem::Specification.new do |s|
   s.bindir = "bin"
   s.executables = (Dir["bin/*"]).collect{|f| File.basename(f)}
   
-  s.add_dependency("citrus", ">= 2.4", "< 4.0")
+  s.add_dependency("citrus", ">= 3.0", "< 4.0")
   
-  s.add_development_dependency("rake", "~> 10.0")
+  s.add_development_dependency("rake", "~> 13.0")
   s.add_development_dependency("rspec", "~> 3.0")
-  s.add_development_dependency("cucumber", "~> 1.3")
-  s.add_development_dependency("path", "~> 1.3")
-  s.add_development_dependency("awesome_print", "~> 1.2")
+  s.add_development_dependency("cucumber", "~> 4.1")
+  s.add_development_dependency("path", ">= 2.0", "< 3.0")
+  s.add_development_dependency("awesome_print", "~> 1.8")
   s.add_development_dependency("coveralls", "~> 0.8")
+  s.add_development_dependency("multi_json", "~> 1.15")
 
 
   s.extensions = []

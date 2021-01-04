@@ -1,36 +1,75 @@
 PATH
   remote: .
   specs:
-    finitio (0.9.1)
-      citrus (>= 2.4, < 4.0)
+    finitio (0.10.0)
+      citrus (>= 3.0, < 4.0)
 
 GEM
   remote: https://rubygems.org/
   specs:
+    activesupport (5.2.4.4)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (>= 0.7, < 2)
+      minitest (~> 5.1)
+      tzinfo (~> 1.1)
     awesome_print (1.8.0)
     builder (3.2.4)
     citrus (3.0.2)
+    concurrent-ruby (1.1.7)
     coveralls (0.8.23)
       json (>= 1.8, < 3)
       simplecov (~> 0.16.1)
       term-ansicolor (~> 1.3)
       thor (>= 0.19.4, < 2.0)
       tins (~> 1.6)
-    cucumber (1.3.20)
-      builder (>= 2.1.2)
-      diff-lcs (>= 1.1.3)
-      gherkin (~> 2.12)
-      multi_json (>= 1.7.5, < 2.0)
-      multi_test (>= 0.1.2)
-    diff-lcs (1.4.4)
+    cucumber (4.1.0)
+      builder (~> 3.2, >= 3.2.3)
+      cucumber-core (~> 7.1, >= 7.1.0)
+      cucumber-create-meta (~> 1.0.0, >= 1.0.0)
+      cucumber-cucumber-expressions (~> 10.1, >= 10.1.0)
+      cucumber-gherkin (~> 14.0, >= 14.0.1)
+      cucumber-html-formatter (~> 7.0, >= 7.0.0)
+      cucumber-messages (~> 12.2, >= 12.2.0)
+      cucumber-wire (~> 3.1, >= 3.1.0)
+      diff-lcs (~> 1.3, >= 1.3, < 1.4)
+      multi_test (~> 0.1, >= 0.1.2)
+      sys-uname (~> 1.0, >= 1.0.2)
+    cucumber-core (7.1.0)
+      cucumber-gherkin (~> 14.0, >= 14.0.1)
+      cucumber-messages (~> 12.2, >= 12.2.0)
+      cucumber-tag-expressions (~> 2.0, >= 2.0.4)
+    cucumber-create-meta (1.0.0)
+      cucumber-messages (~> 12.2, >= 12.2.0)
+      sys-uname (~> 1.2, >= 1.2.1)
+    cucumber-cucumber-expressions (10.3.0)
+    cucumber-gherkin (14.2.0)
+      cucumber-messages (~> 12.4, >= 12.4.0)
+    cucumber-html-formatter (7.2.0)
+      cucumber-messages (~> 12.4, >= 12.4.0)
+    cucumber-messages (12.4.0)
+      protobuf-cucumber (~> 3.10, >= 3.10.8)
+    cucumber-tag-expressions (2.0.4)
+    cucumber-wire (3.1.0)
+      cucumber-core (~> 7.1, >= 7.1.0)
+      cucumber-cucumber-expressions (~> 10.1, >= 10.1.0)
+      cucumber-messages (~> 12.2, >= 12.2.0)
+    diff-lcs (1.3)
     docile (1.3.4)
-    gherkin (2.12.2)
-      multi_json (~> 1.3)
+    ffi (1.14.2)
+    i18n (1.8.7)
+      concurrent-ruby (~> 1.0)
     json (2.5.1)
+    middleware (0.1.0)
+    minitest (5.14.3)
     multi_json (1.15.0)
     multi_test (0.1.2)
-    path (1.3.3)
-    rake (10.5.0)
+    path (2.0.1)
+    protobuf-cucumber (3.10.8)
+      activesupport (>= 3.2)
+      middleware
+      thor
+      thread_safe
+    rake (13.0.3)
     rspec (3.10.0)
       rspec-core (~> 3.10.0)
       rspec-expectations (~> 3.10.0)
@@ -50,26 +89,29 @@ GEM
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
     sync (0.5.0)
+    sys-uname (1.2.2)
+      ffi (~> 1.1)
     term-ansicolor (1.7.1)
       tins (~> 1.0)
     thor (1.0.1)
+    thread_safe (0.3.6)
     tins (1.26.0)
       sync
+    tzinfo (1.2.9)
+      thread_safe (~> 0.1)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  awesome_print (~> 1.2)
+  awesome_print (~> 1.8)
   coveralls (~> 0.8)
-  cucumber (~> 1.3)
+  cucumber (~> 4.1)
   finitio!
-  path (~> 1.3)
-  rake (~> 10.0)
+  multi_json (~> 1.15)
+  path (>= 2.0, < 3.0)
+  rake (~> 13.0)
   rspec (~> 3.0)
-
-RUBY VERSION
-   ruby 2.7.1p83
 
 BUNDLED WITH
    2.2.4

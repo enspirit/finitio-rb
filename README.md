@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/blambeau/finitio-rb.png)](https://travis-ci.org/blambeau/finitio-rb)
+[![Build Status](https://travis-ci.org/blambeau/finitio-rb.svg?branch=master)](https://travis-ci.org/blambeau/finitio-rb.svg?branch=master)
 [![Dependency Status](https://gemnasium.com/blambeau/finitio-rb.png)](https://gemnasium.com/blambeau/finitio-rb)
 [![Code Climate](https://codeclimate.com/github/blambeau/finitio-rb.png)](https://codeclimate.com/github/blambeau/finitio-rb)
 [![Coverage Status](https://coveralls.io/repos/blambeau/finitio-rb/badge.png?branch=master)](https://coveralls.io/r/blambeau/finitio-rb)
