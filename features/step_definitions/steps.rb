@@ -5,7 +5,7 @@ Before do
   @system = Finitio::TEST_SYSTEM
 end
 
-Given(/^the System is(, within '(.*?)')?$/) do |_,path,source|
+Given(/^the System is(, within '(.*?)')?$/) do |path,source|
   if path
     begin
       target = Path.dir.parent/path

@@ -1,3 +1,11 @@
+# 0.10.0 - 2021/01/11
+
+* Upgrade all dependencies.
+
+* Ruby < 2.3 is no longer supported.
+
+* Fix code and build under Ruby 3.0.
+
 # 0.9.1 - 2020/12/24
 
 * Fixes a bug where proxy types are not properly resolved when used
