@@ -8,7 +8,10 @@ module Finitio
       Fixnum => "integer",
       Bignum => "integer",
       Float => "number",
-      Numeric => "number"
+      Numeric => "number",
+      TrueClass => "boolean",
+      FalseClass => "boolean",
+      Object => "object"
     }
 
   end

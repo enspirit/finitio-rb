@@ -1,3 +1,7 @@
+# 0.10.1
+
+* Fix json schema generation of Boolean and union types with a |Nil
+
 # 0.10.0 - 2021/01/11
 
 * Upgrade all dependencies.
