@@ -2,7 +2,7 @@ module Finitio
   module Version
 
     MAJOR = 0
-    MINOR = 10
+    MINOR = 11
     TINY  = 0
 
     def self.to_s
