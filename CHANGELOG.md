@@ -1,3 +1,7 @@
+# 0.11.1 - 2021/12/09
+
+* Fix github actions and extend test grid.
+
 # 0.11.0 - 2021/12/09
 
 * Fix json schema generation of Boolean and union types with a |Nil
