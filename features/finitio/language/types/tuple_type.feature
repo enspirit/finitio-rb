@@ -10,6 +10,14 @@ Feature: Support for rich tuple types
     And `length` and `angle` are mandatory
     And it does not allow extra attributes
 
+  Scenario: Casing of the attribute names
+
+    Given the System is
+      """
+      { a-b: Integer, a_b: Integer, aB: Integer }
+      """
+    Then it compiles to a tuple type
+
   Scenario: Support for optional attributes
 
     Given the System is

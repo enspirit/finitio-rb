@@ -1,6 +1,7 @@
-# 0.10.1
+# 0.11.0
 
 * Fix json schema generation of Boolean and union types with a |Nil
+* Add support for dashses in attribute names (tuple & relation types).
 
 # 0.10.0 - 2021/01/11
 

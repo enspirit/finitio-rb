@@ -34,6 +34,18 @@ module Finitio
           expect(compiled).not_to be_required
         end
       end
+
+      context 'when using dashes in attribute name' do
+        let(:input){ 'created-at : .Integer' }
+
+        it 'works' do
+          expect(compiled).to be_a(Attribute)
+          expect(compiled.name).to eq(:"created-at")
+          expect(compiled.type).to be_a(BuiltinType)
+          expect(compiled.type.ruby_type).to be(Integer)
+          expect(compiled).to be_required
+        end
+      end
     end
 
     describe 'AST' do
@@ -60,6 +72,6 @@ module Finitio
       end
 
     end
-    
+
   end
 end
