@@ -6,3 +6,4 @@ doc/api
 .bundle
 vendor
 features/fixtures/my/test.fio
+Gemfile.lock
