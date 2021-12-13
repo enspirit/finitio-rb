@@ -9,11 +9,11 @@ env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
 jobs:
-  ci:
-    uses: enspirit/finitio-rb/.github/workflows/integration.yml@github-actions
+  # ci:
+  #   uses: enspirit/finitio-rb/.github/workflows/integration.yml@github-actions
 
   rubygem:
-    needs: ci
+    # needs: ci
     runs-on: ubuntu-latest
     steps:
       - uses: act10ns/slack@v1
@@ -45,7 +45,7 @@ jobs:
         if: always()
 
   github:
-    needs: ci
+    # needs: ci
     runs-on: ubuntu-latest
     steps:
       - uses: act10ns/slack@v1
