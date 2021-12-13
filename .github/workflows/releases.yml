@@ -10,7 +10,7 @@ env:
 
 jobs:
   ci:
-    uses: enspirit/finitio-rb/.github/workflows/integration.yml@master
+    uses: enspirit/finitio-rb/.github/workflows/integration.yml@github-actions
 
   rubygem:
     needs: ci
@@ -23,9 +23,9 @@ jobs:
 
       - uses: actions/checkout@v2
 
-      - uses: ruby/setup-ruby@v1
+      - uses: ruby/setup-ruby@master
         with:
-          ruby-version: 2.4
+          ruby-version: 3.1
           bundler-cache: true
 
       - run: make package
@@ -55,9 +55,9 @@ jobs:
 
       - uses: actions/checkout@v2
 
-      - uses: ruby/setup-ruby@v1
+      - uses: ruby/setup-ruby@master
         with:
-          ruby-version: 2.4
+          ruby-version: 3.1
           bundler-cache: true
 
       - run: make package
