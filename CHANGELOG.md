@@ -1,3 +1,9 @@
+# 0.11.3
+
+* Fix json_schema generation on unresolved ProxyTypes. We use
+  "object" by default, waiting for a better support for recursive
+  types.
+
 # 0.11.2 - 2023/01/06
 
 * Fix json_schema generation on builtin_type NilClass. "null"
