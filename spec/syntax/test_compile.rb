@@ -79,6 +79,24 @@ module Finitio
     context 'with AD types' do
       let(:source){
         <<-EOF.strip
+        Int = .Integer
+        Byte = Int(i | i>0)
+        Color = .Color <rgb> { r: Byte, g: Byte, b: Byte }
+        Colors = [Color]
+        EOF
+      }
+
+      it{ should be_a(System) }
+
+      it 'should work fine' do
+        got = subject['Colors'].dress([{ r: 10, g: 15, b: 20 }])
+        expect(got.first).to be_a(Color)
+      end
+    end
+
+    context 'with AD types that make forward references' do
+      let(:source){
+        <<-EOF.strip
         Colors = [Color]
         Color = .Color <rgb> { r: Byte, g: Byte, b: Byte }
         Byte = Int(i | i>0)
@@ -88,7 +106,7 @@ module Finitio
 
       it{ should be_a(System) }
 
-      it 'should work ine' do
+      it 'should work fine' do
         got = subject['Colors'].dress([{ r: 10, g: 15, b: 20 }])
         expect(got.first).to be_a(Color)
       end
