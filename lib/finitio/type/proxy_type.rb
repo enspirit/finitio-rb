@@ -16,7 +16,7 @@ module Finitio
     end
 
     def resolve_proxies(system)
-      system.fetch(target_name){
+      system.fetch(target_name) {
         raise Error, "No such type `#{target_name}` in #{system}"
       }
     end
