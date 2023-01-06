@@ -1,4 +1,4 @@
-# 0.11.2
+# 0.11.2 - 2023/01/06
 
 * Fix json_schema generation on builtin_type NilClass. "null"
   is not a valid value, we now use "string" instead.
