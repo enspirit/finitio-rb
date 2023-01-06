@@ -1,4 +1,4 @@
-# 0.11.3
+# 0.11.3 - 2023/01/06
 
 * Fix json_schema generation on unresolved ProxyTypes. We use
   "object" by default, waiting for a better support for recursive
