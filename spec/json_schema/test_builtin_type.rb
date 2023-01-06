@@ -14,7 +14,7 @@ module Finitio
         let(:ruby_type){ NilClass }
 
         it 'works' do
-          expect(subject).to eql({ type: "null" })
+          expect(subject).to eql({ type: "string" })
         end
       end
 

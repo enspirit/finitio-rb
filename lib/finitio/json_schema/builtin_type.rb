@@ -2,7 +2,7 @@ module Finitio
   module JsonSchema
 
     BUILTIN_MAPPING = {
-      NilClass => "null",
+      NilClass => "string", # jsonapi does not support null
       String => "string",
       Integer => "integer",
       Fixnum => "integer",

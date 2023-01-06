@@ -1,3 +1,8 @@
+# 0.11.2
+
+* Fix json_schema generation on builtin_type NilClass. "null"
+  is not a valid value, we now use "string" instead.
+
 # 0.11.1 - 2021/12/09
 
 * Fix github actions and extend test grid.
