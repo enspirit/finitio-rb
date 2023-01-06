@@ -32,8 +32,10 @@ module Finitio
       @name || default_name
     end
 
-    def name=(n)
-      raise Error, "Name already set to `#{@name}`" unless @name.nil?
+    def name=(n, force = false)
+      if !@name.nil? && !force
+        raise Error, "Name already set to `#{@name}` on #{self.class}"
+      end
       @name = n
     end
 

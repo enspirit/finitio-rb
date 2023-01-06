@@ -28,7 +28,9 @@ module Finitio
 
     def instantiate(compilation, sub_types)
       overrides = Hash[vars.zip(sub_types)]
-      defn.resolve_proxies(compilation.with_scope(overrides))
+      defn.resolve_proxies(compilation.with_scope(overrides)).dup.tap{|x|
+        x.send(:name=, "#{name}<#{overrides.values.join(',')}>", true)
+      }
     end
 
     def unconstrained
