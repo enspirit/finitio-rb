@@ -48,10 +48,6 @@ module Finitio
       Pathname.new(file)
     end
 
-    def resolve_proxies
-      system.resolve_proxies
-    end
-
     # Delegation to Factory
 
     TypeFactory::DSL_METHODS.each do |dsl_method|

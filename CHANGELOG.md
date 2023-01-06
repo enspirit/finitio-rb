@@ -1,3 +1,11 @@
+# 0.11.3
+
+* The proxy resolution is fixed and clarified. When compiling
+  a system, all proxies are actually replaced by their actual
+  Type instance. Only recursive types still keep ProxyType
+  instances (as sentinels) ; they are bound to their target
+  type and delete dress and include? to them.
+
 # 0.11.3 - 2023/01/06
 
 * Fix json_schema generation on unresolved ProxyTypes. We use

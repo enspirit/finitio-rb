@@ -15,24 +15,14 @@ module Finitio
         system['Tree']
       }
 
-      xit 'works as expected' do
+      it 'works as expected' do
         expect(type.to_json_schema).to eql({
           type: "object",
           properties: {
             children: {
               type: "array",
               items: {
-                type: "object",
-                properties: {
-                  children: {
-                    type: "array",
-                    items: "object"
-                  }
-                },
-                required: [
-                  :children
-                ],
-                additionalProperties: false
+                type: "object"
               }
             }
           },

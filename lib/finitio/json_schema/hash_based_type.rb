@@ -7,7 +7,7 @@ module Finitio
       }
       unless heading.empty?
         base[:properties] = heading.inject({}){|ps,a|
-            ps.merge(a.name => a.type.to_json_schema(*args, &bl))
+          ps.merge(a.name => a.type.to_json_schema(*args, &bl))
         }
       end
       unless (reqs = heading.select{|a| a.required? }).empty?

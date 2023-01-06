@@ -50,24 +50,23 @@ module Finitio
     def fetch(name, with_imports = true, &bl)
       if with_imports
         @types.fetch(name) do
-          _fetch(name, @imports, &bl)
+          fetch_on_imports(name, &bl)
         end
       else
         @types.fetch(name, &bl)
       end
     end
 
-    def _fetch(name, imports, &bl)
+    def fetch_on_imports(name, imports = @imports, &bl)
       if imports.empty?
         raise KeyError, %Q{key not found: "#{name}"} unless bl
         bl.call(name)
       else
         imports.first.fetch(name, false) do
-          _fetch(name, imports[1..-1], &bl)
+          fetch_on_imports(name, imports[1..-1], &bl)
         end
       end
     end
-    private :_fetch
 
     def factory
       @factory ||= TypeFactory.new
@@ -89,22 +88,12 @@ module Finitio
       Syntax.compile(source, self.dup)
     end
 
-    def resolve_proxies(recurse = true)
-      rebuilt = {}
-      scope = FetchScope.new(self, rebuilt)
-      types.each_with_object(rebuilt) do |(name,type),memo|
-        rebuilt[name] = type.resolve_proxies(scope)
-      end
-      resolved = System.new(rebuilt, imports)
-      recurse ? resolved.resolve_proxies(false) : resolved
-    end
-
     def inspect
       @types.each_pair.map{|k,v| "#{k} = #{v}" }.join("\n")
     end
 
-    def dup
-      System.new(@types.dup, @imports.dup)
+    def dup(types = @types.dup, imports = @imports.dup)
+      System.new(types, imports)
     end
 
     def check_and_warn(logger = nil)

@@ -15,8 +15,26 @@ module Finitio
       "_#{target_name}_"
     end
 
+    def include?(*args, &bl)
+      raise Error, "Proxy not resolved: #{target_name}" unless @target
+
+      @target.include?(*args, &bl)
+    end
+
+    def dress(*args, &bl)
+      raise Error, "Proxy not resolved: #{target_name}" unless @target
+
+      @target.dress(*args, &bl)
+    end
+
+    def bind!(system)
+      @target = system.fetch(target_name) {
+        raise Error, "No such type `#{target_name}` in #{system}"
+      }
+    end
+
     def resolve_proxies(system)
-      system.fetch(target_name){
+      system.fetch(target_name) {
         raise Error, "No such type `#{target_name}` in #{system}"
       }
     end
