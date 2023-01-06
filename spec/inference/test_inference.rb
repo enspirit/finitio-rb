@@ -35,7 +35,7 @@ module Finitio
       expect(result.elm_type[:size].type.name).to eql("String")
       expect(result.elm_type[:priority].type.name).to eql("String")
 
-      puts result
+      #puts result
     end
 
   end
