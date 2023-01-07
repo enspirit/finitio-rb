@@ -1,10 +1,17 @@
-# 0.11.3
+# 0.11.4 - 2023/01/06
 
 * The proxy resolution is fixed and clarified. When compiling
   a system, all proxies are actually replaced by their actual
   Type instance. Only recursive types still keep ProxyType
   instances (as sentinels) ; they are bound to their target
   type and delete dress and include? to them.
+
+  Given that ProxyType is a sentinel on recursive types, calls
+  to generate_data and to_json_schema are not delegated to the
+  target type, to avoid infinite recursions.
+
+* Generated names of instantiated high order types are better
+  (e.g. Collection<String>).
 
 # 0.11.3 - 2023/01/06
 
