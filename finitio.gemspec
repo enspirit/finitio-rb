@@ -19,13 +19,13 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"] + Dir["spec/**/*"]
   s.bindir = "bin"
   s.executables = (Dir["bin/*"]).collect{|f| File.basename(f)}
-  
+
   s.add_dependency("citrus", ">= 3.0", "< 4.0")
-  
+
   s.add_development_dependency("rake", "~> 13.0")
   s.add_development_dependency("rspec", "~> 3.0")
   s.add_development_dependency("cucumber", "~> 4.1")
-  s.add_development_dependency("path", ">= 2.0", "< 3.0")
+  s.add_development_dependency("path", ">= 2.1", "< 3.0")
   s.add_development_dependency("awesome_print", "~> 1.8")
   s.add_development_dependency("coveralls", "~> 0.8")
   s.add_development_dependency("multi_json", "~> 1.15")
