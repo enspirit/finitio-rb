@@ -11,8 +11,8 @@ Boolean    = .TrueClass|.FalseClass
 
 # Numbers
 Numeric = .Numeric
-Fixnum  = .Fixnum
-Bignum  = .Bignum
+Fixnum = .Integer
+Bignum = .Integer
 Integer = .Integer
 Float   = .Float
 Real    = .Float

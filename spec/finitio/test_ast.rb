@@ -3,7 +3,7 @@ describe Finitio, "ast" do
 
   subject{
     Finitio.ast <<-EOF
-      Posint = .Fixnum( i | i>=0 )
+      Posint = .Integer( i | i>=0 )
       Point  = { x: Posint, y: Posint }
       {{ p: Point }}
     EOF
@@ -14,7 +14,7 @@ describe Finitio, "ast" do
       [ :type_def,
         "Posint",
         [ :sub_type,
-          [:builtin_type, "Fixnum"],
+          [:builtin_type, "Integer"],
           [ :constraint,
             "default",
             [:fn, [:parameters, "i"], [:source, "i>=0"] ]

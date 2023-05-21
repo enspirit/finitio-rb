@@ -7,7 +7,7 @@ module Finitio
   #
   # This class allows capturing those information types, as in:
   #
-  #     Length = BuiltinType.new(Fixnum)
+  #     Length = BuiltinType.new(Integer)
   #     Angle  = BuiltinType.new(Float)
   #     Point  = TupleType.new(Heading.new([
   #                Attribute.new(:r, Length),
@@ -19,7 +19,7 @@ module Finitio
   # type:
   #
   #     R(Point) = Hash[r: R(Length), theta: R(Angle)]
-  #              = Hash[r: Fixnum, theta: Float]
+  #              = Hash[r: Integer, theta: Float]
   #
   # Accordingly, the `dress` transformation function has the signature below.
   # It expects it's Alpha/Object argument to be a Hash with all and only the
@@ -27,7 +27,7 @@ module Finitio
   # applies on every attribute value according to their respective type.
   #
   #     dress :: Alpha  -> Point                         throws TypeError
-  #     dress :: Object -> Hash[r: Fixnum, theta: Float] throws TypeError
+  #     dress :: Object -> Hash[r: Integer, theta: Float] throws TypeError
   #
   class TupleType < Type
     include HeadingBasedType

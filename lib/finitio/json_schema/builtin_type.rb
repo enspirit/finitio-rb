@@ -5,8 +5,6 @@ module Finitio
       NilClass => "string", # jsonapi does not support null
       String => "string",
       Integer => "integer",
-      Fixnum => "integer",
-      Bignum => "integer",
       Float => "number",
       Numeric => "number",
       TrueClass => "boolean",

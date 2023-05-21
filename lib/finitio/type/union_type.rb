@@ -8,7 +8,7 @@ module Finitio
   #
   # This class allows capturing such union types, as follows:
   #
-  #     Int     = BuiltinType.new(Fixnum)
+  #     Int     = BuiltinType.new(Integer)
   #     Real    = BuiltinType.new(Float)
   #     Numeric = UnionType.new([ Int, Real ])
   #
@@ -17,7 +17,7 @@ module Finitio
   # value ends the process and the value is simply returned. Accordingly,
   # the concrete representation will be
   #
-  #     R(Numeric) = R(Int) ^ R(Real) = Fixnum ^ Float = Numeric
+  #     R(Numeric) = R(Int) ^ R(Real) = Integer ^ Float = Numeric
   #
   # where `^` denotes the `least common super type` operator on ruby classes.
   #

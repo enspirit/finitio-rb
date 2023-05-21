@@ -3,21 +3,21 @@ module Finitio
   # A BuiltinType generator allows capuring an information type to a type of
   # the host language, here a Ruby class. For instance,
   #
-  #     Int := BuiltinType(ruby.Fixnum)
+  #     Int := BuiltinType(ruby.Integer)
   #
   # The set of values captured by the information type is the same set of
   # values that can be represented by the host type. In the example, `Int`
-  # captures the same set of numbers as ruby's Fixnum.
+  # captures the same set of numbers as ruby's Integer.
   #
   # The ruby class is used as concrete representation of the information type.
   # In the example:
   #
-  #     R(Int) = Fixnum
+  #     R(Int) = Integer
   #
   # Accordingly, the `dress` transformation function has the following signature:
   #
   #     dress :: Alpha  -> Int    throws TypeError
-  #     dress :: Object -> Fixnum throws TypeError
+  #     dress :: Object -> Integer throws TypeError
   #
   class BuiltinType < Type
 

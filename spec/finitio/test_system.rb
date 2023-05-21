@@ -4,7 +4,7 @@ describe Finitio, "system" do
   context 'with a string' do
     subject{
       Finitio.system <<-EOF
-        Posint = .Fixnum( i | i>=0 )
+        Posint = .Integer( i | i>=0 )
         Point  = { x: Posint, y: Posint }
       EOF
     }

@@ -2,7 +2,7 @@
 Boolean = .TrueClass|.FalseClass
 String  = .String
 Real    = .Float
-Integer = .Fixnum
+Integer = .Integer
 Date    = .Date <iso8601> .String \( s | Date.iso8601(s)   )
                                   \( t | t.iso8601         )
 Time    = .Time <iso8601> .String \( s | DateTime.parse(s) )

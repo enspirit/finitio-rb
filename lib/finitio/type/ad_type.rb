@@ -30,7 +30,7 @@ module Finitio
   #     rgb_infotype  = TupleType.new(...)
   #
   #     # The RGB contract converter, an object that responds to `call` to
-  #     # convert from a valid Hash[r: Fixnum, ...] to a ColorImpl instance.
+  #     # convert from a valid Hash[r: Integer, ...] to a ColorImpl instance.
   #     rgb_contract = ...
   #
   #     AdType.new(ColorImpl, rgb: [rgb_infotype, rgb_contract], hex: ...)

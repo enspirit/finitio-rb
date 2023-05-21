@@ -8,9 +8,9 @@ module Finitio
 
       it{ should be_a(SubType) }
 
-      it 'should have the BuiltinType(Fixnum) super type' do
+      it 'should have the BuiltinType(Integer) super type' do
         expect(subject.super_type).to be_a(BuiltinType)
-        expect(subject.super_type.ruby_type).to be(Fixnum)
+        expect(subject.super_type.ruby_type).to be(Integer)
       end
 
       it 'should have the correct constraint' do
@@ -22,7 +22,7 @@ module Finitio
 
     context 'when use with a ruby class and a block' do
       subject{
-        factory.type(Fixnum){|i| i>=0 and i<=10 }
+        factory.type(Integer){|i| i>=0 and i<=10 }
       }
 
       it_should_behave_like "The 1..10 type"

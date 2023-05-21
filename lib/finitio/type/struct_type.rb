@@ -8,7 +8,7 @@ module Finitio
   #
   # This class allows capturing those information types, as in:
   #
-  #     Length = BuiltinType.new(Fixnum)
+  #     Length = BuiltinType.new(Integer)
   #     Angle  = BuiltinType.new(Float)
   #     Point  = StructType.new([Length, Angle])
   #
@@ -16,7 +16,7 @@ module Finitio
   # values map to the concrete representations of each component type:
   #
   #     R(Point) = Array[R(Length) ^ R(Angle)]
-  #              = Array[Fixnum ^ Float]
+  #              = Array[Integer ^ Float]
   #              = Array[Numeric]
   #
   # where `^` denotes the `least common super type` operator on ruby classes.

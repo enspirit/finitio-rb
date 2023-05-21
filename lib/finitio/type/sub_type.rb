@@ -18,12 +18,12 @@ module Finitio
   # The concrete representation of the super type is kept as representation
   # of the sub type. In other words:
   #
-  #     R(Byte) = R(Int) = Fixnum
+  #     R(Byte) = R(Int) = Integer
   #
   # Accordingly, the `dress` transformation function has the following signature:
   #
   #     dress :: Alpha  -> Byte   throws TypeError
-  #     dress :: Object -> Fixnum throws TypeError
+  #     dress :: Object -> Integer throws TypeError
   #
   class SubType < Type
 

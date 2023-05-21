@@ -26,13 +26,11 @@ module Finitio
         end
       end
 
-      [Fixnum, Bignum, Integer].each do |rt|
-        context "with #{rt}" do
-          let(:ruby_type){ rt }
+      context "with Integer" do
+        let(:ruby_type){ Integer }
 
-          it 'works' do
-            expect(subject).to eql({ type: "integer" })
-          end
+        it 'works' do
+          expect(subject).to eql({ type: "integer" })
         end
       end
 
