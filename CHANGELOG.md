@@ -1,4 +1,12 @@
-# 0.11.4 - 2023/01/06
+## 0.12.0 - 2023/05/23
+
+* Remove support for ruby < 2.6
+
+* Remove support for .Fixnum and .Bignum, .Integer is now used
+  everywhere. To ease the transition, Fixum and Bignum still exist
+  in the finitio/data stdlib schema, but will be removed in 0.13.x
+
+## 0.11.4 - 2023/01/06
 
 * The proxy resolution is fixed and clarified. When compiling
   a system, all proxies are actually replaced by their actual
@@ -13,27 +21,27 @@
 * Generated names of instantiated high order types are better
   (e.g. Collection<String>).
 
-# 0.11.3 - 2023/01/06
+## 0.11.3 - 2023/01/06
 
 * Fix json_schema generation on unresolved ProxyTypes. We use
   "object" by default, waiting for a better support for recursive
   types.
 
-# 0.11.2 - 2023/01/06
+## 0.11.2 - 2023/01/06
 
 * Fix json_schema generation on builtin_type NilClass. "null"
   is not a valid value, we now use "string" instead.
 
-# 0.11.1 - 2021/12/09
+## 0.11.1 - 2021/12/09
 
 * Fix github actions and extend test grid.
 
-# 0.11.0 - 2021/12/09
+## 0.11.0 - 2021/12/09
 
 * Fix json schema generation of Boolean and union types with a |Nil
 * Add support for dashses in attribute names (tuple & relation types).
 
-# 0.10.0 - 2021/01/11
+## 0.10.0 - 2021/01/11
 
 * Upgrade all dependencies.
 
@@ -41,18 +49,18 @@
 
 * Fix code and build under Ruby 3.0.
 
-# 0.9.1 - 2020/12/24
+## 0.9.1 - 2020/12/24
 
 * Fixes a bug where proxy types are not properly resolved when used
   in a heading extra, e.g. `{ ...: Proxy }`
 
-# 0.9.0 - 2020/12/16
+## 0.9.0 - 2020/12/16
 
 * Add Type#to_json_schema that converts Finitio types to JSON schema
   representations. This first implementation skips all constraints on sub types,
   though. You need to explicitly require 'finitio/json_schema' to use it.
 
-# 0.8.0 - 2019/10/21
+## 0.8.0 - 2019/10/21
 
 * Add `Type#unconstrained` that returns a super type with all user specific
   constraints removed on sub types, recursively on all non scalar types.
@@ -62,7 +70,7 @@
 * Add support for random data generation through `Finitio::Generation`.
   Please `require 'finitio/generation'` to use it.
 
-# 0.7.0 / 2019-02-28
+## 0.7.0 / 2019-02-28
 
 * Implement (basic) @import feature, working with relative paths
   and a standard library. The standard library systems are memoized
@@ -75,28 +83,28 @@
 * WARN: Finitio::DEFAULT_SYSTEM is deprecated. Use @import
   finitio/data instead.
 
-# 0.6.1 / 2018-03-23
+## 0.6.1 / 2018-03-23
 
 * Fix support for typed extra attributes, a KeyError was raised when
   keys were Symbols and not Strings.
 
-# 0.6.0 / 2018-02-17
+## 0.6.0 / 2018-02-17
 
 * Add support for typed extra attributes, e.g. { ...: Integer }
 
-# 0.5.2 / 2017-01-08
+## 0.5.2 / 2017-01-08
 
 * Disable memoization in parser because it leads to terrible performance
   issues on some schemas.
 * Avoid alternatives on high-level rules (Union, SubType) to prevent many
   fallbacks that kill performance without memoization enabled.
 
-# 0.5.1 / 2015-09-22
+## 0.5.1 / 2015-09-22
 
 * Enabled memoization in parser to avoid very long parsing time on complex
   schemas.
 
-# 0.5.0 / 2015-09-18
+## 0.5.0 / 2015-09-18
 
 * Breaking changes on public API
 
@@ -162,29 +170,29 @@
   * Make Finitio compatible with both Citrus 2.4.x and Citrus 3.x
   * Fixed parsing of constraint expressions having inner parentheses
 
-# 0.4.1 / 2014-03-20
+## 0.4.1 / 2014-03-20
 
 * Fixed access to the default system that lead to 'Unknown system
   Finitio/default (Finitio::Error)'
 
-# 0.4.0 / 2014-03-20
+## 0.4.0 / 2014-03-20
 
 * Finitio(-rb) is born from the sources of Q(rb) 0.3.0
 * Finitio.parse now recognizes Path-like objects (responding to :to_path),
   allowing to parse files directly (through Pathname, Path, etc.).
 
-# 0.3.0 / 2014-03-09
+## 0.3.0 / 2014-03-09
 
 * Added AnyType abstraction, aka '.'
 * Added support for external contracts in ADTs
 * Added support for extracting an Abstract Syntax Tree from parsing result
 * Allows camelCasing in constraint names
 
-# 0.2.0 / 2014-03-04
+## 0.2.0 / 2014-03-04
 
 * Fix dependencies in gemspec (judofyr)
 
-# 0.1.0 / 2014-03-03
+## 0.1.0 / 2014-03-03
 
 * Enhancements
 

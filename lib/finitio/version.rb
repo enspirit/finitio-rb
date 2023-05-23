@@ -2,8 +2,8 @@ module Finitio
   module Version
 
     MAJOR = 0
-    MINOR = 11
-    TINY  = 4
+    MINOR = 12
+    TINY  = 0
 
     def self.to_s
       [ MAJOR, MINOR, TINY ].join('.')
