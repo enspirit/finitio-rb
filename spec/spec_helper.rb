@@ -4,6 +4,7 @@ require 'finitio'
 require 'finitio/syntax'
 require 'finitio/generation'
 require 'finitio/json_schema'
+require 'finitio/typescript'
 
 require 'coveralls'
 Coveralls.wear!
@@ -72,6 +73,10 @@ module SpecHelpers
 
   def stringType
     @stringType ||= Finitio::BuiltinType.new(String, "stringType")
+  end
+
+  def namespacedStringType
+    @stringType ||= Finitio::BuiltinType.new(String, "Namespace.String")
   end
 
   def byte_full
