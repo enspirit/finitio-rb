@@ -1,3 +1,7 @@
+## 0.12.1 - 2025/03/20
+
+* Allow Hash as bulttin type recognized by JsonSchema generation.
+
 ## 0.12.0 - 2023/05/23
 
 * Remove support for ruby < 2.6
