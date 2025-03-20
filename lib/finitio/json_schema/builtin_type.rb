@@ -9,6 +9,7 @@ module Finitio
       Numeric => "number",
       TrueClass => "boolean",
       FalseClass => "boolean",
+      Hash => "object",
       Object => "object"
     }
 
