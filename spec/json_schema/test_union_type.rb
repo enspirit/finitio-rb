@@ -46,6 +46,18 @@ module Finitio
         end
       end
 
+      context 'when used with two yielding the same final type' do
+        let(:union_type) {
+          UnionType.new([string_type, string_type])
+        }
+
+        it 'works as expected' do
+          expect(union_type.to_json_schema).to eql({
+            :type => "string"
+          })
+        end
+      end
+
       context 'when used with a |Nil' do
         let(:union_type) {
           UnionType.new([string_type, int_type, nil_type])

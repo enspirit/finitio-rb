@@ -1,3 +1,7 @@
+## 0.12.2
+
+* Don't generate anyOf with duplicate types in JsonSchema geneation.
+
 ## 0.12.1 - 2025/03/20
 
 * Allow Hash as bulttin type recognized by JsonSchema generation.

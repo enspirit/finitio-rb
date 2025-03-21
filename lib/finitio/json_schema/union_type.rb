@@ -14,8 +14,10 @@ module Finitio
       return { type: 'boolean'} if self == BOOLEAN_TYPE
       return cs.first.to_json_schema(*args, &bl) if cs.size == 1
 
+      subtypes = cs.map{|c| c.to_json_schema(*args, &bl) }.uniq
+      return subtypes.first if subtypes.size == 1
       {
-        anyOf: cs.map{|c| c.to_json_schema(*args, &bl) }
+        anyOf: subtypes
       }
     end
 
