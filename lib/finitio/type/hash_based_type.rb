@@ -61,6 +61,10 @@ module Finitio
       uped
     end
 
+    def allbut(attrs)
+      factor(heading.allbut(attrs))
+    end
+
   protected
 
     def looks_a_tuple?(value)

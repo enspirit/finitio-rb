@@ -114,6 +114,10 @@ module Finitio
       Heading.new(attributes.values.map{|a| a.unconstrained }, options)
     end
 
+    def allbut(attrs)
+      Heading.new(attributes.values.reject{|a| attrs.include?(a.name) }.to_a, @options)
+    end
+
   private
 
     def normalize_attributes(attrs)

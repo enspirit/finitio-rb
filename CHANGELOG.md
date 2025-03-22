@@ -1,5 +1,9 @@
 ## 0.12.2
 
+* Add Heading#allbut and (Multi)TupleType#allbut, to remove some attributes.
+
+  This actually starts the support for an algebra on types...
+
 * Don't generate anyOf with duplicate types in JsonSchema geneation.
 
 ## 0.12.1 - 2025/03/20

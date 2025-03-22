@@ -29,5 +29,9 @@ module Finitio
       super(other, TupleType, MultiTupleType)
     end
 
+    def factor(heading)
+      MultiTupleType.new(heading)
+    end
+
   end # class MultiTupleType
 end # module Finitio
