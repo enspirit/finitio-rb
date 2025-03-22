@@ -1,4 +1,4 @@
-## 0.12.2
+## 0.12.2 - 2025/03/22
 
 * Add Heading#allbut and (Multi)TupleType#allbut, to remove some attributes.
 
