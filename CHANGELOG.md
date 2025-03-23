@@ -1,3 +1,10 @@
+## 0.12.3
+
+* Add Heading#project and (Multi)TupleType#project, to remove some attributes.
+
+* Add attribute description (taken from metadata) when generating JsonSchema
+  from a HashBasedType.
+
 ## 0.12.2 - 2025/03/22
 
 * Add Heading#allbut and (Multi)TupleType#allbut, to remove some attributes.

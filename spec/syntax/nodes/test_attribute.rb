@@ -23,6 +23,19 @@ module Finitio
         end
       end
 
+      context 'with metadata' do
+        let(:input){ "/- Hello a -/\na: .Integer" }
+
+        it 'compiles to an mandatory Attribute' do
+          expect(compiled).to be_a(Attribute)
+          expect(compiled.name).to eq(:a)
+          expect(compiled.type).to be_a(BuiltinType)
+          expect(compiled.type.ruby_type).to be(Integer)
+          expect(compiled.metadata).to eql(description: 'Hello a')
+          expect(compiled).to be_required
+        end
+      end
+
       context 'a :? .Integer' do
         let(:input){ 'a :? .Integer' }
 

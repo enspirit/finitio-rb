@@ -61,6 +61,10 @@ module Finitio
       uped
     end
 
+    def project(attrs)
+      factor(heading.project(attrs))
+    end
+
     def allbut(attrs)
       factor(heading.allbut(attrs))
     end

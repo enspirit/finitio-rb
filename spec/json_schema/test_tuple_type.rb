@@ -3,7 +3,7 @@ module Finitio
     describe "TupleType" do
 
       let(:heading){
-        Heading.new([Attribute.new(:a, anyType)])
+        Heading.new([Attribute.new(:a, stringType, true, description: 'Hello')])
       }
 
       let(:tuple_type) {
@@ -14,7 +14,7 @@ module Finitio
         expect(tuple_type.to_json_schema).to eql({
           type: "object",
           properties: {
-            a: {}
+            a: {:type=>"string", :description => 'Hello'}
           },
           required: [:a],
           additionalProperties: false

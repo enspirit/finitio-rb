@@ -29,6 +29,16 @@ module Finitio
         end
       end
 
+      context '{a: .Integer}' do
+        let(:input){ '{/- Hello a -/ a: .Integer}' }
+
+        it 'compiles to a TupleType' do
+          expect(compiled).to be_a(TupleType)
+          expect(compiled.heading.size).to eq(1)
+          expect(compiled.heading[:a].metadata).to eql(description: 'Hello a')
+        end
+      end
+
       context '{a: .Integer, b: .Float}' do
         let(:input){ '{a: .Integer, b: .Float}' }
 

@@ -63,5 +63,11 @@ module Finitio
       Attribute.new(name, type.unconstrained, required, metadata)
     end
 
+    def to_json_schema(*args, &bl)
+      schema = type.to_json_schema(*args, &bl)
+      schema[:description] = metadata[:description]
+      schema.compact
+    end
+
   end # class Attribute
 end # module Finitio
