@@ -64,7 +64,11 @@ module Finitio
     end
 
     def to_json_schema(*args, &bl)
-      schema = type.to_json_schema(*args, &bl)
+      schema = if jstype = metadata[:jsonSchemaType]
+        { type: jstype }
+      else
+        type.to_json_schema(*args, &bl)
+      end
       schema[:description] = metadata[:description]
       schema.compact
     end

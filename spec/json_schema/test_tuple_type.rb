@@ -16,8 +16,7 @@ module Finitio
           properties: {
             a: {:type=>"string", :description => 'Hello'}
           },
-          required: [:a],
-          additionalProperties: false
+          required: [:a]
         })
       end
 

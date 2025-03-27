@@ -17,6 +17,10 @@ module Finitio
   class BuiltinType
 
     def to_json_schema(*args, &bl)
+      if type = metadata[:jsonSchemaType]
+        return { type: type }
+      end
+
       mapped = JsonSchema::BUILTIN_MAPPING[ruby_type]
       if mapped
         { type: mapped }

@@ -28,8 +28,7 @@ module Finitio
           },
           required: [
             :children
-          ],
-          additionalProperties: false
+          ]
         })
       end
 

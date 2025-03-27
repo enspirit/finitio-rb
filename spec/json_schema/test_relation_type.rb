@@ -18,8 +18,7 @@ module Finitio
             properties: {
               a: {}
             },
-            required: [:a],
-            additionalProperties: false
+            required: [:a]
           },
           uniqueItems: true
         })

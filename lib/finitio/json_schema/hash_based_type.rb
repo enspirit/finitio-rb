@@ -2,6 +2,10 @@ module Finitio
   module HashBasedType
 
     def to_json_schema(*args, &bl)
+      if type = metadata[:jsonSchemaType]
+        return { type: type }
+      end
+
       base = {
         type: "object"
       }
@@ -13,11 +17,12 @@ module Finitio
       unless (reqs = heading.select{|a| a.required? }).empty?
         base[:required] = reqs.map{|a| a.name }
       end
-      base[:additionalProperties] = if heading.allow_extra?
+      additional = if heading.allow_extra?
         heading.allow_extra.to_json_schema(*args, &bl)
       else
         false
       end
+      base[:additionalProperties] = additional if additional
       base
     end
 

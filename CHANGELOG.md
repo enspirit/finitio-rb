@@ -5,6 +5,9 @@
 * Add attribute description (taken from metadata) when generating JsonSchema
   from a HashBasedType.
 
+* Add support for a hard stop when generating JsonSchema, via a jsonSchemaType
+  metadata.
+
 ## 0.12.2 - 2025/03/22
 
 * Add Heading#allbut and (Multi)TupleType#allbut, to remove some attributes.

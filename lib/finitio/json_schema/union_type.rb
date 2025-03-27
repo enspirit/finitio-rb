@@ -10,6 +10,10 @@ module Finitio
     BOOLEAN_TYPE = UnionType.new([TRUE_TYPE, FALSE_TYPE])
 
     def to_json_schema(*args, &bl)
+      if type = metadata[:jsonSchemaType]
+        return { type: type }
+      end
+
       cs = candidates.reject{|c| c == NIL_TYPE }
       return { type: 'boolean'} if self == BOOLEAN_TYPE
       return cs.first.to_json_schema(*args, &bl) if cs.size == 1
