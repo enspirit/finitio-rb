@@ -1,4 +1,4 @@
-## 0.12.3
+## 0.12.3 - 2025/09/01
 
 * Add Heading#project and (Multi)TupleType#project, to remove some attributes.
 
