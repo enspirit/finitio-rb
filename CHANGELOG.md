@@ -1,3 +1,40 @@
+## 1.0.0 - 2026/08/06
+
+This first major release does not reshape the language or the API: code
+written against 0.12.3 keeps working, apart from the removal announced
+below. It states that the public API is now stable, and that breaking
+changes will be signalled by a major version bump from here on.
+
+* BREAKING: the deprecated `Fixnum` and `Bignum` aliases are removed from
+  the `finitio/data` standard library. They had been aliases of `.Integer`
+  since 0.12.0, where their removal was announced. Use `Integer` instead.
+
+* BREAKING: Ruby 3.2 is now the minimum supported version, and the test
+  grid covers 3.2, 3.3 and 3.4. Ruby 2.7 and 3.1 are both end-of-life.
+
+* Fix the `FalseClass` alias of the `finitio/data` standard library, which
+  was defined as `.TrueClass`: it accepted `true` and rejected `false`.
+  The `False` alias was, and remains, correct. Schemas that worked around
+  the bug by writing `FalseClass` where they meant a true value must be
+  updated.
+
+* Development dependencies are upgraded to their latest releases, notably
+  cucumber 11.1, activesupport 8.1 and simplecov 1.0 (through
+  `coveralls_reborn`, the unmaintained `coveralls` gem having pinned
+  simplecov to 0.16.1).
+
+* Fix `rake test`, which was broken on Ruby 3.4: the gemspec was eval'd
+  without a filename, so `__FILE__` resolved to a bogus path when looking
+  up `Manifest.txt`.
+
+* The dressing rule for extra attributes is now pinned by a feature: an
+  untyped `...` accepts extra attributes but constrains them in no way, so
+  they are dropped, while a typed `...: Age` guarantees their type and
+  keeps them.
+
+* Integration tests now also run on pushes to master, not only on pull
+  requests targeting it.
+
 ## 0.12.3 - 2025/09/01
 
 * Add Heading#project and (Multi)TupleType#project, to remove some attributes.

@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/blambeau/finitio-rb.svg?branch=master)](https://travis-ci.org/blambeau/finitio-rb)
-[![Code Climate](https://codeclimate.com/github/blambeau/finitio-rb.png)](https://codeclimate.com/github/blambeau/finitio-rb)
-[![Coverage Status](https://coveralls.io/repos/blambeau/finitio-rb/badge.png?branch=master)](https://coveralls.io/r/blambeau/finitio-rb)
+[![Integration](https://github.com/enspirit/finitio-rb/actions/workflows/integration.yml/badge.svg?branch=master)](https://github.com/enspirit/finitio-rb/actions/workflows/integration.yml)
+[![Gem Version](https://badge.fury.io/rb/finitio.svg)](https://rubygems.org/gems/finitio)
+[![Coverage Status](https://coveralls.io/repos/github/enspirit/finitio-rb/badge.svg?branch=master)](https://coveralls.io/github/enspirit/finitio-rb?branch=master)
 
 # Finitio(-rb)
 
@@ -10,6 +10,21 @@ schema" but the right way. For more information about *Finitio* itself, see
 
 `finitio-rb` is the ruby binding of *Finitio*. It allows defining data schemas
 and validating and coercing data against them in an idiomatic ruby way.
+
+## Installation
+
+```
+gem install finitio
+```
+
+or, in a `Gemfile`:
+
+```ruby
+gem 'finitio', '~> 1.0'
+```
+
+`finitio-rb` requires Ruby 3.2 or later, and is tested against 3.2, 3.3 and
+3.4.
 
 ## Example
 
@@ -29,11 +44,20 @@ FIO
 
 # Let load some JSON document
 data = JSON.parse <<-JSON
-  { "name": "Finitio", "at": "20142-03-01" }
+  { "name": "Finitio", "at": "2014-03-01T12:00:00Z" }
 JSON
 
 # And try dressing that data
 puts schema.dress(data)
+```
+
+Dressing either returns the data coerced to its ruby representation -- here,
+`at` comes back as a real `DateTime` -- or raises a `Finitio::TypeError`
+explaining what does not match:
+
+```ruby
+schema.dress({ "name" => "  ", "at" => "2014-03-01T12:00:00Z" })
+# => Finitio::TypeError: Invalid Default `  `
 ```
 
 ## ADTs with internal contracts
@@ -183,6 +207,60 @@ Then, a Finitio schema will have access to the types defined in your extension:
 @import myrubygem/base
 @import myrubygem/advanced
 ```
+
+## Generating a JSON Schema
+
+Finitio types can be projected to a JSON Schema, which is useful to expose a
+schema to consumers that do not speak Finitio (API documentation, client-side
+validation, ...). The feature ships in a separate file, to be required
+explicitly:
+
+```ruby
+require 'finitio'
+require 'finitio/json_schema'
+
+schema = Finitio.system <<-FIO
+  @import finitio/data
+
+  Person = { name: String, age: Integer }
+  Person
+FIO
+
+schema.fetch('Person').to_json_schema
+# => {
+# =>   type: "object",
+# =>   properties: {
+# =>     name: { type: "string" },
+# =>     age:  { type: "integer" }
+# =>   },
+# =>   required: ["name", "age"]
+# => }
+```
+
+The projection is necessarily lossy: JSON Schema cannot express Finitio's
+constraints, ADTs or recursive types faithfully. Two metadata attributes let
+you steer it:
+
+* `description` on an attribute is carried over to the generated schema.
+* `jsonSchemaType` on a type stops the generation there and uses the given
+  type as-is, which is the way out for types that have no useful projection.
+
+## Generating data
+
+`Finitio::Generation` produces random data conforming to a type, which is
+handy for tests and fixtures:
+
+```ruby
+require 'finitio'
+require 'finitio/generation'
+
+Finitio::Generation.new.call(schema.fetch('Person'))
+# => { name: "e6f4a1c0b2d3", age: 418561 }
+```
+
+Generation can be fine-tuned by passing generators by type name, or through
+`examples` metadata on the type definitions themselves. See
+`lib/finitio/generation.rb` for the available options.
 
 ## About representations
 

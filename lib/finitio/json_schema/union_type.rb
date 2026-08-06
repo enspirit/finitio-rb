@@ -3,9 +3,9 @@ module Finitio
 
     NIL_TYPE = BuiltinType.new(NilClass)
 
-    FALSE_TYPE = BuiltinType.new(TrueClass)
+    TRUE_TYPE = BuiltinType.new(TrueClass)
 
-    TRUE_TYPE = BuiltinType.new(FalseClass)
+    FALSE_TYPE = BuiltinType.new(FalseClass)
 
     BOOLEAN_TYPE = UnionType.new([TRUE_TYPE, FALSE_TYPE])
 

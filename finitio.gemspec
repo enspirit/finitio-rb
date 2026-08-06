@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version = $version
   s.summary = "Finitio - in Ruby"
   s.description = "Implements the Finitio information language in Ruby."
-  s.homepage = "https://github.com/blambeau/finitio"
+  s.homepage = "https://github.com/enspirit/finitio-rb"
   s.authors = ["Bernard Lambeau"]
   s.email  = ["blambeau@gmail.com"]
   s.require_paths = ["lib"]
