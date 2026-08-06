@@ -136,7 +136,7 @@ Posint = .Integer(i | i >= 0)
 
 ```
 # parent.fio
-@import ./child.fio
+@import ./child
 
 # Child's types are available inside the system, but not outside it, that
 # is, imported types are not themselves exported
@@ -144,7 +144,7 @@ Byte = Posint(i | i <= 255 )
 ```
 
 ```
-@import ./parent.fio
+@import ./parent
 
 # This will work
 HalfByte = Byte(i | i <= 128)
@@ -152,6 +152,14 @@ HalfByte = Byte(i | i <= 128)
 # But this will not: Posint is not defined
 Posint(i | i <= 128)
 ```
+
+Note that the path is written **without** the `.fio` extension: the resolver
+appends it, so `@import ./child.fio` looks for `child.fio.fio` and fails.
+
+Relative paths are resolved against the file the system was loaded from, so
+the schema has to come from one — `Finitio.system(Pathname.new('parent.fio'))`
+rather than `Finitio.system(File.read('parent.fio'))`, which has no path to
+resolve against.
 
 See the next section about the standard library if you need to share types
 without relying on relative paths.

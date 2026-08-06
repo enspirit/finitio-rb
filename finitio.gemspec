@@ -7,9 +7,17 @@ Gem::Specification.new do |s|
   s.version = $version
   s.summary = "Finitio - in Ruby"
   s.description = "Implements the Finitio information language in Ruby."
-  s.homepage = "https://github.com/enspirit/finitio-rb"
+  s.homepage = "https://www.finitio.io"
   s.authors = ["Bernard Lambeau"]
   s.email  = ["blambeau@gmail.com"]
+  s.licenses = ["MIT"]
+  s.metadata = {
+    "homepage_uri"      => "https://www.finitio.io",
+    "source_code_uri"   => "https://github.com/enspirit/finitio-rb",
+    "changelog_uri"     => "https://github.com/enspirit/finitio-rb/blob/master/CHANGELOG.md",
+    "bug_tracker_uri"   => "https://github.com/enspirit/finitio-rb/issues",
+    "documentation_uri" => "https://www.finitio.io/reference/0.4.x/type-system",
+  }
   s.require_paths = ["lib"]
   here = File.expand_path(File.dirname(__FILE__))
   s.files = File.readlines(File.join(here, 'Manifest.txt')).
