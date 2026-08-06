@@ -40,10 +40,22 @@ Then(/^the result should equal (\d+)$/) do |expected|
   @result.should eq(Integer(expected))
 end
 
+# Asserts the dressed value exactly, which `be a representation for X` cannot:
+# a value that dropped attributes is still a valid representation of its type.
+# Tuples are represented with Symbol keys, hence the symbolization.
+Then(/^the result should equal JSON's '(.*?)'$/) do |str|
+  @result.should eq(MultiJson.load(str, symbolize_keys: true))
+end
+
 ### representation
 
 Then(/^the result should be a Tuple representation$/) do
   @result.should be_a(Hash)
+end
+
+Then(/^the result should not have a '(.*?)' attribute$/) do |name|
+  @result.should be_a(Hash)
+  @result.should_not have_key(name.to_sym)
 end
 
 Then(/^its '(.*?)' attribute should be a (.*?) representation$/) do |attr, type|
