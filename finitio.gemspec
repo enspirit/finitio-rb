@@ -20,15 +20,17 @@ Gem::Specification.new do |s|
   s.bindir = "bin"
   s.executables = (Dir["bin/*"]).collect{|f| File.basename(f)}
 
+  s.required_ruby_version = ">= 3.2"
+
   s.add_dependency("citrus", ">= 3.0", "< 4.0")
 
-  s.add_development_dependency("rake", "~> 13.0")
-  s.add_development_dependency("rspec", "~> 3.0")
-  s.add_development_dependency("cucumber", "~> 4.1")
-  s.add_development_dependency('activesupport', '~> 7.0.8')
+  s.add_development_dependency("rake", "~> 13.2")
+  s.add_development_dependency("rspec", "~> 3.13")
+  s.add_development_dependency("cucumber", "~> 11.1")
+  s.add_development_dependency('activesupport', '~> 8.1')
   s.add_development_dependency("path", ">= 2.1", "< 3.0")
-  s.add_development_dependency("awesome_print", "~> 1.8")
-  s.add_development_dependency("coveralls", "~> 0.8")
+  s.add_development_dependency("awesome_print", "~> 1.9")
+  s.add_development_dependency("coveralls_reborn", "~> 1.0")
   s.add_development_dependency("multi_json", "~> 1.15")
 
   s.extensions = []
