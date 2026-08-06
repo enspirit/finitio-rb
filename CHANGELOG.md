@@ -35,6 +35,12 @@ changes will be signalled by a major version bump from here on.
 * Integration tests now also run on pushes to master, not only on pull
   requests targeting it.
 
+* Remove `finitio.noespec`, the Noe template descriptor. It had not been
+  updated since 0.7.0 in 2019 and every value in it had gone stale, while
+  Noe itself is no longer a dependency of the project. `tasks/gem.rake`,
+  the only file still advertising itself as generated from it, is now
+  plainly hand-maintained.
+
 ## 0.12.3 - 2025/09/01
 
 * Add Heading#project and (Multi)TupleType#project, to remove some attributes.
