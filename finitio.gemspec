@@ -32,14 +32,14 @@ Gem::Specification.new do |s|
 
   s.add_dependency("citrus", ">= 3.0", "< 4.0")
 
-  s.add_development_dependency("rake", "~> 13.2")
+  s.add_development_dependency("rake", "~> 13.4")
   s.add_development_dependency("rspec", "~> 3.13")
   s.add_development_dependency("cucumber", "~> 11.1")
   s.add_development_dependency('activesupport', '~> 8.1')
   s.add_development_dependency("path", ">= 2.1", "< 3.0")
   s.add_development_dependency("awesome_print", "~> 1.9")
   s.add_development_dependency("coveralls_reborn", "~> 1.0")
-  s.add_development_dependency("multi_json", "~> 1.15")
+  s.add_development_dependency("multi_json", "~> 1.21")
 
   s.extensions = []
   s.requirements = nil

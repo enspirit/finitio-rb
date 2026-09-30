@@ -1,4 +1,3 @@
-require 'ostruct'
 require 'path'
 
 Before do

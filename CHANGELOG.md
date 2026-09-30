@@ -1,3 +1,12 @@
+## Unreleased
+
+* Ruby 4.0 is now supported: the test grid covers 3.2, 3.3, 3.4 and 4.0.
+  No change was needed in the library itself; the Cucumber suite used to
+  require `ostruct`, which stopped being a default gem in 4.0, and no
+  longer does (the require was unused).
+
+* Upgrade development dependencies: rake ~> 13.4 and multi_json ~> 1.21.
+
 ## 1.0.0 - 2026/08/06
 
 This first major release does not reshape the language or the API: code
