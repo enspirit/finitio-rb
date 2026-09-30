@@ -23,8 +23,8 @@ or, in a `Gemfile`:
 gem 'finitio', '~> 1.0'
 ```
 
-`finitio-rb` requires Ruby 3.2 or later, and is tested against 3.2, 3.3 and
-3.4.
+`finitio-rb` requires Ruby 3.2 or later, and is tested against 3.2, 3.3, 3.4
+and 4.0.
 
 ## Example
 
